@@ -2,6 +2,9 @@
 import csv
 import importlib.util
 import json
+import os
+import shutil
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -46,11 +49,12 @@ def test_sampler_seed_changes_config_hash(provenance):
     assert first["workload_hash"] == manifest.canonical_hash(provenance["workload_obj"])
     assert first["code_revision"] == "unknown"
     assert first["dirty_worktree"] is True
+    assert first["untracked_count"] is None
     assert first["run_id"].endswith(f"_test_{first['config_hash'][:8]}_s10")
     assert set(first) == {
         "run_id", "timestamp", "code_revision", "dirty_worktree", "dataset_hash",
         "workload_hash", "config_hash", "dependency_versions", "sampler_seed",
-        "workload_seed", "method",
+        "workload_seed", "method", "untracked_count",
     }
 
 
@@ -99,3 +103,40 @@ def test_file_hash_changes_with_one_byte(tmp_path):
 def test_dependency_versions_reports_missing():
     name = "greenquanta-deliberately-nonexistent-distribution-7d824cf9"
     assert manifest.dependency_versions([name]) == {name: "missing"}
+
+
+def test_git_info_distinguishes_untracked_files(tmp_path):
+    git = shutil.which("git")
+    if git is None:
+        pytest.skip("git executable is missing")
+
+    def run_git(*args):
+        return subprocess.run(
+            [git, "--no-pager", *args], cwd=tmp_path,
+            env={**os.environ, "GIT_EDITOR": "true"}, check=True,
+            capture_output=True, text=True,
+        )
+
+    run_git("init")
+    run_git("config", "--local", "user.name", "Manifest Test")
+    run_git("config", "--local", "user.email", "manifest-test@example.invalid")
+    tracked = tmp_path / "tracked.txt"
+    tracked.write_text("original\n", encoding="utf-8")
+    run_git("add", "tracked.txt")
+    run_git("-c", "commit.gpgsign=false", "-c", f"core.hooksPath={tmp_path / 'no-hooks'}",
+            "commit", "-m", "Add tracked fixture")
+
+    clean = manifest.git_info(tmp_path)
+    assert clean["code_revision"] == run_git("rev-parse", "HEAD").stdout.strip()
+    assert clean["dirty_worktree"] is False
+    assert clean["untracked_count"] == 0
+
+    (tmp_path / "untracked.txt").write_text("untracked\n", encoding="utf-8")
+    untracked = manifest.git_info(tmp_path)
+    assert untracked["dirty_worktree"] is False
+    assert untracked["untracked_count"] == 1
+
+    tracked.write_text("modified\n", encoding="utf-8")
+    modified = manifest.git_info(tmp_path)
+    assert modified["dirty_worktree"] is True
+    assert modified["untracked_count"] == 1

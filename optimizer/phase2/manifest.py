@@ -30,10 +30,10 @@ def file_hash(path) -> str:
 
 
 def git_info(repo_dir) -> dict:
-    """Return HEAD and tracked/untracked dirtiness without optional Git writes.
+    """Return HEAD, tracked-file dirtiness, and a separate untracked-file count.
 
-    On Git failure, the revision is "unknown" and dirtiness is conservatively
-    True: an unavailable status must not be mistaken for a clean worktree.
+    On Git failure, return revision "unknown", dirty_worktree True, and
+    untracked_count None rather than implying the worktree is clean.
     """
     try:
         revision = subprocess.run(
@@ -41,12 +41,17 @@ def git_info(repo_dir) -> dict:
             check=True, capture_output=True, text=True, timeout=10,
         ).stdout.strip()
         status = subprocess.run(
-            ["git", "--no-optional-locks", "--no-pager", "status", "--porcelain"],
+            ["git", "--no-optional-locks", "--no-pager", "status", "--porcelain", "--untracked-files=no"],
+            cwd=repo_dir, check=True, capture_output=True, text=True, timeout=10,
+        ).stdout
+        untracked = subprocess.run(
+            ["git", "--no-optional-locks", "--no-pager", "ls-files", "--others", "--exclude-standard"],
             cwd=repo_dir, check=True, capture_output=True, text=True, timeout=10,
         ).stdout
     except (OSError, subprocess.SubprocessError):
-        return {"code_revision": "unknown", "dirty_worktree": True}
-    return {"code_revision": revision, "dirty_worktree": bool(status.strip())}
+        return {"code_revision": "unknown", "dirty_worktree": True, "untracked_count": None}
+    return {"code_revision": revision, "dirty_worktree": bool(status.strip()),
+            "untracked_count": len(untracked.splitlines())}
 
 
 def dependency_versions(names) -> dict:
