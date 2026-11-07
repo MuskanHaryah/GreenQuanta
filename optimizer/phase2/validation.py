@@ -11,8 +11,9 @@ def validate_allocation(vms, assignment, servers, quantized_unit=None) -> dict:
     separate meaning and is not checked. Invalid VM resources are reported
     even for unassigned VMs and excluded from that resource's load totals.
 
-    Quantized checks are separate from real checks: sum ceil(size / unit)
-    is compared with floor(limit / unit), without the real-resource tolerance.
+    Quantized checks match the QUBO: sum max(1, ceil(size / unit - 1e-9))
+    is compared with floor(limit / unit + 1e-9). They remain separate from
+    real-resource checks and their 1e-9 capacity tolerance.
     A supplied unit must be finite and positive; otherwise ValueError is raised.
     """
     if quantized_unit is not None:
@@ -49,7 +50,7 @@ def validate_allocation(vms, assignment, servers, quantized_unit=None) -> dict:
             if host_ok:
                 loads[resource][host] += size
                 if quantized_unit is not None:
-                    quantized_loads[resource][host] += math.ceil(size / quantized_unit)
+                    quantized_loads[resource][host] += max(1, math.ceil(size / quantized_unit - 1e-9))
 
     for host, server in enumerate(servers):
         for resource in ("cpu", "mem"):
@@ -60,7 +61,7 @@ def validate_allocation(vms, assignment, servers, quantized_unit=None) -> dict:
                                    "detail": f"Host {host} {resource} load {load!r} exceeds limit {limit!r}"})
             if quantized_unit is not None:
                 quantized_load = quantized_loads[resource][host]
-                quantized_limit = math.floor(limit / quantized_unit)
+                quantized_limit = int(math.floor(limit / quantized_unit + 1e-9))
                 if quantized_load > quantized_limit:
                     violations.append({
                         "type": f"quantized_{resource}_overload",

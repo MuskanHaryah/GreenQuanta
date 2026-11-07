@@ -113,6 +113,19 @@ def test_quantized_mem_overload():
     )
 
 
+def test_quantized_float_edge():
+    for size in (0.35, 0.35000000000000003):
+        assert validate_allocation(
+            [vm(1, cpu=size, mem=size)], {1: 0},
+            [server(cpu=0.35, mem=0.35)], quantized_unit=0.05,
+        ) == {"valid": True, "violations": []}
+    assert_violations(
+        validate_allocation([vm(1, cpu=0.0, mem=0.0)], {1: 0},
+                            [server(cpu=0.0, mem=0.0)], quantized_unit=0.05),
+        "quantized_cpu_overload", "quantized_mem_overload",
+    )
+
+
 def test_duplicate_vm():
     for pairs in ([(1, 0), (1, 1)], [(1, 0), (1, 0)]):
         assert_violations(validate_assignment_pairs(pairs), "duplicate_vm")
