@@ -1,0 +1,83 @@
+{
+  "phase": "1 - static allocation, homogeneous servers",
+  "inputs": {
+    "server": {
+      "count": 10,
+      "cpu_capacity": 0.591796875,
+      "mem_capacity": 0.33349609375,
+      "idle_power_w": 100.0,
+      "peak_power_w": 250.0,
+      "safe_utilization": 0.85
+    },
+    "sla_max_violation_pct": 5.0,
+    "instances_per_vm": 4,
+    "trace_csv": "C:\\Users\\Anmol\\GreenQuanta\\data\\trace\\google2019_a_day2_usage.csv"
+  },
+  "constants": {
+    "pue": 1.54,
+    "emission_factor_kg_per_kwh": 0.435,
+    "simulation_hours": 24.0,
+    "window_seconds": 300,
+    "lambda": {
+      "assign": 2.0,
+      "cpu": 2.0,
+      "ram": 2.0,
+      "link": 2.0
+    },
+    "resource_resolution": 100,
+    "tie_break": 0.01
+  },
+  "workload": {
+    "collections": 10,
+    "instances": 67,
+    "rows": 19293,
+    "vms": 19,
+    "vm_cpu_size_percentile": 95.0
+  },
+  "qubo": {
+    "num_variables": 102,
+    "num_interactions": 1593,
+    "assignment_variables": 57,
+    "server_variables": 3,
+    "slack_variables": 42,
+    "capacity_units_per_server": 85,
+    "resource_resolution": 100,
+    "e_ref_joule": 36298926.24245819,
+    "lower_bound_servers": 1.238,
+    "candidate_servers": 3,
+    "user_servers": 10
+  },
+  "solver": {
+    "solver": "dwave.samplers.SimulatedAnnealingSampler",
+    "num_reads": 200,
+    "num_sweeps": 2000,
+    "seed": 42,
+    "anneal_time_s": 1.2648,
+    "total_solve_time_s": 1.3324,
+    "valid_reads": 0,
+    "valid_reads_pct": 0.0,
+    "repaired_reads": 200,
+    "qubo_energy_min": 4.648815312189981,
+    "qubo_energy_mean": 19.265613193258577,
+    "qubo_energy_max": 151.2289697291053,
+    "reads_breaking_rule": {
+      "assign": 200
+    },
+    "repaired": true,
+    "vms_placed_by_annealer": 17,
+    "vms_placed_by_repair": 2,
+    "qubo_energy_of_best": 4.648815312189981
+  },
+  "result": {
+    "active_hosts": 2,
+    "it_energy_kwh": 7.683035067349495,
+    "facility_energy_kwh": 11.831874003718223,
+    "overhead_energy_kwh": 4.148838936368728,
+    "co2_kg": 5.146865191617427,
+    "dcie_pct": 64.93506493506493,
+    "cue_kg_per_kwh_it": 0.6699,
+    "sla_violation_pct": 4.623538011695906,
+    "unmet_cpu_demand_pct": 0.2187636448190729,
+    "host_overload_windows": 0
+  }
+}

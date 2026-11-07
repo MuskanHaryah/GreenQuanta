@@ -1,0 +1,246 @@
+{
+  "phase": "2 - static allocation, heterogeneous servers",
+  "size": "large_v2",
+  "servers": {
+    "A": 3,
+    "B": 3,
+    "C": 3,
+    "D": 3
+  },
+  "server_types": [
+    {
+      "type": "A",
+      "count": 3,
+      "cpu_ncu": 0.591796875,
+      "mem_nmu": 0.33349609375,
+      "idle_w": 71.9,
+      "peak_w": 380.0,
+      "fit_idle_w": 114.7,
+      "fit_slope_w": 262.6,
+      "safe_util": 0.85,
+      "spec_server": "Lenovo ThinkSystem SR655 V3 (1 x AMD EPYC 9655, 96 cores)"
+    },
+    {
+      "type": "B",
+      "count": 3,
+      "cpu_ncu": 1.0,
+      "mem_nmu": 0.5,
+      "idle_w": 69.3,
+      "peak_w": 367.0,
+      "fit_idle_w": 109.9,
+      "fit_slope_w": 254.8,
+      "safe_util": 0.85,
+      "spec_server": "Fujitsu PRIMERGY RX1440 M2 (1 x AMD EPYC 9845, 160 cores)"
+    },
+    {
+      "type": "C",
+      "count": 3,
+      "cpu_ncu": 0.708984375,
+      "mem_nmu": 0.33349609375,
+      "idle_w": 76.3,
+      "peak_w": 449.0,
+      "fit_idle_w": 140.7,
+      "fit_slope_w": 312.4,
+      "safe_util": 0.85,
+      "spec_server": "Quanta S44NL-1U (1 x AMD EPYC 9755, 128 cores)"
+    },
+    {
+      "type": "D",
+      "count": 3,
+      "cpu_ncu": 0.38671875,
+      "mem_nmu": 0.33349609375,
+      "idle_w": 46.8,
+      "peak_w": 210.0,
+      "fit_idle_w": 56.3,
+      "fit_slope_w": 145.3,
+      "safe_util": 0.85,
+      "spec_server": "HPE ProLiant DL145 Gen11 (1 x AMD EPYC 8534P, 64 cores)"
+    }
+  ],
+  "constants": {
+    "pue": 1.54,
+    "emission_factor": 0.435,
+    "sla_max_violation_pct": 5.0,
+    "instances_per_vm": 4,
+    "unit_ncu": 0.0025,
+    "unit_nmu": 0.0025,
+    "candidate_reduction": false
+  },
+  "workload": {
+    "collections": 40,
+    "instances": 504,
+    "rows": 145138,
+    "vms": 133,
+    "vm_cpu_size_percentile": 95.0,
+    "total_cpu_ncu": 2.349848,
+    "total_mem_nmu": 1.426013
+  },
+  "qubo": {
+    "encoding": "unbalanced",
+    "encoding_description": "No slack, g^2 - 2*c*g with g = (K*y - L)/K (unbalanced penalization)",
+    "lambda_config": "L0.05",
+    "lambda_description": "All lambdas = 0.05 (scan)",
+    "unbalanced_center": 0.02,
+    "lambdas": {
+      "assign": 0.05,
+      "cpu": 0.05,
+      "ram": 0.05,
+      "link": 0.05
+    },
+    "num_variables": 1608,
+    "num_interactions": 115710,
+    "assignment_variables": 1596,
+    "server_variables": 12,
+    "slack_variables": 0,
+    "unit_ncu": 0.0025,
+    "unit_nmu": 0.0025,
+    "bias_range": [
+      4.325259515570935e-06,
+      0.16887400434063915
+    ],
+    "e_ref_joule": 168443275.6380673,
+    "candidate_servers": 12,
+    "user_servers": 12
+  },
+  "solver": {
+    "solver": "SimulatedAnnealingSampler",
+    "num_reads": 200,
+    "num_sweeps": 2000,
+    "seed": 42,
+    "descent": false,
+    "anneal_time_s": 27.8586,
+    "descent_time_s": 0.0,
+    "total_solve_time_s": 28.8728,
+    "valid_reads_raw_pct": 75.0,
+    "valid_reads_pct": 75.0,
+    "mean_vms_placed_pct": 100.0,
+    "reads_breaking_rule": {
+      "cpu_capacity": 46,
+      "mem_capacity": 4
+    },
+    "annealer_only_found": true,
+    "annealer_only_energy_kwh": 40.07440852647983,
+    "repaired": false,
+    "vms_placed_by_annealer": 133,
+    "vms_placed_by_repair": 0,
+    "qubo_energy_of_best": 1.1340278098477086
+  },
+  "result": {
+    "active_hosts": 10,
+    "it_energy_kwh": 40.07440852647983,
+    "facility_energy_kwh": 61.71458913077894,
+    "overhead_energy_kwh": 21.640180604299108,
+    "co2_kg": 26.84584627188884,
+    "sla_violation_pct": 4.680973266499582,
+    "unmet_cpu_demand_pct": 0.5648013866381368,
+    "host_overload_windows": 0,
+    "memory_bound_servers": 7,
+    "by_type": {
+      "A": {
+        "servers_on": 2,
+        "servers_total": 3,
+        "energy_kwh": 7.714279974533045
+      },
+      "B": {
+        "servers_on": 2,
+        "servers_total": 3,
+        "energy_kwh": 9.443928621358321
+      },
+      "C": {
+        "servers_on": 3,
+        "servers_total": 3,
+        "energy_kwh": 14.645803704329865
+      },
+      "D": {
+        "servers_on": 3,
+        "servers_total": 3,
+        "energy_kwh": 8.270396226258594
+      }
+    }
+  },
+  "exact_reference": {
+    "status": "optimal",
+    "proven_optimal": true,
+    "mip_gap": 7.631517035105705e-06,
+    "objective_joule": 73230356.20368038,
+    "time_s": 1.578,
+    "energy": {
+      "active_hosts": 4,
+      "it_energy_kwh": 20.03074856002845,
+      "facility_energy_kwh": 30.847352782443814,
+      "overhead_energy_kwh": 10.816604222415364,
+      "co2_kg": 13.418598460363059,
+      "sla_violation_pct": 4.680973266499582,
+      "unmet_cpu_demand_pct": 0.5648013866381368,
+      "host_overload_windows": 0,
+      "memory_bound_servers": 4,
+      "by_type": {
+        "A": {
+          "servers_on": 0,
+          "servers_total": 3,
+          "energy_kwh": 0.0
+        },
+        "B": {
+          "servers_on": 3,
+          "servers_total": 3,
+          "energy_kwh": 18.777135109676145
+        },
+        "C": {
+          "servers_on": 0,
+          "servers_total": 3,
+          "energy_kwh": 0.0
+        },
+        "D": {
+          "servers_on": 1,
+          "servers_total": 3,
+          "energy_kwh": 1.2536134503522995
+        }
+      }
+    }
+  },
+  "optimality": {
+    "exact_available": true,
+    "exact_proven_optimal": true,
+    "final_gap_energy_pct": 100.06445793268404,
+    "final_matches_optimum": false,
+    "final_beats_linear_optimum_on_curve": false,
+    "annealer_only_found": true,
+    "annealer_only_gap_energy_pct": 100.06445793268404,
+    "annealer_only_servers": 10,
+    "pure_and_optimal": false
+  },
+  "version": "v2",
+  "annealer_only_result": {
+    "active_hosts": 10,
+    "it_energy_kwh": 40.07440852647983,
+    "facility_energy_kwh": 61.71458913077894,
+    "overhead_energy_kwh": 21.640180604299108,
+    "co2_kg": 26.84584627188884,
+    "sla_violation_pct": 4.680973266499582,
+    "unmet_cpu_demand_pct": 0.5648013866381368,
+    "host_overload_windows": 0,
+    "memory_bound_servers": 7,
+    "by_type": {
+      "A": {
+        "servers_on": 2,
+        "servers_total": 3,
+        "energy_kwh": 7.714279974533045
+      },
+      "B": {
+        "servers_on": 2,
+        "servers_total": 3,
+        "energy_kwh": 9.443928621358321
+      },
+      "C": {
+        "servers_on": 3,
+        "servers_total": 3,
+        "energy_kwh": 14.645803704329865
+      },
+      "D": {
+        "servers_on": 3,
+        "servers_total": 3,
+        "energy_kwh": 8.270396226258594
+      }
+    }
+  }
+}

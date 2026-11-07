@@ -1,0 +1,4 @@
+host_id,active,vms,mean_cpu_util_pct,peak_cpu_util_pct,energy_kwh
+0,false,0,0.0000,0.0000,0.000000
+1,true,10,65.0745,83.5696,4.742682
+2,true,9,14.9671,20.0036,2.938814

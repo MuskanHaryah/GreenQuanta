@@ -1,0 +1,7 @@
+host_id,type,active,vms,mean_cpu_util_pct,peak_cpu_util_pct,mean_power_w,energy_kwh
+0,A,False,0,0.0,0.0,0.0,0.0
+1,A,False,0,0.0,0.0,0.0,0.0
+2,B,True,19,47.39364287146796,59.80148315429668,229.3896665847959,5.505351998035102
+3,C,False,0,0.0,0.0,0.0,0.0
+4,C,False,0,0.0,0.0,0.0,0.0
+5,D,False,0,0.0,0.0,0.0,0.0

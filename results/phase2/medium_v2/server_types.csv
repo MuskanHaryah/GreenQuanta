@@ -1,0 +1,5 @@
+type,count,cpu_ncu,mem_nmu,idle_w,peak_w,fit_idle_w,fit_slope_w,safe_util,spec_server
+A,2,0.591796875,0.33349609375,71.9,380.0,114.7,262.6,0.85,"Lenovo ThinkSystem SR655 V3 (1 x AMD EPYC 9655, 96 cores)"
+B,2,1.0,0.5,69.3,367.0,109.9,254.8,0.85,"Fujitsu PRIMERGY RX1440 M2 (1 x AMD EPYC 9845, 160 cores)"
+C,2,0.708984375,0.33349609375,76.3,449.0,140.7,312.4,0.85,"Quanta S44NL-1U (1 x AMD EPYC 9755, 128 cores)"
+D,2,0.38671875,0.33349609375,46.8,210.0,56.3,145.3,0.85,"HPE ProLiant DL145 Gen11 (1 x AMD EPYC 8534P, 64 cores)"
