@@ -12,6 +12,7 @@ Two answers come out:
   * annealer_only : best read that is valid after stage 1 or 2 (no repair), or None
   * final         : best answer overall (repair allowed), always a valid placement
 """
+import math
 import time
 
 import numpy as np
@@ -27,7 +28,19 @@ def _placed_count(sample, vms, servers):
     return sum(1 for v in vms if sum(sample[x_var(v.vm_id, h)] for h in range(len(servers))) == 1)
 
 
-def solve(bqm, vms, servers, num_reads=None, num_sweeps=None, seed=None, descent=True):
+def rank_candidates(candidates, prefer_unrepaired=False):
+    if prefer_unrepaired:
+        return min(candidates, key=lambda c: c[:2], default=None)
+    best = min(candidates, key=lambda c: c[1], default=None)
+    if best is None:
+        return None
+    return min((c for c in candidates if not c[0] and
+                math.isclose(c[1], best[1], rel_tol=1e-12, abs_tol=0.0)),
+               key=lambda c: c[1], default=best)
+
+
+def solve(bqm, vms, servers, num_reads=None, num_sweeps=None, seed=None, descent=True,
+          prefer_unrepaired=False):
     num_reads = num_reads or config.NUM_READS
     num_sweeps = num_sweeps or config.NUM_SWEEPS
     seed = config.SEED if seed is None else seed
@@ -41,7 +54,7 @@ def solve(bqm, vms, servers, num_reads=None, num_sweeps=None, seed=None, descent
     final_set = SteepestDescentSolver().sample(bqm, initial_states=raw) if descent else raw
     descent_s = time.perf_counter() - t1 if descent else 0.0
 
-    best_any, best_any_score, best_any_info = None, None, None
+    candidates = []
     best_pure, best_pure_energy = None, None
     valid_after, rule_counts, placed = 0, {}, []
     for rec in final_set.data(fields=["sample", "energy"]):
@@ -60,13 +73,14 @@ def solve(bqm, vms, servers, num_reads=None, num_sweeps=None, seed=None, descent
         e = evaluate_allocation(vms, assignment, servers)["it_energy_kwh"]
         if not repaired and (best_pure_energy is None or e < best_pure_energy):
             best_pure, best_pure_energy = assignment, e
-        score = (repaired, e)
-        if best_any_score is None or score < best_any_score:
-            best_any, best_any_score = assignment, score
-            best_any_info = {"repaired": repaired, "vms_placed_by_annealer": kept,
-                             "vms_placed_by_repair": by_repair, "qubo_energy_of_best": float(rec.energy)}
-    if best_any is None:
+        candidates.append(((repaired, e, assignment),
+                           {"repaired": repaired, "vms_placed_by_annealer": kept,
+                            "vms_placed_by_repair": by_repair, "qubo_energy_of_best": float(rec.energy)}))
+    best = rank_candidates([candidate for candidate, _ in candidates], prefer_unrepaired)
+    if best is None:
         raise RuntimeError("No usable placement: the servers are too small for this workload.")
+    best_any = best[2]
+    best_any_info = next(info for candidate, info in candidates if candidate is best)
 
     stats = {
         "solver": "SimulatedAnnealingSampler" + (" + SteepestDescentSolver" if descent else ""),
