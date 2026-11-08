@@ -59,4 +59,9 @@ def gap_metrics_v2(final, pure, vms, servers, exact_assignment, exact_info, stat
         out["pure_and_optimal"] = linear_cost(pure, vms, servers) <= ex_lin * (1 + 1e-3)
     else:
         out["pure_and_optimal"] = False
+    out["final_matches_reference_linear"] = out["final_matches_optimum"]
+    out["pure_matches_reference_linear"] = out["pure_and_optimal"]
+    out["final_matches_optimum"] = out["final_matches_optimum"] and out["exact_proven_optimal"]
+    out["pure_and_optimal"] = out["pure_and_optimal"] and out["exact_proven_optimal"]
+    out["exact_mip_gap"] = exact_info.get("mip_gap")
     return out

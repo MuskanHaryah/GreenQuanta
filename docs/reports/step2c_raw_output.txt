@@ -1,0 +1,148 @@
+BEFORE FIX: .venv-gq/Scripts/pytest.exe tests/test_gap_metrics.py -v
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 8 items
+
+tests/test_gap_metrics.py::test_proven_optimum_matches_within_tolerance PASSED [ 12%]
+tests/test_gap_metrics.py::test_unproven_incumbent_is_not_labelled_optimal FAILED [ 25%]
+tests/test_gap_metrics.py::test_no_exact_assignment PASSED               [ 37%]
+tests/test_gap_metrics.py::test_no_pure_assignment PASSED                [ 50%]
+tests/test_gap_metrics.py::test_existing_key_set_is_preserved PASSED     [ 62%]
+tests/test_gap_metrics.py::test_reference_matches_do_not_require_proof FAILED [ 75%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[True] FAILED  [ 87%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[False] FAILED [100%]
+
+================================== FAILURES ===================================
+_______________ test_unproven_incumbent_is_not_labelled_optimal _______________
+
+metrics = <function metrics.<locals>.compute at 0x000001BEC9AF3560>
+
+    def test_unproven_incumbent_is_not_labelled_optimal(metrics):
+        result, _ = metrics(proven_optimal=False)
+>       assert result["final_matches_optimum"] is False
+E       assert True is False
+
+tests\test_gap_metrics.py:42: AssertionError
+_________________ test_reference_matches_do_not_require_proof _________________
+
+metrics = <function metrics.<locals>.compute at 0x000001BEC9BA6DE0>
+
+    def test_reference_matches_do_not_require_proof(metrics):
+        result, _ = metrics(proven_optimal=False)
+>       assert result["final_matches_reference_linear"] is True
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'final_matches_reference_linear'
+
+tests\test_gap_metrics.py:70: KeyError
+____________________ test_exact_mip_gap_is_forwarded[True] ____________________
+
+metrics = <function metrics.<locals>.compute at 0x000001BEC9BA7060>
+include_mip_gap = True
+
+    @pytest.mark.parametrize("include_mip_gap", [True, False])
+    def test_exact_mip_gap_is_forwarded(metrics, include_mip_gap):
+        result, exact_info = metrics(include_mip_gap=include_mip_gap)
+>       assert result["exact_mip_gap"] == exact_info.get("mip_gap")
+               ^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'exact_mip_gap'
+
+tests\test_gap_metrics.py:77: KeyError
+___________________ test_exact_mip_gap_is_forwarded[False] ____________________
+
+metrics = <function metrics.<locals>.compute at 0x000001BEC9BA6E80>
+include_mip_gap = False
+
+    @pytest.mark.parametrize("include_mip_gap", [True, False])
+    def test_exact_mip_gap_is_forwarded(metrics, include_mip_gap):
+        result, exact_info = metrics(include_mip_gap=include_mip_gap)
+>       assert result["exact_mip_gap"] == exact_info.get("mip_gap")
+               ^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'exact_mip_gap'
+
+tests\test_gap_metrics.py:77: KeyError
+=========================== short test summary info ===========================
+FAILED tests/test_gap_metrics.py::test_unproven_incumbent_is_not_labelled_optimal
+FAILED tests/test_gap_metrics.py::test_reference_matches_do_not_require_proof
+FAILED tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[True] - Key...
+FAILED tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[False] - Ke...
+========================= 4 failed, 4 passed in 9.39s =========================
+
+AFTER FIX: .venv-gq/Scripts/pytest.exe tests -v
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 39 items
+
+tests/test_gap_metrics.py::test_proven_optimum_matches_within_tolerance PASSED [  2%]
+tests/test_gap_metrics.py::test_unproven_incumbent_is_not_labelled_optimal PASSED [  5%]
+tests/test_gap_metrics.py::test_no_exact_assignment PASSED               [  7%]
+tests/test_gap_metrics.py::test_no_pure_assignment PASSED                [ 10%]
+tests/test_gap_metrics.py::test_existing_key_set_is_preserved PASSED     [ 12%]
+tests/test_gap_metrics.py::test_reference_matches_do_not_require_proof PASSED [ 15%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[True] PASSED  [ 17%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[False] PASSED [ 20%]
+tests/test_managed_runner.py::test_build_run_config_seed_changes_hash PASSED [ 23%]
+tests/test_managed_runner.py::test_build_run_config_hash_ignores_dict_key_order PASSED [ 25%]
+tests/test_managed_runner.py::test_build_run_config_contains_seed PASSED [ 28%]
+tests/test_manifest.py::test_canonical_hash_ignores_key_order PASSED     [ 30%]
+tests/test_manifest.py::test_sampler_seed_changes_config_hash PASSED     [ 33%]
+tests/test_manifest.py::test_write_manifest_never_overwrites PASSED      [ 35%]
+tests/test_manifest.py::test_experiment_log_appends_without_repeating_header PASSED [ 38%]
+tests/test_manifest.py::test_file_hash_changes_with_one_byte PASSED      [ 41%]
+tests/test_manifest.py::test_dependency_versions_reports_missing PASSED  [ 43%]
+tests/test_manifest.py::test_git_info_distinguishes_untracked_files PASSED [ 46%]
+tests/test_selection.py::test_lower_energy_repaired_wins_by_default PASSED [ 48%]
+tests/test_selection.py::test_prefer_unrepaired_preserves_old_ordering PASSED [ 51%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-0.0] PASSED [ 53%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-5e-13] PASSED [ 56%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-0.0] PASSED [ 58%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-5e-13] PASSED [ 61%]
+tests/test_selection.py::test_empty_candidates[False] PASSED             [ 64%]
+tests/test_selection.py::test_empty_candidates[True] PASSED              [ 66%]
+tests/test_selection.py::test_lowest_energy_of_three_mixed_candidates PASSED [ 69%]
+tests/test_validation.py::test_fully_valid PASSED                        [ 71%]
+tests/test_validation.py::test_missing_vm PASSED                         [ 74%]
+tests/test_validation.py::test_unknown_vm PASSED                         [ 76%]
+tests/test_validation.py::test_unknown_host PASSED                       [ 79%]
+tests/test_validation.py::test_cpu_overload PASSED                       [ 82%]
+tests/test_validation.py::test_mem_overload PASSED                       [ 84%]
+tests/test_validation.py::test_non_finite_or_negative PASSED             [ 87%]
+tests/test_validation.py::test_quantized_cpu_overload PASSED             [ 89%]
+tests/test_validation.py::test_quantized_mem_overload PASSED             [ 92%]
+tests/test_validation.py::test_quantized_float_edge PASSED               [ 94%]
+tests/test_validation.py::test_duplicate_vm PASSED                       [ 97%]
+tests/test_validation_real.py::test_saved_small_v2_assignments PASSED    [100%]
+
+============================= 39 passed in 5.59s ==============================
+
+AFTER FIX: git --no-pager diff -- optimizer/phase2/pipeline_v2.py
+warning: in the working copy of 'optimizer/phase2/pipeline_v2.py', LF will be replaced by CRLF the next time Git touches it
+diff --git a/optimizer/phase2/pipeline_v2.py b/optimizer/phase2/pipeline_v2.py
+index bb6a2d6e..59d4631f 100644
+--- a/optimizer/phase2/pipeline_v2.py
++++ b/optimizer/phase2/pipeline_v2.py
+@@ -59,4 +59,9 @@ def gap_metrics_v2(final, pure, vms, servers, exact_assignment, exact_info, stat
+         out["pure_and_optimal"] = linear_cost(pure, vms, servers) <= ex_lin * (1 + 1e-3)
+     else:
+         out["pure_and_optimal"] = False
++    out["final_matches_reference_linear"] = out["final_matches_optimum"]
++    out["pure_matches_reference_linear"] = out["pure_and_optimal"]
++    out["final_matches_optimum"] = out["final_matches_optimum"] and out["exact_proven_optimal"]
++    out["pure_and_optimal"] = out["pure_and_optimal"] and out["exact_proven_optimal"]
++    out["exact_mip_gap"] = exact_info.get("mip_gap")
+     return out
+
+AFTER FIX: git --no-optional-locks status --short
+ M optimizer/phase2/pipeline_v2.py
+?? .rules
+?? docs/
+?? results/experiment_log.csv
+?? results/runs/
+?? tests/test_gap_metrics.py
+
+AFTER FIX: git --no-pager diff --check
+warning: in the working copy of 'optimizer/phase2/pipeline_v2.py', LF will be replaced by CRLF the next time Git touches it
+
