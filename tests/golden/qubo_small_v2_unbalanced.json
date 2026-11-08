@@ -1,0 +1,16 @@
+{
+  "fingerprint": {
+    "sha256": "9b903ed87e4dcaee0e5a2c041a6f6b1c99547e17fe0653b852fd9d976cbc4086",
+    "num_variables": 256,
+    "num_interactions": 4836,
+    "offset": 1.5500000000000007
+  },
+  "info": {
+    "num_variables": 256,
+    "bias_range": [
+      4.325259515570935e-06,
+      0.2140276936603287
+    ],
+    "e_ref_joule": 104002167.79060815
+  }
+}
