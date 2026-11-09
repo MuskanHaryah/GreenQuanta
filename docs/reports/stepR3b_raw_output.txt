@@ -1,0 +1,654 @@
+Step R3b; local only; dependencies added: none
+BEFORE results/phase2 count=105 sha256=a87a20897d50feb7ff1e2ae678f422bc8edde8d909ba81901faf35d04e62aebd
+BEFORE 7548672d2d032cba9aff83d3f9659c1ba5530cb8e5c927aca2bdd90e9ae793cd  results/phase2/large/assignment_exact.csv
+BEFORE 5c0c29da1648cf52f3eb868e2cfb62b9102332075d9d0aa09d03531e3f525f09  results/phase2/large/assignment_qa.csv
+BEFORE 166c0e7f14008a7c768873f18bbf929a03abcd755252eb87351a1427f07e4aa0  results/phase2/large/cloudsim_energy_hosts.csv
+BEFORE 0184bfc22be6033af008dfb8273e33cfd0e9b8af64a90497b0a2fe5bea04e5aa  results/phase2/large/cloudsim_input/servers.csv
+BEFORE 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/large/cloudsim_input/settings.csv
+BEFORE 8edbffc39279c763d07ce6cb9e4064aa399cb82acb09b53f6023c9343e39024c  results/phase2/large/cloudsim_input/vm_cpu_demand.csv
+BEFORE 293044713a3049bb5cfc884c53a61fd84f3effc2f8e144189451baa7e78247a7  results/phase2/large/cloudsim_input/vms_assignment.csv
+BEFORE 0c919667fe72cc7daacd71cbe488072c91a2bb9659486ba3e2fac3954287e47c  results/phase2/large/cloudsim_summary.csv
+BEFORE 4a3020ba7d0dd3e900c4439a6f18321c700fc082895e879e94c7e4b1f5696e75  results/phase2/large/energy_hosts_python.csv
+BEFORE d01e5fb260d1ed9e7cdc12d046cd78fe4eede98e5e01df1864a4fd02d9f989ae  results/phase2/large/experiment_v2.csv
+BEFORE 849bf5085b24b9251c167160b621911f45fe166f0ba64b12ba289f2b56e74adc  results/phase2/large/experiment_v2.png
+BEFORE b7a74ff41896d9b6e5a5e82c7479a5727c8c9992c9e0d0456df5d3e690e434f6  results/phase2/large/host_energy.png
+BEFORE dc77fe20534786c842949675c26bf4b151a32985ffe15c7a33fc26f52eafa846  results/phase2/large/host_utilization_24h.png
+BEFORE ae330312f30b91470f218c9a8c8e723f19964c68fa419d8d4d2d1614779cc9d2  results/phase2/large/lambda_experiment.csv
+BEFORE 024d96d8e46eb7e096ba1fdad68103009c9a5875cd7bfc53d81d2a65777b47c2  results/phase2/large/lambda_experiment.png
+BEFORE 5cec602a40aa5bbaaf663ac4f3759c2b82560a6dcaf0f03fa8ea08c0e13a3447  results/phase2/large/server_types.csv
+BEFORE 62ace0f5ee07722ffda46fbf83cf130ec2cb7fab36f8e85c0728c955b1900ad1  results/phase2/large/summary.json
+BEFORE 9f52280c7c7c3ded59e5572403b4f3d41aedb4a9a8cbe81e6353d8eb288a3919  results/phase2/large/vms.csv
+BEFORE ac0c062a2862da52378410c6915a1b5033c22002b4d9000e01518f8d79ee6c90  results/phase2/large_v2/assignment_annealer_only.csv
+BEFORE b9809f4bf91e2818c0f01173d87eefa1a142f5f7bf60750cc04ba59dc45a2ff0  results/phase2/large_v2/assignment_exact.csv
+BEFORE 7119449617fae04cd5d8e8c22016e7544f1ac107419527632e205c4b2c210bd0  results/phase2/large_v2/assignment_qa.csv
+BEFORE 9470ae24cb22513f2b3229390f2b4ad974b4d8a82616c0981dc01dd83cfba5ff  results/phase2/large_v2/cloudsim_energy_hosts.csv
+BEFORE 9caf169160ad3d1d595b7a401608b3fa48e9de64bfd51ca77b2b4c8f20148ed1  results/phase2/large_v2/cloudsim_input/servers.csv
+BEFORE 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/large_v2/cloudsim_input/settings.csv
+BEFORE 2a75c80d7879c9c822cddf17422ef3a12968db1e07abd4afa1bf7d5872a223ad  results/phase2/large_v2/cloudsim_input/vm_cpu_demand.csv
+BEFORE 81c366b2be25872a16dc3a859627404a6d95bdc36f3151b1013b81d17f7f3aa3  results/phase2/large_v2/cloudsim_input/vms_assignment.csv
+BEFORE 5ab2e0fa5cb73e2480cfac8980a86399506fd10fa16df91fdec4a78b67dfcc15  results/phase2/large_v2/cloudsim_summary.csv
+BEFORE ae78d6e767dd5aefebe223d9a70eedccaa929ced8cccc58485becfbb6ad75505  results/phase2/large_v2/energy_hosts_python.csv
+BEFORE 38fc84039ef59a7d3f8d5b9a0d255d22ea62efa4f00ff752ea24e1caa56ee027  results/phase2/large_v2/experiment_v2.csv
+BEFORE d5fc14c2835ce3bbf2197a980421dd606391f5c416bffc99bbf75e03e2fc66e7  results/phase2/large_v2/experiment_v2.png
+BEFORE 2652fdf63c0ccf23241ac7e1b18bf30781ccd45c905f02add35187b854e95213  results/phase2/large_v2/host_energy.png
+BEFORE 837d84612e0b8f878ce8cafa1f2a9f2c3584ccbb4c87b8bede41b258b1c9e042  results/phase2/large_v2/host_utilization_24h.png
+BEFORE 46817538b4cab1a7bb6deb40444f617d9610dffc247f49230d147196d33e1966  results/phase2/large_v2/server_types.csv
+BEFORE 1919f01f04bede5cef9ee3175162c35f37a101a8be25bad75cd09ee6794e860f  results/phase2/large_v2/summary.json
+BEFORE 1b01ec96910a1ad53b995db516111e43418490050605386554c815e93fd6063c  results/phase2/large_v2/vms.csv
+BEFORE 1215466ff15267c48f932ca8f1a498993c05a074172ea6cd322be6752d7976de  results/phase2/medium/assignment_exact.csv
+BEFORE 1bf45ee84b55a7c78d8b8c17e29bc0a546004df2a847ad8df6b5428abbf545d4  results/phase2/medium/assignment_qa.csv
+BEFORE 392c3bd84fa05dd703a99b33bd070615ea8d8c8ef38aba26778a626dec59e7a4  results/phase2/medium/cloudsim_energy_hosts.csv
+BEFORE cc2e9342819bd68300b3bea52a7141ef5839b12fe1bb2986e679881d7889ce57  results/phase2/medium/cloudsim_input/servers.csv
+BEFORE 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/medium/cloudsim_input/settings.csv
+BEFORE 93f6fde2a1c46ccff2fe34df063c62a798cf4712d71834dd323aa0655e68a32b  results/phase2/medium/cloudsim_input/vm_cpu_demand.csv
+BEFORE 8121f72756a65a6aa31aff59262b1cd7aaf21250ee5c8a0695aee5d8e62c5284  results/phase2/medium/cloudsim_input/vms_assignment.csv
+BEFORE 4077ccc15aa566d9e76c8b1798062be3382616468a0664ba002da7b81f4ed48c  results/phase2/medium/cloudsim_summary.csv
+BEFORE 798b02119ab359b75707ca98cdf955dcf82cca23f4a301f7e078a2ff1447fc81  results/phase2/medium/energy_hosts_python.csv
+BEFORE 4a475c6c8afabe47a614cc6eeb948545ce1ca07bd177adbd54c43a1965438ccd  results/phase2/medium/experiment_v2.csv
+BEFORE 2829386da9a7b5011cc16e4c8a782a71922c7f02d9af87c66877db292cb61d58  results/phase2/medium/experiment_v2.png
+BEFORE 0bed32bd1118e8456c9fa0f97934c40b52421d57973b65ddf85da60abd5b5df4  results/phase2/medium/host_energy.png
+BEFORE a3015d2549d59a3180f5574a7ddd2d565013cb7ccd237c928ce678205b0ec739  results/phase2/medium/host_utilization_24h.png
+BEFORE 037ca84e9bf54827e13f87a00186f90ea3d4aa5baa7c70914bfe01c41f4dd7de  results/phase2/medium/lambda_experiment.csv
+BEFORE 49d0003bf6312628ab7d8d76bb970efd6ec3bcec46df89be50f2d72d644c1f88  results/phase2/medium/lambda_experiment.png
+BEFORE 0654f439c219fdb4e28b2f2f6ad02a149dcd5b4922f2574179bdee2f7fa17e71  results/phase2/medium/server_types.csv
+BEFORE 542c82a1497cea364153298301d1354a1051a2319c978b46bc6c42854ced8946  results/phase2/medium/summary.json
+BEFORE 2b70b54c446131c2ef1ec77ce30dfbcd4a7d61aa3d99f7eb23f23c77faaffa20  results/phase2/medium/vms.csv
+BEFORE 547370180e2b9c4473003438a2e9e8a2dab59c4a1fabb4cfcf3867a1002ad77e  results/phase2/medium_v2/assignment_annealer_only.csv
+BEFORE bfad59b871fc03ad0ee51a4e62e1c0395c621c8b803a8d003a0110ca2f0de5b0  results/phase2/medium_v2/assignment_exact.csv
+BEFORE 0bb23e4c9158b4048f95e0ff72dd8b8a30130efb7c4a9b4e574acf9dc9a88330  results/phase2/medium_v2/assignment_qa.csv
+BEFORE d7719e08bdfcee0815442d601f789a7bb0824195d1137bf432596d03ee00a064  results/phase2/medium_v2/cloudsim_energy_hosts.csv
+BEFORE b922892adaa35ebf00b3d4e9e6d188940c2f0f23c2cef12560d48a5acbd788fc  results/phase2/medium_v2/cloudsim_input/servers.csv
+BEFORE 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/medium_v2/cloudsim_input/settings.csv
+BEFORE 589ecdf53da7456656c9fa8c1b98f46c74c52addb4c70e54e798f89ecf997c2d  results/phase2/medium_v2/cloudsim_input/vm_cpu_demand.csv
+BEFORE f7ac554cf9c8971a5aa62e439a032deac4c83acd3d13b3df512da0bb53ccefe3  results/phase2/medium_v2/cloudsim_input/vms_assignment.csv
+BEFORE 4c75cb604194fea3603718dda4e2ba026920b145bb338946189ebb6ec4a53095  results/phase2/medium_v2/cloudsim_summary.csv
+BEFORE 2310c89b1181df1484444d89c9848c80aab5ad9a104b01210f3e57f5ca25b052  results/phase2/medium_v2/energy_hosts_python.csv
+BEFORE 582814fabafd7e6701d4703fcd6b06eaca6efda76292377bd333b99fcb8fd5e6  results/phase2/medium_v2/experiment_v2.csv
+BEFORE 38d09612c6c2f59be5bcac2dbdab26cbc3d5d1eeca0722ee40cf0f5c78f09691  results/phase2/medium_v2/experiment_v2.png
+BEFORE ebcefe184442e8bddec25390de9b64650ee9560880dcbe91e45e879b4c4be87f  results/phase2/medium_v2/host_energy.png
+BEFORE c1ebfd4344f05a0acd37ce67d2d4e7065b30920702d3e150aa8b61a6f1d41254  results/phase2/medium_v2/host_utilization_24h.png
+BEFORE b91fdb6e4bbd65a7e6e8cf49ab180a21dbad890af2964ad8e9715b3ec1c2f394  results/phase2/medium_v2/server_types.csv
+BEFORE ea89fc5e5373fef86dba38830617db748046c89d5b569eca22ed6f83f1bfe33b  results/phase2/medium_v2/summary.json
+BEFORE fadb79b0a0c37eefce8aeda59b46acc2f636477d1d5378de92daf669803841f4  results/phase2/medium_v2/vms.csv
+BEFORE 160c9d5000f74ab0981d46ba33200ae64d9370f74a20d9ac183bfc0b514d00a2  results/phase2/small/assignment_exact.csv
+BEFORE e2cc91f09ff54b3a7b46d0585ed64a9fc7a2b1467f8fc32df4e7f3e17e8148c8  results/phase2/small/assignment_qa.csv
+BEFORE 14e4865f3a7c4bbd5e570365a6dc5ae4a875273280b49245f2bcb3ad8e545dc8  results/phase2/small/cloudsim_energy_hosts.csv
+BEFORE 09c91c861d81552c20a58bc4c61845e6b2729006e2ca943f1f1b820953b2a0c7  results/phase2/small/cloudsim_input/servers.csv
+BEFORE 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/small/cloudsim_input/settings.csv
+BEFORE f5d400a0cb27694594c1a837dce16af2cfa5881808dd0d6d7e6b3339b1085500  results/phase2/small/cloudsim_input/vm_cpu_demand.csv
+BEFORE 3f0d8765f5e1426397d821f90be8648274d9b2770db6fba8933b82889feddb04  results/phase2/small/cloudsim_input/vms_assignment.csv
+BEFORE 9cd4eabe1b72e06b2584869ba8319b73dc3ee405afdadd733ffd6bf533ffca47  results/phase2/small/cloudsim_summary.csv
+BEFORE dae81620c2336c57c49e63a4c627e8c397826aa1bd683243d88907d0c0610000  results/phase2/small/energy_hosts_python.csv
+BEFORE da5b4840eb7493e7a7bdb74e29142cfaa3c8c428eeb3917810154a71dd258c4f  results/phase2/small/experiment_v2.csv
+BEFORE c274a404e623acc1cabdd477f44354e3796db1ff4acdc9a066bd109b5b7bf0e3  results/phase2/small/experiment_v2.png
+BEFORE be6b7a4d7b711549c331f82d6a7b12b39c41c604995b5a4b2e879cbc45fb3ece  results/phase2/small/host_energy.png
+BEFORE 9b3035753bc19f3bd67c82bd60912561ac08f203c86be80490b168bc1d07216d  results/phase2/small/host_utilization_24h.png
+BEFORE 629744872c2485dca83568ff27a0c501b283d2104b6f8cebce2465da0e1c0b86  results/phase2/small/lambda_experiment.csv
+BEFORE 005c72bdbe21bfe44eab696fb20e153990d81d3d706c3c1d7cfa9133ad8d27bb  results/phase2/small/lambda_experiment.png
+BEFORE 8bc8cf874f8d8da0d203ab60c16c4fee48cf197d556a26ae66aaedc239f38eaf  results/phase2/small/server_types.csv
+BEFORE a55fe3cc0bc9ac65de45cb58029bbded66b300e1598dac3f1a932a394d6852e1  results/phase2/small/summary.json
+BEFORE 178079481833e276e8a47c8d33529f2b72daaa840da20089273d07acddd6b060  results/phase2/small/vms.csv
+BEFORE a83050514b81258a34838629726a08a68ee8a92da650fb18735cbda6f55175df  results/phase2/small_v2/assignment_annealer_only.csv
+BEFORE 1a946e988f3ce735069bf8f45099ce940412a2138c37cf5a2bfcd064b72b9812  results/phase2/small_v2/assignment_exact.csv
+BEFORE 9b397c7f14e8e291398993a35a67d8e1f02204fe8f927240f9039e330f0a1ca0  results/phase2/small_v2/assignment_qa.csv
+BEFORE 94c61bef0f18cddaf75c3a53ebea02f6287818b2c61927dc92dbc1b5f9c9e624  results/phase2/small_v2/cloudsim_energy_hosts.csv
+BEFORE b922892adaa35ebf00b3d4e9e6d188940c2f0f23c2cef12560d48a5acbd788fc  results/phase2/small_v2/cloudsim_input/servers.csv
+BEFORE 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/small_v2/cloudsim_input/settings.csv
+BEFORE 86d1ae8afc828021b801b6b348748c1a2af60c6228f392967e06bfd446a1d3e4  results/phase2/small_v2/cloudsim_input/vm_cpu_demand.csv
+BEFORE 86b44752adbfa3c973e91d6b1b16e5ecc277890fb5f90eac310c13d333a70d17  results/phase2/small_v2/cloudsim_input/vms_assignment.csv
+BEFORE f24a2997e14ceeaedb42bca4b60fffb0c23d37964d1e16af5cc05adfedc93859  results/phase2/small_v2/cloudsim_summary.csv
+BEFORE ee4779ac98f9060b3bfb1a86da91f2cccd4322650f8f1dcb0bae02e60132d93d  results/phase2/small_v2/energy_hosts_python.csv
+BEFORE 9853de099a3d1a314e0f2dea52189d1999f898609152dd2ff21427bdcaa8feac  results/phase2/small_v2/experiment_v2.csv
+BEFORE 96c6e361e96b714f40967b8b0b261f4f92cbd4f0caa0ab172441391145cc4b56  results/phase2/small_v2/experiment_v2.png
+BEFORE 13617e6738dce2544c17b81052b95298854348787cc3fedc124206485247ac2e  results/phase2/small_v2/host_energy.png
+BEFORE 8d2e7851d94fc82f50bc5857dc4132756bb524ed5d9f59c342c5b8200d66d9bd  results/phase2/small_v2/host_utilization_24h.png
+BEFORE b91fdb6e4bbd65a7e6e8cf49ab180a21dbad890af2964ad8e9715b3ec1c2f394  results/phase2/small_v2/server_types.csv
+BEFORE b249d8f6a3742a2ae36d8e36814db9a03c45f544fa09ce2e2d71187e4e0cffb9  results/phase2/small_v2/summary.json
+BEFORE 61a6adb4200a6bd1424c3e8e4e95ae79c3c7c48f2c057081effbbe58126ccdf1  results/phase2/small_v2/vms.csv
+BEFORE results/runs count=24 sha256=5c3202409b556e96f43a5971f60824347528677a8b47f58cf81d3207b0f9a883
+BEFORE a83050514b81258a34838629726a08a68ee8a92da650fb18735cbda6f55175df  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/assignment_annealer_only.csv
+BEFORE 817a1a906375a35ec150f46d6cfed70754003508a9e2018c1463ceda97af22fb  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/assignment_exact.csv
+BEFORE 9b397c7f14e8e291398993a35a67d8e1f02204fe8f927240f9039e330f0a1ca0  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/assignment_qa.csv
+BEFORE b922892adaa35ebf00b3d4e9e6d188940c2f0f23c2cef12560d48a5acbd788fc  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/servers.csv
+BEFORE 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/settings.csv
+BEFORE 86d1ae8afc828021b801b6b348748c1a2af60c6228f392967e06bfd446a1d3e4  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/vm_cpu_demand.csv
+BEFORE a3ec73c319a711a2daca649a22eee85284f27d7817c04515d42ecd1ea8907609  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/vms_assignment.csv
+BEFORE 8b770d08e503c1b020808577e485f70c9266de4dfde4c1e27f0b4cddf3bb0fdb  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/energy_hosts_python.csv
+BEFORE 63e933490c5eeedbfdbe571351f0b9373e129598240a5ed60303c4e1be53ded9  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/manifest.json
+BEFORE b91fdb6e4bbd65a7e6e8cf49ab180a21dbad890af2964ad8e9715b3ec1c2f394  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/server_types.csv
+BEFORE e3c29aea5919912b09a92056e8372aa20468f9c8c19f7692c67fbbe1f424322b  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/summary.json
+BEFORE 61a6adb4200a6bd1424c3e8e4e95ae79c3c7c48f2c057081effbbe58126ccdf1  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/vms.csv
+BEFORE a83050514b81258a34838629726a08a68ee8a92da650fb18735cbda6f55175df  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/assignment_annealer_only.csv
+BEFORE 817a1a906375a35ec150f46d6cfed70754003508a9e2018c1463ceda97af22fb  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/assignment_exact.csv
+BEFORE 9b397c7f14e8e291398993a35a67d8e1f02204fe8f927240f9039e330f0a1ca0  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/assignment_qa.csv
+BEFORE b922892adaa35ebf00b3d4e9e6d188940c2f0f23c2cef12560d48a5acbd788fc  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/cloudsim_input/servers.csv
+BEFORE 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/cloudsim_input/settings.csv
+BEFORE 86d1ae8afc828021b801b6b348748c1a2af60c6228f392967e06bfd446a1d3e4  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/cloudsim_input/vm_cpu_demand.csv
+BEFORE a3ec73c319a711a2daca649a22eee85284f27d7817c04515d42ecd1ea8907609  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/cloudsim_input/vms_assignment.csv
+BEFORE 8b770d08e503c1b020808577e485f70c9266de4dfde4c1e27f0b4cddf3bb0fdb  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/energy_hosts_python.csv
+BEFORE 373e61d580da6cbc66021aa4f4cffd99db4d2f040cd8a8b4ac8dcca6d08e079e  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/manifest.json
+BEFORE b91fdb6e4bbd65a7e6e8cf49ab180a21dbad890af2964ad8e9715b3ec1c2f394  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/server_types.csv
+BEFORE 7b2fb8dca540e157bb43ff0faa9b05aa4e9eb4110c8a7296f518ea4e21bab82e  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/summary.json
+BEFORE 61a6adb4200a6bd1424c3e8e4e95ae79c3c7c48f2c057081effbbe58126ccdf1  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/vms.csv
+COMMAND: git --no-pager branch --show-current
+step3-r3-exact-qubo
+exit_code=0 total_time_s=0.103
+COMMAND: "C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe" -B -m pytest tests/test_exact_qubo.py -v -p no:cacheprovider
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 13 items
+
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L0.05-c0.02] PASSED [  7%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.05-c0.02-cutting] PASSED [ 15%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.05-c0.02-full] PASSED [ 23%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L0.2-c0.07] PASSED [ 30%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.2-c0.07-cutting] PASSED [ 38%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.2-c0.07-full] PASSED [ 46%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L1.0-c0] PASSED [ 53%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L1.0-c0-cutting] PASSED [ 61%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L1.0-c0-full] PASSED [ 69%]
+tests/test_exact_qubo.py::test_one_iteration_duplicate_state_is_unproven PASSED [ 76%]
+tests/test_exact_qubo.py::test_time_exhausted_before_milp_has_finite_bound PASSED [ 84%]
+tests/test_exact_qubo.py::test_interrupted_exact_worse_candidate_retains_earlier_incumbent PASSED [ 92%]
+tests/test_exact_qubo.py::test_milp_time_limit_without_candidate_keeps_true_scored_state PASSED [100%]
+
+============================= 13 passed in 59.11s =============================
+exit_code=0 total_time_s=61.638
+=== A: large_v2 saved-assignment safeguard (D3 has no BQM hash) ===
+assignment_exact.csv total_h: actual=0.48695076826605527 recorded=0.48695076826605527
+assignment_exact.csv energy_h: actual=0.43559318782980688 recorded=0.43559318782980688
+assignment_exact.csv assign_h: actual=-3.1918911957973251e-16 recorded=-3.1918911957973251e-16
+assignment_exact.csv cpu_h: actual=0.041558712178112987 recorded=0.041558712178112987
+assignment_exact.csv ram_h: actual=0.009798868258198078 recorded=0.009798868258198078
+assignment_exact.csv link_h: actual=6.9388939039072284e-18 recorded=6.9388939039072284e-18
+assignment_annealer_only.csv total_h: actual=1.1340278096862335 recorded=1.1340278096862335
+assignment_annealer_only.csv energy_h: actual=0.86365435807991198 recorded=0.86365435807991198
+assignment_annealer_only.csv assign_h: actual=-3.1918911957973251e-16 recorded=-3.1918911957973251e-16
+assignment_annealer_only.csv cpu_h: actual=0.14698997302053055 recorded=0.14698997302053055
+assignment_annealer_only.csv ram_h: actual=0.12338347858581479 recorded=0.12338347858581479
+assignment_annealer_only.csv link_h: actual=6.9388939039072284e-18 recorded=6.9388939039072284e-18
+Saved large_v2 total/split safeguard: PASS
+COMMAND: "C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe" -B -m pytest tests/test_r3_run.py -v -p no:cacheprovider
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 24 items
+
+tests/test_r3_run.py::test_constrained_tiny_minimum_is_proven_within_30_second_budget PASSED [  4%]
+tests/test_r3_run.py::test_margin_excludes_near_limit_host_even_when_shared_validation_accepts[cpu] PASSED [  8%]
+tests/test_r3_run.py::test_margin_excludes_near_limit_host_even_when_shared_validation_accepts[mem] PASSED [ 12%]
+tests/test_r3_run.py::test_no_margin_safe_placement_does_not_return_invalid_fallback[cpu] PASSED [ 16%]
+tests/test_r3_run.py::test_no_margin_safe_placement_does_not_return_invalid_fallback[mem] PASSED [ 20%]
+tests/test_r3_run.py::test_one_iteration_preserves_honest_certificate_and_scoring PASSED [ 25%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[990.0-False] PASSED [ 29%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[990.0-True] PASSED [ 33%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1000.0-False] PASSED [ 37%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1000.0-True] PASSED [ 41%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1010.0-False] PASSED [ 45%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1010.0-True] PASSED [ 50%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[990.0] PASSED [ 54%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[1000.0] PASSED [ 58%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[1010.0] PASSED [ 62%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1000.0-0.0-MATCH] PASSED [ 66%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1000.5-0.05-MATCH] PASSED [ 70%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[999.5--0.05-MATCH] PASSED [ 75%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1001.0-0.1-MATCH] PASSED [ 79%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[999.0--0.1-MATCH] PASSED [ 83%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1001.001-0.1001-DIFFERENT] PASSED [ 87%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[998.999--0.1001-DIFFERENT] PASSED [ 91%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1010.0-1.0-DIFFERENT] PASSED [ 95%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[990.0--1.0-DIFFERENT] PASSED [100%]
+
+============================= 24 passed in 3.89s ==============================
+exit_code=0 total_time_s=5.578
+
+=== small_v2: L0.05, unbalanced, center=0.02, unit=0.0025, tie_break=0.01, seed=42 ===
+VMs=31 servers=8 time_limit_s=600 max_iters=50
+B: global QUBO
+iteration=1 max_violation=0.058875432525951399 max_weighted_violation=0.0029437716262975702 milp_objective=0.30707032960229319 lower_bound=0.3070703296022932 incumbent_true_H=0.31122863410056301
+iteration=2 max_violation=0.058875432525951538 max_weighted_violation=0.0029437716262975771 milp_objective=0.3079830490389795 lower_bound=0.3079830490389779 incumbent_true_H=0.31122863410056301
+iteration=3 max_violation=0.00095155709342510664 max_weighted_violation=4.7577854671255333e-05 milp_objective=0.31057546824485083 lower_bound=0.3105754682448508 incumbent_true_H=0.31064380734519681
+iteration=4 max_violation=0 max_weighted_violation=0 milp_objective=0.31064380734519692 lower_bound=0.31064380734519687 incumbent_true_H=0.31064380734519681
+R3= {'status': 'OPTIMAL', 'proven_optimal': True, 'reason': 'proven global QUBO minimum', 'lower_bound': 0.31064380734519687, 'incumbent_true_H': 0.3106438073451968, 'independent_H': 0.3106438073451968, 'bqm_H': 0.310643807345195, 'mip_gap': 0.0, 'iterations': 4, 'time_s': 1.0468395000789315}
+recomputed_H= {'bqm_H': 0.310643807345195, 'independent_H': 0.3106438073451968}
+servers_on= 1 hosts= [{'index': 2, 'host_id': 2, 'type': 'B'}]
+unplaced_VMs= [15]
+duplicated_VMs= {}
+host_id=0 type=A on=0 cpu: units=0 K=201 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.50302734375000002 real_overload=0 real_overload_pct=0.000000000
+host_id=0 type=A on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=1 type=A on=0 cpu: units=0 K=201 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.50302734375000002 real_overload=0 real_overload_pct=0.000000000
+host_id=1 type=A on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=2 type=B on=1 cpu: units=416 K=340 overload_units=76 overload_units_pct=22.352941176 real_load=1.0033856074015299 limit=0.84999999999999998 real_overload=0.15338560740152996 real_overload_pct=18.045365577
+host_id=2 type=B on=1 mem: units=113 K=170 overload_units=0 overload_units_pct=0.000000000 real_load=0.25211772600809734 limit=0.42499999999999999 real_overload=0 real_overload_pct=0.000000000
+host_id=3 type=B on=0 cpu: units=0 K=340 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.84999999999999998 real_overload=0 real_overload_pct=0.000000000
+host_id=3 type=B on=0 mem: units=0 K=170 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.42499999999999999 real_overload=0 real_overload_pct=0.000000000
+host_id=4 type=C on=0 cpu: units=0 K=241 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.60263671875000002 real_overload=0 real_overload_pct=0.000000000
+host_id=4 type=C on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=5 type=C on=0 cpu: units=0 K=241 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.60263671875000002 real_overload=0 real_overload_pct=0.000000000
+host_id=5 type=C on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=6 type=D on=0 cpu: units=0 K=131 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.32871093749999997 real_overload=0 real_overload_pct=0.000000000
+host_id=6 type=D on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=7 type=D on=0 cpu: units=0 K=131 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.32871093749999997 real_overload=0 real_overload_pct=0.000000000
+host_id=7 type=D on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+H_breakdown= {'energy': 0.2527479595943318, 'assign': 0.05, 'cpu': 0.002945328719723184, 'ram': 0.004950519031141867, 'link': 0.0, 'tie': 0.0, 'offset': 0.0}
+real_size_validator= {'valid': False, 'allocation': {'valid': False, 'violations': [{'type': 'missing_vm', 'detail': 'VM 15 has no assignment'}, {'type': 'cpu_overload', 'detail': 'Host 2 cpu load 1.00338560740153 exceeds limit 0.85'}]}, 'assignment_multiplicities': {15: 0}, 'off_server_links': []}
+quantized_validator= {'valid': False, 'violations': [{'type': 'missing_vm', 'detail': 'VM 15 has no assignment'}, {'type': 'cpu_overload', 'detail': 'Host 2 cpu load 1.00338560740153 exceeds limit 0.85'}, {'type': 'quantized_cpu_overload', 'detail': 'Host 2 cpu units 416 exceed limit 340'}]}
+linear cost and SPEC energy: unavailable (not a complete singleton assignment)
+D: R3v; same H plus singleton, links and real-size guarded capacity rows
+iteration=1 max_violation=0.060311418685121111 max_weighted_violation=0.0030155709342560557 milp_objective=0.42221001000864961 lower_bound=0.4222100100086496 incumbent_true_H=0.43068665360726555
+iteration=2 max_violation=0.0148961937716263 max_weighted_violation=0.00074480968858131504 milp_objective=0.4297091449567465 lower_bound=0.42970914495674645 incumbent_true_H=0.43068665360726555
+iteration=3 max_violation=0.0036332179930796543 max_weighted_violation=0.00018166089965398273 milp_objective=0.43022558094290564 lower_bound=0.43022558094290564 incumbent_true_H=0.43068665360726555
+iteration=4 max_violation=0.00077854671280275234 max_weighted_violation=3.892733564013762e-05 milp_objective=0.43042886814013764 lower_bound=0.4304288681401375 incumbent_true_H=0.43052748405709251
+iteration=5 max_violation=0.00017301038062284002 max_weighted_violation=8.6505190311420014e-06 milp_objective=0.43043319339965308 lower_bound=0.4304331933996531 incumbent_true_H=0.43045049443771538
+iteration=6 max_violation=1.7301038063209651e-05 max_weighted_violation=8.6505190316048257e-07 milp_objective=0.43043578855536041 lower_bound=0.4304357885553604 incumbent_true_H=0.43043751865916863
+iteration=7 max_violation=4.343747583845925e-15 max_weighted_violation=2.1718737919229625e-16 milp_objective=0.43043665360726591 lower_bound=0.43043665360726585 incumbent_true_H=0.43043665360726552
+R3v= {'status': 'OPTIMAL', 'proven_optimal': True, 'lower_bound': 0.43043665360726585, 'bqm_H': 0.4304366536072653, 'independent_H': 0.4304366536072655, 'mip_gap': 0.0, 'iterations': 7, 'time_s': 4.6019252999685705, 'validation': {'valid': True, 'allocation': {'valid': True, 'violations': []}, 'assignment_multiplicities': {}, 'off_server_links': [], 'margin_excess': []}}
+H_valid_min= 0.4304366536072653 H_valid_incumbent= 0.4304366536072653
+R3v servers= [{'index': 2, 'host_id': 2, 'type': 'B'}, {'index': 3, 'host_id': 3, 'type': 'B'}]
+R3v linear_cost_J= 39951971.03582648
+E: same-BQM references
+R1 saved real-MILP: H=0.43664513111591491 linear_cost_J=39951971.035826482 SPEC_curve_energy_kWh=11.084941645113627
+R1 real_size_validator= {'valid': True, 'allocation': {'valid': True, 'violations': []}, 'assignment_multiplicities': {}, 'off_server_links': []}
+R1 quantized_validator= {'valid': True, 'violations': []}
+Step 2e R2: host_ids=[2, 3] linear_cost_J=39951971.035826482 SPEC_curve_energy_kWh=11.041989090265; label_reference=R2 linear joules
+R2 recomputation= {'status': 'optimal', 'proven_optimal': True, 'mip_gap': 0.0, 'objective_joule': 39951971.03582648, 'time_s': 0.363}
+R2 H_quantized=0.44302834910899408 linear_cost_J=39951971.035826482 SPEC_curve_energy_kWh=11.041989090265169 hosts=[{'index': 2, 'host_id': 2, 'type': 'B'}, {'index': 3, 'host_id': 3, 'type': 'B'}]
+R2 validators= {'valid': True, 'violations': []} {'valid': True, 'violations': []}
+D3 best valid H (recorded)= 0.4304401138135745
+D3 bqm.energy reference: SKIPPED; best-sample x/y bits are absent from D3 CSVs. Recorded scalar only; no sampling or state reconstruction.
+LABEL small_v2: R3_INVALID; linear_cost_difference_vs_R2_pct=None
+| H_min (or incumbent if UNPROVEN) | H_valid_min (or incumbent if UNPROVEN) | H_quantized | best annealer H (D3 recorded only) |
+|---|---|---|---|
+| 0.31064380734519498 (OPTIMAL) | 0.4304366536072653 (OPTIMAL) | 0.44302834910899408 | 0.4304401138135745 |
+
+=== medium_v2: L0.05, unbalanced, center=0.02, unit=0.0025, tie_break=0.01, seed=42 ===
+VMs=63 servers=8 time_limit_s=600 max_iters=50
+B: global QUBO
+iteration=1 max_violation=0.038823529411771807 max_weighted_violation=0.0019411764705885904 milp_objective=0.36613994685581824 lower_bound=0.36613994685581824 incumbent_true_H=0.3687558638108378
+iteration=2 max_violation=0.038823529411764812 max_weighted_violation=0.0019411764705882407 milp_objective=0.36700029329685901 lower_bound=0.367000293296859 incumbent_true_H=0.3687558638108378
+iteration=3 max_violation=0 max_weighted_violation=0 milp_objective=0.36875586381083825 lower_bound=0.36875586381083825 incumbent_true_H=0.3687558638108378
+R3= {'status': 'OPTIMAL', 'proven_optimal': True, 'reason': 'proven global QUBO minimum', 'lower_bound': 0.36875586381083825, 'incumbent_true_H': 0.3687558638108378, 'independent_H': 0.3687558638108378, 'bqm_H': 0.3687558638108289, 'mip_gap': 0.0, 'iterations': 3, 'time_s': 8.302742999978364}
+recomputed_H= {'bqm_H': 0.3687558638108289, 'independent_H': 0.3687558638108378}
+servers_on= 1 hosts= [{'index': 2, 'host_id': 2, 'type': 'B'}]
+unplaced_VMs= [17, 18]
+duplicated_VMs= {}
+host_id=0 type=A on=0 cpu: units=0 K=201 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.50302734375000002 real_overload=0 real_overload_pct=0.000000000
+host_id=0 type=A on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=1 type=A on=0 cpu: units=0 K=201 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.50302734375000002 real_overload=0 real_overload_pct=0.000000000
+host_id=1 type=A on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=2 type=B on=1 cpu: units=455 K=340 overload_units=115 overload_units_pct=33.823529412 real_load=1.0615549723307292 limit=0.84999999999999998 real_overload=0.21155497233072917 real_overload_pct=24.888820274
+host_id=2 type=B on=1 mem: units=281 K=170 overload_units=111 overload_units_pct=65.294117647 real_load=0.63837443351745604 limit=0.42499999999999999 real_overload=0.21337443351745605 real_overload_pct=50.205749063
+host_id=3 type=B on=0 cpu: units=0 K=340 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.84999999999999998 real_overload=0 real_overload_pct=0.000000000
+host_id=3 type=B on=0 mem: units=0 K=170 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.42499999999999999 real_overload=0 real_overload_pct=0.000000000
+host_id=4 type=C on=0 cpu: units=0 K=241 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.60263671875000002 real_overload=0 real_overload_pct=0.000000000
+host_id=4 type=C on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=5 type=C on=0 cpu: units=0 K=241 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.60263671875000002 real_overload=0 real_overload_pct=0.000000000
+host_id=5 type=C on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=6 type=D on=0 cpu: units=0 K=131 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.32871093749999997 real_overload=0 real_overload_pct=0.000000000
+host_id=6 type=D on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=7 type=D on=0 cpu: units=0 K=131 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.32871093749999997 real_overload=0 real_overload_pct=0.000000000
+host_id=7 type=D on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+H_breakdown= {'energy': 0.239736746163779, 'assign': 0.1, 'cpu': 0.0063966262975778555, 'ram': 0.02262249134948097, 'link': 0.0, 'tie': 0.0, 'offset': 0.0}
+real_size_validator= {'valid': False, 'allocation': {'valid': False, 'violations': [{'type': 'missing_vm', 'detail': 'VM 17 has no assignment'}, {'type': 'missing_vm', 'detail': 'VM 18 has no assignment'}, {'type': 'cpu_overload', 'detail': 'Host 2 cpu load 1.0615549723307292 exceeds limit 0.85'}, {'type': 'mem_overload', 'detail': 'Host 2 mem load 0.638374433517456 exceeds limit 0.425'}]}, 'assignment_multiplicities': {17: 0, 18: 0}, 'off_server_links': []}
+quantized_validator= {'valid': False, 'violations': [{'type': 'missing_vm', 'detail': 'VM 17 has no assignment'}, {'type': 'missing_vm', 'detail': 'VM 18 has no assignment'}, {'type': 'cpu_overload', 'detail': 'Host 2 cpu load 1.0615549723307292 exceeds limit 0.85'}, {'type': 'quantized_cpu_overload', 'detail': 'Host 2 cpu units 455 exceed limit 340'}, {'type': 'mem_overload', 'detail': 'Host 2 mem load 0.638374433517456 exceeds limit 0.425'}, {'type': 'quantized_mem_overload', 'detail': 'Host 2 mem units 281 exceed limit 170'}]}
+linear cost and SPEC energy: unavailable (not a complete singleton assignment)
+D: R3v; same H plus singleton, links and real-size guarded capacity rows
+iteration=1 max_violation=0.062491349480968836 max_weighted_violation=0.003124567474048442 milp_objective=0.40088464226002135 lower_bound=0.40088464226002135 incumbent_true_H=0.40431111284825655
+iteration=2 max_violation=0.015986159169550179 max_weighted_violation=0.00079930795847750903 milp_objective=0.40174882911123244 lower_bound=0.4017488291112324 incumbent_true_H=0.40333706440535
+iteration=3 max_violation=0.0038062283737027719 max_weighted_violation=0.00019031141868513862 milp_objective=0.40299623395552309 lower_bound=0.4029962339555231 incumbent_true_H=0.40333706440535
+iteration=4 max_violation=0.00069204152249139131 max_weighted_violation=3.4602076124569564e-05 milp_objective=0.40317270454375842 lower_bound=0.40317270454375836 incumbent_true_H=0.4032419086960074
+iteration=5 max_violation=3.4694469519536142e-18 max_weighted_violation=1.7347234759768072e-19 milp_objective=0.40324190869600751 lower_bound=0.40324190869600735 incumbent_true_H=0.4032419086960074
+R3v= {'status': 'OPTIMAL', 'proven_optimal': True, 'lower_bound': 0.40324190869600735, 'bqm_H': 0.4032419086959977, 'independent_H': 0.40324190869600746, 'mip_gap': 0.0, 'iterations': 5, 'time_s': 3.857883600052446, 'validation': {'valid': True, 'allocation': {'valid': True, 'violations': []}, 'assignment_multiplicities': {}, 'off_server_links': [], 'margin_excess': []}}
+H_valid_min= 0.4032419086959977 H_valid_incumbent= 0.4032419086959977
+R3v servers= [{'index': 2, 'host_id': 2, 'type': 'B'}, {'index': 3, 'host_id': 3, 'type': 'B'}]
+R3v linear_cost_J= 44211076.67748815
+E: same-BQM references
+R1 saved real-MILP: H=0.40625228931883839 linear_cost_J=44211076.677488148 SPEC_curve_energy_kWh=12.19809951681296
+R1 real_size_validator= {'valid': True, 'allocation': {'valid': True, 'violations': []}, 'assignment_multiplicities': {}, 'off_server_links': []}
+R1 quantized_validator= {'valid': False, 'violations': [{'type': 'quantized_mem_overload', 'detail': 'Host 2 mem units 174 exceed limit 170'}]}
+Step 2e R2: host_ids=[2, 3] linear_cost_J=44211076.677488148 SPEC_curve_energy_kWh=12.176813306393001; label_reference=R2 linear joules
+R2 recomputation= {'status': 'optimal', 'proven_optimal': True, 'mip_gap': 0.0, 'objective_joule': 44211076.677488156, 'time_s': 0.264}
+R2 H_quantized=0.40552564572022287 linear_cost_J=44211076.677488148 SPEC_curve_energy_kWh=12.176813306392564 hosts=[{'index': 2, 'host_id': 2, 'type': 'B'}, {'index': 3, 'host_id': 3, 'type': 'B'}]
+R2 validators= {'valid': True, 'violations': []} {'valid': True, 'violations': []}
+D3 best valid H (recorded)= 0.5792571166238005
+D3 bqm.energy reference: SKIPPED; best-sample x/y bits are absent from D3 CSVs. Recorded scalar only; no sampling or state reconstruction.
+LABEL medium_v2: R3_INVALID; linear_cost_difference_vs_R2_pct=None
+| H_min (or incumbent if UNPROVEN) | H_valid_min (or incumbent if UNPROVEN) | H_quantized | best annealer H (D3 recorded only) |
+|---|---|---|---|
+| 0.36875586381082892 (OPTIMAL) | 0.4032419086959977 (OPTIMAL) | 0.40552564572022287 | 0.5792571166238005 |
+
+=== large_v2: L0.05, unbalanced, center=0.02, unit=0.0025, tie_break=0.01, seed=42 ===
+VMs=133 servers=12 time_limit_s=600 max_iters=50
+B: global QUBO
+iteration=1 max_violation=0.36352941176470582 max_weighted_violation=0.01817647058823529 milp_objective=0.38624056220750147 lower_bound=0.38624056220750147 incumbent_true_H=0.43013264487679237
+iteration=2 max_violation=0.45363321799307965 max_weighted_violation=0.022681660899653983 milp_objective=0.38703354810567109 lower_bound=0.38703354810567103 incumbent_true_H=0.43013264487679237
+iteration=3 max_violation=0.79097815020753381 max_weighted_violation=0.039548907510376693 milp_objective=0.39502258766693082 lower_bound=0.3950225876669308 incumbent_true_H=0.43013264487679237
+iteration=4 max_violation=0.75980891220925684 max_weighted_violation=0.037990445610462845 milp_objective=0.39806219174817403 lower_bound=0.398062191748174 incumbent_true_H=0.43013264487679237
+iteration=5 max_violation=0.19187093742658001 max_weighted_violation=0.0095935468713290017 milp_objective=0.41009810274194713 lower_bound=0.41009810274194713 incumbent_true_H=0.42141440337678887
+iteration=6 max_violation=0.1841960999295168 max_weighted_violation=0.0092098049964758396 milp_objective=0.41164017144163623 lower_bound=0.4116401714416362 incumbent_true_H=0.42119808822447169
+iteration=7 max_violation=0.017508650519032394 max_weighted_violation=0.0008754325259516197 milp_objective=0.41520743772829494 lower_bound=0.4152074377282949 incumbent_true_H=0.41658460035805323
+iteration=8 max_violation=0.0038062283737024111 max_weighted_violation=0.00019031141868512056 milp_objective=0.4158890986279532 lower_bound=0.4158890986279532 incumbent_true_H=0.41622560381826085
+iteration=9 max_violation=0.00020761245674742745 max_weighted_violation=1.0380622837371373e-05 milp_objective=0.41610709170753396 lower_bound=0.41610709170753396 incumbent_true_H=0.41613131316082141
+iteration=10 max_violation=0.00017301038062283731 max_weighted_violation=8.6505190311418659e-06 milp_objective=0.41612179758988932 lower_bound=0.4161217975898893 incumbent_true_H=0.41613131316082141
+iteration=11 max_violation=1.7301038062283498e-05 max_weighted_violation=8.6505190311417496e-07 milp_objective=0.41612698790136127 lower_bound=0.41612698790136127 incumbent_true_H=0.41612785295320898
+iteration=12 max_violation=1.4969969708289455e-13 max_weighted_violation=7.4849848541447276e-15 milp_objective=0.41612785295321059 lower_bound=0.4161278529532106 incumbent_true_H=0.41612785295320898
+R3= {'status': 'OPTIMAL', 'proven_optimal': True, 'reason': 'proven global QUBO minimum', 'lower_bound': 0.4161278529532106, 'incumbent_true_H': 0.416127852953209, 'independent_H': 0.416127852953209, 'bqm_H': 0.41612785295313637, 'mip_gap': 0.0, 'iterations': 12, 'time_s': 481.456992499996}
+recomputed_H= {'bqm_H': 0.41612785295313637, 'independent_H': 0.416127852953209}
+servers_on= 3 hosts= [{'index': 3, 'host_id': 3, 'type': 'B'}, {'index': 4, 'host_id': 4, 'type': 'B'}, {'index': 5, 'host_id': 5, 'type': 'B'}]
+unplaced_VMs= []
+duplicated_VMs= {}
+host_id=0 type=A on=0 cpu: units=0 K=201 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.50302734375000002 real_overload=0 real_overload_pct=0.000000000
+host_id=0 type=A on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=1 type=A on=0 cpu: units=0 K=201 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.50302734375000002 real_overload=0 real_overload_pct=0.000000000
+host_id=1 type=A on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=2 type=A on=0 cpu: units=0 K=201 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.50302734375000002 real_overload=0 real_overload_pct=0.000000000
+host_id=2 type=A on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=3 type=B on=1 cpu: units=337 K=340 overload_units=0 overload_units_pct=0.000000000 real_load=0.77966785430908203 limit=0.84999999999999998 real_overload=0 real_overload_pct=0.000000000
+host_id=3 type=B on=1 mem: units=211 K=170 overload_units=41 overload_units_pct=24.117647059 real_load=0.47094440460205078 limit=0.42499999999999999 real_overload=0.045944404602050792 real_overload_pct=10.810448142
+host_id=4 type=B on=1 cpu: units=337 K=340 overload_units=0 overload_units_pct=0.000000000 real_load=0.78366902669270833 limit=0.84999999999999998 real_overload=0 real_overload_pct=0.000000000
+host_id=4 type=B on=1 mem: units=210 K=170 overload_units=40 overload_units_pct=23.529411765 real_load=0.47575693766276039 limit=0.42499999999999999 real_overload=0.050756937662760404 real_overload_pct=11.942808862
+host_id=5 type=B on=1 cpu: units=336 K=340 overload_units=0 overload_units_pct=0.000000000 real_load=0.78651142120361328 limit=0.84999999999999998 real_overload=0 real_overload_pct=0.000000000
+host_id=5 type=B on=1 mem: units=210 K=170 overload_units=40 overload_units_pct=23.529411765 real_load=0.47931164741516114 limit=0.42499999999999999 real_overload=0.054311647415161146 real_overload_pct=12.779211157
+host_id=6 type=C on=0 cpu: units=0 K=241 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.60263671875000002 real_overload=0 real_overload_pct=0.000000000
+host_id=6 type=C on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=7 type=C on=0 cpu: units=0 K=241 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.60263671875000002 real_overload=0 real_overload_pct=0.000000000
+host_id=7 type=C on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=8 type=C on=0 cpu: units=0 K=241 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.60263671875000002 real_overload=0 real_overload_pct=0.000000000
+host_id=8 type=C on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=9 type=D on=0 cpu: units=0 K=131 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.32871093749999997 real_overload=0 real_overload_pct=0.000000000
+host_id=9 type=D on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=10 type=D on=0 cpu: units=0 K=131 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.32871093749999997 real_overload=0 real_overload_pct=0.000000000
+host_id=10 type=D on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+host_id=11 type=D on=0 cpu: units=0 K=131 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.32871093749999997 real_overload=0 real_overload_pct=0.000000000
+host_id=11 type=D on=0 mem: units=0 K=113 overload_units=0 overload_units_pct=0.000000000 real_load=0 limit=0.28347167968749998 real_overload=0 real_overload_pct=0.000000000
+H_breakdown= {'energy': 0.4054584920485218, 'assign': 0.0, 'cpu': -4.411764705882354e-05, 'ram': 0.009868166089965399, 'link': 0.0, 'tie': 0.0008453124617805799, 'offset': 0.0}
+real_size_validator= {'valid': False, 'allocation': {'valid': False, 'violations': [{'type': 'mem_overload', 'detail': 'Host 3 mem load 0.4709444046020508 exceeds limit 0.425'}, {'type': 'mem_overload', 'detail': 'Host 4 mem load 0.4757569376627604 exceeds limit 0.425'}, {'type': 'mem_overload', 'detail': 'Host 5 mem load 0.4793116474151612 exceeds limit 0.425'}]}, 'assignment_multiplicities': {}, 'off_server_links': []}
+quantized_validator= {'valid': False, 'violations': [{'type': 'mem_overload', 'detail': 'Host 3 mem load 0.4709444046020508 exceeds limit 0.425'}, {'type': 'quantized_mem_overload', 'detail': 'Host 3 mem units 211 exceed limit 170'}, {'type': 'mem_overload', 'detail': 'Host 4 mem load 0.4757569376627604 exceeds limit 0.425'}, {'type': 'quantized_mem_overload', 'detail': 'Host 4 mem units 210 exceed limit 170'}, {'type': 'mem_overload', 'detail': 'Host 5 mem load 0.4793116474151612 exceeds limit 0.425'}, {'type': 'quantized_mem_overload', 'detail': 'Host 5 mem units 210 exceed limit 170'}]}
+linear_cost_J=68296756.535924509 SPEC_curve_energy_kWh=18.804159882410367
+D: R3v; same H plus singleton, links and real-size guarded capacity rows
+iteration=1 max_violation=0.061764705882352944 max_weighted_violation=0.0030882352941176473 milp_objective=0.43881051710234192 lower_bound=0.4388105171023419 incumbent_true_H=0.44539723644983353
+iteration=2 max_violation=0.061534875590000579 max_weighted_violation=0.003076743779500029 milp_objective=0.43933120512800689 lower_bound=0.43933120512800683 incumbent_true_H=0.44441965457930466
+iteration=3 max_violation=0.061534875590000579 max_weighted_violation=0.003076743779500029 milp_objective=0.43990895290236881 lower_bound=0.4399089529023688 incumbent_true_H=0.44408863785833952
+iteration=4 max_violation=0.013985198997727395 max_weighted_violation=0.00069925994988636979 milp_objective=0.44202547792947805 lower_bound=0.44202547792947805 incumbent_true_H=0.44295757484041925
+iteration=5 max_violation=0.013985198997727401 max_weighted_violation=0.00069925994988637012 milp_objective=0.44231433204510834 lower_bound=0.44231433204510834 incumbent_true_H=0.44295757484041925
+iteration=6 max_violation=0.013985198997727353 max_weighted_violation=0.00069925994988636773 milp_objective=0.44249072941333367 lower_bound=0.44249072941333367 incumbent_true_H=0.44295757484041925
+iteration=7 max_violation=0.0032632130994697112 max_weighted_violation=0.00016316065497348558 milp_objective=0.44284872040338591 lower_bound=0.4428487204033859 incumbent_true_H=0.44295757484041925
+iteration=8 max_violation=0.0006992599498864549 max_weighted_violation=3.4962997494322745e-05 milp_objective=0.44288074562276791 lower_bound=0.4428807456227679 incumbent_true_H=0.44292435913929357
+iteration=9 max_violation=0.00011654332498082717 max_weighted_violation=5.8271662490413587e-06 milp_objective=0.44288228905273463 lower_bound=0.44288228905273463 incumbent_true_H=0.44288898127088705
+iteration=10 max_violation=4.6837533851373792e-17 max_weighted_violation=2.3418766925686897e-18 milp_objective=0.44288898127088699 lower_bound=0.44288898127088694 incumbent_true_H=0.44288898127088705
+R3v= {'status': 'OPTIMAL', 'proven_optimal': True, 'lower_bound': 0.44288898127088694, 'bqm_H': 0.4428889812708667, 'independent_H': 0.4428889812708871, 'mip_gap': 0.0, 'iterations': 10, 'time_s': 237.59846510004718, 'validation': {'valid': True, 'allocation': {'valid': True, 'violations': []}, 'assignment_multiplicities': {}, 'off_server_links': [], 'margin_excess': []}}
+H_valid_min= 0.4428889812708667 H_valid_incumbent= 0.4428889812708667
+R3v servers= [{'index': 3, 'host_id': 3, 'type': 'B'}, {'index': 4, 'host_id': 4, 'type': 'B'}, {'index': 5, 'host_id': 5, 'type': 'B'}, {'index': 9, 'host_id': 9, 'type': 'D'}]
+R3v linear_cost_J= 74067879.75252485
+E: same-BQM references
+R1 saved real-MILP: H=0.48695076826605527 linear_cost_J=73230356.203680813 SPEC_curve_energy_kWh=20.030748560028577
+R1 real_size_validator= {'valid': True, 'allocation': {'valid': True, 'violations': []}, 'assignment_multiplicities': {}, 'off_server_links': []}
+R1 quantized_validator= {'valid': False, 'violations': [{'type': 'quantized_mem_overload', 'detail': 'Host 3 mem units 186 exceed limit 170'}, {'type': 'quantized_mem_overload', 'detail': 'Host 4 mem units 189 exceed limit 170'}, {'type': 'quantized_cpu_overload', 'detail': 'Host 5 cpu units 365 exceed limit 340'}, {'type': 'quantized_mem_overload', 'detail': 'Host 5 mem units 189 exceed limit 170'}]}
+Step 2e R2: host_ids=[4, 5, 9, 10, 11] linear_cost_J=77978145.882644266 SPEC_curve_energy_kWh=21.440746551558; label_reference=R2 linear joules
+R2 recomputation= {'status': 'optimal', 'proven_optimal': True, 'mip_gap': 9.994426359458923e-05, 'objective_joule': 77978145.88264427, 'time_s': 8.717}
+R2 H_quantized=0.46970705803835278 linear_cost_J=77978145.882644266 SPEC_curve_energy_kWh=21.440746551557528 hosts=[{'index': 4, 'host_id': 4, 'type': 'B'}, {'index': 5, 'host_id': 5, 'type': 'B'}, {'index': 9, 'host_id': 9, 'type': 'D'}, {'index': 10, 'host_id': 10, 'type': 'D'}, {'index': 11, 'host_id': 11, 'type': 'D'}]
+R2 validators= {'valid': True, 'violations': []} {'valid': True, 'violations': []}
+D3 best valid H (recorded)= 1.09935717248851
+D3 bqm.energy reference: SKIPPED; best-sample x/y bits are absent from D3 CSVs. Recorded scalar only; no sampling or state reconstruction.
+LABEL large_v2: R3_INVALID; linear_cost_difference_vs_R2_pct=None
+| H_min (or incumbent if UNPROVEN) | H_valid_min (or incumbent if UNPROVEN) | H_quantized | best annealer H (D3 recorded only) |
+|---|---|---|---|
+| 0.41612785295313637 (OPTIMAL) | 0.4428889812708667 (OPTIMAL) | 0.46970705803835278 | 1.09935717248851 |
+COMMAND: "C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe" -B -m pytest tests -v -p no:cacheprovider
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 108 items
+
+tests/test_d0_formulation.py::test_hand_capacity_values[1.0-0.048] PASSED [  0%]
+tests/test_d0_formulation.py::test_hand_capacity_values[0.02--2e-05] PASSED [  1%]
+tests/test_d0_formulation.py::test_hand_capacity_values[0.0-0.0] PASSED  [  2%]
+tests/test_d0_formulation.py::test_hand_capacity_values[-0.5-0.0135] PASSED [  3%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[slack] PASSED   [  4%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[slack_scaled] PASSED [  5%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[unknown] PASSED [  6%]
+tests/test_d0_formulation.py::test_all_32768_states_match_independent_formula PASSED [  7%]
+tests/test_d0_formulation.py::test_independent_terms_include_offsets_and_off_server_link PASSED [  8%]
+tests/test_d0_formulation.py::test_all_81_assignments_use_real_size_validation_and_rank PASSED [  9%]
+tests/test_d0_formulation.py::test_validation_rejects_missing_duplicate_and_off_server PASSED [ 10%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[small_v2] PASSED [ 11%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[medium_v2] PASSED [ 12%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[large_v2] PASSED [ 12%]
+tests/test_d3_helpers.py::test_flip_bound[a-7.5] PASSED                  [ 13%]
+tests/test_d3_helpers.py::test_flip_bound[b-7.25] PASSED                 [ 14%]
+tests/test_d3_helpers.py::test_flip_bound[c-2.25] PASSED                 [ 15%]
+tests/test_d3_helpers.py::test_read_landscape_threshold_and_multiplicity PASSED [ 16%]
+tests/test_d3_helpers.py::test_csv_writer_refuses_overwrite PASSED       [ 17%]
+tests/test_d3_helpers.py::test_saved_small_encoding_matches_d2[assignment_exact.csv-0.4366451311159] PASSED [ 18%]
+tests/test_d3_helpers.py::test_saved_small_encoding_matches_d2[assignment_annealer_only.csv-0.5012005266234] PASSED [ 19%]
+tests/test_exact_quantized.py::test_rounding_requires_one_more_server[cpu] PASSED [ 20%]
+tests/test_exact_quantized.py::test_rounding_requires_one_more_server[mem] PASSED [ 21%]
+tests/test_exact_quantized.py::test_exact_unit_multiples_have_equal_optima[cpu] PASSED [ 22%]
+tests/test_exact_quantized.py::test_exact_unit_multiples_have_equal_optima[mem] PASSED [ 23%]
+tests/test_exact_quantized.py::test_no_incumbent_has_complete_info PASSED [ 24%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L0.05-c0.02] PASSED [ 25%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.05-c0.02-cutting] PASSED [ 25%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.05-c0.02-full] PASSED [ 26%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L0.2-c0.07] PASSED [ 27%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.2-c0.07-cutting] PASSED [ 28%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.2-c0.07-full] PASSED [ 29%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L1.0-c0] PASSED [ 30%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L1.0-c0-cutting] PASSED [ 31%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L1.0-c0-full] PASSED [ 32%]
+tests/test_exact_qubo.py::test_one_iteration_duplicate_state_is_unproven PASSED [ 33%]
+tests/test_exact_qubo.py::test_time_exhausted_before_milp_has_finite_bound PASSED [ 34%]
+tests/test_exact_qubo.py::test_interrupted_exact_worse_candidate_retains_earlier_incumbent PASSED [ 35%]
+tests/test_exact_qubo.py::test_milp_time_limit_without_candidate_keeps_true_scored_state PASSED [ 36%]
+tests/test_gap_metrics.py::test_proven_optimum_matches_within_tolerance PASSED [ 37%]
+tests/test_gap_metrics.py::test_unproven_incumbent_is_not_labelled_optimal PASSED [ 37%]
+tests/test_gap_metrics.py::test_no_exact_assignment PASSED               [ 38%]
+tests/test_gap_metrics.py::test_no_pure_assignment PASSED                [ 39%]
+tests/test_gap_metrics.py::test_existing_key_set_is_preserved PASSED     [ 40%]
+tests/test_gap_metrics.py::test_reference_matches_do_not_require_proof PASSED [ 41%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[True] PASSED  [ 42%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[False] PASSED [ 43%]
+tests/test_managed_runner.py::test_build_run_config_seed_changes_hash PASSED [ 44%]
+tests/test_managed_runner.py::test_build_run_config_hash_ignores_dict_key_order PASSED [ 45%]
+tests/test_managed_runner.py::test_build_run_config_contains_seed PASSED [ 46%]
+tests/test_manifest.py::test_canonical_hash_ignores_key_order PASSED     [ 47%]
+tests/test_manifest.py::test_sampler_seed_changes_config_hash PASSED     [ 48%]
+tests/test_manifest.py::test_write_manifest_never_overwrites PASSED      [ 49%]
+tests/test_manifest.py::test_experiment_log_appends_without_repeating_header PASSED [ 50%]
+tests/test_manifest.py::test_file_hash_changes_with_one_byte PASSED      [ 50%]
+tests/test_manifest.py::test_dependency_versions_reports_missing PASSED  [ 51%]
+tests/test_manifest.py::test_git_info_distinguishes_untracked_files PASSED [ 52%]
+tests/test_qubo_fingerprint.py::test_repeated_build_has_same_hash PASSED [ 53%]
+tests/test_qubo_fingerprint.py::test_lambda_changes_hash PASSED          [ 54%]
+tests/test_qubo_fingerprint.py::test_center_changes_hash PASSED          [ 55%]
+tests/test_qubo_fingerprint.py::test_matches_golden PASSED               [ 56%]
+tests/test_qubo_fingerprint.py::test_insertion_order_and_edge_orientation_do_not_change_hash PASSED [ 57%]
+tests/test_qubo_fingerprint.py::test_offset_changes_hash PASSED          [ 58%]
+tests/test_r3_run.py::test_constrained_tiny_minimum_is_proven_within_30_second_budget PASSED [ 59%]
+tests/test_r3_run.py::test_margin_excludes_near_limit_host_even_when_shared_validation_accepts[cpu] PASSED [ 60%]
+tests/test_r3_run.py::test_margin_excludes_near_limit_host_even_when_shared_validation_accepts[mem] PASSED [ 61%]
+tests/test_r3_run.py::test_no_margin_safe_placement_does_not_return_invalid_fallback[cpu] PASSED [ 62%]
+tests/test_r3_run.py::test_no_margin_safe_placement_does_not_return_invalid_fallback[mem] PASSED [ 62%]
+tests/test_r3_run.py::test_one_iteration_preserves_honest_certificate_and_scoring PASSED [ 63%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[990.0-False] PASSED [ 64%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[990.0-True] PASSED [ 65%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1000.0-False] PASSED [ 66%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1000.0-True] PASSED [ 67%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1010.0-False] PASSED [ 68%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1010.0-True] PASSED [ 69%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[990.0] PASSED [ 70%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[1000.0] PASSED [ 71%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[1010.0] PASSED [ 72%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1000.0-0.0-MATCH] PASSED [ 73%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1000.5-0.05-MATCH] PASSED [ 74%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[999.5--0.05-MATCH] PASSED [ 75%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1001.0-0.1-MATCH] PASSED [ 75%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[999.0--0.1-MATCH] PASSED [ 76%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1001.001-0.1001-DIFFERENT] PASSED [ 77%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[998.999--0.1001-DIFFERENT] PASSED [ 78%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1010.0-1.0-DIFFERENT] PASSED [ 79%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[990.0--1.0-DIFFERENT] PASSED [ 80%]
+tests/test_selection.py::test_lower_energy_repaired_wins_by_default PASSED [ 81%]
+tests/test_selection.py::test_prefer_unrepaired_preserves_old_ordering PASSED [ 82%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-0.0] PASSED [ 83%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-5e-13] PASSED [ 84%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-0.0] PASSED [ 85%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-5e-13] PASSED [ 86%]
+tests/test_selection.py::test_empty_candidates[False] PASSED             [ 87%]
+tests/test_selection.py::test_empty_candidates[True] PASSED              [ 87%]
+tests/test_selection.py::test_lowest_energy_of_three_mixed_candidates PASSED [ 88%]
+tests/test_validation.py::test_fully_valid PASSED                        [ 89%]
+tests/test_validation.py::test_missing_vm PASSED                         [ 90%]
+tests/test_validation.py::test_unknown_vm PASSED                         [ 91%]
+tests/test_validation.py::test_unknown_host PASSED                       [ 92%]
+tests/test_validation.py::test_cpu_overload PASSED                       [ 93%]
+tests/test_validation.py::test_mem_overload PASSED                       [ 94%]
+tests/test_validation.py::test_non_finite_or_negative PASSED             [ 95%]
+tests/test_validation.py::test_quantized_cpu_overload PASSED             [ 96%]
+tests/test_validation.py::test_quantized_mem_overload PASSED             [ 97%]
+tests/test_validation.py::test_quantized_float_edge PASSED               [ 98%]
+tests/test_validation.py::test_duplicate_vm PASSED                       [ 99%]
+tests/test_validation_real.py::test_saved_small_v2_assignments PASSED    [100%]
+
+======================= 108 passed in 78.89s (0:01:18) ========================
+exit_code=0 total_time_s=80.823
+AFTER results/phase2 count=105 sha256=a87a20897d50feb7ff1e2ae678f422bc8edde8d909ba81901faf35d04e62aebd
+AFTER 7548672d2d032cba9aff83d3f9659c1ba5530cb8e5c927aca2bdd90e9ae793cd  results/phase2/large/assignment_exact.csv
+AFTER 5c0c29da1648cf52f3eb868e2cfb62b9102332075d9d0aa09d03531e3f525f09  results/phase2/large/assignment_qa.csv
+AFTER 166c0e7f14008a7c768873f18bbf929a03abcd755252eb87351a1427f07e4aa0  results/phase2/large/cloudsim_energy_hosts.csv
+AFTER 0184bfc22be6033af008dfb8273e33cfd0e9b8af64a90497b0a2fe5bea04e5aa  results/phase2/large/cloudsim_input/servers.csv
+AFTER 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/large/cloudsim_input/settings.csv
+AFTER 8edbffc39279c763d07ce6cb9e4064aa399cb82acb09b53f6023c9343e39024c  results/phase2/large/cloudsim_input/vm_cpu_demand.csv
+AFTER 293044713a3049bb5cfc884c53a61fd84f3effc2f8e144189451baa7e78247a7  results/phase2/large/cloudsim_input/vms_assignment.csv
+AFTER 0c919667fe72cc7daacd71cbe488072c91a2bb9659486ba3e2fac3954287e47c  results/phase2/large/cloudsim_summary.csv
+AFTER 4a3020ba7d0dd3e900c4439a6f18321c700fc082895e879e94c7e4b1f5696e75  results/phase2/large/energy_hosts_python.csv
+AFTER d01e5fb260d1ed9e7cdc12d046cd78fe4eede98e5e01df1864a4fd02d9f989ae  results/phase2/large/experiment_v2.csv
+AFTER 849bf5085b24b9251c167160b621911f45fe166f0ba64b12ba289f2b56e74adc  results/phase2/large/experiment_v2.png
+AFTER b7a74ff41896d9b6e5a5e82c7479a5727c8c9992c9e0d0456df5d3e690e434f6  results/phase2/large/host_energy.png
+AFTER dc77fe20534786c842949675c26bf4b151a32985ffe15c7a33fc26f52eafa846  results/phase2/large/host_utilization_24h.png
+AFTER ae330312f30b91470f218c9a8c8e723f19964c68fa419d8d4d2d1614779cc9d2  results/phase2/large/lambda_experiment.csv
+AFTER 024d96d8e46eb7e096ba1fdad68103009c9a5875cd7bfc53d81d2a65777b47c2  results/phase2/large/lambda_experiment.png
+AFTER 5cec602a40aa5bbaaf663ac4f3759c2b82560a6dcaf0f03fa8ea08c0e13a3447  results/phase2/large/server_types.csv
+AFTER 62ace0f5ee07722ffda46fbf83cf130ec2cb7fab36f8e85c0728c955b1900ad1  results/phase2/large/summary.json
+AFTER 9f52280c7c7c3ded59e5572403b4f3d41aedb4a9a8cbe81e6353d8eb288a3919  results/phase2/large/vms.csv
+AFTER ac0c062a2862da52378410c6915a1b5033c22002b4d9000e01518f8d79ee6c90  results/phase2/large_v2/assignment_annealer_only.csv
+AFTER b9809f4bf91e2818c0f01173d87eefa1a142f5f7bf60750cc04ba59dc45a2ff0  results/phase2/large_v2/assignment_exact.csv
+AFTER 7119449617fae04cd5d8e8c22016e7544f1ac107419527632e205c4b2c210bd0  results/phase2/large_v2/assignment_qa.csv
+AFTER 9470ae24cb22513f2b3229390f2b4ad974b4d8a82616c0981dc01dd83cfba5ff  results/phase2/large_v2/cloudsim_energy_hosts.csv
+AFTER 9caf169160ad3d1d595b7a401608b3fa48e9de64bfd51ca77b2b4c8f20148ed1  results/phase2/large_v2/cloudsim_input/servers.csv
+AFTER 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/large_v2/cloudsim_input/settings.csv
+AFTER 2a75c80d7879c9c822cddf17422ef3a12968db1e07abd4afa1bf7d5872a223ad  results/phase2/large_v2/cloudsim_input/vm_cpu_demand.csv
+AFTER 81c366b2be25872a16dc3a859627404a6d95bdc36f3151b1013b81d17f7f3aa3  results/phase2/large_v2/cloudsim_input/vms_assignment.csv
+AFTER 5ab2e0fa5cb73e2480cfac8980a86399506fd10fa16df91fdec4a78b67dfcc15  results/phase2/large_v2/cloudsim_summary.csv
+AFTER ae78d6e767dd5aefebe223d9a70eedccaa929ced8cccc58485becfbb6ad75505  results/phase2/large_v2/energy_hosts_python.csv
+AFTER 38fc84039ef59a7d3f8d5b9a0d255d22ea62efa4f00ff752ea24e1caa56ee027  results/phase2/large_v2/experiment_v2.csv
+AFTER d5fc14c2835ce3bbf2197a980421dd606391f5c416bffc99bbf75e03e2fc66e7  results/phase2/large_v2/experiment_v2.png
+AFTER 2652fdf63c0ccf23241ac7e1b18bf30781ccd45c905f02add35187b854e95213  results/phase2/large_v2/host_energy.png
+AFTER 837d84612e0b8f878ce8cafa1f2a9f2c3584ccbb4c87b8bede41b258b1c9e042  results/phase2/large_v2/host_utilization_24h.png
+AFTER 46817538b4cab1a7bb6deb40444f617d9610dffc247f49230d147196d33e1966  results/phase2/large_v2/server_types.csv
+AFTER 1919f01f04bede5cef9ee3175162c35f37a101a8be25bad75cd09ee6794e860f  results/phase2/large_v2/summary.json
+AFTER 1b01ec96910a1ad53b995db516111e43418490050605386554c815e93fd6063c  results/phase2/large_v2/vms.csv
+AFTER 1215466ff15267c48f932ca8f1a498993c05a074172ea6cd322be6752d7976de  results/phase2/medium/assignment_exact.csv
+AFTER 1bf45ee84b55a7c78d8b8c17e29bc0a546004df2a847ad8df6b5428abbf545d4  results/phase2/medium/assignment_qa.csv
+AFTER 392c3bd84fa05dd703a99b33bd070615ea8d8c8ef38aba26778a626dec59e7a4  results/phase2/medium/cloudsim_energy_hosts.csv
+AFTER cc2e9342819bd68300b3bea52a7141ef5839b12fe1bb2986e679881d7889ce57  results/phase2/medium/cloudsim_input/servers.csv
+AFTER 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/medium/cloudsim_input/settings.csv
+AFTER 93f6fde2a1c46ccff2fe34df063c62a798cf4712d71834dd323aa0655e68a32b  results/phase2/medium/cloudsim_input/vm_cpu_demand.csv
+AFTER 8121f72756a65a6aa31aff59262b1cd7aaf21250ee5c8a0695aee5d8e62c5284  results/phase2/medium/cloudsim_input/vms_assignment.csv
+AFTER 4077ccc15aa566d9e76c8b1798062be3382616468a0664ba002da7b81f4ed48c  results/phase2/medium/cloudsim_summary.csv
+AFTER 798b02119ab359b75707ca98cdf955dcf82cca23f4a301f7e078a2ff1447fc81  results/phase2/medium/energy_hosts_python.csv
+AFTER 4a475c6c8afabe47a614cc6eeb948545ce1ca07bd177adbd54c43a1965438ccd  results/phase2/medium/experiment_v2.csv
+AFTER 2829386da9a7b5011cc16e4c8a782a71922c7f02d9af87c66877db292cb61d58  results/phase2/medium/experiment_v2.png
+AFTER 0bed32bd1118e8456c9fa0f97934c40b52421d57973b65ddf85da60abd5b5df4  results/phase2/medium/host_energy.png
+AFTER a3015d2549d59a3180f5574a7ddd2d565013cb7ccd237c928ce678205b0ec739  results/phase2/medium/host_utilization_24h.png
+AFTER 037ca84e9bf54827e13f87a00186f90ea3d4aa5baa7c70914bfe01c41f4dd7de  results/phase2/medium/lambda_experiment.csv
+AFTER 49d0003bf6312628ab7d8d76bb970efd6ec3bcec46df89be50f2d72d644c1f88  results/phase2/medium/lambda_experiment.png
+AFTER 0654f439c219fdb4e28b2f2f6ad02a149dcd5b4922f2574179bdee2f7fa17e71  results/phase2/medium/server_types.csv
+AFTER 542c82a1497cea364153298301d1354a1051a2319c978b46bc6c42854ced8946  results/phase2/medium/summary.json
+AFTER 2b70b54c446131c2ef1ec77ce30dfbcd4a7d61aa3d99f7eb23f23c77faaffa20  results/phase2/medium/vms.csv
+AFTER 547370180e2b9c4473003438a2e9e8a2dab59c4a1fabb4cfcf3867a1002ad77e  results/phase2/medium_v2/assignment_annealer_only.csv
+AFTER bfad59b871fc03ad0ee51a4e62e1c0395c621c8b803a8d003a0110ca2f0de5b0  results/phase2/medium_v2/assignment_exact.csv
+AFTER 0bb23e4c9158b4048f95e0ff72dd8b8a30130efb7c4a9b4e574acf9dc9a88330  results/phase2/medium_v2/assignment_qa.csv
+AFTER d7719e08bdfcee0815442d601f789a7bb0824195d1137bf432596d03ee00a064  results/phase2/medium_v2/cloudsim_energy_hosts.csv
+AFTER b922892adaa35ebf00b3d4e9e6d188940c2f0f23c2cef12560d48a5acbd788fc  results/phase2/medium_v2/cloudsim_input/servers.csv
+AFTER 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/medium_v2/cloudsim_input/settings.csv
+AFTER 589ecdf53da7456656c9fa8c1b98f46c74c52addb4c70e54e798f89ecf997c2d  results/phase2/medium_v2/cloudsim_input/vm_cpu_demand.csv
+AFTER f7ac554cf9c8971a5aa62e439a032deac4c83acd3d13b3df512da0bb53ccefe3  results/phase2/medium_v2/cloudsim_input/vms_assignment.csv
+AFTER 4c75cb604194fea3603718dda4e2ba026920b145bb338946189ebb6ec4a53095  results/phase2/medium_v2/cloudsim_summary.csv
+AFTER 2310c89b1181df1484444d89c9848c80aab5ad9a104b01210f3e57f5ca25b052  results/phase2/medium_v2/energy_hosts_python.csv
+AFTER 582814fabafd7e6701d4703fcd6b06eaca6efda76292377bd333b99fcb8fd5e6  results/phase2/medium_v2/experiment_v2.csv
+AFTER 38d09612c6c2f59be5bcac2dbdab26cbc3d5d1eeca0722ee40cf0f5c78f09691  results/phase2/medium_v2/experiment_v2.png
+AFTER ebcefe184442e8bddec25390de9b64650ee9560880dcbe91e45e879b4c4be87f  results/phase2/medium_v2/host_energy.png
+AFTER c1ebfd4344f05a0acd37ce67d2d4e7065b30920702d3e150aa8b61a6f1d41254  results/phase2/medium_v2/host_utilization_24h.png
+AFTER b91fdb6e4bbd65a7e6e8cf49ab180a21dbad890af2964ad8e9715b3ec1c2f394  results/phase2/medium_v2/server_types.csv
+AFTER ea89fc5e5373fef86dba38830617db748046c89d5b569eca22ed6f83f1bfe33b  results/phase2/medium_v2/summary.json
+AFTER fadb79b0a0c37eefce8aeda59b46acc2f636477d1d5378de92daf669803841f4  results/phase2/medium_v2/vms.csv
+AFTER 160c9d5000f74ab0981d46ba33200ae64d9370f74a20d9ac183bfc0b514d00a2  results/phase2/small/assignment_exact.csv
+AFTER e2cc91f09ff54b3a7b46d0585ed64a9fc7a2b1467f8fc32df4e7f3e17e8148c8  results/phase2/small/assignment_qa.csv
+AFTER 14e4865f3a7c4bbd5e570365a6dc5ae4a875273280b49245f2bcb3ad8e545dc8  results/phase2/small/cloudsim_energy_hosts.csv
+AFTER 09c91c861d81552c20a58bc4c61845e6b2729006e2ca943f1f1b820953b2a0c7  results/phase2/small/cloudsim_input/servers.csv
+AFTER 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/small/cloudsim_input/settings.csv
+AFTER f5d400a0cb27694594c1a837dce16af2cfa5881808dd0d6d7e6b3339b1085500  results/phase2/small/cloudsim_input/vm_cpu_demand.csv
+AFTER 3f0d8765f5e1426397d821f90be8648274d9b2770db6fba8933b82889feddb04  results/phase2/small/cloudsim_input/vms_assignment.csv
+AFTER 9cd4eabe1b72e06b2584869ba8319b73dc3ee405afdadd733ffd6bf533ffca47  results/phase2/small/cloudsim_summary.csv
+AFTER dae81620c2336c57c49e63a4c627e8c397826aa1bd683243d88907d0c0610000  results/phase2/small/energy_hosts_python.csv
+AFTER da5b4840eb7493e7a7bdb74e29142cfaa3c8c428eeb3917810154a71dd258c4f  results/phase2/small/experiment_v2.csv
+AFTER c274a404e623acc1cabdd477f44354e3796db1ff4acdc9a066bd109b5b7bf0e3  results/phase2/small/experiment_v2.png
+AFTER be6b7a4d7b711549c331f82d6a7b12b39c41c604995b5a4b2e879cbc45fb3ece  results/phase2/small/host_energy.png
+AFTER 9b3035753bc19f3bd67c82bd60912561ac08f203c86be80490b168bc1d07216d  results/phase2/small/host_utilization_24h.png
+AFTER 629744872c2485dca83568ff27a0c501b283d2104b6f8cebce2465da0e1c0b86  results/phase2/small/lambda_experiment.csv
+AFTER 005c72bdbe21bfe44eab696fb20e153990d81d3d706c3c1d7cfa9133ad8d27bb  results/phase2/small/lambda_experiment.png
+AFTER 8bc8cf874f8d8da0d203ab60c16c4fee48cf197d556a26ae66aaedc239f38eaf  results/phase2/small/server_types.csv
+AFTER a55fe3cc0bc9ac65de45cb58029bbded66b300e1598dac3f1a932a394d6852e1  results/phase2/small/summary.json
+AFTER 178079481833e276e8a47c8d33529f2b72daaa840da20089273d07acddd6b060  results/phase2/small/vms.csv
+AFTER a83050514b81258a34838629726a08a68ee8a92da650fb18735cbda6f55175df  results/phase2/small_v2/assignment_annealer_only.csv
+AFTER 1a946e988f3ce735069bf8f45099ce940412a2138c37cf5a2bfcd064b72b9812  results/phase2/small_v2/assignment_exact.csv
+AFTER 9b397c7f14e8e291398993a35a67d8e1f02204fe8f927240f9039e330f0a1ca0  results/phase2/small_v2/assignment_qa.csv
+AFTER 94c61bef0f18cddaf75c3a53ebea02f6287818b2c61927dc92dbc1b5f9c9e624  results/phase2/small_v2/cloudsim_energy_hosts.csv
+AFTER b922892adaa35ebf00b3d4e9e6d188940c2f0f23c2cef12560d48a5acbd788fc  results/phase2/small_v2/cloudsim_input/servers.csv
+AFTER 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/phase2/small_v2/cloudsim_input/settings.csv
+AFTER 86d1ae8afc828021b801b6b348748c1a2af60c6228f392967e06bfd446a1d3e4  results/phase2/small_v2/cloudsim_input/vm_cpu_demand.csv
+AFTER 86b44752adbfa3c973e91d6b1b16e5ecc277890fb5f90eac310c13d333a70d17  results/phase2/small_v2/cloudsim_input/vms_assignment.csv
+AFTER f24a2997e14ceeaedb42bca4b60fffb0c23d37964d1e16af5cc05adfedc93859  results/phase2/small_v2/cloudsim_summary.csv
+AFTER ee4779ac98f9060b3bfb1a86da91f2cccd4322650f8f1dcb0bae02e60132d93d  results/phase2/small_v2/energy_hosts_python.csv
+AFTER 9853de099a3d1a314e0f2dea52189d1999f898609152dd2ff21427bdcaa8feac  results/phase2/small_v2/experiment_v2.csv
+AFTER 96c6e361e96b714f40967b8b0b261f4f92cbd4f0caa0ab172441391145cc4b56  results/phase2/small_v2/experiment_v2.png
+AFTER 13617e6738dce2544c17b81052b95298854348787cc3fedc124206485247ac2e  results/phase2/small_v2/host_energy.png
+AFTER 8d2e7851d94fc82f50bc5857dc4132756bb524ed5d9f59c342c5b8200d66d9bd  results/phase2/small_v2/host_utilization_24h.png
+AFTER b91fdb6e4bbd65a7e6e8cf49ab180a21dbad890af2964ad8e9715b3ec1c2f394  results/phase2/small_v2/server_types.csv
+AFTER b249d8f6a3742a2ae36d8e36814db9a03c45f544fa09ce2e2d71187e4e0cffb9  results/phase2/small_v2/summary.json
+AFTER 61a6adb4200a6bd1424c3e8e4e95ae79c3c7c48f2c057081effbbe58126ccdf1  results/phase2/small_v2/vms.csv
+AFTER results/runs count=24 sha256=5c3202409b556e96f43a5971f60824347528677a8b47f58cf81d3207b0f9a883
+AFTER a83050514b81258a34838629726a08a68ee8a92da650fb18735cbda6f55175df  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/assignment_annealer_only.csv
+AFTER 817a1a906375a35ec150f46d6cfed70754003508a9e2018c1463ceda97af22fb  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/assignment_exact.csv
+AFTER 9b397c7f14e8e291398993a35a67d8e1f02204fe8f927240f9039e330f0a1ca0  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/assignment_qa.csv
+AFTER b922892adaa35ebf00b3d4e9e6d188940c2f0f23c2cef12560d48a5acbd788fc  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/servers.csv
+AFTER 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/settings.csv
+AFTER 86d1ae8afc828021b801b6b348748c1a2af60c6228f392967e06bfd446a1d3e4  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/vm_cpu_demand.csv
+AFTER a3ec73c319a711a2daca649a22eee85284f27d7817c04515d42ecd1ea8907609  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/vms_assignment.csv
+AFTER 8b770d08e503c1b020808577e485f70c9266de4dfde4c1e27f0b4cddf3bb0fdb  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/energy_hosts_python.csv
+AFTER 63e933490c5eeedbfdbe571351f0b9373e129598240a5ed60303c4e1be53ded9  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/manifest.json
+AFTER b91fdb6e4bbd65a7e6e8cf49ab180a21dbad890af2964ad8e9715b3ec1c2f394  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/server_types.csv
+AFTER e3c29aea5919912b09a92056e8372aa20468f9c8c19f7692c67fbbe1f424322b  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/summary.json
+AFTER 61a6adb4200a6bd1424c3e8e4e95ae79c3c7c48f2c057081effbbe58126ccdf1  results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/vms.csv
+AFTER a83050514b81258a34838629726a08a68ee8a92da650fb18735cbda6f55175df  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/assignment_annealer_only.csv
+AFTER 817a1a906375a35ec150f46d6cfed70754003508a9e2018c1463ceda97af22fb  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/assignment_exact.csv
+AFTER 9b397c7f14e8e291398993a35a67d8e1f02204fe8f927240f9039e330f0a1ca0  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/assignment_qa.csv
+AFTER b922892adaa35ebf00b3d4e9e6d188940c2f0f23c2cef12560d48a5acbd788fc  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/cloudsim_input/servers.csv
+AFTER 2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/cloudsim_input/settings.csv
+AFTER 86d1ae8afc828021b801b6b348748c1a2af60c6228f392967e06bfd446a1d3e4  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/cloudsim_input/vm_cpu_demand.csv
+AFTER a3ec73c319a711a2daca649a22eee85284f27d7817c04515d42ecd1ea8907609  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/cloudsim_input/vms_assignment.csv
+AFTER 8b770d08e503c1b020808577e485f70c9266de4dfde4c1e27f0b4cddf3bb0fdb  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/energy_hosts_python.csv
+AFTER 373e61d580da6cbc66021aa4f4cffd99db4d2f040cd8a8b4ac8dcca6d08e079e  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/manifest.json
+AFTER b91fdb6e4bbd65a7e6e8cf49ab180a21dbad890af2964ad8e9715b3ec1c2f394  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/server_types.csv
+AFTER 7b2fb8dca540e157bb43ff0faa9b05aa4e9eb4110c8a7296f518ea4e21bab82e  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/summary.json
+AFTER 61a6adb4200a6bd1424c3e8e4e95ae79c3c7c48f2c057081effbbe58126ccdf1  results/runs/20261108T065055230288Z_phase2_v2_f049a1b9_s42/vms.csv
+results/phase2 identical=yes counts=105/105
+results/runs identical=yes counts=24/24
+experiment_log identical=yes
+COMMAND: git --no-pager diff --exit-code
+
+exit_code=0 total_time_s=0.082
+COMMAND: git --no-pager diff --cached --exit-code
+
+exit_code=0 total_time_s=0.109
