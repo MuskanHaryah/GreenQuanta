@@ -52,7 +52,8 @@ def records(kind):
 
 
 def problem(size, variant):
-    return build_problem_custom(size, *variant["lambdas"], RUN_CONFIG["center"], variant["unit"])
+    return build_problem_custom(size, *variant["lambdas"], RUN_CONFIG["center"], variant["unit"],
+                                variant.get("encoding", "unbalanced"))
 
 
 def independent_terms(sample, vms, servers, info, energy):
@@ -70,6 +71,9 @@ def independent_terms(sample, vms, servers, info, energy):
             cap = math.floor(getattr(server, resource + "_limit") / unit + 1e-9)
             load = sum(units(getattr(v, resource + "_size"), unit) * sample[x_var(v.vm_id, h)]
                        for v in vms)
+            if info["encoding"] == "slack":   # Step 0 Lemma: eliminated slack
+                values.append(lam[tag] * max(0, load - cap * sample[y_var(h)]) ** 2)
+                continue
             g = (cap * sample[y_var(h)] - load) / cap
             values.append(lam[tag] * (g * g - 2 * info["unbalanced_center"] * g))
         terms[tag] = math.fsum(values)
@@ -87,17 +91,17 @@ def solver_context(variant):
     local_config.UNIT_NCU = local_config.UNIT_NMU = unit
 
     def builder(vms, servers, lambda_config=None, encoding="unbalanced", center=None):
-        if encoding != "unbalanced":
-            raise ValueError("R3c supports unbalanced only")
         weights = [0.] * 4 if lambda_config in ("L0", "L0.0") else variant["lambdas"]
-        return build_qubo_custom(vms, servers, *weights, RUN_CONFIG["center"] if center is None else center, unit)
+        return build_qubo_custom(vms, servers, *weights, RUN_CONFIG["center"] if center is None else center,
+                                 unit, encoding)
 
     local = types.ModuleType("r3c_private_exact")
     local.__dict__.update(vars(exact_qubo))
     local.__dict__.update(config=local_config, build_qubo=builder, independent_terms=independent_terms)
     source = exact_qubo.solve_exact_qubo
     local.solve_exact_qubo = types.FunctionType(source.__code__, local.__dict__, source.__name__, source.__defaults__)
-    local.solve_exact_qubo.__kwdefaults__ = source.__kwdefaults__
+    local.solve_exact_qubo.__kwdefaults__ = dict(source.__kwdefaults__,
+                                                 encoding=variant.get("encoding", "unbalanced"))
     valid_globals = dict(vars(r3_run), exact_qubo=local, config=local_config,
                          build_qubo=builder, independent_terms=independent_terms)
     source = r3_run.score_state

@@ -104,6 +104,10 @@ def independent_terms(sample, vms, servers, info, energy):
         for h, server in enumerate(servers):
             k = math.floor(getattr(server, f"{resource}_limit") / unit + 1e-9)
             load = sum(a[vm.vm_id] * sample[x_var(vm.vm_id, h)] for vm in vms)
+            if info.get("encoding") == "slack":
+                # Step 0 Lemma: min over slack bits = integer overload squared.
+                values.append(max(0, load - k * sample[y_var(h)]) ** 2)
+                continue
             g = (k * sample[y_var(h)] - load) / k
             values.append(g*g - 2 * info["unbalanced_center"] * g)
         capacity[term] = math.fsum(values)

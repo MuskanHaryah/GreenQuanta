@@ -1,8 +1,14 @@
-"""Exact unbalanced-QUBO minimization with local HiGHS, without placement rules.
+"""Exact QUBO minimization with local HiGHS, without placement rules.
 
 Integer assignment/capacity residuals have square epigraphs. Capacity cuts use
 q = g/K and t = (g/K)^2, avoiding coefficients proportional to 1/K^2 on an
 integer column. No physical feasibility constraints, repair, or sampling apply.
+
+encoding="slack" (Step 0): slack bits are eliminated exactly (Lemma in
+docs/reports/step0/0.2_proof.md). The capacity penalty of a rule becomes
+lambda * o^2 with integer overload o = max(0, L - K*y), so q is the integer
+overload o >= -g, t >= o^2, and cuts are unscaled. Returned samples carry the
+optimal slack bits, so the genuine slack BQM scores them.
 """
 import math
 import time
@@ -14,7 +20,7 @@ from scipy.sparse import coo_matrix
 
 from diagnostics.common import CENTER, LAMBDA_CONFIG
 from diagnostics.d0_formulation import independent_terms, state_validation
-from phase1.qubo_builder import x_var, y_var
+from phase1.qubo_builder import slack_coefficients, x_var, y_var
 from phase2 import config
 from phase2.energy_model import linear_energy_terms
 from phase2.qubo_builder import units
@@ -24,9 +30,30 @@ from phase2.qubo_builder_v2 import build_qubo
 TOLERANCE = 1e-9
 
 
+def with_slack(sample, vms, caps, loads, m):
+    """Add the optimal slack bits S = clip(K*y - L, 0, K) of every capacity rule.
+
+    Rule r = resource_index * m + host; tags 'sc' (cpu) / 'sm' (ram) as in
+    qubo_builder_v2. S is written greedily with slack_coefficients(K)."""
+    full = dict(sample)
+    for r, (cap, demand) in enumerate(zip(caps, loads)):
+        h = r % m
+        load = sum(a * int(sample[x_var(vm.vm_id, h)]) for vm, a in zip(vms, demand))
+        value = min(cap, max(0, cap * int(sample[y_var(h)]) - load))
+        coeffs = slack_coefficients(cap)
+        bits = [0] * len(coeffs)
+        for k in [len(coeffs) - 1] + list(range(len(coeffs) - 2, -1, -1)):
+            if value >= coeffs[k]:
+                bits[k], value = 1, value - coeffs[k]
+        assert value == 0, "slack value not representable"
+        tag = "sc" if r < m else "sm"
+        full.update({f"{tag}_{h}_{k}": b for k, b in enumerate(bits)})
+    return full
+
+
 def solve_exact_qubo(vms, servers, lambda_config=LAMBDA_CONFIG, center=CENTER,
                      time_limit=None, *, max_iters=50, full_cuts=False,
-                     fixed_sample=None):
+                     fixed_sample=None, encoding="unbalanced"):
     """Return an independently scored x/y incumbent and its QUBO certificate.
 
     ``fixed_sample`` optionally fixes any binary variable by its BQM name; it
@@ -53,6 +80,9 @@ def solve_exact_qubo(vms, servers, lambda_config=LAMBDA_CONFIG, center=CENTER,
         raise ValueError("max_iters must be a positive integer")
     if not math.isfinite(center):
         raise ValueError("center must be finite")
+    if encoding not in ("unbalanced", "slack"):
+        raise ValueError("encoding must be 'unbalanced' or 'slack'")
+    slack = encoding == "slack"
     n, m = len(vms), len(servers)
     if not n or not m or len({vm.vm_id for vm in vms}) != n:
         raise ValueError("require nonempty VMs/servers and unique VM IDs")
@@ -71,14 +101,16 @@ def solve_exact_qubo(vms, servers, lambda_config=LAMBDA_CONFIG, center=CENTER,
             weights.append(term)
 
     bqm, info = build_qubo(vms, servers, lambda_config=lambda_config,
-                           encoding="unbalanced", center=center)
+                           encoding=encoding, center=center)
     lam = info["lambdas"]
     if any(not math.isfinite(value) or value < 0 for value in lam.values()):
         raise ValueError("square epigraphs require finite, nonnegative lambdas")
+    if slack and min(lam.values()) <= 0:
+        raise ValueError("slack mode requires positive lambdas (overload cost must grow)")
     # This is the builder's energy objective only; D0 independently evaluates
     # every penalty rather than using the builder's quadratic coefficients.
     energy, _ = build_qubo(vms, servers, lambda_config="L0",
-                           encoding="unbalanced", center=center)
+                           encoding=encoding, center=center)
     idle, _, e_ref = linear_energy_terms(vms, servers)
     tie_coeff = [energy.linear[y_var(h)] - idle[h] / e_ref for h in range(m)]
     residual_offset = float(bqm.offset - n * lam["assign"] - energy.offset)
@@ -104,6 +136,9 @@ def solve_exact_qubo(vms, servers, lambda_config=LAMBDA_CONFIG, center=CENTER,
     lower, upper = np.zeros(size), np.full(size, np.inf)
     integer = np.zeros(size, dtype=np.uint8)
     integer[:g0 + nr] = 1
+    if slack:
+        integer[q0:q0 + nr] = 1          # q = integer overload o
+    scale = [1 if slack else cap for cap in caps]
     upper[:nb] = 1
     lower[d0:g0], upper[d0:g0] = -1, m - 1
     upper[s0:t0] = max(1, m - 1) ** 2
@@ -117,10 +152,14 @@ def solve_exact_qubo(vms, servers, lambda_config=LAMBDA_CONFIG, center=CENTER,
     for r, (cap, demand, term) in enumerate(zip(caps, loads, weights)):
         total = sum(demand)
         lower[g0 + r], upper[g0 + r] = -total, cap
-        lower[q0 + r], upper[q0 + r] = -total / cap, 1
-        upper[t0 + r] = max(1, total / cap) ** 2
+        if slack:
+            lower[q0 + r], upper[q0 + r] = 0, total
+            upper[t0 + r] = max(1, total) ** 2
+        else:
+            lower[q0 + r], upper[q0 + r] = -total / cap, 1
+            upper[t0 + r] = max(1, total / cap) ** 2
+            cost[q0 + r] = -2 * center * lam[term]
         cost[t0 + r] = lam[term]
-        cost[q0 + r] = -2 * center * lam[term]
     objective_offset = float(energy.offset)
 
     rows, row_lower, row_upper = [], [], []
@@ -138,7 +177,10 @@ def solve_exact_qubo(vms, servers, lambda_config=LAMBDA_CONFIG, center=CENTER,
         h = r % m
         row({g0 + r: 1, nx + h: -cap,
              **{i * m + h: a for i, a in enumerate(demand)}}, 0, 0)
-        row({g0 + r: 1 / cap, q0 + r: -1}, 0, 0)
+        if slack:
+            row({g0 + r: 1, q0 + r: 1}, 0)       # o >= -g = L - K*y (and o >= 0)
+        else:
+            row({g0 + r: 1 / cap, q0 + r: -1}, 0, 0)
     for i in range(n):
         for h in range(m):
             j = i * m + h
@@ -149,21 +191,30 @@ def solve_exact_qubo(vms, servers, lambda_config=LAMBDA_CONFIG, center=CENTER,
     def add_cut(r, k):
         if k in cuts[r]:
             return False
-        cap = caps[r]
+        cap = scale[r]
         row({t0 + r: 1, q0 + r: -(2 * k + 1) / cap},
             -(k / cap) * ((k + 1) / cap))
         cuts[r].add(k)
         return True
 
     for r, (cap, demand) in enumerate(zip(caps, loads)):
-        lo, hi = -sum(demand), cap
-        grid = range(lo, hi + 1) if full_cuts else {
-            lo, hi, -1, 0, (lo + hi) // 2, lo // 2, hi // 2,
-        }
+        if slack:
+            # Secants through integer overloads; valid because o is integer.
+            hi = sum(demand)
+            grid = range(0, hi + 1) if full_cuts else (
+                set(range(0, min(hi, 32) + 1)) | {2 ** j for j in range(hi.bit_length())}
+                | {hi // 2, hi})
+        else:
+            lo, hi = -sum(demand), cap
+            grid = range(lo, hi + 1) if full_cuts else {
+                lo, hi, -1, 0, (lo + hi) // 2, lo // 2, hi // 2,
+            }
         for k in sorted(grid):
             add_cut(r, k)
 
     def score(sample):
+        if slack:
+            sample = with_slack(sample, vms, caps, loads, m)
         terms = independent_terms(sample, vms, servers, info, energy)
         independent_h = math.fsum(terms.values())
         tie = math.fsum(tie_coeff[h] * sample[y_var(h)] for h in range(m))
@@ -187,6 +238,8 @@ def solve_exact_qubo(vms, servers, lambda_config=LAMBDA_CONFIG, center=CENTER,
     bound_terms = [objective_offset]
     bound_terms.extend(min(cost[j] * lower[j], cost[j] * upper[j]) for j in range(nb))
     for r, term in enumerate(weights):
+        if slack:
+            continue                      # lambda * o^2 >= 0
         q = min(upper[q0 + r], max(lower[q0 + r], center))
         bound_terms.append(lam[term] * (q * q - 2 * center * q))
     lower_bound = math.fsum(bound_terms)
@@ -251,8 +304,12 @@ def solve_exact_qubo(vms, servers, lambda_config=LAMBDA_CONFIG, center=CENTER,
             h = r % m
             g = cap * int(bits[nx + h]) - sum(
                 a * int(bits[i * m + h]) for i, a in enumerate(demand))
+            if slack:
+                g = max(0, -g)            # cut index = true integer overload
+                violations.append(max(0.0, g ** 2 - float(last.x[t0 + r])))
+            else:
+                violations.append(max(0.0, (g / cap) ** 2 - float(last.x[t0 + r])))
             residuals.append(g)
-            violations.append(max(0.0, (g / cap) ** 2 - float(last.x[t0 + r])))
         max_violation = max(violations, default=0.0)
         max_weighted = max((lam[term] * violation
                             for term, violation in zip(weights, violations)), default=0.0)
@@ -313,4 +370,5 @@ def solve_exact_qubo(vms, servers, lambda_config=LAMBDA_CONFIG, center=CENTER,
                            if len(hosts) == 1}, "placements": placements,
             "hosts": {h for h in range(m) if sample[y_var(h)]},
             "validation": state_validation(sample, vms, servers),
-            "full_cuts": full_cuts, "lambdas": dict(lam), "center": center}
+            "full_cuts": full_cuts, "lambdas": dict(lam), "center": center,
+            "encoding": encoding}

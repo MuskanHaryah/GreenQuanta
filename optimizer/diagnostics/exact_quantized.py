@@ -23,8 +23,12 @@ from phase2.validation import validate_allocation
 SIZES = ("small_v2", "medium_v2", "large_v2")
 
 
-def solve_exact_quantized(vms, servers, time_limit=None):
-    """Use solve_exact's unmodified joule objective and links, with integer capacities."""
+def solve_exact_quantized(vms, servers, time_limit=None, unit=None):
+    """Use solve_exact's unmodified joule objective and links, with integer capacities.
+
+    unit=None keeps config.UNIT_NCU / UNIT_NMU (unchanged behaviour); a number uses it for both."""
+    unit_cpu = config.UNIT_NCU if unit is None else unit
+    unit_mem = config.UNIT_NMU if unit is None else unit
     n, m = len(vms), len(servers)
     idle_cost, dyn_cost, _ = linear_energy_terms(vms, servers)
     nx = n * m
@@ -49,10 +53,10 @@ def solve_exact_quantized(vms, servers, time_limit=None):
         r += 1
     for h, s in enumerate(servers):
         for i, v in enumerate(vms):
-            a[r, xi(i, h)] = units(v.cpu_size, config.UNIT_NCU)
-            a[r + 1, xi(i, h)] = units(v.mem_size, config.UNIT_NMU)
-        a[r, nx + h] = -math.floor(s.cpu_limit / config.UNIT_NCU + 1e-9)
-        a[r + 1, nx + h] = -math.floor(s.mem_limit / config.UNIT_NMU + 1e-9)
+            a[r, xi(i, h)] = units(v.cpu_size, unit_cpu)
+            a[r + 1, xi(i, h)] = units(v.mem_size, unit_mem)
+        a[r, nx + h] = -math.floor(s.cpu_limit / unit_cpu + 1e-9)
+        a[r + 1, nx + h] = -math.floor(s.mem_limit / unit_mem + 1e-9)
         r += 2
     for i in range(n):
         for h in range(m):

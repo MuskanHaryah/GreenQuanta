@@ -12,13 +12,19 @@ from phase2.qubo_builder_v2 import ENCODINGS, add_capacity_rule
 
 
 def build_qubo_custom(vms, servers, lambda_assign, lambda_cpu, lambda_ram,
-                      lambda_link, center, unit):
-    """Minimal unbalanced build_qubo assembly with explicit weights/units."""
+                      lambda_link, center, unit, encoding="unbalanced"):
+    """build_qubo_v2 assembly with explicit weights/units; encoding 'unbalanced' or 'slack'.
+
+    center is used only by 'unbalanced' (pass None for 'slack')."""
     lam = dict(assign=lambda_assign, cpu=lambda_cpu, ram=lambda_ram, link=lambda_link)
+    if encoding not in ("unbalanced", "slack"):
+        raise ValueError("encoding must be 'unbalanced' or 'slack'")
     if not math.isfinite(unit) or unit <= 0:
         raise ValueError("unit must be finite and positive")
-    if not math.isfinite(center) or any(not math.isfinite(v) or v < 0 for v in lam.values()):
-        raise ValueError("finite center and finite nonnegative lambdas required")
+    if encoding == "unbalanced" and (center is None or not math.isfinite(center)):
+        raise ValueError("finite center required for unbalanced")
+    if any(not math.isfinite(v) or v < 0 for v in lam.values()):
+        raise ValueError("finite nonnegative lambdas required")
     bqm = dimod.BinaryQuadraticModel(dimod.BINARY)
     hosts = range(len(servers))
     cpu_units = {v.vm_id: units(v.cpu_size, unit) for v in vms}
@@ -40,9 +46,10 @@ def build_qubo_custom(vms, servers, lambda_assign, lambda_cpu, lambda_ram,
             bqm.add_linear(x_var(v.vm_id, h), dyn_cost[v.vm_id][h] / e_ref)
     for v in vms:
         add_squared_penalty(bqm, [(x_var(v.vm_id, h), 1) for h in hosts], -1, lam["assign"])
+    slack_vars = 0
     for h in hosts:
-        add_capacity_rule(bqm, h, "sc", cpu_units, k_cpu[h], lam["cpu"], vms, "unbalanced", center)
-        add_capacity_rule(bqm, h, "sm", mem_units, k_mem[h], lam["ram"], vms, "unbalanced", center)
+        slack_vars += add_capacity_rule(bqm, h, "sc", cpu_units, k_cpu[h], lam["cpu"], vms, encoding, center)
+        slack_vars += add_capacity_rule(bqm, h, "sm", mem_units, k_mem[h], lam["ram"], vms, encoding, center)
     for v in vms:
         for h in hosts:
             bqm.add_linear(x_var(v.vm_id, h), lam["link"])
@@ -50,21 +57,21 @@ def build_qubo_custom(vms, servers, lambda_assign, lambda_cpu, lambda_ram,
     biases = [abs(b) for b in bqm.linear.values()] + [abs(b) for b in bqm.quadratic.values()]
     biases = [b for b in biases if b > 0]
     return bqm, {
-        "encoding": "unbalanced", "encoding_description": ENCODINGS["unbalanced"],
+        "encoding": encoding, "encoding_description": ENCODINGS[encoding],
         "lambda_config": "custom", "lambda_description": repr(lam),
-        "unbalanced_center": center, "lambdas": lam,
+        "unbalanced_center": center if encoding == "unbalanced" else None, "lambdas": lam,
         "num_variables": len(bqm.variables), "num_interactions": len(bqm.quadratic),
         "assignment_variables": len(vms) * len(servers), "server_variables": len(servers),
-        "slack_variables": 0, "unit_ncu": unit, "unit_nmu": unit,
+        "slack_variables": slack_vars, "unit_ncu": unit, "unit_nmu": unit,
         "bias_range": [min(biases), max(biases)] if biases else [0, 0],
         "e_ref_joule": e_ref,
     }
 
 
 def build_problem_custom(size, lambda_assign, lambda_cpu, lambda_ram, lambda_link,
-                         center, unit):
+                         center, unit, encoding="unbalanced"):
     """Return the same (vms, servers, bqm, info) tuple as common.build_problem."""
     vms, servers, _, _ = build_problem(size)
     bqm, info = build_qubo_custom(vms, servers, lambda_assign, lambda_cpu,
-                                  lambda_ram, lambda_link, center, unit)
+                                  lambda_ram, lambda_link, center, unit, encoding)
     return vms, servers, bqm, info
