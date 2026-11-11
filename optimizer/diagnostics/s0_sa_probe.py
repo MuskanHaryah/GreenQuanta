@@ -57,11 +57,15 @@ def run(size):
                                                      num_sweeps=RUN_CONFIG["sweeps"], seed=seed)
         wall = time.perf_counter() - started
         total = valid = quant_valid = hit_raw = hit_elim = 0
-        best = None
+        best, worst_rel = None, 0.0
         for row in samples.data(fields=["sample", "energy", "num_occurrences"]):
             sample = {k: int(v) for k, v in row.sample.items()}
-            raw = float(row.energy)
-            assert abs(raw - float(bqm.energy(sample))) <= TOL
+            # Score = genuine dimod BQM energy; the sampler's own energy is only cross-checked
+            # (relative, recorded): penalties reach ~lambda*K^2 ~ 6e4, see CHANGES #9 / #12.
+            raw = float(bqm.energy(sample))
+            rel = abs(raw - float(row.energy)) / max(1.0, abs(raw))
+            worst_rel = max(worst_rel, rel)
+            assert rel <= 1e-6, ("sampler/BQM energy mismatch", raw, float(row.energy))
             count = int(row.num_occurrences)
             total += count
             data = metrics(sample, vms, servers)
@@ -86,7 +90,8 @@ def run(size):
                   "valid_read_pct": 100 * valid / total, "quant_valid_read_pct": 100 * quant_valid / total,
                   "exact_H": exact_h, "best_valid": best, "best_valid_gap_pct": gap,
                   "reads_hitting_exact_raw": hit_raw, "reads_hitting_exact_slack_eliminated": hit_elim,
-                  "sampler_wall_s": wall, "exact_status": exact["status"]}
+                  "sampler_wall_s": wall, "exact_status": exact["status"],
+                  "max_rel_sampler_bqm_energy_diff": worst_rel}
         emit("SA", **result)
         run_config = dict(RUN_CONFIG, size=size, seed=seed, lambda_value=lam, encoding="slack")
         m = manifest.build_manifest("s0_sa_probe", run_config, seed, 0, trace, workload, config.ROOT,
