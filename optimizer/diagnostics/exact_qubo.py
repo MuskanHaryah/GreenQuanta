@@ -28,6 +28,20 @@ from phase2.qubo_builder_v2 import build_qubo
 
 
 TOLERANCE = 1e-9
+BQM_RELATIVE = 1e-12
+
+
+def bqm_agrees(bqm, sample, exact_h, bqm_h):
+    """|exact-sum H - dimod bqm.energy(sample)| <= TOLERANCE, else <= 1e-12 x the summed |active terms|.
+
+    dimod sums in plain float; at large lambda its rounding exceeds 1e-9 (Step 1 CHANGES #1).
+    The term sum is computed only when the absolute check fails."""
+    difference = abs(exact_h - bqm_h)
+    if difference <= TOLERANCE:
+        return True
+    active = math.fsum(abs(b) for v, b in bqm.linear.items() if sample[v])
+    active += math.fsum(abs(b) for (u, v), b in bqm.quadratic.items() if sample[u] and sample[v])
+    return difference <= BQM_RELATIVE * (active + abs(bqm.offset))
 
 
 def with_slack(sample, vms, caps, loads, m):
@@ -222,9 +236,9 @@ def solve_exact_qubo(vms, servers, lambda_config=LAMBDA_CONFIG, center=CENTER,
                      "tie": tie, "offset": 0.0}
         true_h = math.fsum(breakdown.values())
         bqm_h = float(bqm.energy(sample))
-        assert max(abs(true_h - independent_h), abs(true_h - bqm_h),
-                   abs(independent_h - bqm_h)) <= TOLERANCE, (
-                       true_h, independent_h, bqm_h)
+        assert (abs(true_h - independent_h) <= TOLERANCE
+                and bqm_agrees(bqm, sample, true_h, bqm_h)
+                and bqm_agrees(bqm, sample, independent_h, bqm_h)), (true_h, independent_h, bqm_h)
         return {"sample": sample, "breakdown": breakdown,
                 "incumbent_true_H": true_h, "independent_H": independent_h,
                 "bqm_H": bqm_h}

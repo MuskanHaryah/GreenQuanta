@@ -15,13 +15,13 @@ import types
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from diagnostics import common, exact_qubo, r3_run
+from diagnostics.d0_formulation import independent_terms
 from diagnostics.exact_quantized import solve_exact_quantized
 from diagnostics.r3c_build import build_problem_custom, build_qubo_custom
 from phase1.qubo_builder import x_var, y_var
 from phase2 import config
 from phase2.exact_solver import linear_cost
 from phase2.fingerprint import qubo_fingerprint
-from phase2.qubo_builder import units
 
 ROOT = config.ROOT
 RAW = ROOT / "docs/reports/stepR3c_raw_output.txt"
@@ -56,30 +56,6 @@ def problem(size, variant):
                                 variant.get("encoding", "unbalanced"))
 
 
-def independent_terms(sample, vms, servers, info, energy):
-    """Direct x/y residual formula, independent of penalty BQM coefficients."""
-    lam = info["lambdas"]
-    terms = {"energy": float(energy.energy(sample)), "assign": 0., "cpu": 0., "ram": 0., "link": 0.}
-    terms["assign"] = lam["assign"] * math.fsum(
-        (sum(sample[x_var(v.vm_id, h)] for h in range(len(servers))) - 1) ** 2 for v in vms)
-    terms["link"] = lam["link"] * sum(sample[x_var(v.vm_id, h)] * (1 - sample[y_var(h)])
-                                             for v in vms for h in range(len(servers)))
-    for resource, tag, key in (("cpu", "cpu", "unit_ncu"), ("mem", "ram", "unit_nmu")):
-        unit = info[key]
-        values = []
-        for h, server in enumerate(servers):
-            cap = math.floor(getattr(server, resource + "_limit") / unit + 1e-9)
-            load = sum(units(getattr(v, resource + "_size"), unit) * sample[x_var(v.vm_id, h)]
-                       for v in vms)
-            if info["encoding"] == "slack":   # Step 0 Lemma: eliminated slack
-                values.append(lam[tag] * max(0, load - cap * sample[y_var(h)]) ** 2)
-                continue
-            g = (cap * sample[y_var(h)] - load) / cap
-            values.append(lam[tag] * (g * g - 2 * info["unbalanced_center"] * g))
-        terms[tag] = math.fsum(values)
-    return terms
-
-
 def solver_context(variant):
     """Bind library functions to private globals; retain R3a's solver unchanged.
 
@@ -97,13 +73,13 @@ def solver_context(variant):
 
     local = types.ModuleType("r3c_private_exact")
     local.__dict__.update(vars(exact_qubo))
-    local.__dict__.update(config=local_config, build_qubo=builder, independent_terms=independent_terms)
+    local.__dict__.update(config=local_config, build_qubo=builder)
     source = exact_qubo.solve_exact_qubo
     local.solve_exact_qubo = types.FunctionType(source.__code__, local.__dict__, source.__name__, source.__defaults__)
     local.solve_exact_qubo.__kwdefaults__ = dict(source.__kwdefaults__,
                                                  encoding=variant.get("encoding", "unbalanced"))
     valid_globals = dict(vars(r3_run), exact_qubo=local, config=local_config,
-                         build_qubo=builder, independent_terms=independent_terms)
+                         build_qubo=builder)
     source = r3_run.score_state
     valid_globals["score_state"] = types.FunctionType(source.__code__, valid_globals, source.__name__, source.__defaults__)
     source = r3_run.solve_valid_qubo
@@ -126,7 +102,7 @@ def pass_rule(global_valid, diff_r1, diff_r2, unit):
 def score(sample, vms, servers, bqm, info, energy):
     h = math.fsum(independent_terms(sample, vms, servers, info, energy).values())
     bqm_h = float(bqm.energy(sample))
-    if abs(h - bqm_h) > 1e-9:
+    if not exact_qubo.bqm_agrees(bqm, sample, h, bqm_h):
         raise AssertionError(("independent/BQM mismatch", h, bqm_h))
     return h
 
@@ -161,7 +137,7 @@ def references(size, vms, servers, bqm):
 def certificate(result, vms, servers, bqm, info, energy):
     if result["sample"] is not None:
         h = score(result["sample"], vms, servers, bqm, info, energy)
-        assert abs(h - result["bqm_H"]) <= 1e-9
+        assert exact_qubo.bqm_agrees(bqm, result["sample"], h, result["bqm_H"])
     return {k: result.get(k) for k in ("status", "proven_optimal", "bqm_H", "independent_H",
             "lower_bound", "mip_gap", "iterations", "time_s", "reason")}
 
