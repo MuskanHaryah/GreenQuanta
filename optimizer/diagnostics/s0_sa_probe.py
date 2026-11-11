@@ -3,7 +3,7 @@
 Baseline for Step 2's SQA comparison. Full BQM, no fixed variables, no repair. Per size: exact
 global minimum (as in 0.5), then dwave SimulatedAnnealingSampler for each seed in RUN_CONFIG.
 Every read is scored on the genuine BQM (raw H, slack bits as sampled) and with slack eliminated
-(r3c_run.independent_terms = Lemma). One experiment-log row per (size, seed); no results/runs folder.
+(d0_formulation.independent_terms = Lemma). One experiment-log row per (size, seed); no results/runs folder.
 """
 import argparse
 import json
@@ -18,7 +18,8 @@ from dwave.samplers import SimulatedAnnealingSampler
 
 from diagnostics.common import build_problem
 from diagnostics.r3c_build import build_qubo_custom
-from diagnostics.r3c_run import independent_terms, metrics, solver_context
+from diagnostics.d0_formulation import independent_terms
+from diagnostics.r3c_run import metrics, solver_context
 from diagnostics.s0_exact import reference_f
 from phase1.qubo_builder import x_var, y_var
 from phase2 import config, manifest
