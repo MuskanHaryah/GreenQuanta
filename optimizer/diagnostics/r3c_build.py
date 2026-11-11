@@ -65,6 +65,8 @@ def build_qubo_custom(vms, servers, lambda_assign, lambda_cpu, lambda_ram,
         "slack_variables": slack_vars, "unit_ncu": unit, "unit_nmu": unit,
         "bias_range": [min(biases), max(biases)] if biases else [0, 0],
         "e_ref_joule": e_ref,
+        # Quantized demands/capacities used above (Step 1 Stage-1 cost reads them; no recompute).
+        "cpu_units": cpu_units, "mem_units": mem_units, "k_cpu": k_cpu, "k_mem": k_mem,
     }
 
 
