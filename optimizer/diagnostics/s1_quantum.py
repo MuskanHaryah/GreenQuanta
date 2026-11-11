@@ -45,26 +45,41 @@ def probabilities(psi):
     return p / p.sum()
 
 
-def expectation(costs, gammas, betas):
-    return float(probabilities(qaoa_state(costs, gammas, betas)) @ np.asarray(costs, dtype=float))
+def cvar(costs, probs, alpha):
+    """Exact CVaR_alpha: mean cost of the lowest-cost alpha fraction of the output distribution
+    (Barkoutsos et al. 2020). alpha = 1 is the mean. On hardware it is estimated from shots."""
+    order = np.argsort(costs, kind="stable")
+    p, c = probs[order], np.asarray(costs, dtype=float)[order]
+    take = np.minimum(p, np.maximum(0.0, alpha - (np.cumsum(p) - p)))
+    return float(take @ c / alpha)
 
 
-def gamma_beta_grid(costs, gamma_max, grid):
-    """p=1 expectation on a (gamma, beta) grid: gamma in [0, gamma_max], beta in [-pi/2, pi/2).
+def expectation(costs, gammas, betas, alpha=None):
+    """QAOA objective: mean of C (alpha None) or CVaR_alpha of C (Step 1.5b)."""
+    probs = probabilities(qaoa_state(costs, gammas, betas))
+    if alpha is None:
+        return float(probs @ np.asarray(costs, dtype=float))
+    return cvar(costs, probs, alpha)
+
+
+def gamma_beta_grid(costs, gamma_max, grid, alpha=None):
+    """p=1 objective on a (gamma, beta) grid: gamma in [0, gamma_max], beta in [-pi/2, pi/2).
     A wide gamma range is needed because near-tied costs differ by ~1e-2..1e-4 (Step 1 CHANGES #3)."""
     gammas = np.linspace(0, gamma_max, grid[0])
     betas = np.linspace(-math.pi / 2, math.pi / 2, grid[1], endpoint=False)
-    values = np.array([[expectation(costs, [g], [b]) for b in betas] for g in gammas])
+    values = np.array([[expectation(costs, [g], [b], alpha) for b in betas] for g in gammas])
     steps = np.array([gammas[1] - gammas[0], betas[1] - betas[0]])
     return gammas, betas, values, steps
 
 
-def optimise_qaoa(costs, p_max, seeds, maxiter, gamma_max=200.0, grid=(2000, 16), rhobeg=0.1):
+def optimise_qaoa(costs, p_max, seeds, maxiter, gamma_max=200.0, grid=(2000, 16), rhobeg=0.1,
+                  alpha=None):
     """COBYLA per depth; one restart per seed. p=1: restart i starts at the i-th best grid point of
     gamma_beta_grid, jittered by its seed within half a grid step. Layer-wise init for p>1 (previous
     optimum of the same restart + a zero layer, so a restart never gets worse with p).
-    Returns one row per p with the best restart; nfev counts every circuit evaluation, grid included."""
-    gammas, betas, values, steps = gamma_beta_grid(costs, gamma_max, grid)
+    Returns one row per p with the best restart ("expected" = objective value: mean, or CVaR_alpha);
+    nfev counts every circuit evaluation, grid included."""
+    gammas, betas, values, steps = gamma_beta_grid(costs, gamma_max, grid, alpha)
     ranked = np.argsort(values, axis=None, kind="stable")
     chains = {}
     rows = []
@@ -79,7 +94,7 @@ def optimise_qaoa(costs, p_max, seeds, maxiter, gamma_max=200.0, grid=(2000, 16)
             else:
                 g, b = chains[seed]
                 start = np.concatenate([g, [0.0], b, [0.0]])
-            result = minimize(lambda x: expectation(costs, x[:p], x[p:]), start, method="COBYLA",
+            result = minimize(lambda x: expectation(costs, x[:p], x[p:], alpha), start, method="COBYLA",
                               options={"maxiter": maxiter, "rhobeg": rhobeg})
             nfev += int(result.nfev)
             chains[seed] = (result.x[:p], result.x[p:])
