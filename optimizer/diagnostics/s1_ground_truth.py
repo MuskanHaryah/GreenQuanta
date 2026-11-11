@@ -19,10 +19,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from diagnostics.common import build_problem
 from diagnostics.r3c_run import metrics, solve_fixed
 from diagnostics.s1_stage1 import aggregate_ok, all_costs, bits, stage1_data
-from phase2 import config
+from phase2 import config, manifest
 from phase2.validation import validate_allocation
 
 RAW = config.ROOT / "docs/reports/step1/1.3_ground_truth.txt"
+LOG = config.ROOT / "results/experiment_log.csv"
 RUN_CONFIG = {
     "sizes": ["small_v2", "medium_v2", "large_v2"], "unit": 0.0025, "factor": 1.1,
     "margin": 1e-9, "tie_tol": 1e-9, "time_limit": 600,
@@ -39,15 +40,41 @@ def emit(kind, **data):
     print(kind + "_JSON=" + json.dumps(data, sort_keys=True, allow_nan=False), flush=True)
 
 
+def records(kind, size):
+    """All <kind>_JSON records of `size` in the 1.3 raw output, in file order."""
+    prefix = kind + "_JSON="
+    raw = RAW.read_bytes()
+    # Windows PowerShell 5.1 Tee-Object writes UTF-16 with a BOM; other writers give UTF-8.
+    text = raw.decode("utf-16") if raw[:2] in (b"\xff\xfe", b"\xfe\xff") else raw.decode("utf-8-sig")
+    rows = [json.loads(line[len(prefix):]) for line in text.splitlines() if line.startswith(prefix)]
+    return [r for r in rows if r["size"] == size]
+
+
 def ground_truth(size):
-    """The GT_JSON record of `size` from the 1.3 raw output (last one wins)."""
-    prefix = "GT_JSON="
-    rows = [json.loads(line[len(prefix):]) for line in RAW.read_text(encoding="utf-8").splitlines()
-            if line.startswith(prefix)]
-    rows = [r for r in rows if r["size"] == size]
+    """The 1.3 GT record of `size` (last one wins), plus joule_optimal: proven 1.3 survivors whose
+    linear joules equal y*'s (they differ from y* only by the tie-break; a subset of all such y)."""
+    rows = records("GT", size)
     if not rows:
         raise LookupError(f"no 1.3 ground truth for {size}")
-    return rows[-1]
+    gt = rows[-1]
+    gt["joule_optimal"] = sorted({r["index"] for r in records("V", size) if r["proven"]
+                                  and r["linear_joules"] is not None
+                                  and math.isclose(r["linear_joules"], gt["joules"], rel_tol=1e-9)})
+    return gt
+
+
+def log_run(method, run_config, seed, size, vms, result, gate):
+    """One experiment-log row (rule 6), as s0_sa_probe; no results/runs folder (Step 0 CHANGES #11)."""
+    trace = config.TRACE_DIR / config.SCENARIOS[size]["trace"]
+    workload = [(v.vm_id, v.cpu_size, v.mem_size) for v in vms]
+    m = manifest.build_manifest(method, run_config, seed, 0, trace, workload, config.ROOT,
+                                ("numpy", "scipy", "dimod"))
+    manifest.append_experiment_log(LOG, {
+        "run_id": m["run_id"], "git_commit": m["code_revision"], "config_hash": m["config_hash"],
+        "sampler_seed": seed, "workload_seed": m["workload_seed"], "method": m["method"],
+        "metrics_json": json.dumps(result, default=str), "gate_result": gate,
+        "timestamp": m["timestamp"]})
+    emit("LOGGED", run_id=m["run_id"], dirty_worktree=m["dirty_worktree"])
 
 
 def candidates(size):
