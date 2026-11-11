@@ -49,24 +49,38 @@ def expectation(costs, gammas, betas):
     return float(probabilities(qaoa_state(costs, gammas, betas)) @ np.asarray(costs, dtype=float))
 
 
-def optimise_qaoa(costs, p_max, seeds, maxiter):
-    """COBYLA per depth; one restart per seed (random p=1 start); layer-wise init for p>1
-    (previous optimum of the same restart + a zero layer, so a restart never gets worse with p).
-    Returns one row per p with the best restart; nfev counts every circuit evaluation of all restarts."""
+def gamma_beta_grid(costs, gamma_max, grid):
+    """p=1 expectation on a (gamma, beta) grid: gamma in [0, gamma_max], beta in [-pi/2, pi/2).
+    A wide gamma range is needed because near-tied costs differ by ~1e-2..1e-4 (Step 1 CHANGES #3)."""
+    gammas = np.linspace(0, gamma_max, grid[0])
+    betas = np.linspace(-math.pi / 2, math.pi / 2, grid[1], endpoint=False)
+    values = np.array([[expectation(costs, [g], [b]) for b in betas] for g in gammas])
+    steps = np.array([gammas[1] - gammas[0], betas[1] - betas[0]])
+    return gammas, betas, values, steps
+
+
+def optimise_qaoa(costs, p_max, seeds, maxiter, gamma_max=200.0, grid=(2000, 16), rhobeg=0.1):
+    """COBYLA per depth; one restart per seed. p=1: restart i starts at the i-th best grid point of
+    gamma_beta_grid, jittered by its seed within half a grid step. Layer-wise init for p>1 (previous
+    optimum of the same restart + a zero layer, so a restart never gets worse with p).
+    Returns one row per p with the best restart; nfev counts every circuit evaluation, grid included."""
+    gammas, betas, values, steps = gamma_beta_grid(costs, gamma_max, grid)
+    ranked = np.argsort(values, axis=None, kind="stable")
     chains = {}
     rows = []
     total = 0
     for p in range(1, p_max + 1):
-        best, nfev = None, 0
-        for seed in seeds:
+        best, nfev = None, values.size if p == 1 else 0
+        for rank, seed in enumerate(seeds):
             if p == 1:
-                rng = np.random.default_rng(seed)
-                start = np.array([rng.uniform(0, math.pi), rng.uniform(0, math.pi / 2)])
+                g, b = np.unravel_index(ranked[rank], values.shape)
+                jitter = np.random.default_rng(seed).uniform(-0.5, 0.5, 2) * steps
+                start = np.array([gammas[g], betas[b]]) + jitter
             else:
                 g, b = chains[seed]
                 start = np.concatenate([g, [0.0], b, [0.0]])
             result = minimize(lambda x: expectation(costs, x[:p], x[p:]), start, method="COBYLA",
-                              options={"maxiter": maxiter, "rhobeg": 0.5})
+                              options={"maxiter": maxiter, "rhobeg": rhobeg})
             nfev += int(result.nfev)
             chains[seed] = (result.x[:p], result.x[p:])
             if best is None or result.fun < best[0]:
