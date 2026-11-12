@@ -49,13 +49,17 @@ def reference_f(vms, servers, unit):
     return assignment, info, f
 
 
-def reference_u(energy, vms, servers):
+def reference_u(energy, vms, servers, on=None):
     """Step 1.1 solver-free bound U = sum_h c_y[h] + sum_v max_h c_x[v,h] (proof: 1.1_proof.md).
 
-    energy is the lambda=0 slack BQM; U >= E(x, y) for every state with one host per VM."""
+    energy is the lambda=0 slack BQM; U >= E(x, y) for every state with one host per VM.
+    on (Step 2.2): restrict both sums to these host positions, giving U_y for the on-set of y
+    (proof: docs/reports/step2/2.2_proof.md); None = all hosts (Step 1 behaviour)."""
     if energy.offset != 0 or min(energy.linear.values()) < 0:
         raise ValueError("U needs a zero offset and nonnegative energy coefficients (A4)")
-    hosts = range(len(servers))
+    hosts = range(len(servers)) if on is None else sorted(on)
+    if not hosts:
+        raise ValueError("U needs at least one host")
     return math.fsum(energy.linear[y_var(h)] for h in hosts) + math.fsum(
         max(energy.linear[x_var(v.vm_id, h)] for h in hosts) for v in vms)
 
