@@ -225,7 +225,8 @@ def sample_worker(pipe, size, variant, active, seed, exact_h):
                 assert h < raw or exact_qubo.bqm_agrees(bqm, sample, h, raw), (h, raw)
             else:
                 h = score(sample, vms, servers, bqm, info, energy)
-            assert exact_qubo.bqm_agrees(bqm, sample, raw, float(row.energy)), (raw, float(row.energy))
+            # Sampler energy is its own running total: relative 1e-6 cross-check (Step 0 CHANGES #12).
+            assert abs(raw - float(row.energy)) <= 1e-6 * max(1.0, abs(raw)), (raw, float(row.energy))
             count = int(row.num_occurrences)
             total += count
             if metrics(sample, vms, servers)["GLOBAL_VALID"]:
