@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "optimizer"))
 
 from diagnostics import common, r3c_build
 from diagnostics.d0_formulation import tiny_problem
-from diagnostics.r3c_run import VARIANTS, metrics, pass_rule, solve_fixed, solver_context
+from diagnostics.r3c_run import VARIANTS, metrics, pass_rule, solve_fixed, solver_context, violation_counts
 from phase1.qubo_builder import x_var, y_var
 from phase2.fingerprint import qubo_fingerprint
 
@@ -84,6 +84,25 @@ def test_linear_joules_use_actual_on_bits(tiny):
     actual = metrics(sample, vms, servers)
     assert not actual["GLOBAL_VALID"]
     assert actual["linear_joules"] == pytest.approx(energy.energy(sample) * info["e_ref_joule"], abs=1e-7, rel=0)
+
+
+def test_violation_counts_include_duplicated_load(tiny):
+    """Every VM on every host: the shared validator sees no single placement, hence no load (CHANGES #3);
+    the breakdown must still flag the resources whose total exceeds the smallest limit (tiny_problem ensures one)."""
+    vms, servers, bqm, _, _ = tiny
+    sample = dict.fromkeys(bqm.variables, 0)
+    for h in range(len(servers)):
+        sample[y_var(h)] = 1
+        for vm in vms:
+            sample[x_var(vm.vm_id, h)] = 1
+    check = metrics(sample, vms, servers)
+    assert not any(v["type"].endswith("overload") for v in check["validation"]["allocation"]["violations"])
+    expected = {r for r in ("cpu", "mem") if sum(getattr(vm, r + "_size") for vm in vms)
+                > min(getattr(s, r + "_limit") for s in servers) + 1e-9}
+    assert expected
+    flags = violation_counts(check, check["GLOBAL_VALID"], True)
+    assert {r for r, key in (("cpu", "cpu_over"), ("mem", "ram_over")) if flags[key]} == expected
+    assert flags["duplicated"] and not flags["unplaced"] and not flags["off_host"]
 
 
 def test_solver_bindings_do_not_mutate_shared_config(tiny):

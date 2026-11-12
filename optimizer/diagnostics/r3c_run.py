@@ -111,9 +111,11 @@ def metrics(sample, vms, servers):
     check = r3_run.state_validation(sample, vms, servers)
     placements = {v.vm_id: [h for h in range(len(servers)) if sample[x_var(v.vm_id, h)]] for v in vms}
     complete = all(len(hs) == 1 for hs in placements.values())
-    overload = max((100 * max(0, math.fsum(getattr(v, resource + "_size") * sample[x_var(v.vm_id, h)]
-                       for v in vms) - getattr(s, resource + "_limit")) / getattr(s, resource + "_limit")
-                    for h, s in enumerate(servers) for resource in ("cpu", "mem")), default=0.)
+    # Loads from every x = 1 (duplicates counted on each host); the shared validator sees only single placements.
+    over = {(h, resource): 100 * max(0, math.fsum(getattr(v, resource + "_size") * sample[x_var(v.vm_id, h)]
+                for v in vms) - getattr(s, resource + "_limit")) / getattr(s, resource + "_limit")
+            for h, s in enumerate(servers) for resource in ("cpu", "mem")}
+    overload = max(over.values(), default=0.)
     cost = None
     if complete:
         assignment = {vm_id: hs[0] for vm_id, hs in placements.items()}
@@ -124,7 +126,8 @@ def metrics(sample, vms, servers):
             idle[h] * (sample[y_var(h)] - int(h in used)) for h in range(len(servers)))
     return {"GLOBAL_VALID": bool(check["valid"] and complete and overload == 0), "n_unplaced": sum(not hs for hs in placements.values()),
             "n_duplicate": sum(len(hs) > 1 for hs in placements.values()),
-            "max_real_overload_pct": overload, "linear_joules": cost, "validation": check}
+            "max_real_overload_pct": overload, "overloaded_resources": sorted({r for (_, r), v in over.items() if v > 0}),
+            "linear_joules": cost, "validation": check}
 
 
 def references(size, vms, servers, bqm):
@@ -203,19 +206,22 @@ def active_controls(servers, size):
 
 
 def violation_counts(check, valid, slack_ok):
-    """Step 2.3 per-read violation flags, from metrics() and the shared validator inside it."""
-    kinds = {v["type"] for v in check["validation"]["allocation"]["violations"]}
+    """Step 2.3 per-read violation flags, from metrics(). CPU/RAM flags use metrics' real loads over every x = 1:
+    the shared validator drops unplaced/duplicated VMs from host loads, so its overload flags undercount (CHANGES #3)."""
     return {"unplaced": check["n_unplaced"] > 0, "duplicated": check["n_duplicate"] > 0,
-            "cpu_over": "cpu_overload" in kinds, "ram_over": "mem_overload" in kinds,
+            "cpu_over": "cpu" in check["overloaded_resources"], "ram_over": "mem" in check["overloaded_resources"],
             "off_host": bool(check["validation"]["off_server_links"]),
             "valid_slack_off_minimiser": valid and not slack_ok}
 
 
-def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False):
+def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False, sampler=None):
     """reduce (Step 2.3): sample the reduced Stage-2 QUBO Q_y (s2_stage2.stage2_bqm: off-host x and slack fixed
-    to 0) at the variant's lambda, instead of the BQM with only y fixed (Step 1 probe / R3c behaviour)."""
+    to 0) at the variant's lambda, instead of the BQM with only y fixed (Step 1 probe / R3c behaviour).
+    sampler (Step 2.4): dict overriding {"method": "sa", "reads", "sweeps"} from RUN_CONFIG; method "sqa" also needs
+    "trotter", "beta", "gamma" (s2_sqa.sqa_sample). Scoring below is shared by both methods.
+    Spin updates = reads x sweeps x trotter (1 for SA) x sampled variables."""
+    spec = {"method": "sa", "reads": RUN_CONFIG["reads"], "sweeps": RUN_CONFIG["sweeps"], **(sampler or {})}
     try:
-        from dwave.samplers import SimulatedAnnealingSampler
         vms, servers, bqm, info = problem(size, variant)
         energy, _ = build_qubo_custom(vms, servers, 0, 0, 0, 0, RUN_CONFIG["center"], variant["unit"])
         if reduce:
@@ -231,8 +237,18 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False):
             fixed = {y_var(h): int(h in active) for h in range(len(servers))}
             reduced.fix_variables(fixed)
         started = time.perf_counter()
-        samples = SimulatedAnnealingSampler().sample(reduced, num_reads=RUN_CONFIG["reads"],
-                    num_sweeps=RUN_CONFIG["sweeps"], seed=seed)
+        if spec["method"] == "sqa":
+            from diagnostics.s2_sqa import sqa_sample
+            samples, _ = sqa_sample(reduced, spec["reads"], spec["sweeps"], spec["trotter"], spec["beta"],
+                                    spec["gamma"], seed, spec.get("schedule"))
+            trotter = spec["trotter"]
+        elif spec["method"] == "sa":
+            from dwave.samplers import SimulatedAnnealingSampler
+            samples = SimulatedAnnealingSampler().sample(reduced, num_reads=spec["reads"],
+                        num_sweeps=spec["sweeps"], seed=seed)
+            trotter = 1
+        else:
+            raise ValueError(("unknown sampler method", spec["method"]))
         valid_count = optimal_count = raw_optimal_count = total = 0
         breakdown = dict.fromkeys(("unplaced", "duplicated", "cpu_over", "ram_over", "off_host",
                                    "valid_slack_off_minimiser"), 0)
@@ -261,7 +277,7 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False):
                 if exact_h is not None and abs(h - exact_h) <= 1e-9:
                     optimal_count += count
                     raw_optimal_count += count * exact_qubo.bqm_agrees(bqm, sample, h, raw)
-        assert total == RUN_CONFIG["reads"]
+        assert total == spec["reads"]
         pipe.send({"status": "DONE", "valid_read_pct": 100 * valid_count / total,
                    "min_valid_H": min_h, "exact_fixed_y_H": exact_h,
                    "gap_pct": None if min_h is None or exact_h is None else
@@ -269,20 +285,20 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False):
                    "pure_and_optimal_count": optimal_count,
                    "optimal_with_optimal_slack_count": raw_optimal_count,
                    "violation_reads": breakdown, "sampled_variables": len(reduced.variables),
-                   "spin_updates": RUN_CONFIG["reads"] * RUN_CONFIG["sweeps"] * len(reduced.variables),
-                   "sampler_wall_s": time.perf_counter() - started})
+                   "spin_updates": spec["reads"] * spec["sweeps"] * trotter * len(reduced.variables),
+                   "sampler": spec, "sampler_wall_s": time.perf_counter() - started})
     except BaseException as exc:
         pipe.send({"status": "ERROR", "error": repr(exc)})
     finally:
         pipe.close()
 
 
-def sampled_run(size, variant, active, seed, exact_h, cap=None, reduce=False):
-    """cap: seconds before TIMEOUT (default RUN_CONFIG['sample_cap']); reduce: see sample_worker."""
+def sampled_run(size, variant, active, seed, exact_h, cap=None, reduce=False, sampler=None):
+    """cap: seconds before TIMEOUT (default RUN_CONFIG['sample_cap']); reduce, sampler: see sample_worker."""
     cap = RUN_CONFIG["sample_cap"] if cap is None else cap
     ctx = mp.get_context("spawn")
     receive, send = ctx.Pipe(duplex=False)
-    proc = ctx.Process(target=sample_worker, args=(send, size, variant, active, seed, exact_h, reduce))
+    proc = ctx.Process(target=sample_worker, args=(send, size, variant, active, seed, exact_h, reduce, sampler))
     started = time.perf_counter()
     proc.start()
     send.close()
