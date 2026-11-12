@@ -3,8 +3,11 @@
 Compares r3c_run.protected_snapshot() with the R3c BEFORE manifest:
 - results/phase2 and results/runs: identical file sets and SHA256;
 - results/experiment_log.csv: append-only (its first bytes equal the old file, by SHA256 of the
-  prefix of the old length), and every appended row is method s0_sa_probe.
+  prefix of the old length), and the set of appended methods equals --methods (default: Step 0's
+  s0_sa_probe; Step 1.8 passes the Step 0 + Step 1 methods).
 """
+import argparse
+from collections import Counter
 import csv
 import hashlib
 import json
@@ -18,6 +21,9 @@ from phase2 import config
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--methods", nargs="+", default=["s0_sa_probe"])
+    allowed = sorted(set(parser.parse_args().methods))
     text = RAW.read_text(encoding="utf-8")
     before = json.loads(next(line[len("BEFORE_JSON="):] for line in text.splitlines()
                              if line.startswith("BEFORE_JSON=")))
@@ -40,7 +46,9 @@ def main():
         new = rows[old_rows:]
         methods = sorted({r["method"] for r in new})
         print(f"experiment_log: old_rows={old_rows} appended_rows={len(new)} appended_methods={methods}")
-        ok &= methods == ["s0_sa_probe"]
+        print(f"experiment_log: rows_per_method={dict(sorted(Counter(r['method'] for r in new).items()))} "
+              f"expected_methods={allowed}")
+        ok &= methods == allowed
     print("PROTECTION_GATE", "PASS" if ok else "FAIL")
     sys.exit(0 if ok else 1)
 
