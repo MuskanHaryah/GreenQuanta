@@ -213,12 +213,19 @@ def sample_worker(pipe, size, variant, active, seed, exact_h):
         started = time.perf_counter()
         samples = SimulatedAnnealingSampler().sample(reduced, num_reads=RUN_CONFIG["reads"],
                     num_sweeps=RUN_CONFIG["sweeps"], seed=seed)
-        valid_count = optimal_count = total = 0
+        valid_count = optimal_count = raw_optimal_count = total = 0
         min_h = None
         for row in samples.data(fields=["sample", "energy", "num_occurrences"]):
             sample = {**{k: int(v) for k, v in row.sample.items()}, **fixed}
-            h = score(sample, vms, servers, bqm, info, energy)
-            assert exact_qubo.bqm_agrees(bqm, sample, h, float(row.energy))
+            raw = float(bqm.energy(sample))
+            if info["encoding"] == "slack":
+                # Sampled slack bits need not sit at their minimiser: h = slack eliminated (Step 0
+                # Lemma) is <= the raw BQM H, which is what the sampler reports (Step 1 CHANGES #7).
+                h = math.fsum(independent_terms(sample, vms, servers, info, energy).values())
+                assert h < raw or exact_qubo.bqm_agrees(bqm, sample, h, raw), (h, raw)
+            else:
+                h = score(sample, vms, servers, bqm, info, energy)
+            assert exact_qubo.bqm_agrees(bqm, sample, raw, float(row.energy)), (raw, float(row.energy))
             count = int(row.num_occurrences)
             total += count
             if metrics(sample, vms, servers)["GLOBAL_VALID"]:
@@ -226,12 +233,15 @@ def sample_worker(pipe, size, variant, active, seed, exact_h):
                 min_h = h if min_h is None else min(min_h, h)
                 if exact_h is not None and abs(h - exact_h) <= 1e-9:
                     optimal_count += count
+                    raw_optimal_count += count * exact_qubo.bqm_agrees(bqm, sample, h, raw)
         assert total == RUN_CONFIG["reads"]
         pipe.send({"status": "DONE", "valid_read_pct": 100 * valid_count / total,
                    "min_valid_H": min_h, "exact_fixed_y_H": exact_h,
                    "gap_pct": None if min_h is None or exact_h is None else
                        100 * (min_h - exact_h) / max(abs(exact_h), 1e-10),
-                   "pure_and_optimal_count": optimal_count, "sampler_wall_s": time.perf_counter() - started})
+                   "pure_and_optimal_count": optimal_count,
+                   "optimal_with_optimal_slack_count": raw_optimal_count,
+                   "sampler_wall_s": time.perf_counter() - started})
     except BaseException as exc:
         pipe.send({"status": "ERROR", "error": repr(exc)})
     finally:
