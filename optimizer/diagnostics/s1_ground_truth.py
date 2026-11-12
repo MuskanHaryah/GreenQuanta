@@ -40,10 +40,10 @@ def emit(kind, **data):
     print(kind + "_JSON=" + json.dumps(data, sort_keys=True, allow_nan=False), flush=True)
 
 
-def records(kind, size):
-    """All <kind>_JSON records of `size` in the 1.3 raw output, in file order."""
+def records(kind, size, path=RAW):
+    """All <kind>_JSON records of `size` in a raw output file (default: 1.3), in file order."""
     prefix = kind + "_JSON="
-    raw = RAW.read_bytes()
+    raw = Path(path).read_bytes()
     # Windows PowerShell 5.1 Tee-Object writes UTF-16 with a BOM; other writers give UTF-8.
     text = raw.decode("utf-16") if raw[:2] in (b"\xff\xfe", b"\xfe\xff") else raw.decode("utf-8-sig")
     rows = [json.loads(line[len(prefix):]) for line in text.splitlines() if line.startswith(prefix)]
@@ -86,6 +86,25 @@ def candidates(size):
     return vms, servers, data, costs, keep, threshold
 
 
+def stage2(vms, servers, data, costs, index):
+    """Exact fixed-y minimum V(y) for y = bits(index) (slack, lambda = data['lam']; r3c_run.solve_fixed).
+    Step 1 uses it as the stand-in for a perfect Stage 2. Returns (row, solver result)."""
+    m, unit = len(servers), RUN_CONFIG["unit"]
+    variant = {"id": "S1-1.1U", "lambdas": [data["lam"]] * 4, "unit": unit, "encoding": "slack"}
+    active = [h for h in range(m) if bits(index, m)[h]]
+    result = solve_fixed(vms, servers, variant, active, RUN_CONFIG["time_limit"])
+    check = metrics(result["sample"], vms, servers)
+    complete = len(result["assignment"]) == len(vms)
+    row = {"index": index, "active_ids": [servers[h].server_id for h in active],
+           "C": float(costs[index]), "V": result["independent_H"],
+           "lower_bound": result["lower_bound"], "status": result["status"],
+           "proven": result["proven_optimal"], "real_valid": check["GLOBAL_VALID"],
+           "quantized_valid": complete and validate_allocation(
+               vms, result["assignment"], servers, quantized_unit=unit)["valid"],
+           "linear_joules": check["linear_joules"], "time_s": result["time_s"]}
+    return row, result
+
+
 def run(size, dry_run):
     started = time.perf_counter()
     vms, servers, data, costs, keep, threshold = candidates(size)
@@ -95,21 +114,9 @@ def run(size, dry_run):
          threshold=threshold, U=data["U"], lam=data["lam"], enumerate_s=time.perf_counter() - started)
     if dry_run:
         return
-    unit = RUN_CONFIG["unit"]
-    variant = {"id": "S1-1.1U", "lambdas": [data["lam"]] * 4, "unit": unit, "encoding": "slack"}
     rows = []
     for index in keep:
-        active = [h for h in range(m) if bits(index, m)[h]]
-        result = solve_fixed(vms, servers, variant, active, RUN_CONFIG["time_limit"])
-        check = metrics(result["sample"], vms, servers)
-        complete = len(result["assignment"]) == len(vms)
-        row = {"index": index, "active_ids": [servers[h].server_id for h in active],
-               "C": float(costs[index]), "V": result["independent_H"],
-               "lower_bound": result["lower_bound"], "status": result["status"],
-               "proven": result["proven_optimal"], "real_valid": check["GLOBAL_VALID"],
-               "quantized_valid": complete and validate_allocation(
-                   vms, result["assignment"], servers, quantized_unit=unit)["valid"],
-               "linear_joules": check["linear_joules"], "time_s": result["time_s"]}
+        row, _ = stage2(vms, servers, data, costs, index)
         emit("V", size=size, **row)
         rows.append(row)
     proven = [r for r in rows if r["proven"]]

@@ -218,7 +218,7 @@ def sample_worker(pipe, size, variant, active, seed, exact_h):
         for row in samples.data(fields=["sample", "energy", "num_occurrences"]):
             sample = {**{k: int(v) for k, v in row.sample.items()}, **fixed}
             h = score(sample, vms, servers, bqm, info, energy)
-            assert abs(h - row.energy) <= 1e-9
+            assert exact_qubo.bqm_agrees(bqm, sample, h, float(row.energy))
             count = int(row.num_occurrences)
             total += count
             if metrics(sample, vms, servers)["GLOBAL_VALID"]:
@@ -238,7 +238,9 @@ def sample_worker(pipe, size, variant, active, seed, exact_h):
         pipe.close()
 
 
-def sampled_run(size, variant, active, seed, exact_h):
+def sampled_run(size, variant, active, seed, exact_h, cap=None):
+    """cap: seconds before TIMEOUT (default RUN_CONFIG['sample_cap'])."""
+    cap = RUN_CONFIG["sample_cap"] if cap is None else cap
     ctx = mp.get_context("spawn")
     receive, send = ctx.Pipe(duplex=False)
     proc = ctx.Process(target=sample_worker, args=(send, size, variant, active, seed, exact_h))
@@ -246,7 +248,7 @@ def sampled_run(size, variant, active, seed, exact_h):
     proc.start()
     send.close()
     try:
-        if receive.poll(RUN_CONFIG["sample_cap"]):
+        if receive.poll(cap):
             result = receive.recv()
         else:
             result = {"status": "TIMEOUT", "valid_read_pct": None, "min_valid_H": None,
