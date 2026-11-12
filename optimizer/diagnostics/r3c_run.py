@@ -202,18 +202,40 @@ def active_controls(servers, size):
     return controls
 
 
-def sample_worker(pipe, size, variant, active, seed, exact_h):
+def violation_counts(check, valid, slack_ok):
+    """Step 2.3 per-read violation flags, from metrics() and the shared validator inside it."""
+    kinds = {v["type"] for v in check["validation"]["allocation"]["violations"]}
+    return {"unplaced": check["n_unplaced"] > 0, "duplicated": check["n_duplicate"] > 0,
+            "cpu_over": "cpu_overload" in kinds, "ram_over": "mem_overload" in kinds,
+            "off_host": bool(check["validation"]["off_server_links"]),
+            "valid_slack_off_minimiser": valid and not slack_ok}
+
+
+def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False):
+    """reduce (Step 2.3): sample the reduced Stage-2 QUBO Q_y (s2_stage2.stage2_bqm: off-host x and slack fixed
+    to 0) at the variant's lambda, instead of the BQM with only y fixed (Step 1 probe / R3c behaviour)."""
     try:
         from dwave.samplers import SimulatedAnnealingSampler
         vms, servers, bqm, info = problem(size, variant)
         energy, _ = build_qubo_custom(vms, servers, 0, 0, 0, 0, RUN_CONFIG["center"], variant["unit"])
-        reduced = bqm.copy()
-        fixed = {y_var(h): int(h in active) for h in range(len(servers))}
-        reduced.fix_variables(fixed)
+        if reduce:
+            from diagnostics.s2_stage2 import stage2_bqm
+            lam = variant["lambdas"][0]
+            if any(v != lam for v in variant["lambdas"]) or info["encoding"] != "slack":
+                raise ValueError("reduce needs the slack encoding with four equal lambdas")
+            reduced, qinfo = stage2_bqm(vms, servers, [h in active for h in range(len(servers))],
+                                        variant["unit"], lam=lam)
+            fixed = qinfo["fixed"]
+        else:
+            reduced = bqm.copy()
+            fixed = {y_var(h): int(h in active) for h in range(len(servers))}
+            reduced.fix_variables(fixed)
         started = time.perf_counter()
         samples = SimulatedAnnealingSampler().sample(reduced, num_reads=RUN_CONFIG["reads"],
                     num_sweeps=RUN_CONFIG["sweeps"], seed=seed)
         valid_count = optimal_count = raw_optimal_count = total = 0
+        breakdown = dict.fromkeys(("unplaced", "duplicated", "cpu_over", "ram_over", "off_host",
+                                   "valid_slack_off_minimiser"), 0)
         min_h = None
         for row in samples.data(fields=["sample", "energy", "num_occurrences"]):
             sample = {**{k: int(v) for k, v in row.sample.items()}, **fixed}
@@ -229,7 +251,11 @@ def sample_worker(pipe, size, variant, active, seed, exact_h):
             assert abs(raw - float(row.energy)) <= 1e-6 * max(1.0, abs(raw)), (raw, float(row.energy))
             count = int(row.num_occurrences)
             total += count
-            if metrics(sample, vms, servers)["GLOBAL_VALID"]:
+            check = metrics(sample, vms, servers)
+            flags = violation_counts(check, check["GLOBAL_VALID"], exact_qubo.bqm_agrees(bqm, sample, h, raw))
+            for key, flag in flags.items():
+                breakdown[key] += count * flag
+            if check["GLOBAL_VALID"]:
                 valid_count += count
                 min_h = h if min_h is None else min(min_h, h)
                 if exact_h is not None and abs(h - exact_h) <= 1e-9:
@@ -242,6 +268,8 @@ def sample_worker(pipe, size, variant, active, seed, exact_h):
                        100 * (min_h - exact_h) / max(abs(exact_h), 1e-10),
                    "pure_and_optimal_count": optimal_count,
                    "optimal_with_optimal_slack_count": raw_optimal_count,
+                   "violation_reads": breakdown, "sampled_variables": len(reduced.variables),
+                   "spin_updates": RUN_CONFIG["reads"] * RUN_CONFIG["sweeps"] * len(reduced.variables),
                    "sampler_wall_s": time.perf_counter() - started})
     except BaseException as exc:
         pipe.send({"status": "ERROR", "error": repr(exc)})
@@ -249,12 +277,12 @@ def sample_worker(pipe, size, variant, active, seed, exact_h):
         pipe.close()
 
 
-def sampled_run(size, variant, active, seed, exact_h, cap=None):
-    """cap: seconds before TIMEOUT (default RUN_CONFIG['sample_cap'])."""
+def sampled_run(size, variant, active, seed, exact_h, cap=None, reduce=False):
+    """cap: seconds before TIMEOUT (default RUN_CONFIG['sample_cap']); reduce: see sample_worker."""
     cap = RUN_CONFIG["sample_cap"] if cap is None else cap
     ctx = mp.get_context("spawn")
     receive, send = ctx.Pipe(duplex=False)
-    proc = ctx.Process(target=sample_worker, args=(send, size, variant, active, seed, exact_h))
+    proc = ctx.Process(target=sample_worker, args=(send, size, variant, active, seed, exact_h, reduce))
     started = time.perf_counter()
     proc.start()
     send.close()
