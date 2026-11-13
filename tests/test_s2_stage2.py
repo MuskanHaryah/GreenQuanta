@@ -162,6 +162,17 @@ def test_l4_assignment_weight_keeps_minimum(tiny, reduced, ratio):
     assert checked > 0
 
 
+def test_bqm_agrees_relative_branch_returns_python_bool():
+    """Both branches must return a Python bool: the relative one touches numpy's bqm.offset (CHANGES #5)."""
+    import dimod
+    bqm = dimod.BinaryQuadraticModel({"a": 1e4, "b": 1e4}, {("a", "b"): 1e4}, 0.5, dimod.BINARY)
+    sample = {"a": 1, "b": 1}
+    h = float(bqm.energy(sample))
+    assert bqm_agrees(bqm, sample, h, h) is True                   # absolute branch
+    assert bqm_agrees(bqm, sample, h, h + 5e-9) is True            # relative branch: 5e-9 <= 1e-12 * 3e4
+    assert bqm_agrees(bqm, sample, h, h + 5e-8) is False           # relative branch, too far
+
+
 def test_rejects_bad_input(tiny):
     vms, servers, unit = tiny["vms"], tiny["servers"], tiny["unit"]
     with pytest.raises(ValueError):

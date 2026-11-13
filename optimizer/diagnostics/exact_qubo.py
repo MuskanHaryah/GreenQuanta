@@ -41,7 +41,8 @@ def bqm_agrees(bqm, sample, exact_h, bqm_h):
         return True
     active = math.fsum(abs(b) for v, b in bqm.linear.items() if sample[v])
     active += math.fsum(abs(b) for (u, v), b in bqm.quadratic.items() if sample[u] and sample[v])
-    return difference <= BQM_RELATIVE * (active + abs(bqm.offset))
+    # bqm.offset is numpy float64; a numpy bool_ here makes count * agrees an int64 that json rejects (Step 2 CHANGES #5).
+    return bool(difference <= BQM_RELATIVE * (active + abs(bqm.offset)))
 
 
 def with_slack(sample, vms, caps, loads, m):
