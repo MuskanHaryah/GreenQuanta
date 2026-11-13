@@ -8,7 +8,10 @@ Modes (run in this order; outputs under docs/reports/step2/):
                   gap, then lowest mean raw H (the only signal if no setting gives a valid read), then grid order.
                   Every run and its spin updates are counted (calibration cost). -> 2.5_calibration.txt
   --size S        main runs: SA and SQA (calibrated settings, unchanged on every size), budget levels B and 4B,
-                  main seeds, RUN_CONFIG reads. -> 2.5_sa_vs_sqa.txt
+                  main seeds, RUN_CONFIG reads. -> 2.5_sa_vs_sqa.txt (RUN_TABLE lines)
+  --lever-l4 S    2.5b lever L4: assignment weight l4_ratios x lambda_y (exact: s2_stage2.stage2_bqm docstring),
+                  SA and SQA at budget B, main seeds. -> 2.5b_levers.txt (L4_TABLE lines). Mean raw H includes the
+                  larger assignment penalty, so compare valid % / P(optimal) across ratios, not raw H.
 Equal budget: per read, SA sweeps = base_sa_sweeps x level and SQA sweeps x trotter = the same number, so
 reads x sweeps x trotter x variables match (SA trotter = 1). B at level 1 equals the 2.3 SA budget.
 beta and gamma are in units of max|coef| (s2_sqa rescales). Grid range: on Q_y(lambda_y) the smallest coefficient is
@@ -33,7 +36,8 @@ CALIB = config.ROOT / "docs/reports/step2/2.5_calibration.txt"
 RUN_CONFIG = {"sizes": S23["sizes"], "seeds": S23["seeds"], "reads": S23["reads"], "base_sa_sweeps": S23["sweeps"],
               "budget_levels": [1, 4], "calib_size": "small_v2", "calib_seed": 100, "calib_reads": 50,
               "grid": {"beta": [1e1, 1e2, 1e3, 1e4, 1e5, 1e6], "gamma": [0.3, 1.0, 3.0], "trotter": [4, 8]},
-              "dry_sqa": {"beta": 1e3, "gamma": 1.0, "trotter": 4}, "cap_s": 1800}
+              "dry_sqa": {"beta": 1e3, "gamma": 1.0, "trotter": 4}, "cap_s": 1800,
+              "l4_ratios": [10.0, 100.0, 1000.0, 10000.0]}
 
 
 def spec(method, reads, level, params=None):
@@ -45,10 +49,12 @@ def spec(method, reads, level, params=None):
     return {"method": "sqa", "reads": reads, "sweeps": sweeps // params["trotter"], **params}
 
 
-def sample(size, ctx, seed, s):
+def sample(size, ctx, seed, s, ratio=1.0):
+    """One sampled run on Q_y at lambda_y; ratio > 1: assignment weight ratio * lambda_y (lever L4)."""
     _, _, _, active, exact_h, qinfo = ctx
-    return r3c_run.sampled_run(size, variant("lambda_y", qinfo["lam"]), active, seed, exact_h,
-                               cap=RUN_CONFIG["cap_s"], reduce=True, sampler=s)
+    lam = qinfo["lam"]
+    return r3c_run.sampled_run(size, variant("lambda_y", lam, None if ratio == 1 else ratio * lam), active, seed,
+                               exact_h, cap=RUN_CONFIG["cap_s"], reduce=True, sampler=s)
 
 
 def dry_run():
@@ -107,32 +113,50 @@ def calibrate():
             {"choice": choice, "rows": rows}, "recorded")
 
 
-def main_runs(size):
+def calibrated():
     choice = records("CALIB_CHOICE", RUN_CONFIG["calib_size"], CALIB)[-1]
-    params = {k: choice[k] for k in ("beta", "gamma", "trotter")}
-    ctx = setup(size)
+    return {k: choice[k] for k in ("beta", "gamma", "trotter")}
+
+
+def cell(size, ctx, method, level, params, ratio, kind, log_method):
+    """One (method, budget level, assignment ratio) cell over the main seeds: rows, summary, table line, log row."""
     vms, index, exact_h = ctx[0], ctx[2], ctx[4]
+    s = spec(method, RUN_CONFIG["reads"], level, params)
+    labels = {"size": size, "method": method, "level": level, "assign_ratio": ratio}
+    rows = []
+    for seed in RUN_CONFIG["seeds"]:
+        row = {**labels, "seed": seed, "y_star": index, **sample(size, ctx, seed, s, ratio)}
+        emit(kind, **row)
+        rows.append(row)
+    summary = {**labels, "sampler": s, **summarize(rows, exact_h)}
+    emit(kind + "_SUMMARY", **summary)
+    v = summary["violation_pct"]
+    print(f"{kind}_TABLE | {size} | {method} | {level}B | r {ratio:g} | {summary['spin_updates_per_seed']} | "
+          f"{summary['valid_pct_per_seed']} | {summary['p_optimal_read']} | {summary['best_valid_gap_pct']} | "
+          f"{summary['tts99_spin_updates'] or 'not reached'} | "
+          + ", ".join(f"{k} {val:.1f}%" for k, val in v.items()) +
+          f" | mean raw H {summary['mean_raw_H']} | {summary['statuses']} | wall {summary['sampler_wall_s']} |",
+          flush=True)
+    log_run(log_method, dict(RUN_CONFIG, **labels, sampler=s), RUN_CONFIG["seeds"][0], size, vms,
+            {"summary": summary, "rows": rows}, "recorded")
+
+
+def main_runs(size):
+    params, ctx = calibrated(), setup(size)
     for level in RUN_CONFIG["budget_levels"]:
         for method in ("sa", "sqa"):
-            s = spec(method, RUN_CONFIG["reads"], level, params)
-            rows = []
-            for seed in RUN_CONFIG["seeds"]:
-                row = {"size": size, "method": method, "level": level, "seed": seed, "y_star": index,
-                       **sample(size, ctx, seed, s)}
-                emit("RUN", **row)
-                rows.append(row)
-            summary = {"size": size, "method": method, "level": level, "sampler": s, **summarize(rows, exact_h)}
-            emit("SUMMARY", **summary)
-            v = summary["violation_pct"]
-            print(f"TABLE | {size} | {method} | {level}B | {summary['spin_updates_per_seed']} | "
-                  f"{summary['valid_pct_per_seed']} | {summary['p_optimal_read']} | {summary['best_valid_gap_pct']} | "
-                  f"{summary['tts99_spin_updates'] or 'not reached'} | "
-                  + ", ".join(f"{k} {val:.1f}%" for k, val in v.items()) +
-                  f" | mean raw H {summary['mean_raw_H']} | {summary['statuses']} | wall {summary['sampler_wall_s']} |",
-                  flush=True)
-            log_run("s2_sa_vs_sqa", dict(RUN_CONFIG, size=size, method=method, level=level, sampler=s),
-                    RUN_CONFIG["seeds"][0], size, vms, {"summary": summary, "rows": rows}, "recorded")
+            cell(size, ctx, method, level, params, 1.0, "RUN", "s2_sa_vs_sqa")
     emit("DONE", size=size)
+
+
+def lever_l4(size):
+    """2.5b lever L4 (user-approved, CHANGES #4): assignment weight ratio * lambda_y, other weights lambda_y,
+    SA and SQA (2.5 calibrated settings, unchanged) at budget level 1, main seeds."""
+    params, ctx = calibrated(), setup(size)
+    for ratio in RUN_CONFIG["l4_ratios"]:
+        for method in ("sa", "sqa"):
+            cell(size, ctx, method, 1, params, ratio, "L4", "s2_lever_l4")
+    emit("DONE", size=size, lever="L4")
 
 
 def main():
@@ -141,12 +165,15 @@ def main():
     mode.add_argument("--dry-run", action="store_true")
     mode.add_argument("--calibrate", action="store_true")
     mode.add_argument("--size", choices=RUN_CONFIG["sizes"])
+    mode.add_argument("--lever-l4", choices=RUN_CONFIG["sizes"], metavar="SIZE")
     args = parser.parse_args()
     print("RUN_CONFIG=" + json.dumps(RUN_CONFIG, sort_keys=True), flush=True)
     if args.dry_run:
         dry_run()
     elif args.calibrate:
         calibrate()
+    elif args.lever_l4:
+        lever_l4(args.lever_l4)
     else:
         main_runs(args.size)
 

@@ -13,8 +13,10 @@ from diagnostics.s0_exact import reference_u
 from phase1.qubo_builder import slack_coefficients, x_var, y_var
 
 
-def stage2_bqm(vms, servers, y, unit, factor=1.1, lam=None):
-    """(Q_y, info). lam=None -> lambda_y = factor * U_y (factor > 1); else this lambda for all four terms."""
+def stage2_bqm(vms, servers, y, unit, factor=1.1, lam=None, assign_lam=None):
+    """(Q_y, info). lam=None -> lambda_y = factor * U_y (factor > 1); else this lambda for all four terms.
+    assign_lam (Step 2.5b lever L4): weight of the assignment term only, >= lam; None = lam. Exact: the BQM becomes
+    H + (assign_lam - lam) * P_A with P_A >= 0 and P_A = 0 on valid states, so the minimiser and minimum are kept."""
     m = len(servers)
     y = [bool(b) for b in y]
     if len(y) != m:
@@ -29,7 +31,10 @@ def stage2_bqm(vms, servers, y, unit, factor=1.1, lam=None):
         if factor <= 1:
             raise ValueError("factor must be > 1 (Theorem 2.2)")
         lam = factor * u_y
-    full, info = build_qubo_custom(vms, servers, lam, lam, lam, lam, None, unit, "slack")
+    assign_lam = lam if assign_lam is None else assign_lam
+    if assign_lam < lam:
+        raise ValueError("assign_lam must be >= lam (exactness)")
+    full, info = build_qubo_custom(vms, servers, assign_lam, lam, lam, lam, None, unit, "slack")
     fixed = {y_var(h): int(y[h]) for h in range(m)}
     fixed.update({x_var(v.vm_id, h): 0 for v in vms for h in off})
     for tag, caps in (("sc", info["k_cpu"]), ("sm", info["k_mem"])):
@@ -40,7 +45,7 @@ def stage2_bqm(vms, servers, y, unit, factor=1.1, lam=None):
     reduced = full.copy()
     reduced.fix_variables(fixed)
     slack = sum(1 for v in reduced.variables if str(v).startswith(("sc_", "sm_")))
-    return reduced, {"lam": lam, "U_y": u_y, "on": on, "fixed": fixed, "full": full, "energy": energy,
+    return reduced, {"lam": lam, "assign_lam": assign_lam, "U_y": u_y, "on": on, "fixed": fixed, "full": full, "energy": energy,
                      "info": info, "num_variables": len(reduced.variables), "slack_variables": slack,
                      "x_variables": len(reduced.variables) - slack}
 

@@ -128,8 +128,44 @@ def test_profile_and_load_factor(tiny, reduced):
     assert set(lf) == {"cpu", "ram"} and all(v > 0 for v in lf.values())
 
 
+@pytest.mark.parametrize("ratio", [10.0, 1000.0])
+def test_l4_assignment_weight_keeps_minimum(tiny, reduced, ratio):
+    """Lever L4: assign_lam = ratio * lambda_y gives Q' = Q + (assign_lam - lambda_y) * P_A on every state
+    (slack at its minimiser, which P_A does not touch) and the same minimum W(y) on every feasible y."""
+    vms, servers, unit, m = tiny["vms"], tiny["servers"], tiny["unit"], tiny["m"]
+    checked = 0
+    for index, r in reduced.items():
+        if not math.isfinite(r["E_star"]):
+            continue
+        y, lam = bits(index, m), r["qinfo"]["lam"]
+        q4, info4 = stage2_bqm(vms, servers, y, unit, lam=lam, assign_lam=ratio * lam)
+        assert info4["assign_lam"] == ratio * lam and set(q4.variables) == set(r["q"].variables)
+        caps, loads = caps_loads(info4["info"], vms)
+        on, best = info4["on"], math.inf
+        for choice in product((0, 1), repeat=len(vms) * len(on)):
+            sample = {y_var(h): int(y[h]) for h in range(m)}
+            sample.update({x_var(v.vm_id, h): 0 for v in vms for h in range(m)})
+            sample.update({x_var(v.vm_id, h): choice[i * len(on) + j]
+                           for i, v in enumerate(vms) for j, h in enumerate(on)})
+            full = with_slack(sample, vms, caps, loads, m)
+            z = {k: full[k] for k in q4.variables}
+            p_a = sum((sum(full[x_var(v.vm_id, h)] for h in range(m)) - 1) ** 2 for v in vms)
+            e4 = float(q4.energy(z))
+            assert e4 == pytest.approx(float(r["q"].energy(z)) + (ratio - 1) * lam * p_a, rel=1e-9, abs=1e-9)
+            # Minimum through the exact-sum path (as W in the fixture); dimod's float sum carries ~1e-11 of
+            # cancellation noise at coefficients ~ratio * lambda, so it is held to the Step 0 relative rule only.
+            h4 = math.fsum(independent_terms(full, vms, servers, info4["info"], info4["energy"]).values())
+            assert bqm_agrees(q4, z, h4, e4), (index, h4, e4)
+            best = min(best, h4)
+        assert abs(best - r["W"]) <= TOL, (index, best, r["W"])
+        checked += 1
+    assert checked > 0
+
+
 def test_rejects_bad_input(tiny):
     vms, servers, unit = tiny["vms"], tiny["servers"], tiny["unit"]
+    with pytest.raises(ValueError):
+        stage2_bqm(vms, servers, [1] * tiny["m"], unit, lam=1.0, assign_lam=0.5)
     with pytest.raises(ValueError):
         stage2_bqm(vms, servers, [0] * tiny["m"], unit)
     with pytest.raises(ValueError):

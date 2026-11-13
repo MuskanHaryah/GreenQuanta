@@ -36,8 +36,10 @@ def setup(size):
     return vms, data, index, [h for h in range(m) if y[h]], exact_h, qinfo
 
 
-def variant(case, lam):
-    return {"id": f"S2-{case}", "lambdas": [lam] * 4, "unit": RUN_CONFIG["unit"], "encoding": "slack"}
+def variant(case, lam, assign_lam=None):
+    """lambdas = [assign, cpu, ram, link]; assign_lam (lever L4) defaults to lam."""
+    return {"id": f"S2-{case}", "lambdas": [lam if assign_lam is None else assign_lam] + [lam] * 3,
+            "unit": RUN_CONFIG["unit"], "encoding": "slack"}
 
 
 def tts99(budget_per_read, p):

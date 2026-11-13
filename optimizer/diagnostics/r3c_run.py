@@ -226,11 +226,12 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False, samp
         energy, _ = build_qubo_custom(vms, servers, 0, 0, 0, 0, RUN_CONFIG["center"], variant["unit"])
         if reduce:
             from diagnostics.s2_stage2 import stage2_bqm
-            lam = variant["lambdas"][0]
-            if any(v != lam for v in variant["lambdas"]) or info["encoding"] != "slack":
-                raise ValueError("reduce needs the slack encoding with four equal lambdas")
+            # lambdas = [assign, cpu, ram, link]; cpu = ram = link (assign may be larger: lever L4, s2_stage2)
+            lam = variant["lambdas"][1]
+            if any(v != lam for v in variant["lambdas"][1:]) or info["encoding"] != "slack":
+                raise ValueError("reduce needs the slack encoding with equal cpu/ram/link lambdas")
             reduced, qinfo = stage2_bqm(vms, servers, [h in active for h in range(len(servers))],
-                                        variant["unit"], lam=lam)
+                                        variant["unit"], lam=lam, assign_lam=variant["lambdas"][0])
             fixed = qinfo["fixed"]
         else:
             reduced = bqm.copy()
