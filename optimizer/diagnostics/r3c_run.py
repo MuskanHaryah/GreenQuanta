@@ -303,9 +303,10 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False, samp
                    "violation_reads": breakdown, "sampled_variables": len(reduced.variables),
                    "best_valid": best_valid,
                    "mean_raw_H": math.fsum(raw_sum) / total, "min_raw_H": min_raw,
-                   # QUBO samplers: spin updates (per variable); 2C samplers: move attempts (per VM), CHANGES #8a.
-                   "spin_updates": spec["reads"] * spec["sweeps"] * trotter
-                       * (len(vms) if spec["method"] in ("csa", "csqa") else len(reduced.variables)),
+                   # QUBO samplers: spin updates (per variable); 2C samplers: move attempts (per VM), CHANGES #8a,
+                   # from the one formula s2_constrained.move_attempts (2D.1: world-line moves count P each).
+                   "spin_updates": cinfo["move_attempts"] if spec["method"] in ("csa", "csqa")
+                       else spec["reads"] * spec["sweeps"] * trotter * len(reduced.variables),
                    "budget_unit": "move_attempts" if spec["method"] in ("csa", "csqa") else "spin_updates",
                    "sampler": spec, "sampler_wall_s": time.perf_counter() - started})
     except BaseException as exc:
