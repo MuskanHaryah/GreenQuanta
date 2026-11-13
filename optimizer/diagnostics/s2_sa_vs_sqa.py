@@ -60,8 +60,9 @@ RUN_CONFIG = {"sizes": S23["sizes"], "seeds": S23["seeds"], "reads": S23["reads"
                          "csqa": {"beta": [1e2, 1e3, 1e4], "gamma": [1.0, 4.0], "trotter": [4, 8]}},
               "c_dry": {"csa": {"beta_min": 0.1, "beta_max": 1e3}, "csqa": {"beta": 1e3, "gamma": 1.0, "trotter": 4}},
               # Step 2D (2D.0_protocol.md). Grid order = product order of these lists. Ties: |difference| <= d_tie.
+              # csqa gamma lowered from {0.3, 1, 3, 10} after 2D.2 (user decision, CHANGES #14).
               "d_grid": {"csa": {"beta_min": [0.01, 0.1, 1.0, 10.0], "beta_max": [1e3, 1e4, 1e5, 1e6]},
-                         "csqa": {"beta": [1e3, 1e4], "gamma": [0.3, 1.0, 3.0, 10.0], "trotter": [8, 16],
+                         "csqa": {"beta": [1e3, 1e4], "gamma": [1e-3, 1e-2, 1e-1, 1.0], "trotter": [8, 16],
                                   "worldline": [True]}},
               "d_calib_seeds": [100, 101], "d_calib_sizes": ["medium_v2", "large_v2"],
               "d_eval_sizes": ["medium_v2", "large_v2"], "d_tie": 1e-9,
