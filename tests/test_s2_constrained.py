@@ -189,6 +189,20 @@ def test_constrained_sample_gives_one_hot_q_y_samples(tiny, spec):
         assert abs(raw - float(row.energy)) <= 1e-6 * max(1.0, abs(raw))
 
 
+def test_equal_budget_specs():
+    """2C plan / CHANGES #8b: within a track, reads x sweeps x P is equal; QUBO SA keeps its 2.5 spec."""
+    from diagnostics.s2_sa_vs_sqa import RUN_CONFIG, spec
+    base = RUN_CONFIG["base_sa_sweeps"]
+    for level in (1, 4):
+        sa = spec("csa", 10, level, {"beta_min": 0.1, "beta_max": 1e3})
+        sqa = spec("csqa", 10, level, {"beta": 1e3, "gamma": 1.0, "trotter": 8})
+        assert sa["sweeps"] == base * level == sqa["sweeps"] * sqa["trotter"] and "trotter" not in sa
+    assert spec("sa", 10, 1, {"beta": 1.0, "gamma": 1.0, "trotter": 8}) == {"method": "sa", "reads": 10,
+                                                                           "sweeps": base}
+    with pytest.raises(ValueError):
+        spec("csqa", 10, 1, {"beta": 1.0, "gamma": 1.0, "trotter": 3})
+
+
 def test_schedule_shapes():
     beta_g, ell, p = schedule({"method": "csqa", "sweeps": 10, "trotter": 4, "beta": 8.0, "gamma": 2.0}, 0.5, 3)
     assert p == 4 and beta_g.shape == ell.shape == (10,)
