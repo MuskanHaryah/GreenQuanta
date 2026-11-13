@@ -90,6 +90,14 @@ def test_open_point_2_solution_is_a_trotter_slice(bqm):
         assert states(res, sorted(bqm.variables))[0] in slices
 
 
+def test_tts99():
+    from diagnostics.s2_sa_reduced import tts99
+    assert tts99(10, 0) is None and tts99(10, 0.0) is None
+    assert tts99(10, 1.0) == 10
+    assert tts99(10, 0.5) == 70          # ceil(ln 0.01 / ln 0.5) = ceil(6.64) = 7 reads
+    assert tts99(10, 0.9) == 20          # ceil(ln 0.01 / ln 0.1) = ceil(2.0000...) — 1 - 0.9 is 0.09999..., so 2
+
+
 def test_open_point_4_no_internal_rescaling(bqm):
     # Same seeds, coefficients x10 without our rescaling: different statistics => cxxjij uses raw couplings.
     scaled, _ = rescaled(bqm)

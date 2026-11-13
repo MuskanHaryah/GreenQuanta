@@ -6,6 +6,7 @@ the effect of the smaller weight (b vs a). Sampling: r3c_run.sampled_run(..., re
 r3c_run.RUN_CONFIG); every read is scored on the full BQM with the fixed values restored, validated by the
 shared validator, and classified by violation (r3c_run.violation_counts). exact_h = V(y*) from 1.3.
 Spin updates = reads x sweeps x Q_y variables. Wall time is indicative only.
+setup() and summarize() are shared with Step 2.5 (s2_sa_vs_sqa.py).
 """
 import argparse
 import json
@@ -24,39 +25,61 @@ RUN_CONFIG = {"sizes": S1["sizes"], "unit": S1["unit"], "factor": S1["factor"], 
               "reads": r3c_run.RUN_CONFIG["reads"], "sweeps": r3c_run.RUN_CONFIG["sweeps"], "cap_s": 900}
 
 
-def run(size):
+def setup(size):
+    """(vms, data, y* index, active hosts, V(y*) from 1.3, Q_y info at lambda_y) for one size."""
     vms, servers, data, _, _, _ = candidates(size)
-    m, unit = len(servers), RUN_CONFIG["unit"]
-    gt = ground_truth(size)
-    index = gt["y_star"]
+    m = len(servers)
+    index = ground_truth(size)["y_star"]
     exact_h = [r for r in records("V", size) if r["index"] == index][-1]["V"]
     y = bits(index, m)
-    active = [h for h in range(m) if y[h]]
-    _, qinfo = stage2_bqm(vms, servers, y, unit, RUN_CONFIG["factor"])
-    cases = {"lambda_1.1U": data["lam"], "lambda_y": qinfo["lam"]}
-    for case, lam in cases.items():
-        variant = {"id": f"S2-{case}", "lambdas": [lam] * 4, "unit": unit, "encoding": "slack"}
+    _, qinfo = stage2_bqm(vms, servers, y, RUN_CONFIG["unit"], RUN_CONFIG["factor"])
+    return vms, data, index, [h for h in range(m) if y[h]], exact_h, qinfo
+
+
+def variant(case, lam):
+    return {"id": f"S2-{case}", "lambdas": [lam] * 4, "unit": RUN_CONFIG["unit"], "encoding": "slack"}
+
+
+def tts99(budget_per_read, p):
+    """Spin updates to reach the optimum with 99 % confidence; None = not reached (p = 0)."""
+    if not p:
+        return None
+    return budget_per_read * (1 if p >= 1 else math.ceil(math.log(0.01) / math.log(1 - p)))
+
+
+def summarize(rows, exact_h):
+    """Pooled summary over seed rows (sampled_run results plus labels)."""
+    done = [r for r in rows if r["status"] == "DONE"]
+    reads = sum(r["sampler"]["reads"] for r in done)
+    breakdown = {k: sum(r["violation_reads"][k] for r in done) for k in done[0]["violation_reads"]} if done else {}
+    gaps = [r["gap_pct"] for r in done if r["gap_pct"] is not None]
+    p_opt = sum(r["pure_and_optimal_count"] for r in done) / reads if reads else None
+    per_read = done[0]["spin_updates"] / done[0]["sampler"]["reads"] if done else None
+    return {"seeds": len(rows), "done": len(done),
+            "valid_pct_per_seed": [r["valid_read_pct"] for r in done],
+            "valid_pct_pooled": math.fsum(r["valid_read_pct"] for r in done) / len(done) if done else None,
+            "optimal_reads": sum(r["pure_and_optimal_count"] for r in done), "p_optimal_read": p_opt,
+            "tts99_spin_updates": tts99(per_read, p_opt) if done else None,
+            "best_valid_gap_pct": min(gaps) if gaps else None, "violation_reads": breakdown,
+            "violation_pct": {k: 100 * v / reads for k, v in breakdown.items()} if reads else {},
+            "mean_raw_H": [r.get("mean_raw_H") for r in done], "min_raw_H": [r.get("min_raw_H") for r in done],
+            "sampled_variables": done[0]["sampled_variables"] if done else None,
+            "spin_updates_per_seed": done[0]["spin_updates"] if done else None,
+            "exact_h": exact_h, "statuses": [r["status"] for r in rows],
+            "sampler_wall_s": [r.get("sampler_wall_s") for r in rows]}
+
+
+def run(size):
+    vms, data, index, active, exact_h, qinfo = setup(size)
+    for case, lam in {"lambda_1.1U": data["lam"], "lambda_y": qinfo["lam"]}.items():
         rows = []
         for seed in RUN_CONFIG["seeds"]:
-            result = r3c_run.sampled_run(size, variant, active, seed, exact_h, cap=RUN_CONFIG["cap_s"], reduce=True)
+            result = r3c_run.sampled_run(size, variant(case, lam), active, seed, exact_h, cap=RUN_CONFIG["cap_s"],
+                                         reduce=True)
             row = {"size": size, "case": case, "lam": lam, "seed": seed, "y_star": index, **result}
             emit("SA_QY", **row)
             rows.append(row)
-        done = [r for r in rows if r["status"] == "DONE"]
-        reads = RUN_CONFIG["reads"] * len(done)
-        breakdown = {k: sum(r["violation_reads"][k] for r in done) for k in done[0]["violation_reads"]} if done else {}
-        gaps = [r["gap_pct"] for r in done if r["gap_pct"] is not None]
-        summary = {"size": size, "case": case, "lam": lam, "seeds": len(rows), "done": len(done),
-                   "valid_pct_per_seed": [r["valid_read_pct"] for r in done],
-                   "valid_pct_pooled": math.fsum(r["valid_read_pct"] for r in done) / len(done) if done else None,
-                   "optimal_reads": sum(r["pure_and_optimal_count"] for r in done),
-                   "p_optimal_read": sum(r["pure_and_optimal_count"] for r in done) / reads if reads else None,
-                   "best_valid_gap_pct": min(gaps) if gaps else None, "violation_reads": breakdown,
-                   "violation_pct": {k: 100 * v / reads for k, v in breakdown.items()} if reads else {},
-                   "sampled_variables": done[0]["sampled_variables"] if done else None,
-                   "spin_updates_per_seed": done[0]["spin_updates"] if done else None,
-                   "exact_h": exact_h, "statuses": [r["status"] for r in rows],
-                   "sampler_wall_s": [r.get("sampler_wall_s") for r in rows]}
+        summary = {"size": size, "case": case, "lam": lam, **summarize(rows, exact_h)}
         emit("SA_QY_SUMMARY", **summary)
         v = summary["violation_pct"]
         print(f"TABLE | {size} | {case} | {lam:.6g} | {summary['sampled_variables']} | "

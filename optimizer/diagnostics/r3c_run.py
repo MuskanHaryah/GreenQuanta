@@ -252,10 +252,13 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False, samp
         valid_count = optimal_count = raw_optimal_count = total = 0
         breakdown = dict.fromkeys(("unplaced", "duplicated", "cpu_over", "ram_over", "off_host",
                                    "valid_slack_off_minimiser"), 0)
-        min_h = None
+        min_h = min_raw = None
+        raw_sum = []
         for row in samples.data(fields=["sample", "energy", "num_occurrences"]):
             sample = {**{k: int(v) for k, v in row.sample.items()}, **fixed}
             raw = float(bqm.energy(sample))
+            raw_sum.append(raw * int(row.num_occurrences))
+            min_raw = raw if min_raw is None else min(min_raw, raw)
             if info["encoding"] == "slack":
                 # Sampled slack bits need not sit at their minimiser: h = slack eliminated (Step 0
                 # Lemma) is <= the raw BQM H, which is what the sampler reports (Step 1 CHANGES #7).
@@ -285,6 +288,7 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False, samp
                    "pure_and_optimal_count": optimal_count,
                    "optimal_with_optimal_slack_count": raw_optimal_count,
                    "violation_reads": breakdown, "sampled_variables": len(reduced.variables),
+                   "mean_raw_H": math.fsum(raw_sum) / total, "min_raw_H": min_raw,
                    "spin_updates": spec["reads"] * spec["sweeps"] * trotter * len(reduced.variables),
                    "sampler": spec, "sampler_wall_s": time.perf_counter() - started})
     except BaseException as exc:
