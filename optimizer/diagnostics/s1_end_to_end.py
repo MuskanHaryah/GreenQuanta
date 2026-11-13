@@ -107,8 +107,8 @@ def hybrid(size, stage1="s1", stage2_method="exact"):
     pool = sorted(set(from_qaoa) | set(from_gas), key=lambda i: (costs[i], i))
     feasible = [i for i in pool if aggregate_ok(bits(i, m), data)]
     emit("PROPOSALS", size=size, stage1=stage1, qaoa_top_k=from_qaoa, gas_best=from_gas,
-         gas_runs_ending_at_y_star=sum(i == gt["y_star"] for i in gas_best), gas_runs=len(gas_best),
-         pool=pool, aggregate_ok=feasible, y_star_proposed=gt["y_star"] in pool, **cost)
+         gas_runs_ending_at_y_star=sum(i == gt["y_star"] for i in gas_best),
+         pool=pool, aggregate_ok=feasible, y_star_proposed=gt["y_star"] in pool, **cost)   # cost has gas_runs
     best, solved = None, []
     for index in feasible:
         if best is not None and costs[index] > best[0]["V"] + GT_CONFIG["margin"]:
