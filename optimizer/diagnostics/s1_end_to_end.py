@@ -7,6 +7,16 @@
   (s1_ground_truth.stage2): a STAND-IN for a perfect Stage 2, replaced by SQA in Step 2. Proposals are
   solved in increasing C order and skipped once C(y) > best proven V (exact by 1.2 Prop. 3).
 --part probe: dwave SA (r3c_run.sampled_run: 200 reads x 2000 sweeps) on the slack QUBO, y = y* fixed.
+
+Step 2.6 (fully quantum pipeline), options of --part hybrid:
+  --stage1 s1 (Step 1.7 as run: GAS to 2^m, 20 seeds, + CVaR-QAOA top-k) | gas (GAS only, budget
+    ceil(c_pipe * sqrt(2^m)), pipe_gas_seeds pooled, no classical optimiser) | gas+qaoa (gas + CVaR-QAOA top-k, COBYLA)
+  --stage2 exact (Step 1 stand-in; a control only) | csqa (constraint-preserving SQA, 2C.4 settings) |
+    csa (constraint-preserving classical SA, same moves; a control). csqa/csa use lambda_y of each y, budget B,
+    pipe_stage2_seed, and no exact value (y* and V are read only afterwards, to score). Proposals are tried in
+    increasing C order and skipped once C(y) > best valid H found so far (2.2 Prop. 3 / 2C.1 Prop. 5).
+  Resource count: GAS oracle calls + measurements; QAOA circuit evaluations (nfev_cumulative, from 1.5b);
+  Stage-2 move attempts (or proven exact solves for the control).
 """
 import argparse
 import json
@@ -28,67 +38,132 @@ from diagnostics.s1_quantum import gas
 from diagnostics.s1_stage1 import aggregate_ok, bits
 from phase2 import config
 from phase2.energy_model import evaluate_allocation
+from phase2.validation import validate_allocation
 
 RUN_CONFIG = {"sizes": ["small_v2", "medium_v2", "large_v2"],
               "qaoa_raw": "docs/reports/step1/1.5b_qaoa_cvar.txt", "qaoa_objective": "cvar", "qaoa_p": 5,
               "gas_seeds": list(range(20)), "gas_growth": 1.2, "gas_budget_factor": 1.0,
-              "probe_seeds": [0, 1, 2], "probe_cap": 900}
+              "probe_seeds": [0, 1, 2], "probe_cap": 900,
+              # Step 2.6: c_pipe from 2.1 (2.1_c_pipe.txt); Stage-2 sampler settings from 2C.3 via calibrated().
+              "c_pipe": 4, "pipe_gas_seeds": [0, 1, 2], "pipe_stage2_seed": 0, "pipe_stage2_level": 1}
 
 
-def proposals(size, costs):
-    qaoa = [r for r in records("QAOA", size, config.ROOT / RUN_CONFIG["qaoa_raw"])
-            if r["p"] == RUN_CONFIG["qaoa_p"] and r["objective"] == RUN_CONFIG["qaoa_objective"]]
-    if not qaoa:
-        raise LookupError(f"no {RUN_CONFIG['qaoa_objective']} QAOA rows at p={RUN_CONFIG['qaoa_p']} for {size}")
-    budget = int(RUN_CONFIG["gas_budget_factor"] * len(costs))
-    gas_best = [gas(costs, np.random.default_rng(s), budget, RUN_CONFIG["gas_growth"])["best"]
-                for s in RUN_CONFIG["gas_seeds"]]
-    return sorted({i for r in qaoa for i in r["top_k_sampled"]}), sorted(set(gas_best)), gas_best
+def proposals(size, costs, stage1="s1"):
+    """(QAOA top-k, distinct GAS bests, all GAS bests, resource counts). stage1 as in the module docstring."""
+    qaoa = []
+    if stage1 in ("s1", "gas+qaoa"):
+        qaoa = [r for r in records("QAOA", size, config.ROOT / RUN_CONFIG["qaoa_raw"])
+                if r["p"] == RUN_CONFIG["qaoa_p"] and r["objective"] == RUN_CONFIG["qaoa_objective"]]
+        if not qaoa:
+            raise LookupError(f"no {RUN_CONFIG['qaoa_objective']} QAOA rows at p={RUN_CONFIG['qaoa_p']} for {size}")
+    if stage1 == "s1":
+        budget, seeds = int(RUN_CONFIG["gas_budget_factor"] * len(costs)), RUN_CONFIG["gas_seeds"]
+    elif stage1 in ("gas", "gas+qaoa"):
+        budget, seeds = math.ceil(RUN_CONFIG["c_pipe"] * math.sqrt(len(costs))), RUN_CONFIG["pipe_gas_seeds"]
+    else:
+        raise ValueError(f"unknown stage1 {stage1}")
+    runs = [gas(costs, np.random.default_rng(s), budget, RUN_CONFIG["gas_growth"]) for s in seeds]
+    gas_best = [r["best"] for r in runs]
+    cost = {"gas_budget": budget, "gas_runs": len(runs), "gas_oracle_calls": sum(r["oracle_calls"] for r in runs),
+            "gas_measurements": sum(r["measurements"] for r in runs),
+            "qaoa_runs": len(qaoa), "qaoa_circuit_evaluations": sum(r["nfev_cumulative"] for r in qaoa)}
+    return sorted({i for r in qaoa for i in r["top_k_sampled"]}), sorted(set(gas_best)), gas_best, cost
 
 
-def hybrid(size):
+def stage2_sampled(size, vms, servers, index, method):
+    """One y through constraint-preserving SA/SQA (no exact value): row like s1_ground_truth.stage2's, plus the
+    best valid placement. Real and quantized validity are checked here with the shared validator."""
+    from diagnostics.s2_sa_reduced import variant
+    from diagnostics.s2_sa_vs_sqa import RUN_CONFIG as S25, calibrated, spec
+    from diagnostics.s2_stage2 import stage2_bqm
+    m = len(servers)
+    y = bits(index, m)
+    active = [h for h in range(m) if y[h]]
+    _, qinfo = stage2_bqm(vms, servers, y, GT_CONFIG["unit"], GT_CONFIG["factor"])
+    s = spec(method, S25["reads"], RUN_CONFIG["pipe_stage2_level"], calibrated(method))
+    result = sampled_run(size, variant("lambda_y", qinfo["lam"]), active, RUN_CONFIG["pipe_stage2_seed"], None,
+                         cap=RUN_CONFIG["probe_cap"], reduce=True, sampler=s)
+    if result["status"] != "DONE":
+        raise RuntimeError(("stage-2 sampler failed", size, index, method, result.get("error")))
+    best = result["best_valid"]
+    assignment = best["assignment"] if best else None
+    row = {"index": index, "active_ids": [servers[h].server_id for h in active], "method": method,
+           "status": result["status"], "lam_y": qinfo["lam"], "valid_read_pct": result.get("valid_read_pct"),
+           "V": best["H"] if best else None, "proven": False, "linear_joules": best["linear_joules"] if best else None,
+           "real_valid": bool(assignment) and validate_allocation(vms, assignment, servers)["valid"],
+           "quantized_valid": bool(assignment) and validate_allocation(vms, assignment, servers,
+                                                                      quantized_unit=GT_CONFIG["unit"])["valid"],
+           "move_attempts": result.get("spin_updates", 0), "time_s": result.get("sampler_wall_s", result["wall_s"]),
+           "violation_reads": result.get("violation_reads")}
+    return row, {"assignment": assignment}
+
+
+def hybrid(size, stage1="s1", stage2_method="exact"):
     started = time.perf_counter()
     vms, servers, data, costs, _, _ = candidates(size)
-    gt = ground_truth(size)
+    gt = ground_truth(size)                      # read only to score the result (is_y_star, gap), never to decide
     m = len(servers)
-    from_qaoa, from_gas, gas_best = proposals(size, costs)
+    from_qaoa, from_gas, gas_best, cost = proposals(size, costs, stage1)
     pool = sorted(set(from_qaoa) | set(from_gas), key=lambda i: (costs[i], i))
     feasible = [i for i in pool if aggregate_ok(bits(i, m), data)]
-    emit("PROPOSALS", size=size, qaoa_top_k=from_qaoa, gas_best=from_gas,
+    emit("PROPOSALS", size=size, stage1=stage1, qaoa_top_k=from_qaoa, gas_best=from_gas,
          gas_runs_ending_at_y_star=sum(i == gt["y_star"] for i in gas_best), gas_runs=len(gas_best),
-         pool=pool, aggregate_ok=feasible, y_star_proposed=gt["y_star"] in pool)
+         pool=pool, aggregate_ok=feasible, y_star_proposed=gt["y_star"] in pool, **cost)
     best, solved = None, []
     for index in feasible:
         if best is not None and costs[index] > best[0]["V"] + GT_CONFIG["margin"]:
             emit("SKIP", size=size, index=index, C=float(costs[index]), best_V=best[0]["V"],
-                 reason="C(y) > best proven V (Prop. 3)")
+                 reason="C(y) > best valid H found (Prop. 3)")
             continue
-        row, result = stage2(vms, servers, data, costs, index)
-        emit("STAGE2", size=size, **row)
+        if stage2_method == "exact":
+            row, result = stage2(vms, servers, data, costs, index)
+            usable = row["proven"]
+        else:
+            row, result = stage2_sampled(size, vms, servers, index, stage2_method)
+            usable = row["V"] is not None
+        emit("STAGE2", size=size, stage2=stage2_method, **row)
         solved.append(row)
-        if row["proven"] and (best is None or row["V"] < best[0]["V"]):
+        if usable and (best is None or row["V"] < best[0]["V"]):
             best = (row, result)
+    labels = {"size": size, "stage1": stage1, "stage2": stage2_method}
+    resources = {**cost, "stage2_solves": len(solved),
+                 "stage2_move_attempts": sum(r.get("move_attempts", 0) for r in solved)}
+    if best is None:
+        out = {**labels, "found": False, "real_valid": False, "quantized_valid": False, **resources,
+               "y_star_proposed": gt["y_star"] in pool, "wall_s": time.perf_counter() - started}
+        emit("HYBRID", **out)
+        print(f"TABLE | {size} | {stage1} | {stage2_method} | {len(pool)} | {len(feasible)} | {len(solved)} | "
+              f"no valid placement found |", flush=True)
+        log_run(f"s2_pipeline_{stage1}_{stage2_method}" if stage1 != "s1" else "s1_hybrid",
+                dict(RUN_CONFIG, **labels), RUN_CONFIG["pipe_gas_seeds"][0], size, vms,
+                {"summary": out, "stage2": solved}, "FAIL")
+        return
     row, result = best
     assignment = result["assignment"]
     lam = data["lam"]
     bqm, _ = build_qubo_custom(vms, servers, lam, lam, lam, lam, None, GT_CONFIG["unit"], "slack")
     r1, r2 = references(size, vms, servers, bqm)
     joules = row["linear_joules"]
-    out = {"size": size, "chosen": row["index"], "chosen_ids": row["active_ids"],
-           "is_y_star": row["index"] == gt["y_star"], "V": row["V"], "V_minus_step0": row["V"] - gt["step0_h_min"],
+    out = {**labels, "found": True, "chosen": row["index"], "chosen_ids": row["active_ids"],
+           "is_y_star": row["index"] == gt["y_star"], "y_star_proposed": gt["y_star"] in pool,
+           "V": row["V"], "V_minus_step0": row["V"] - gt["step0_h_min"],
+           "gap_to_h_min_pct": 100 * (row["V"] - gt["step0_h_min"]) / gt["step0_h_min"],
            "real_valid": row["real_valid"], "quantized_valid": row["quantized_valid"],
            "linear_joules": joules, "r1_joules": r1, "r2_joules": r2,
            "diff_r1_pct": 100 * (joules - r1) / r1, "diff_r2_pct": 100 * (joules - r2) / r2,
            "curve_it_energy_kwh": evaluate_allocation(vms, assignment, servers)["it_energy_kwh"],
-           "r2_curve_it_energy_kwh": historical_r2(size)[2],
-           "stage2_solves": len(solved), "stage2_s": math.fsum(r["time_s"] for r in solved),
-           "wall_s": time.perf_counter() - started}
+           "r2_curve_it_energy_kwh": historical_r2(size)[2], **resources,
+           "stage2_s": math.fsum(r["time_s"] for r in solved), "wall_s": time.perf_counter() - started}
     emit("HYBRID", **out)
-    print(f"TABLE | {size} | {len(pool)} | {len(feasible)} | {len(solved)} | {row['active_ids']} | "
-          f"{out['is_y_star']} | {out['real_valid']}/{out['quantized_valid']} | {joules:.10g} | "
-          f"{out['diff_r1_pct']:.4f} | {out['diff_r2_pct']:.4f} | {out['curve_it_energy_kwh']:.6g} |", flush=True)
-    log_run("s1_hybrid", dict(RUN_CONFIG, size=size), RUN_CONFIG["gas_seeds"][0], size, vms,
-            {"summary": out, "stage2": solved}, "PASS" if out["real_valid"] and out["quantized_valid"] else "FAIL")
+    print(f"TABLE | {size} | {stage1} | {stage2_method} | {len(pool)} | {len(feasible)} | {len(solved)} | "
+          f"{row['active_ids']} | {out['is_y_star']} | {out['real_valid']}/{out['quantized_valid']} | "
+          f"{out['gap_to_h_min_pct']:.4f} | {joules:.10g} | {out['diff_r1_pct']:.4f} | {out['diff_r2_pct']:.4f} | "
+          f"{out['curve_it_energy_kwh']:.6g} | GAS {cost['gas_oracle_calls']}+{cost['gas_measurements']} | "
+          f"QAOA nfev {cost['qaoa_circuit_evaluations']} | moves {resources['stage2_move_attempts']} |", flush=True)
+    log_run(f"s2_pipeline_{stage1}_{stage2_method}" if stage1 != "s1" else "s1_hybrid",
+            dict(RUN_CONFIG, **labels), RUN_CONFIG["pipe_gas_seeds"][0] if stage1 != "s1" else RUN_CONFIG["gas_seeds"][0],
+            size, vms, {"summary": out, "stage2": solved},
+            "PASS" if out["real_valid"] and out["quantized_valid"] else "FAIL")
 
 
 def probe(size):
@@ -111,9 +186,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--part", choices=["hybrid", "probe"], required=True)
     parser.add_argument("--size", choices=RUN_CONFIG["sizes"], required=True)
+    parser.add_argument("--stage1", choices=["s1", "gas", "gas+qaoa"], default="s1")
+    parser.add_argument("--stage2", choices=["exact", "csqa", "csa"], default="exact")
     args = parser.parse_args()
     print("RUN_CONFIG=" + json.dumps(RUN_CONFIG, sort_keys=True), flush=True)
-    (hybrid if args.part == "hybrid" else probe)(args.size)
+    if args.part == "hybrid":
+        hybrid(args.size, args.stage1, args.stage2)
+    else:
+        probe(args.size)
 
 
 if __name__ == "__main__":

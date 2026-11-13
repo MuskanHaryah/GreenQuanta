@@ -260,7 +260,7 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False, samp
         valid_count = optimal_count = raw_optimal_count = total = 0
         breakdown = dict.fromkeys(("unplaced", "duplicated", "cpu_over", "ram_over", "off_host",
                                    "valid_slack_off_minimiser"), 0)
-        min_h = min_raw = None
+        min_h = min_raw = best_valid = None
         raw_sum = []
         for row in samples.data(fields=["sample", "energy", "num_occurrences"]):
             sample = {**{k: int(v) for k, v in row.sample.items()}, **fixed}
@@ -284,6 +284,11 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False, samp
                 breakdown[key] += count * flag
             if check["GLOBAL_VALID"]:
                 valid_count += count
+                if min_h is None or h < min_h:
+                    # Step 2.6: the pipeline needs the placement itself (one host per VM: valid => exactly one).
+                    best_valid = {"H": h, "linear_joules": check["linear_joules"],
+                                  "assignment": {v.vm_id: next(b for b in range(len(servers))
+                                                               if sample[x_var(v.vm_id, b)]) for v in vms}}
                 min_h = h if min_h is None else min(min_h, h)
                 if exact_h is not None and abs(h - exact_h) <= 1e-9:
                     optimal_count += count
@@ -296,6 +301,7 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False, samp
                    "pure_and_optimal_count": optimal_count,
                    "optimal_with_optimal_slack_count": raw_optimal_count,
                    "violation_reads": breakdown, "sampled_variables": len(reduced.variables),
+                   "best_valid": best_valid,
                    "mean_raw_H": math.fsum(raw_sum) / total, "min_raw_H": min_raw,
                    # QUBO samplers: spin updates (per variable); 2C samplers: move attempts (per VM), CHANGES #8a.
                    "spin_updates": spec["reads"] * spec["sweeps"] * trotter
