@@ -9,3 +9,6 @@ __pycache__/
 
 __pycache__/
 *.pyc
+
+# Java build output (Step 2D R6, user choice b): not tracked
+simulation/target/
