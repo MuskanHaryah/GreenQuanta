@@ -248,6 +248,13 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False, samp
             samples = SimulatedAnnealingSampler().sample(reduced, num_reads=spec["reads"],
                         num_sweeps=spec["sweeps"], seed=seed)
             trotter = 1
+        elif spec["method"] in ("csa", "csqa"):
+            # Step 2C: constraint-preserving SA / SQA on G_y (s2_constrained); needs the Q_y context (reduce=True).
+            if not reduce:
+                raise ValueError("csa/csqa sample G_y, which is defined on Q_y (reduce=True)")
+            from diagnostics.s2_constrained import constrained_sample
+            samples, cinfo = constrained_sample(qinfo, vms, servers, spec, seed)
+            trotter = cinfo["trotter"]
         else:
             raise ValueError(("unknown sampler method", spec["method"]))
         valid_count = optimal_count = raw_optimal_count = total = 0
@@ -290,7 +297,10 @@ def sample_worker(pipe, size, variant, active, seed, exact_h, reduce=False, samp
                    "optimal_with_optimal_slack_count": raw_optimal_count,
                    "violation_reads": breakdown, "sampled_variables": len(reduced.variables),
                    "mean_raw_H": math.fsum(raw_sum) / total, "min_raw_H": min_raw,
-                   "spin_updates": spec["reads"] * spec["sweeps"] * trotter * len(reduced.variables),
+                   # QUBO samplers: spin updates (per variable); 2C samplers: move attempts (per VM), CHANGES #8a.
+                   "spin_updates": spec["reads"] * spec["sweeps"] * trotter
+                       * (len(vms) if spec["method"] in ("csa", "csqa") else len(reduced.variables)),
+                   "budget_unit": "move_attempts" if spec["method"] in ("csa", "csqa") else "spin_updates",
                    "sampler": spec, "sampler_wall_s": time.perf_counter() - started})
     except BaseException as exc:
         pipe.send({"status": "ERROR", "error": repr(exc)})
