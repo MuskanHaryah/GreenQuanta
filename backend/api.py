@@ -6,7 +6,7 @@ import math
 
 from flask import Blueprint, current_app, jsonify, request
 
-from backend import ROOT
+from backend import ROOT, gas_trace
 from demo.build_results import META
 from diagnostics.common import build_problem
 from diagnostics.s1_end_to_end import RUN_CONFIG
@@ -139,3 +139,13 @@ def claims():
     return jsonify(size=size, notes=load(size)["notes"], caveats=CAVEATS,
                    methods=[{"method_id": k, "label": label, "kind": kind, "algorithm": algorithm, "reference": ref}
                             for k, (label, kind, algorithm, ref) in META.items()])
+
+
+@bp.get("/gas-trace/<size>")
+def gas_trace_view(size):
+    check_size(size)
+    seeds = RUN_CONFIG["pipe_gas_seeds"]
+    seed = request.args.get("seed", str(seeds[0]))
+    if not (seed.lstrip("-").isdigit() and int(seed) in seeds):
+        raise ApiError(400, "bad_seed", f"seed must be one of the pipeline's GAS seeds {seeds}, got {seed!r}")
+    return jsonify(gas_trace.trace(size, int(seed)))
