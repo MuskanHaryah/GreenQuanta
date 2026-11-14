@@ -101,7 +101,7 @@ def stage2_sampled(size, vms, servers, index, method, settings="2C"):
     return row, {"assignment": assignment}
 
 
-def hybrid(size, stage1="s1", stage2_method="exact", settings="2C"):
+def hybrid(size, stage1="s1", stage2_method="exact", settings="2C", log=True):
     started = time.perf_counter()
     vms, servers, data, costs, _, _ = candidates(size)
     gt = ground_truth(size)                      # read only to score the result (is_y_star, gap), never to decide
@@ -141,9 +141,10 @@ def hybrid(size, stage1="s1", stage2_method="exact", settings="2C"):
         emit("HYBRID", **out)
         print(f"TABLE | {size} | {stage1} | {stage2_method} | {len(pool)} | {len(feasible)} | {len(solved)} | "
               f"no valid placement found |", flush=True)
-        log_run(log_method, dict(RUN_CONFIG, **labels), RUN_CONFIG["pipe_gas_seeds"][0], size, vms,
-                {"summary": out, "stage2": solved}, "FAIL")
-        return
+        if log:
+            log_run(log_method, dict(RUN_CONFIG, **labels), RUN_CONFIG["pipe_gas_seeds"][0], size, vms,
+                    {"summary": out, "stage2": solved}, "FAIL")
+        return out, None
     row, result = best
     assignment = result["assignment"]
     lam = data["lam"]
@@ -166,9 +167,11 @@ def hybrid(size, stage1="s1", stage2_method="exact", settings="2C"):
           f"{out['gap_to_h_min_pct']:.4f} | {joules:.10g} | {out['diff_r1_pct']:.4f} | {out['diff_r2_pct']:.4f} | "
           f"{out['curve_it_energy_kwh']:.6g} | GAS {cost['gas_oracle_calls']}+{cost['gas_measurements']} | "
           f"QAOA nfev {cost['qaoa_circuit_evaluations']} | moves {resources['stage2_move_attempts']} |", flush=True)
-    log_run(log_method, dict(RUN_CONFIG, **labels), RUN_CONFIG["pipe_gas_seeds"][0] if stage1 != "s1" else RUN_CONFIG["gas_seeds"][0],
-            size, vms, {"summary": out, "stage2": solved},
-            "PASS" if out["real_valid"] and out["quantized_valid"] else "FAIL")
+    if log:
+        log_run(log_method, dict(RUN_CONFIG, **labels), RUN_CONFIG["pipe_gas_seeds"][0] if stage1 != "s1" else RUN_CONFIG["gas_seeds"][0],
+                size, vms, {"summary": out, "stage2": solved},
+                "PASS" if out["real_valid"] and out["quantized_valid"] else "FAIL")
+    return out, assignment
 
 
 def probe(size):

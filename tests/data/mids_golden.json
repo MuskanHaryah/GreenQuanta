@@ -1,0 +1,80 @@
+{
+  "large_v2": {
+    "csa": {
+      "V": 0.4656709142036448,
+      "chosen_ids": [
+        3,
+        4,
+        9,
+        10,
+        11
+      ],
+      "gap_to_h_min_pct": 0.44564416026913456,
+      "linear_joules": 78318706.95783564,
+      "quantized_valid": true,
+      "real_valid": true
+    },
+    "csqa": {
+      "V": 0.4689138415395567,
+      "chosen_ids": [
+        3,
+        4,
+        9,
+        10,
+        11
+      ],
+      "gap_to_h_min_pct": 1.1451465669798149,
+      "linear_joules": 78864956.26095286,
+      "quantized_valid": true,
+      "real_valid": true
+    }
+  },
+  "medium_v2": {
+    "csa": {
+      "V": 0.40156535160258183,
+      "chosen_ids": [
+        2,
+        3
+      ],
+      "gap_to_h_min_pct": 0.0,
+      "linear_joules": 44211076.67748815,
+      "quantized_valid": true,
+      "real_valid": true
+    },
+    "csqa": {
+      "V": 0.40156535160258183,
+      "chosen_ids": [
+        2,
+        3
+      ],
+      "gap_to_h_min_pct": 0.0,
+      "linear_joules": 44211076.67748815,
+      "quantized_valid": true,
+      "real_valid": true
+    }
+  },
+  "small_v2": {
+    "csa": {
+      "V": 0.38505827990484337,
+      "chosen_ids": [
+        2,
+        3
+      ],
+      "gap_to_h_min_pct": 0.0,
+      "linear_joules": 39951971.03582648,
+      "quantized_valid": true,
+      "real_valid": true
+    },
+    "csqa": {
+      "V": 0.38505827990484337,
+      "chosen_ids": [
+        2,
+        3
+      ],
+      "gap_to_h_min_pct": 0.0,
+      "linear_joules": 39951971.03582648,
+      "quantized_valid": true,
+      "real_valid": true
+    }
+  }
+}
