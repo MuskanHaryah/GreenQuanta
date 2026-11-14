@@ -1,11 +1,14 @@
+import { lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import Overview from "./pages/Overview";
-import Pipeline from "./pages/Pipeline";
-import Servers from "./pages/Servers";
-import Compare from "./pages/Compare";
-import Quantum from "./pages/Quantum";
-import About from "./pages/About";
+
+// One chunk per page: Recharts loads only with the pages that draw charts.
+const Overview = lazy(() => import("./pages/Overview"));
+const Pipeline = lazy(() => import("./pages/Pipeline"));
+const Servers = lazy(() => import("./pages/Servers"));
+const Compare = lazy(() => import("./pages/Compare"));
+const Quantum = lazy(() => import("./pages/Quantum"));
+const About = lazy(() => import("./pages/About"));
 
 export default function App() {
   return (

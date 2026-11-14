@@ -1,10 +1,11 @@
 // Page frame: top bar (logo, tag, links, size switcher), left rail of the page's sections, phone menu, blobs, footer.
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { api } from "../api";
 import { useApi, useSize } from "../hooks";
 import { PAGES, pageOf } from "../routes";
 import Blobs from "./Blobs";
+import { Skeleton } from "./ui";
 
 function SizeSwitcher() {
   const [size, setSize] = useSize();
@@ -65,15 +66,22 @@ export default function Layout() {
       const hit = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
       if (hit) setVisible(hit.target.id);
     }, { rootMargin: "-20% 0px -55% 0px" });
-    page.sections.forEach((s) => { const el = document.getElementById(s.id); if (el) observer.observe(el); });
-    return () => observer.disconnect();
+    // pages load lazily: (re)attach whenever their sections appear in the DOM
+    const attach = () => page.sections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+    const watcher = new MutationObserver(attach);
+    watcher.observe(document.body, { childList: true, subtree: true });
+    attach();
+    return () => { observer.disconnect(); watcher.disconnect(); };
   }, [page]);
 
   const pick = (id: string) => { setOpen(false); setVisible(id); scrollTo(id); };
 
   return (
     <>
-      <Blobs />
+      {pathname === "/" && <Blobs />}
       <header className="topbar">
         <NavLink to={{ pathname: "/", search }} className="logo">GREENQUANTA</NavLink>
         <span className="tag">quantum vm placement</span>
@@ -91,7 +99,7 @@ export default function Layout() {
           <SizeSwitcher />
         </div>
       )}
-      <main className="main"><Outlet /></main>
+      <main className="main"><Suspense fallback={<Skeleton />}><Outlet /></Suspense></main>
       <footer className="footer">
         GreenQuanta · mid-evaluation demo · everything quantum is simulated on a classical computer
         {health.data && <> · build {health.data.git_commit.slice(0, 8)}</>}

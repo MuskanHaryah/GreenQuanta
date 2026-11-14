@@ -71,7 +71,8 @@ export function Player({ trace }: { trace: GasTrace }) {
         <ResponsiveContainer width="100%" height={260}>
           <BarChart data={step.top} margin={{ top: 8, right: 8, bottom: 4, left: 0 }}>
             <XAxis dataKey="index" tick={{ fontSize: 10 }} stroke="#D6CFEA" interval="preserveStartEnd" />
-            <YAxis tick={{ fontSize: 10 }} stroke="#D6CFEA" width={44} domain={[0, "auto"]} />
+            <YAxis tick={{ fontSize: 10 }} stroke="#D6CFEA" width={52} domain={[0, "auto"]}
+              tickFormatter={(p: number) => (p === 0 ? "0" : p < 0.01 ? p.toExponential(1) : p.toFixed(2))} />
             <Tooltip cursor={{ fill: "#2A2733" }} isAnimationActive={false}
               content={({ active, payload }) => {
                 const s = active && payload?.length ? (payload[0].payload as TraceState) : null;

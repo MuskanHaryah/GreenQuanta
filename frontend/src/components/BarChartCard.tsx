@@ -4,9 +4,13 @@ import { methodColor, OUTLINED } from "../methodColors";
 
 export interface BarRow { id: string; label: string; value: number; color?: string }
 
-const short = (s: string) => (s.length > 24 ? `${s.slice(0, 23)}…` : s);
+// Axis label: the method label up to its parenthesis (the tooltip shows the full label).
+const short = (s: string) => {
+  const head = s.split(" (")[0];
+  return head.length > 22 ? `${head.slice(0, 21)}…` : head;
+};
 
-export default function BarChartCard({ title, caption, rows, format, labelWidth = 150 }:
+export default function BarChartCard({ title, caption, rows, format, labelWidth = 128 }:
   { title: string; caption?: string; rows: BarRow[]; format: (x: number) => string; labelWidth?: number }) {
   return (
     <figure className="chart-card" style={{ margin: 0 }}>

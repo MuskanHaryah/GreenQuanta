@@ -1,4 +1,4 @@
-/* GreenQuanta theme: flat colours only (no gradients, blur or glow). Tokens are the only colours used. */
+/* GreenQuanta theme: flat colours only (solid fills, no colour ramps, no soft shadows). Tokens are the only colours. */
 :root {
   --bg: #584887;
   --bg-deep: #3B3070;
@@ -39,13 +39,21 @@ button, select, input { font: inherit; color: inherit; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---------- decorative blobs (inline SVG, flat fills, slow morph + drift; off under reduced motion) ---------- */
+.blob-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 900px;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
 .blobs {
   position: absolute;
   top: 56px;
   right: -6vw;
-  width: min(1000px, 70vw);
-  z-index: 0;
-  pointer-events: none;
+  width: min(1000px, 60vw);
 }
 .blobs svg { display: block; width: 100%; height: auto; overflow: visible; }
 .blob-blue { fill: var(--blob-blue); animation: blob-blue 18s ease-in-out infinite alternate, drift 26s ease-in-out infinite alternate; }
@@ -72,7 +80,8 @@ button, select, input { font: inherit; color: inherit; }
   z-index: 4;
   display: flex;
   align-items: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 12px 20px;
   padding: 20px var(--gutter) 20px calc(var(--rail-w) + var(--gutter));
 }
 .logo { font: 600 15px var(--body); letter-spacing: 0.4em; text-decoration: none; white-space: nowrap; }
@@ -94,7 +103,7 @@ button, select, input { font: inherit; color: inherit; }
   border-bottom: 1px solid transparent;
   transition: color var(--fast), border-color var(--fast);
 }
-.nav a:hover, .nav a.active { color: var(--text); border-bottom-color: var(--coral); }
+.nav a:hover, .nav a.active { color: var(--text); border-bottom-color: var(--text); }
 .pills { display: flex; gap: 6px; }
 .pill {
   border: 1px solid var(--muted);
@@ -258,7 +267,8 @@ button, select, input { font: inherit; color: inherit; }
 .row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
 
 /* ---------- badges, checks ---------- */
-.badge { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.badge { display: inline-flex; align-items: center; gap: 8px; }
+td .badge { white-space: nowrap; }
 .swatch { width: 12px; height: 12px; flex: none; }
 .swatch.outlined { border: 2px solid var(--text); background: transparent; }
 .kindtag { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
@@ -321,7 +331,7 @@ select {
 label.field { display: grid; gap: 4px; font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
 .notice { border-left: 4px solid var(--periwinkle); padding: 8px 12px; background: var(--panel-2); font-size: 13px; }
 .notice.bad { border-left-color: var(--bad); white-space: pre-wrap; word-break: break-word; }
-.kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 0; }
+.kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 0; }
 .kv div { background: var(--panel-2); padding: 10px 12px; }
 .kv dt { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .kv dd { margin: 2px 0 0; font-variant-numeric: tabular-nums; }
@@ -383,13 +393,21 @@ label.field { display: grid; gap: 4px; font-size: 12px; color: var(--muted); let
 .methods .card h3 { margin: 0 0 8px; font-size: 15px; }
 .ref { font-size: 13px; color: var(--periwinkle); margin: 8px 0 0; }
 
+/* ---------- narrow desktop / tablet ---------- */
+@media (max-width: 1200px) {
+  .tag { display: none; }
+  .nav { gap: 14px; }
+}
+
 /* ---------- phone ---------- */
 @media (max-width: 768px) {
   :root { --gutter: 16px; --rail-w: 0px; }
   .rail, .nav, .topbar .pills { display: none; }
   .hamburger { display: block; }
   .tag { display: none; }
-  .blobs { width: 150vw; right: -70vw; top: 70px; }
+  /* phone: the blobs sit in the top-right corner beside the headline, clear of the text below it */
+  .blob-frame { height: 340px; }
+  .blobs { width: 88vw; right: -40vw; top: 58px; }
   .hero { min-height: 360px; }
   .stepper { grid-template-columns: 1fr; }
   .compare-grids { grid-template-columns: 1fr; }
