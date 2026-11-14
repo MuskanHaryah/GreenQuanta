@@ -1,0 +1,26 @@
+[
+ {
+  "id": "small_v2",
+  "label": "Small",
+  "vms": 31,
+  "servers": 8,
+  "m": 8,
+  "available": true
+ },
+ {
+  "id": "medium_v2",
+  "label": "Medium",
+  "vms": 63,
+  "servers": 8,
+  "m": 8,
+  "available": true
+ },
+ {
+  "id": "large_v2",
+  "label": "Large",
+  "vms": 133,
+  "servers": 12,
+  "m": 12,
+  "available": true
+ }
+]

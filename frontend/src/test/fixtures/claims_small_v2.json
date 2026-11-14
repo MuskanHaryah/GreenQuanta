@@ -1,0 +1,90 @@
+{
+ "size": "small_v2",
+ "notes": [
+  "Everything quantum is simulated on a classical computer (statevector Grover Adaptive Search, path-integral Monte Carlo SQA); no quantum speed-up is claimed.",
+  "Stage 2 shows no SQA advantage over classical SA: the classical control was better on medium and large at both budgets, every seed (Step 2D.4).",
+  "Stage 1 on small_v2: 351 GAS oracle calls + measurements vs 256 exhaustive evaluations. At m = 8 (small, medium) GAS costs more than exhaustive (R7); on large it is 1,053 vs 4,096.",
+  "The constraint-preserving SQA (one-hot hopping driver) is not runnable on today's quantum annealers, which only offer a transverse-field driver.",
+  "Quantization loss on small_v2: the best placement of the quantized model (unit 0.0025 NCU) costs +0.000 % joules vs the real-size exact optimum R1, so a quantized optimum can still lose to R1."
+ ],
+ "caveats": [
+  "Validity of a method is valid_real: the placement fits the real server capacities (shared validator).",
+  "valid_quantized only says whether the placement also fits the quantum model's rounding grid (unit 0.0025 NCU); the baselines and R1 work at real sizes, so a failed quantized check is expected for them and is not an error.",
+  "The baselines' CloudSim host model rounds CPU to that grid and keeps memory at its real size, the generous choice for the baselines.",
+  "Methods are ranked by linear joules (diff_r1_pct), the optimised objective. it_energy_kwh comes from the SPEC power curve, on which the quantum placement can score below R1 (small, medium) although R1 is optimal for the linear objective; this is not a win over the optimum.",
+  "The cached quantum and control rows come from one Stage-2 seed (pipe_stage2_seed 0). The multi-seed comparison (Step 2D.4: held-out seeds 0-2, budgets B and 4B, medium and large) found classical SA better than SQA in 4 of 4 cells, for every seed.",
+  "A live run uses the same config seeds as the cached result, so it must reproduce it; matches_cached reports this."
+ ],
+ "methods": [
+  {
+   "method_id": "quantum",
+   "label": "Quantum pipeline (GAS -> constraint-preserving SQA)",
+   "kind": "quantum",
+   "algorithm": "Grover Adaptive Search (statevector simulation) picks the servers to switch on; constraint-preserving simulated quantum annealing (path-integral Monte Carlo) places the VMs on them.",
+   "reference": "Dürr & Høyer 1996, arXiv:quant-ph/9607014 (quantum minimum finding); Gilliam, Woerner & Gonciulea 2021, Quantum 5, 428 (Grover Adaptive Search); Hen & Spedalieri 2016, Phys. Rev. Applied 5, 034007 and Hen & Sarandy 2016, Phys. Rev. A 93, 062312 (constraint-preserving drivers); Martoňák, Santoro & Tosatti 2002, Phys. Rev. B 66, 094203 (path-integral SQA)"
+  },
+  {
+   "method_id": "control",
+   "label": "Classical control (GAS -> constraint-preserving SA)",
+   "kind": "classical-control",
+   "algorithm": "Same Stage 1 and the same moves and budget as the quantum pipeline, with classical simulated annealing in Stage 2.",
+   "reference": "Kirkpatrick, Gelatt & Vecchi 1983, Science 220, 671 (simulated annealing)"
+  },
+  {
+   "method_id": "exact_r1",
+   "label": "Exact optimum R1 (MILP, real sizes)",
+   "kind": "exact",
+   "algorithm": "Mixed-integer linear program on the real VM sizes (SciPy HiGHS), proven optimal for the linear energy model; the reference every method is compared with.",
+   "reference": "Huangfu & Hall 2018, Math. Prog. Comp. 10, 119 (HiGHS); Virtanen et al. 2020, Nature Methods 17, 261 (SciPy milp)"
+  },
+  {
+   "method_id": "cs_firstfit",
+   "label": "CloudSim FirstFit (next-fit)",
+   "kind": "baseline",
+   "algorithm": "CloudSim Plus 8.0.0 built-in VmAllocationPolicyFirstFit, VMs in input order; it resumes at the last used host, so it behaves as circular next-fit.",
+   "reference": "CloudSim Plus 8.0.0, VmAllocationPolicyFirstFit; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)"
+  },
+  {
+   "method_id": "cs_bestfit",
+   "label": "CloudSim BestFit",
+   "kind": "baseline",
+   "algorithm": "CloudSim Plus 8.0.0 built-in VmAllocationPolicyBestFit (active host with the fewest free CPU units), VMs in input order.",
+   "reference": "CloudSim Plus 8.0.0, VmAllocationPolicyBestFit; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)"
+  },
+  {
+   "method_id": "cs_worstfit",
+   "label": "CloudSim WorstFit (Simple)",
+   "kind": "baseline",
+   "algorithm": "CloudSim Plus 8.0.0 built-in VmAllocationPolicySimple (active host with the most free CPU units), VMs in input order.",
+   "reference": "CloudSim Plus 8.0.0, VmAllocationPolicySimple; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)"
+  },
+  {
+   "method_id": "cs_roundrobin",
+   "label": "CloudSim RoundRobin",
+   "kind": "baseline",
+   "algorithm": "CloudSim Plus 8.0.0 built-in VmAllocationPolicyRoundRobin, VMs in input order.",
+   "reference": "CloudSim Plus 8.0.0, VmAllocationPolicyRoundRobin; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)"
+  },
+  {
+   "method_id": "cs_ffd",
+   "label": "First-Fit Decreasing",
+   "kind": "baseline",
+   "algorithm": "Textbook first-fit (lowest-index host that fits) with VMs sorted by CPU size descending, run in CloudSim Plus.",
+   "reference": "Johnson 1973 (bin-packing FFD)"
+  },
+  {
+   "method_id": "cs_bfd",
+   "label": "Best-Fit Decreasing",
+   "kind": "baseline",
+   "algorithm": "CloudSim Plus 8.0.0 built-in VmAllocationPolicyBestFit with VMs sorted by CPU size descending.",
+   "reference": "Johnson 1973 (bin-packing BFD)"
+  },
+  {
+   "method_id": "pabfd",
+   "label": "PABFD (implemented per Beloglazov & Buyya 2012)",
+   "kind": "baseline",
+   "algorithm": "Power-Aware Best-Fit Decreasing: VMs by CPU descending, each to the host with the smallest power increase (SPEC curve; an empty host is off). Not built into CloudSim Plus 8; implemented on its allocation hook.",
+   "reference": "Beloglazov & Buyya 2012, Concurrency Computat.: Pract. Exper. 24(13), 1397 (PABFD)"
+  }
+ ]
+}

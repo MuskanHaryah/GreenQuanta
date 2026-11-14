@@ -1,0 +1,9 @@
+{
+ "status": "ok",
+ "git_commit": "871007f3f0bc7e1100d50f7c17c7bc155c84b022",
+ "results_available": {
+  "small_v2": true,
+  "medium_v2": true,
+  "large_v2": true
+ }
+}
