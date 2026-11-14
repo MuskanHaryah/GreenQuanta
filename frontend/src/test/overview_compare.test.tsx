@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import type { CompareRow, Results } from "../api";
 import { bestBaseline, relDiffPct } from "../selectors";
 import { signedPct } from "../format";
+import { methodName } from "../methods";
 import Overview, { Kpis } from "../pages/Overview";
 import Compare from "../pages/Compare";
 import { fixtures, mockApi, renderPage } from "./utils";
@@ -36,14 +37,14 @@ describe("Overview KPIs", () => {
     const q = results.methods.quantum;
     const diff = relDiffPct(q.linear_joules!, best.linear_joules!);
     expect(diff).toBeLessThan(0);   // small_v2: the quantum placement is the optimum, every baseline costs more
-    const card = screen.getByRole("article", { name: "vs best baseline" });
+    const card = screen.getByRole("article", { name: "Against the best baseline" });
     expect(card).toHaveTextContent(signedPct(diff));
     expect(card).toHaveTextContent(/^.*−/);
-    expect(card).toHaveTextContent(best.label);
-    expect(screen.getByRole("article", { name: "Placement valid" })).toHaveTextContent("✓");
-    const q4 = screen.getByRole("article", { name: "Stage-1 quantum queries" });
+    expect(card).toHaveTextContent(`Less energy than ${methodName(bestBaseline(Object.entries(results.methods))![0])}`);
+    expect(screen.getByRole("article", { name: "Valid placement" })).toHaveTextContent("Yes");
+    const q4 = screen.getByRole("article", { name: "Quantum search queries" });
     expect(q4).toHaveTextContent(String(results.stage1.exhaustive_evaluations));
-    expect(q4).toHaveTextContent(/more than exhaustive/);   // m = 8: GAS costs more than exhaustive (honest)
+    expect(q4).toHaveTextContent(/trying all 256 combinations is cheaper/);   // m = 8: GAS costs more (honest)
   });
 
   it("shows a + sign when the quantum result is worse than the best baseline", () => {
@@ -51,31 +52,35 @@ describe("Overview KPIs", () => {
     const best = bestBaseline(Object.entries(r.methods))![1];
     r.methods.quantum.linear_joules = best.linear_joules! * 1.05;
     render(<Kpis r={r} />);
-    expect(screen.getByRole("article", { name: "vs best baseline" })).toHaveTextContent("+5.00 %");
+    const card = screen.getByRole("article", { name: "Against the best baseline" });
+    expect(card).toHaveTextContent("+5.00 %");
+    expect(card).toHaveTextContent("More energy than");
   });
 
   it("loads the selected size's results through the API", async () => {
     const fetchMock = mockApi();
     renderPage(<Overview />, "/?size=small_v2");
-    expect(await screen.findByRole("article", { name: "Placement valid" })).toBeInTheDocument();
+    expect(await screen.findByRole("article", { name: "Valid placement" })).toBeInTheDocument();
+    expect(screen.getByText("Size Small")).toBeInTheDocument();
     expect(fetchMock).toHaveBeenCalledWith("/api/results/small_v2", undefined);
     expect(screen.getByRole("link", { name: "Run live" })).toHaveAttribute("href", "/pipeline?size=small_v2");
   });
 });
 
 describe("Compare", () => {
-  it("keeps the API order, highlights the quantum row and shows every method", async () => {
+  it("keeps the API order, highlights the quantum row and shows every method except the hidden control", async () => {
     mockApi();
     renderPage(<Compare />, "/compare?size=small_v2");
     const table = await screen.findByRole("table");
     const ids = within(table).getAllByRole("row").slice(1).map((tr) => tr.getAttribute("data-method"));
-    expect(ids).toEqual(rows.map((r) => r.method_id));
+    expect(ids).toEqual(rows.filter((r) => r.method_id !== "control").map((r) => r.method_id));
+    expect(document.body).not.toHaveTextContent(/classical|control/i);
     const quantum = table.querySelector('tr[data-method="quantum"]')!;
     expect(quantum).toHaveClass("highlight");
     expect(table.querySelectorAll("tr.highlight")).toHaveLength(1);
   });
 
-  it("renders invalid methods with ✗ (red for valid_real, muted with a tooltip for valid_quantized)", async () => {
+  it("marks a method whose placement does not fit, in red, without tick glyphs", async () => {
     const changed = clone(rows);
     changed[changed.length - 1].valid_real = false;
     changed[changed.length - 1].valid_quantized = false;
@@ -83,10 +88,9 @@ describe("Compare", () => {
     renderPage(<Compare />, "/compare?size=small_v2");
     const table = await screen.findByRole("table");
     const last = table.querySelector(`tr[data-method="${changed[changed.length - 1].method_id}"]`)!;
-    expect(within(last as HTMLElement).getByLabelText("invalid")).toHaveClass("bad");
-    const soft = within(last as HTMLElement).getByLabelText(/not on grid/);
-    expect(soft).toHaveClass("soft");
-    expect(soft).toHaveAttribute("title", "fits the real servers; does not fit the quantum model's rounding grid");
+    expect(within(last as HTMLElement).getByText("does not fit")).toHaveClass("bad-text");
+    expect(table).not.toHaveTextContent(/[✓✗]/);
+    expect(last).toHaveTextContent("does not fit");
   });
 
   it("filters rows with the method chips", async () => {
@@ -95,6 +99,6 @@ describe("Compare", () => {
     const table = await screen.findByRole("table");
     await userEvent.click(screen.getByRole("button", { name: "Baselines" }));
     const ids = within(table).getAllByRole("row").slice(1).map((tr) => tr.getAttribute("data-method"));
-    expect(ids).toEqual(rows.filter((r) => r.kind !== "baseline").map((r) => r.method_id));
+    expect(ids).toEqual(rows.filter((r) => r.kind !== "baseline" && r.method_id !== "control").map((r) => r.method_id));
   });
 });

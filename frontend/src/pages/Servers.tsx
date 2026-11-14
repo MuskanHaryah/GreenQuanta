@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { createPortal } from "react-dom";
 import { api, type CompareRow, type Host } from "../api";
 import { useApi, useSize } from "../hooks";
 import { bestBaseline } from "../selectors";
-import { methodColor } from "../methodColors";
+import { methodColor, methodName, shown } from "../methods";
 import { int } from "../format";
-import { Async, MethodBadge, Section } from "../components/ui";
+import { Async, MethodBadge, Section, useEscape } from "../components/ui";
 
 const share = (load: number, limit: number) => Math.min(100, (100 * load) / limit);
 const ncu = (x: number) => x.toFixed(4);
@@ -41,7 +42,7 @@ export function Datacentre({ size, method, label, onPick }:
         const on = p.hosts.filter((h) => h.active).length;
         return (
           <>
-            <p className="muted" style={{ margin: 0, fontSize: 12 }}>{on} of {p.hosts.length} servers on · bars: CPU (top), memory</p>
+            <p className="muted" style={{ margin: 0, fontSize: 13 }}>{on} of {p.hosts.length} servers on</p>
             {types.map((t) => (
               <div key={t}>
                 <div className="dc-type">type {t}</div>
@@ -61,17 +62,13 @@ export function Datacentre({ size, method, label, onPick }:
 
 function Drawer({ picked, onClose }: { picked: Picked; onClose: () => void }) {
   const h = picked.host;
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  useEscape(onClose);
   return (
     <aside className="drawer" role="dialog" aria-label={`server ${h.host_id} VMs`}>
       <button className="circle" style={{ float: "right" }} aria-label="close" onClick={onClose} autoFocus>✕</button>
       <h3>Server #{h.host_id}</h3>
-      <p className="muted">{picked.method} · type {h.type} · {h.active ? `${h.vms.length} VMs` : "off"}</p>
-      <p style={{ fontSize: 13 }}>CPU {ncu(h.cpu_load)} / {ncu(h.cpu_limit)} · memory {ncu(h.mem_load)} / {ncu(h.mem_limit)} (normalised units)</p>
+      <p className="muted">{picked.method}, type {h.type}, {h.active ? `${h.vms.length} VMs` : "switched off"}</p>
+      <p style={{ fontSize: 13 }}>CPU {ncu(h.cpu_load)} of {ncu(h.cpu_limit)}, memory {ncu(h.mem_load)} of {ncu(h.mem_limit)}</p>
       {h.vms.length > 0 && (
         <div className="table-wrap">
           <table>
@@ -92,17 +89,18 @@ function Drawer({ picked, onClose }: { picked: Picked; onClose: () => void }) {
   );
 }
 
-function Picker({ rows, sizeKey }: { rows: CompareRow[]; sizeKey: string }) {
+function Picker({ rows: all, sizeKey }: { rows: CompareRow[]; sizeKey: string }) {
+  const rows = all.filter((r) => shown(r.method_id));
   const best = bestBaseline(rows.map((r) => [r.method_id, r] as [string, CompareRow]));
   const [chosen, setChosen] = useState<{ key: string; a: string; b: string } | null>(null);
   const current = chosen?.key === sizeKey ? chosen : { key: sizeKey, a: "quantum", b: best?.[0] ?? rows[0].method_id };
   const [picked, setPicked] = useState<Picked | null>(null);
-  const label = (id: string) => rows.find((r) => r.method_id === id)?.label ?? id;
+  const label = (id: string) => methodName(id, rows.find((r) => r.method_id === id)?.label);
   const select = (side: "a" | "b") => (
     <label className="field">
       {side === "a" ? "Left" : "Right"} method
       <select value={current[side]} onChange={(e) => setChosen({ ...current, [side]: e.target.value })}>
-        {rows.map((r) => <option key={r.method_id} value={r.method_id}>{r.label}</option>)}
+        {rows.map((r) => <option key={r.method_id} value={r.method_id}>{methodName(r.method_id, r.label)}</option>)}
       </select>
     </label>
   );
@@ -114,7 +112,11 @@ function Picker({ rows, sizeKey }: { rows: CompareRow[]; sizeKey: string }) {
           <Datacentre key={side} size={sizeKey} method={current[side]} label={label(current[side])} onPick={setPicked} />
         ))}
       </div>
-      {picked && <Drawer picked={picked} onClose={() => setPicked(null)} />}
+      {picked && createPortal(   // on top of the whole page (top bar, rail), with a backdrop that closes it
+        <>
+          <div className="drawer-backdrop" onClick={() => setPicked(null)} />
+          <Drawer picked={picked} onClose={() => setPicked(null)} />
+        </>, document.body)}
     </>
   );
 }
@@ -124,8 +126,8 @@ export default function Servers() {
   const rows = useApi(api.compare, size);
   return (
     <Section id="datacentre" first="Server" second="Datacentre">
-      <p className="muted">One tile per server, grouped by type. Filled = on (bars: CPU and memory load vs the limit);
-        dashed = off. Click a server to list its VMs. Default: the quantum pipeline vs the best valid baseline.</p>
+      <p className="muted">Each tile is a server. Lit tiles are switched on, the top bar shows CPU use and the bottom
+        bar memory. Click a server to see its VMs.</p>
       <Async state={rows}>{(r) => <Picker rows={r} sizeKey={size} />}</Async>
     </Section>
   );

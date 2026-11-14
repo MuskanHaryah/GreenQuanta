@@ -165,6 +165,17 @@ def start_run():
     return jsonify(job_id=job_id), 202
 
 
+@bp.post("/runs/<job_id>/cancel")
+def cancel_run(job_id):
+    jobs = current_app.extensions["jobs"]
+    stopped = jobs.cancel(job_id)
+    if stopped is None:
+        raise ApiError(404, "unknown_job", f"unknown job {job_id!r} (jobs are kept in memory until restart)")
+    if not stopped:
+        raise ApiError(409, "not_running", f"run {job_id} has already finished ({jobs.get(job_id)['status']})")
+    return jsonify(job_id=job_id, status="cancelled")
+
+
 @bp.get("/runs/<job_id>")
 def get_run(job_id):
     job = current_app.extensions["jobs"].get(job_id)

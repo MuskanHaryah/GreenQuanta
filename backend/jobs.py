@@ -3,8 +3,9 @@
 Why a subprocess: the Stage-2 sampler already uses a multiprocessing spawn child (r3c_run.sampled_run), which is fragile
 inside a Flask process on Windows; a subprocess also isolates crashes. Progress = the <KIND>_JSON stdout lines the
 pipeline prints (demo.run_pipeline.parse_line). Job state lives in memory (lost on restart). On timeout the whole
-process tree is killed (the spawn child too) and the job fails. A finished job is compared with the cached
-results.json (matches_cached): same seeds from config, so it must reproduce it.
+process tree is killed (the spawn child too) and the job fails; cancel() kills it the same way and the job ends
+"cancelled" (nothing is logged). A finished job is compared with the cached results.json (matches_cached): same seeds
+from config, so it must reproduce it.
 """
 from collections import deque
 from datetime import datetime, timezone
@@ -63,7 +64,7 @@ class JobManager:
         self.python, self.cwd, self.timeout_s, self.results_root = python, cwd, timeout_s, results_root
         self._lock = threading.Lock()
         self._jobs, self._procs, self._t0 = {}, {}, {}
-        self._active = None
+        self._active, self._cancelled = None, set()
 
     def start(self, size, stage2):
         """Queue a run and return its id; raises Busy(running id) while another run is queued or running."""
@@ -92,6 +93,21 @@ class JobManager:
     def process(self, job_id):
         return self._procs.get(job_id)
 
+    def cancel(self, job_id):
+        """Stop a queued or running job: kill its process tree; the job ends "cancelled". Returns True if this call
+        stopped it, False if it had already finished, None for an unknown job."""
+        with self._lock:
+            job = self._jobs.get(job_id)
+            if job is None:
+                return None
+            if job["status"] not in ("queued", "running") or job_id in self._cancelled:
+                return False
+            self._cancelled.add(job_id)
+            proc = self._procs.get(job_id)
+        if proc is not None and proc.poll() is None:
+            kill_tree(proc)
+        return True
+
     def _run(self, job_id):
         job, t0 = self._jobs[job_id], self._t0[job_id]
         cmd = [self.python, "-B", "-u", "-m", "demo.run_pipeline", "--size", job["size"], "--stage2", job["stage2"]]
@@ -104,6 +120,9 @@ class JobManager:
         self._procs[job_id] = proc
         with self._lock:
             job["status"] = "running"
+            cancelled_early = job_id in self._cancelled
+        if cancelled_early:                       # cancel() came before the process existed
+            kill_tree(proc)
         timer = threading.Timer(self.timeout_s, lambda: (timed_out.set(), kill_tree(proc)))
         timer.start()
         result = None
@@ -117,6 +136,8 @@ class JobManager:
                     job["events"].append({"kind": kind, "t": round(time.monotonic() - t0, 3), "data": data})
         proc.wait()
         timer.cancel()
+        if job_id in self._cancelled:
+            return self._finish(job_id, "cancelled", error="stopped by the user")
         if timed_out.is_set() and proc.returncode != 0:
             return self._finish(job_id, "failed", error=f"timed out after {self.timeout_s} s; process tree killed")
         if proc.returncode != 0 or result is None:

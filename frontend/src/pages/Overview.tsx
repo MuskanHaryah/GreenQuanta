@@ -2,31 +2,33 @@ import { Link, useLocation } from "react-router-dom";
 import { api, type Results } from "../api";
 import { useApi, useSize } from "../hooks";
 import { bestBaseline, relDiffPct } from "../selectors";
-import { int, kg, signed, signedPct } from "../format";
-import { Async, Check, Dots, Headline, KpiCard, Section } from "../components/ui";
+import { methodName } from "../methods";
+import { int, kg, signedPct, sizeName } from "../format";
+import { Async, Dots, Headline, KpiCard, Section } from "../components/ui";
 
 export function Kpis({ r }: { r: Results }) {
   const q = r.methods.quantum;
   const best = bestBaseline(Object.entries(r.methods));
+  const vsBest = best && q.linear_joules != null && best[1].linear_joules != null
+    ? relDiffPct(q.linear_joules, best[1].linear_joules) : null;
   const s1 = r.stage1;
   const queries = s1.gas_oracle_calls + s1.gas_measurements;
   return (
     <div className="grid">
-      <KpiCard index={1} title="Placement valid" value={<Check ok={q.valid_real} />}
-        sub={<>fits the real servers · quantized grid <Check ok={q.valid_quantized} kind="quantized" /></>} />
-      <KpiCard index={2} peach title="Energy vs exact optimum" value={signedPct(q.diff_r1_pct)}
-        sub={<>linear joules vs R1 (real sizes) · vs R2 (quantized optimum) {signedPct(q.diff_r2_pct)}</>} />
-      <KpiCard index={3} title="vs best baseline"
-        value={best && q.linear_joules != null && best[1].linear_joules != null
-          ? signedPct(relDiffPct(q.linear_joules, best[1].linear_joules)) : "—"}
+      <KpiCard index={1} title="Valid placement" value={q.valid_real ? "Yes" : "No"} tone={q.valid_real ? "ok" : "bad"}
+        sub={q.valid_real ? "Every VM fits on its server." : "Some VMs do not fit their server."} />
+      <KpiCard index={2} tone="peach" title="Above the exact optimum" value={signedPct(q.diff_r1_pct)}
+        sub="Extra energy compared with the best possible placement." />
+      <KpiCard index={3} title="Against the best baseline" value={signedPct(vsBest)}
+        tone={vsBest == null ? undefined : vsBest <= 0 ? "ok" : "bad"}
         sub={best ? <>
-          energy (linear joules) vs <b>{best[1].label}</b>; negative = quantum uses less.
-          {q.energy && best[1].energy && <> CO₂ {kg(q.energy.co2_kg)} vs {kg(best[1].energy.co2_kg)} (
-            {signed(q.energy.co2_kg - best[1].energy.co2_kg, "kg")}).</>}
-        </> : "no valid baseline"} />
-      <KpiCard index={4} title="Stage-1 quantum queries" value={`${int(queries)} / ${int(s1.exhaustive_evaluations)}`}
-        sub={<>GAS oracle calls + measurements ({s1.gas_runs} runs) vs exhaustive 2<sup>{s1.m}</sup> ·{" "}
-          {queries < s1.exhaustive_evaluations ? "fewer than exhaustive" : `more than exhaustive at m = ${s1.m}`}</>} />
+          {vsBest != null && vsBest <= 0 ? "Less" : "More"} energy than {methodName(best[0])}.
+          {q.energy && best[1].energy && <> CO₂ {kg(q.energy.co2_kg)} against {kg(best[1].energy.co2_kg)}.</>}
+        </> : "No valid baseline."} />
+      <KpiCard index={4} tone="periwinkle" title="Quantum search queries" value={`${int(queries)} / ${int(s1.exhaustive_evaluations)}`}
+        sub={queries < s1.exhaustive_evaluations
+          ? `Grover search needed ${int(queries)} checks instead of trying all ${int(s1.exhaustive_evaluations)} server combinations.`
+          : `Grover search used ${int(queries)} checks. At this size trying all ${int(s1.exhaustive_evaluations)} combinations is cheaper.`} />
     </div>
   );
 }
@@ -40,8 +42,8 @@ export default function Overview() {
       <section id="intro" className="section hero" aria-label="Green Quanta">
         <Headline as="h1" first="Green" second="Quanta" />
         <p className="lede">
-          Energy- and carbon-aware VM placement with quantum algorithms (simulated): Grover Adaptive Search picks the
-          servers to switch on, then constraint-preserving simulated quantum annealing places the VMs on them.
+          Energy and carbon aware VM placement with quantum algorithms, simulated on a classical computer. Grover
+          search chooses which servers to switch on, then quantum annealing places the VMs on them.
         </p>
         <div className="buttons">
           <Link className="btn btn-navy" to={{ pathname: "/compare", search }}>Explore results</Link>
@@ -50,7 +52,7 @@ export default function Overview() {
       </section>
       <Dots />
       <Section id="kpis" first="Quantum" second="Results">
-        <p className="muted">Size {size}: the quantum pipeline's cached result (one Stage-2 seed).</p>
+        <p className="muted">Size {sizeName(size)}</p>
         <Async state={results}>{(r) => <Kpis r={r} />}</Async>
       </Section>
     </>

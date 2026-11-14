@@ -1,8 +1,9 @@
 // Small shared building blocks: one component per concept.
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import type { ApiError } from "../api";
 import type { Loaded } from "../hooks";
-import { methodColor, OUTLINED } from "../methodColors";
+import { methodColor, methodName, OUTLINED } from "../methods";
 import { two } from "../format";
 
 /** Condensed uppercase headline: first word periwinkle, second white. */
@@ -26,14 +27,16 @@ export function Section({ id, first, second, children }: { id: string; first: st
 
 export const Dots = () => <hr className="dots" aria-hidden="true" />;
 
-export function KpiCard({ index, title, value, sub, peach, children }:
-  { index: number; title: string; value: ReactNode; sub?: ReactNode; peach?: boolean; children?: ReactNode }) {
+export type Tone = "peach" | "ok" | "bad" | "periwinkle";
+
+export function KpiCard({ index, title, value, sub, tone, children }:
+  { index: number; title: string; value: ReactNode; sub?: ReactNode; tone?: Tone; children?: ReactNode }) {
   return (
     <div className="kpi">
       <div className="numeral" aria-hidden="true">{two(index)}</div>
-      <article className={`card${peach ? " peach" : ""}`} aria-label={title}>
+      <article className="card" aria-label={title}>
         <h3 className="card-title">{title}</h3>
-        <div className="card-value">{value}</div>
+        <div className={`card-value${tone ? ` tone-${tone}` : ""}`}>{value}</div>
         {sub && <p className="card-sub">{sub}</p>}
         {children}
       </article>
@@ -41,31 +44,50 @@ export function KpiCard({ index, title, value, sub, peach, children }:
   );
 }
 
-export function MethodBadge({ id, label }: { id: string; label: string }) {
+export function MethodBadge({ id, label }: { id: string; label?: string }) {
   return (
     <span className="badge">
       <span className={`swatch${OUTLINED.has(id) ? " outlined" : ""}`}
         style={OUTLINED.has(id) ? undefined : { background: methodColor(id) }} aria-hidden="true" />
-      {label}
+      {methodName(id, label)}
     </span>
   );
 }
 
-const QUANTIZED_TIP = "fits the real servers; does not fit the quantum model's rounding grid";
+/** Calls onClose when Escape is pressed (dialogs and drawers). */
+export function useEscape(onClose: () => void) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+}
 
-/** ✓/✗ for a validity flag. Only valid_real ✗ is "bad"; a valid_quantized ✗ is muted with an explanation. */
-export function Check({ ok, kind = "real" }: { ok: boolean; kind?: "real" | "quantized" }) {
-  if (ok) return <span className="check ok" aria-label="valid">✓</span>;
-  return kind === "real"
-    ? <span className="check bad" aria-label="invalid">✗</span>
-    : <span className="check soft" title={QUANTIZED_TIP} aria-label={`not on grid: ${QUANTIZED_TIP}`}>✗</span>;
+/** A dialog over the whole page: dimmed backdrop, closes on Escape or a backdrop click, focus moves to its close button. */
+export function Modal({ title, onClose, children, footer }:
+  { title: string; onClose: () => void; children: ReactNode; footer?: ReactNode }) {
+  useEscape(onClose);
+  return createPortal(
+    <div className="modal-layer">
+      <div className="modal-backdrop" onClick={onClose} data-testid="modal-backdrop" />
+      <div className="modal" role="dialog" aria-modal="true" aria-label={title}>
+        <header className="modal-head">
+          <h2>{title}</h2>
+          <button className="circle" aria-label="close" onClick={onClose} autoFocus>✕</button>
+        </header>
+        <div className="modal-body">{children}</div>
+        {footer && <footer className="modal-foot">{footer}</footer>}
+      </div>
+    </div>,
+    document.body,
+  );
 }
 
 export function ErrorPanel({ error, retry }: { error: ApiError; retry: () => void }) {
   return (
     <div className="error-panel" role="alert">
-      <h3>API problem</h3>
-      <p>{error.message} <span className="muted">({error.code}{error.status ? `, HTTP ${error.status}` : ""})</span></p>
+      <h3>Could not load the data</h3>
+      <p>{error.message}</p>
       <button className="btn btn-coral" onClick={retry}>Retry</button>
     </div>
   );

@@ -1,16 +1,10 @@
 // The one bar-chart wrapper (Recharts, flat fills, method colours, a tooltip with the exact number on every bar).
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { methodColor, OUTLINED } from "../methodColors";
+import { methodColor, OUTLINED } from "../methods";
 
 export interface BarRow { id: string; label: string; value: number; color?: string }
 
-// Axis label: the method label up to its parenthesis (the tooltip shows the full label).
-const short = (s: string) => {
-  const head = s.split(" (")[0];
-  return head.length > 22 ? `${head.slice(0, 21)}…` : head;
-};
-
-export default function BarChartCard({ title, caption, rows, format, labelWidth = 128 }:
+export default function BarChartCard({ title, caption, rows, format, labelWidth = 150 }:
   { title: string; caption?: string; rows: BarRow[]; format: (x: number) => string; labelWidth?: number }) {
   return (
     <figure className="chart-card" style={{ margin: 0 }}>
@@ -19,8 +13,7 @@ export default function BarChartCard({ title, caption, rows, format, labelWidth 
       <ResponsiveContainer width="100%" height={rows.length * 30 + 36}>
         <BarChart data={rows} layout="vertical" margin={{ top: 4, right: 16, bottom: 4, left: 4 }}>
           <XAxis type="number" tick={{ fontSize: 11 }} stroke="#D6CFEA" tickFormatter={(x: number) => format(x).split(" ")[0]} />
-          <YAxis type="category" dataKey="label" width={labelWidth} tick={{ fontSize: 11 }} stroke="#D6CFEA"
-            tickFormatter={short} interval={0} />
+          <YAxis type="category" dataKey="label" width={labelWidth} tick={{ fontSize: 11 }} stroke="#D6CFEA" interval={0} />
           <Tooltip cursor={{ fill: "#2A2733" }} isAnimationActive={false}
             content={({ active, payload }) => active && payload?.length ? (
               <div className="tooltip"><b>{(payload[0].payload as BarRow).label}</b><br />{format(payload[0].value as number)}</div>

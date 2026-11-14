@@ -1,9 +1,11 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { GasTrace } from "../api";
 import Quantum, { Player, PLAY_MS, stateColor } from "../pages/Quantum";
 import About from "../pages/About";
 import { int } from "../format";
+import { methodName } from "../methods";
+import { sources } from "../sources";
 import { fixtures, mockApi, renderPage } from "./utils";
 
 const trace = fixtures.trace as unknown as GasTrace;
@@ -58,26 +60,37 @@ describe("Grover player", () => {
     expect(screen.getByTestId("p-ystar")).toHaveTextContent(trace.steps[0].p_y_star.toFixed(3));
   });
 
-  it("loads the trace for an allowed seed, and the simulated box from /api/claims", async () => {
+  it("loads the trace for an allowed seed", async () => {
     const fetchMock = mockApi();
     renderPage(<Quantum />, "/quantum?size=small_v2");
     expect(await screen.findByRole("slider", { name: "step" })).toBeInTheDocument();
     expect(fetchMock.mock.calls.map((c) => String(c[0]))).toContain("/api/gas-trace/small_v2?seed=0");
-    expect(await screen.findByText("What is quantum here, and what is simulated")).toBeInTheDocument();
-    expect(screen.getByRole("combobox", { name: "GAS seed" })).toHaveDisplayValue("0");
+    expect(screen.getByRole("combobox", { name: "Search run" })).toHaveDisplayValue("Run 1");
   });
 });
 
 describe("About", () => {
-  it("renders every note, every caveat and every method's reference from /api/claims", async () => {
+  it("renders every shown method with its reference from /api/claims, and never the classical control", async () => {
     mockApi();
     renderPage(<About />, "/about?size=small_v2");
-    const notes = await screen.findByTestId("notes");
-    expect(notes.querySelectorAll("li")).toHaveLength(fixtures.claims.notes.length);
-    fixtures.claims.notes.forEach((n) => expect(notes).toHaveTextContent(n));
-    expect(screen.getByTestId("caveats").querySelectorAll("li")).toHaveLength(fixtures.claims.caveats.length);
-    const methods = screen.getAllByTestId("method");
-    expect(methods).toHaveLength(fixtures.claims.methods.length);
-    fixtures.claims.methods.forEach((m, i) => expect(methods[i]).toHaveTextContent(m.reference ?? "no reference"));
+    const methods = await screen.findAllByTestId("method");
+    const listed = fixtures.claims.methods.filter((m) => m.method_id !== "control");
+    expect(methods).toHaveLength(listed.length);
+    for (const m of listed) {
+      const card = methods.find((c) => c.textContent!.includes(methodName(m.method_id)))!;
+      for (const src of sources(m.reference)) {
+        expect(card).toHaveTextContent(src.text);
+        if (src.url) {
+          const link = within(card).getAllByRole("link").find((a) => a.textContent!.startsWith(src.text));
+          expect(link).toHaveAttribute("href", src.url);
+        }
+      }
+    }
+    // the quantum card links all five papers; every link opens in a new tab
+    expect(within(methods[0]).getAllByRole("link")).toHaveLength(5);
+    const links = document.querySelectorAll(".sources a");
+    expect(links.length).toBeGreaterThan(5);
+    links.forEach((a) => expect(a).toHaveAttribute("target", "_blank"));
+    expect(document.body).not.toHaveTextContent(/classical|Kirkpatrick/i);
   });
 });

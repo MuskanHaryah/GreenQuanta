@@ -68,12 +68,13 @@ export interface RunEvent { kind: EventKind; t: number; data: Record<string, unk
 export interface RunOut {
   chosen_ids: number[]; real_valid: boolean; quantized_valid: boolean; linear_joules: number; diff_r1_pct: number;
   diff_r2_pct: number; gap_to_h_min_pct: number; curve_it_energy_kwh: number; gas_oracle_calls: number;
-  gas_measurements: number;
+  gas_measurements: number; gas_runs: number; stage2_s: number;
 }
+export interface RunEnergy { active_hosts: number; it_energy_kwh: number; facility_energy_kwh: number; co2_kg: number }
 export interface Job {
-  job_id: string; size: SizeId; stage2: Stage2; status: "queued" | "running" | "done" | "failed"; started_at: string;
+  job_id: string; size: SizeId; stage2: Stage2; status: "queued" | "running" | "done" | "failed" | "cancelled"; started_at: string;
   elapsed_s: number; events: RunEvent[];
-  result: { out: RunOut; assignment: Record<string, number> | null; energy: Record<string, unknown> | null } | null;
+  result: { out: RunOut; assignment: Record<string, number> | null; energy: RunEnergy | null } | null;
   matches_cached: boolean | null; error: string | null;
 }
 
@@ -118,4 +119,7 @@ export const api = {
       method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ size, stage2 }),
     }),
   run: (jobId: string) => request<Job>(`/api/runs/${q(jobId)}`),
+  /** Stop a running job (409 not_running if it already finished). */
+  cancelRun: (jobId: string) =>
+    request<{ job_id: string; status: "cancelled" }>(`/api/runs/${q(jobId)}/cancel`, { method: "POST" }),
 };

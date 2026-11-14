@@ -15,7 +15,6 @@ export const relDiffPct = (value: number, reference: number) => (100 * (value - 
 
 export const KIND_GROUPS: Array<{ id: string; label: string; kinds: Kind[] }> = [
   { id: "quantum", label: "Quantum", kinds: ["quantum"] },
-  { id: "control", label: "Control", kinds: ["classical-control"] },
   { id: "exact", label: "Exact", kinds: ["exact"] },
   { id: "baselines", label: "Baselines", kinds: ["baseline"] },
 ];

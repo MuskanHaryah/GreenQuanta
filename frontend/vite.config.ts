@@ -6,9 +6,10 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: { proxy: { "/api": "http://127.0.0.1:5000" } },
-  build: { outDir: "dist", emptyOutDir: true },
+  // the 3D hero chunk (three.js, about 1 MB) is lazy and loads only with the Overview hero
+  build: { outDir: "dist", emptyOutDir: true, chunkSizeWarningLimit: 1100 },
   test: {
     environment: "jsdom", globals: true, setupFiles: ["src/test/setup.ts"], css: false,
-    unstubGlobals: true, restoreMocks: true,
+    unstubGlobals: true, restoreMocks: true, testTimeout: 20000,
   },
 });

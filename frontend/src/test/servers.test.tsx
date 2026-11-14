@@ -50,12 +50,26 @@ describe("Servers", () => {
     expect(screen.queryByRole("dialog", { name: `server ${host.host_id} VMs` })).toBeNull();
   });
 
+  it("opens the drawer above the whole page and closes it from the backdrop", async () => {
+    mockApi();
+    renderPage(<Servers />, "/servers?size=small_v2");
+    const grid = await screen.findByTestId("dc-quantum");
+    await userEvent.click((await within(grid).findAllByTestId("tile"))[0]);
+    const drawer = screen.getByRole("dialog");
+    expect(drawer.parentElement).toBe(document.body);              // not inside main, so the top bar cannot cover it
+    expect(document.querySelector("main")!.contains(drawer)).toBe(false);
+    await userEvent.click(document.querySelector(".drawer-backdrop")!);
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
+
   it("loads another placement when a selector changes", async () => {
-    const fetchMock = mockApi({ "/api/results/small_v2/placement/control": { ...quantum, method_id: "control" } });
+    const fetchMock = mockApi({ "/api/results/small_v2/placement/cs_ffd": { ...quantum, method_id: "cs_ffd" } });
     renderPage(<Servers />, "/servers?size=small_v2");
     await screen.findByTestId("dc-quantum");
-    await userEvent.selectOptions(screen.getByRole("combobox", { name: "Left method" }), "control");
-    expect(await screen.findByTestId("dc-control")).toBeInTheDocument();
-    expect(fetchMock.mock.calls.map((c) => String(c[0]))).toContain("/api/results/small_v2/placement/control");
+    const left = screen.getByRole("combobox", { name: "Left method" });
+    expect(Array.from((left as HTMLSelectElement).options).map((o) => o.value)).not.toContain("control");
+    await userEvent.selectOptions(left, "cs_ffd");
+    expect(await screen.findByTestId("dc-cs_ffd")).toBeInTheDocument();
+    expect(fetchMock.mock.calls.map((c) => String(c[0]))).toContain("/api/results/small_v2/placement/cs_ffd");
   });
 });

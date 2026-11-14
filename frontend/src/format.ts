@@ -16,3 +16,5 @@ export const signed = (x: number, unit: string, digits = 3) =>
 export const prob = (x: number) => f3.format(x);
 export const seconds = (x: number) => `${nf(1).format(x)} s`;
 export const two = (n: number) => String(n).padStart(2, "0");
+/** "large_v2" → "Large" (the audience never sees the internal size ids). */
+export const sizeName = (id: string) => id.charAt(0).toUpperCase() + id.split("_")[0].slice(1);

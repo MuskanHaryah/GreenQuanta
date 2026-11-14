@@ -1,4 +1,4 @@
-// Page frame: top bar (logo, tag, links, size switcher), left rail of the page's sections, phone menu, blobs, footer.
+// Page frame: top bar (logo, links, size switcher), left rail of the page's sections, phone menu, hero waves.
 import { Suspense, useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { api } from "../api";
@@ -14,7 +14,7 @@ function SizeSwitcher() {
     <div className="pills" role="group" aria-label="problem size">
       {(sizes.data ?? []).map((s) => (
         <button key={s.id} className="pill" aria-pressed={s.id === size} disabled={!s.available}
-          title={`${s.vms} VMs on ${s.servers} servers${s.available ? "" : " (results not built)"}`}
+          title={`${s.vms} VMs on ${s.servers} servers`}
           onClick={() => setSize(s.id)}>{s.label}</button>
       ))}
     </div>
@@ -57,7 +57,6 @@ export default function Layout() {
   const page = pageOf(pathname);
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState<string | null>(null);
-  const health = useApi(api.health);
   const active = visible && page.sections.some((s) => s.id === visible) ? visible : page.sections[0].id;
 
   useEffect(() => {
@@ -84,7 +83,6 @@ export default function Layout() {
       {pathname === "/" && <Blobs />}
       <header className="topbar">
         <NavLink to={{ pathname: "/", search }} className="logo">GREENQUANTA</NavLink>
-        <span className="tag">quantum vm placement</span>
         <nav className="nav" aria-label="pages"><Links /></nav>
         <SizeSwitcher />
         <button className="hamburger" aria-label="menu" aria-expanded={open} aria-controls="phone-menu"
@@ -100,10 +98,6 @@ export default function Layout() {
         </div>
       )}
       <main className="main"><Suspense fallback={<Skeleton />}><Outlet /></Suspense></main>
-      <footer className="footer">
-        GreenQuanta · mid-evaluation demo · everything quantum is simulated on a classical computer
-        {health.data && <> · build {health.data.git_commit.slice(0, 8)}</>}
-      </footer>
     </>
   );
 }
