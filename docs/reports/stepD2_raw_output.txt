@@ -1,0 +1,60 @@
+
+=== small_v2: encoding=unbalanced, lambda_config=L0.05, center=0.02 ===
+Decomposition: PASS (all linear/quadratic coefficients and offset; max error=2.775557561563e-17, tolerance=1.000000000000e-12)
+term        max |coef|         min nonzero |coef|  ratio              nonzero count
+energy      1.180276936603e-01 1.499581257307e-05 7.870710112254e+03 256
+assign      1.000000000000e-01 5.000000000000e-02 2.000000000000e+00 1116
+cpu         7.480916030534e-02 8.650519031142e-07 8.647938931298e+04 4224
+ram         4.800000000000e-02 3.460207612457e-06 1.387200000000e+04 4224
+link        5.000000000000e-02 5.000000000000e-02 1.000000000000e+00 496
+Energy: servers=8, e_ref_joule=1.040021677906e+08
+Energy y (cost of opening one server, normalized units): min=4.677133278408e-02, max=1.180276936603e-01
+Energy x (VM-on-server, normalized units): min=1.499581257307e-05, max=6.988363275514e-02
+assignment_exact.csv: servers_on=2, real_resource_valid=True, total_H=4.366451311159e-01
+  H split: energy=3.850582799048e-01 / assign=-9.714451465470e-17 / cpu=1.094221453287e-02 / ram=4.064463667820e-02 / link=-1.387778780781e-17
+  Real-resource validation: {"valid": true, "violations": []}
+assignment_annealer_only.csv: servers_on=3, real_resource_valid=True, total_H=5.012005266234e-01
+  H split: energy=4.208898576850e-01 / assign=-9.714451465470e-17 / cpu=6.460988578754e-03 / ram=7.384968035963e-02 / link=-6.938893903907e-18
+  Real-resource validation: {"valid": true, "violations": []}
+Lower total H: assignment_exact.csv
+Saved: results/diagnostics/d2/small_v2.csv
+
+=== medium_v2: encoding=unbalanced, lambda_config=L0.05, center=0.02 ===
+Decomposition: PASS (all linear/quadratic coefficients and offset; max error=2.775557561563e-17, tolerance=1.000000000000e-12)
+term        max |coef|         min nonzero |coef|  ratio              nonzero count
+energy      1.112551153214e-01 1.413533388153e-05 7.870710112254e+03 512
+assign      1.000000000000e-01 5.000000000000e-02 2.000000000000e+00 2268
+cpu         7.480916030534e-02 8.650519031142e-07 8.647938931298e+04 16640
+ram         4.800000000000e-02 3.460207612457e-06 1.387200000000e+04 16640
+link        5.000000000000e-02 5.000000000000e-02 1.000000000000e+00 1008
+Energy: servers=8, e_ref_joule=1.103332279557e+08
+Energy y (cost of opening one server, normalized units): min=4.408753455443e-02, max=1.112551153214e-01
+Energy x (VM-on-server, normalized units): min=1.413533388153e-05, max=6.587362152165e-02
+assignment_exact.csv: servers_on=2, real_resource_valid=True, total_H=4.062522893188e-01
+  H split: energy=4.015653516026e-01 / assign=-3.191891195797e-16 / cpu=2.569204152254e-05 / ram=4.661245674741e-03 / link=-6.938893903907e-18
+  Real-resource validation: {"valid": true, "violations": []}
+assignment_annealer_only.csv: servers_on=5, real_resource_valid=True, total_H=7.667320471471e-01
+  H split: energy=6.013213238014e-01 / assign=-3.191891195797e-16 / cpu=7.682205471945e-02 / ram=8.858866862625e-02 / link=-6.938893903907e-18
+  Real-resource validation: {"valid": true, "violations": []}
+Lower total H: assignment_exact.csv
+Saved: results/diagnostics/d2/medium_v2.csv
+
+=== large_v2: encoding=unbalanced, lambda_config=L0.05, center=0.02 ===
+Decomposition: PASS (all linear/quadratic coefficients and offset; max error=2.775557561563e-17, tolerance=1.000000000000e-12)
+term        max |coef|         min nonzero |coef|  ratio              nonzero count
+energy      7.287400434064e-02 9.258885577195e-06 7.870710112254e+03 1608
+assign      1.000000000000e-01 5.000000000000e-02 2.000000000000e+00 10374
+cpu         7.480916030534e-02 8.650519031142e-07 8.647938931298e+04 108540
+ram         4.800000000000e-02 3.460207612457e-06 1.387200000000e+04 108540
+link        5.000000000000e-02 5.000000000000e-02 1.000000000000e+00 3192
+Energy: servers=12, e_ref_joule=1.684432756381e+08
+Energy y (cost of opening one server, normalized units): min=2.887808956204e-02, max=7.287400434064e-02
+Energy x (VM-on-server, normalized units): min=9.258885577195e-06, max=4.314834933057e-02
+assignment_exact.csv: servers_on=4, real_resource_valid=True, total_H=4.869507682661e-01
+  H split: energy=4.355931878298e-01 / assign=-3.191891195797e-16 / cpu=4.155871217811e-02 / ram=9.798868258198e-03 / link=6.938893903907e-18
+  Real-resource validation: {"valid": true, "violations": []}
+assignment_annealer_only.csv: servers_on=10, real_resource_valid=True, total_H=1.134027809686e+00
+  H split: energy=8.636543580799e-01 / assign=-3.191891195797e-16 / cpu=1.469899730205e-01 / ram=1.233834785858e-01 / link=6.938893903907e-18
+  Real-resource validation: {"valid": true, "violations": []}
+Lower total H: assignment_exact.csv
+Saved: results/diagnostics/d2/large_v2.csv

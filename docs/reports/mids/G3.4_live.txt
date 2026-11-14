@@ -1,0 +1,15 @@
+# G3.4 live run via the Vite dev server proxy (npm run dev -> /api -> python -m backend), 2026-11-14T13:11:08+05:00
+[0.1 s] GET / (dev server page) 200 has #root
+[0.2 s] POST /api/runs 202 {"size":"small_v2","stage2":"csqa"} -> job_id fd8c6b39ff74
+[0.3 s] second POST /api/runs 409 {"error":{"code":"run_in_progress","message":"run fd8c6b39ff74 is still running"},"job_id":"fd8c6b39ff74"}
+[5.4 s] event PROPOSALS at t=5.125 s
+[21.7 s] event STAGE2 at t=20.687 s
+[21.7 s] event HYBRID at t=20.812 s
+[21.7 s] event LOGGED at t=21.156 s
+[22.7 s] event RESULT at t=22.234 s
+[23.7 s] status done elapsed_s 22.687 error null
+[23.7 s] result {"chosen_ids":[2,3],"real_valid":true,"quantized_valid":true,"linear_joules":39951971.03582648,"diff_r1_pct":0,"gap_to_h_min_pct":0}
+[23.7 s] cached {"chosen_ids":[2,3],"valid_real":true,"valid_quantized":true,"linear_joules":39951971.03582648,"diff_r1_pct":0}
+[23.7 s] matches_cached true
+LIVE RUN PASS
+exit 0

@@ -1,0 +1,39 @@
+COMMAND: .venv-gq/Scripts/python.exe -B -m pytest tests/test_s0_slack.py tests/test_r3c_run.py tests/test_qubo_fingerprint.py -v -p no:cacheprovider 
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 30 items
+
+tests/test_s0_slack.py::test_slack_range_is_exactly_0_to_k PASSED        [  3%]
+tests/test_s0_slack.py::test_default_encoding_is_unbalanced_and_unchanged PASSED [  6%]
+tests/test_s0_slack.py::test_encoding_arguments_are_checked PASSED       [ 10%]
+tests/test_s0_slack.py::test_slack_matches_build_qubo_v2_at_default_unit_and_lambda PASSED [ 13%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[small_v2] PASSED [ 16%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[medium_v2] PASSED [ 20%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[large_v2] PASSED [ 23%]
+tests/test_s0_slack.py::test_lemma_slack_elimination_bruteforce[0.05] PASSED [ 26%]
+tests/test_s0_slack.py::test_lemma_slack_elimination_bruteforce[0.0025] PASSED [ 30%]
+tests/test_r3c_run.py::test_custom_matches_common_on_tiny PASSED         [ 33%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[assign] PASSED  [ 36%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[cpu] PASSED     [ 40%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[ram] PASSED     [ 43%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[link] PASSED    [ 46%]
+tests/test_r3c_run.py::test_fixed_y_equals_bruteforce[0.0025-weights0-active0] PASSED [ 50%]
+tests/test_r3c_run.py::test_fixed_y_equals_bruteforce[0.001-weights1-active1] PASSED [ 53%]
+tests/test_r3c_run.py::test_pass_rule[True-9.0-0.1-0.0025-True] PASSED   [ 56%]
+tests/test_r3c_run.py::test_pass_rule[True-0.0-0.10001-0.0025-False] PASSED [ 60%]
+tests/test_r3c_run.py::test_pass_rule[False-0.0-0.0-0.0025-False] PASSED [ 63%]
+tests/test_r3c_run.py::test_pass_rule[True--0.1-8.0-0.001-True] PASSED   [ 66%]
+tests/test_r3c_run.py::test_pass_rule[True-0.10001-0.0-0.0005-False] PASSED [ 70%]
+tests/test_r3c_run.py::test_pass_rule[True-None-None-0.0025-False] PASSED [ 73%]
+tests/test_r3c_run.py::test_linear_joules_use_actual_on_bits PASSED      [ 76%]
+tests/test_r3c_run.py::test_solver_bindings_do_not_mutate_shared_config PASSED [ 80%]
+tests/test_qubo_fingerprint.py::test_repeated_build_has_same_hash PASSED [ 83%]
+tests/test_qubo_fingerprint.py::test_lambda_changes_hash PASSED          [ 86%]
+tests/test_qubo_fingerprint.py::test_center_changes_hash PASSED          [ 90%]
+tests/test_qubo_fingerprint.py::test_matches_golden PASSED               [ 93%]
+tests/test_qubo_fingerprint.py::test_insertion_order_and_edge_orientation_do_not_change_hash PASSED [ 96%]
+tests/test_qubo_fingerprint.py::test_offset_changes_hash PASSED          [100%]
+
+======================= 30 passed in 239.35s (0:03:59) ========================
+EXIT=0 

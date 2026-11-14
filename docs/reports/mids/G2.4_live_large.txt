@@ -1,0 +1,10 @@
+﻿G2.4 manual live run on large_v2 through the real server (python -m backend, 127.0.0.1:5000)
+server pid 532
+health: status=ok git_commit=7b6965aa17e791723cc8eb7c0e9c392ab245dc85
+POST /api/runs {size: large_v2, stage2: csqa} -> job_id e5af65558274
+client wall time: 77.7 s
+status=done elapsed_s=76.828 matches_cached=True error=
+events (kind @ t s): PROPOSALS@6.25, STAGE2@65.188, HYBRID@67.969, LOGGED@68.531, RESULT@76.047
+result: chosen_ids=[3, 4, 9, 10, 11] V=0.4689138415395567 gap_to_h_min_pct=1.1451465669798149 linear_joules=78864956.26095286 valid=True/True diff_r1_pct=7.69435019761495
+golden (G1.1): chosen [3, 4, 9, 10, 11], V 0.4689138415395567, gap 1.1451465669798149 %, 78864956.26095286 J
+server stopped: True

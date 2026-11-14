@@ -1,0 +1,40 @@
+## pytest tests/test_mids_baselines.py
+
+tests/test_mids_baselines.py::test_every_assignment_covers_every_vm_once_or_is_flagged PASSED [ 50%]
+tests/test_mids_baselines.py::test_sorted_submission_is_applied PASSED   [100%]
+
+======================== 2 passed in 103.53s (0:01:43) ========================
+## 7 policies x 3 sizes, script C:/Users/Lenovo/AppData/Local/Temp/claude/d35d9ae42a527623/7a4840f7-043b-42a5-8c7b-d99164140117/scratchpad/g14.py
+BASELINE | size | policy | found | unplaced | valid real/quant | active servers | linear J | dR1 % | dR2 % | IT kWh | CO2 kg | CloudSim IT kWh | CS diff % | ok | s
+BASELINE | small_v2 | firstfit | True | 0 | True/True | [0, 1, 2] | 60258543.227043144 | 50.827 | 50.827 | 16.6737 | 11.1697 | 16.6703 | 0.0199 | True | 13.7
+BASELINE | small_v2 | bestfit | True | 0 | True/True | [0, 1, 6, 7] | 63356064.425045595 | 58.581 | 58.581 | 17.2954 | 11.5862 | 17.2911 | 0.0246 | True | 13.7
+BASELINE | small_v2 | worstfit | True | 0 | True/True | [0, 1, 2, 3, 4, 5] | 90152528.15622923 | 125.652 | 125.652 | 23.1262 | 15.4922 | 23.1226 | 0.0152 | True | 13.9
+BASELINE | small_v2 | roundrobin | True | 0 | True/True | [0, 1, 2, 3, 4, 5, 6, 7] | 105827606.76585677 | 164.887 | 164.887 | 26.2109 | 17.5586 | 26.2053 | 0.0213 | True | 14.1
+BASELINE | small_v2 | ffd | True | 0 | True/True | [0, 1, 2] | 62930697.58663383 | 57.516 | 57.516 | 17.3776 | 11.6412 | 17.3739 | 0.0211 | True | 13.7
+BASELINE | small_v2 | bfd | True | 0 | True/True | [0, 1, 6, 7] | 63196781.16855916 | 58.182 | 58.182 | 17.2697 | 11.5690 | 17.2655 | 0.0242 | True | 13.6
+BASELINE | small_v2 | pabfd | True | 0 | True/True | [2, 6, 7] | 44113217.14119838 | 10.416 | 10.416 | 11.9084 | 7.9774 | 11.9056 | 0.0229 | True | 13.7
+BASELINE | medium_v2 | firstfit | True | 0 | True/True | [0, 1, 2, 3] | 74019993.37105647 | 67.424 | 67.424 | 19.9220 | 13.3457 | 19.9213 | 0.0034 | True | 15.3
+BASELINE | medium_v2 | bestfit | True | 0 | True/False | [0, 1, 6, 7] | 70760688.14932448 | 60.052 | 60.052 | 19.2223 | 12.8770 | 19.2198 | 0.0126 | True | 14.2
+  violations: [{'type': 'quantized_mem_overload', 'detail': 'Host 6 mem units 116 exceed limit 113'}]
+BASELINE | medium_v2 | worstfit | True | 0 | True/True | [0, 1, 2, 3, 4, 5] | 96333386.01378867 | 117.894 | 117.894 | 26.6996 | 17.8861 | 26.6958 | 0.0142 | True | 14.0
+BASELINE | medium_v2 | roundrobin | True | 0 | True/True | [0, 1, 2, 3, 4, 5, 6, 7] | 110685875.84938762 | 150.358 | 150.358 | 28.0806 | 18.8112 | 28.0810 | 0.0014 | True | 13.9
+BASELINE | medium_v2 | ffd | True | 0 | True/False | [0, 1, 2, 3] | 76448933.85334751 | 72.918 | 72.918 | 20.1867 | 13.5231 | 20.1844 | 0.0112 | True | 14.1
+  violations: [{'type': 'quantized_mem_overload', 'detail': 'Host 2 mem units 188 exceed limit 170'}]
+BASELINE | medium_v2 | bfd | True | 0 | True/False | [0, 1, 4, 6, 7] | 82812769.8346705 | 87.312 | 87.312 | 22.1774 | 14.8567 | 22.1734 | 0.0180 | True | 13.8
+  violations: [{'type': 'quantized_mem_overload', 'detail': 'Host 1 mem units 121 exceed limit 113'}]
+BASELINE | medium_v2 | pabfd | True | 0 | True/True | [2, 3, 6, 7] | 58876043.06609361 | 33.170 | 33.170 | 15.5832 | 10.4392 | 15.5807 | 0.0165 | True | 14.1
+BASELINE | large_v2 | firstfit | True | 0 | True/False | [0, 1, 2, 3, 4, 5] | 108279472.61709592 | 47.861 | 38.859 | 30.1537 | 20.2000 | 30.1461 | 0.0252 | True | 14.2
+  violations: [{'type': 'quantized_mem_overload', 'detail': 'Host 1 mem units 119 exceed limit 113'}, {'type': 'quantized_mem_overload', 'detail': 'Host 4 mem units 196 exceed limit 170'}]
+BASELINE | large_v2 | bestfit | True | 0 | True/False | [0, 1, 2, 6, 7, 9, 10, 11] | 134560928.67818594 | 83.750 | 72.562 | 35.7292 | 23.9350 | 35.7243 | 0.0137 | True | 15.1
+  violations: [{'type': 'quantized_mem_overload', 'detail': 'Host 2 mem units 121 exceed limit 113'}, {'type': 'quantized_mem_overload', 'detail': 'Host 6 mem units 125 exceed limit 113'}, {'type': 'quantized_mem_overload', 'detail': 'Host 9 mem units 121 exceed limit 113'}]
+BASELINE | large_v2 | worstfit | True | 0 | True/True | [0, 1, 2, 3, 4, 5, 6, 7, 8] | 146086101.52739194 | 99.488 | 87.342 | 40.6173 | 27.2095 | 40.6140 | 0.0080 | True | 14.8
+BASELINE | large_v2 | roundrobin | True | 0 | True/True | [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] | 168962203.74066424 | 130.727 | 116.679 | 47.2340 | 31.6420 | 47.2254 | 0.0182 | True | 14.5
+BASELINE | large_v2 | ffd | True | 0 | True/False | [0, 1, 2, 3, 4, 5] | 114655572.87541184 | 56.568 | 47.036 | 31.0171 | 20.7783 | 31.0076 | 0.0307 | True | 14.4
+  violations: [{'type': 'quantized_mem_overload', 'detail': 'Host 2 mem units 117 exceed limit 113'}, {'type': 'quantized_mem_overload', 'detail': 'Host 3 mem units 176 exceed limit 170'}, {'type': 'quantized_mem_overload', 'detail': 'Host 4 mem units 201 exceed limit 170'}]
+BASELINE | large_v2 | bfd | True | 0 | True/False | [0, 1, 2, 6, 7, 9, 10, 11] | 133346506.60783534 | 82.092 | 71.005 | 34.4218 | 23.0592 | 34.4092 | 0.0366 | True | 14.5
+  violations: [{'type': 'quantized_mem_overload', 'detail': 'Host 2 mem units 136 exceed limit 113'}, {'type': 'quantized_mem_overload', 'detail': 'Host 6 mem units 135 exceed limit 113'}]
+BASELINE | large_v2 | pabfd | True | 0 | True/False | [3, 4, 5, 9, 10, 11] | 90672175.1404723 | 23.818 | 16.279 | 24.0877 | 16.1363 | 24.0802 | 0.0309 | True | 14.7
+  violations: [{'type': 'quantized_mem_overload', 'detail': 'Host 3 mem units 175 exceed limit 170'}, {'type': 'quantized_mem_overload', 'detail': 'Host 4 mem units 191 exceed limit 170'}]
+CLOUDSIM CROSS-CHECK PASS (all <= 1 %)
+## protected folder status
+(empty = untouched)

@@ -1,0 +1,30 @@
+## Java: pre-change replay (old classes, temp cwd) vs post-change replay (protected input -> temp output), small_v2
+IDENTICAL cloudsim_summary.csv
+IDENTICAL cloudsim_energy_hosts.csv
+## pytest write_cloudsim_inputs == write_outputs
+tests/test_mids_cloudsim.py::test_write_cloudsim_inputs_matches_write_outputs PASSED [100%]
+
+============================== 1 passed in 5.32s ==============================
+## refactored write_cloudsim_inputs vs pre-refactor write_outputs snapshot (small_v2, R1)
+Matplotlib is building the font cache; this may take a moment.
+IDENTICAL servers.csv
+IDENTICAL settings.csv
+IDENTICAL vm_cpu_demand.csv
+IDENTICAL vms_assignment.csv
+## replays: first attempt ran from stdin and failed (sampler spawn child cannot re-import <stdin>); rerun from a script file below
+## replays (results/mids/<size>/<label>/), script C:/Users/Lenovo/AppData/Local/Temp/claude/d35d9ae42a527623/7a4840f7-043b-42a5-8c7b-d99164140117/scratchpad/g13_replay.py
+REPLAY | small_v2 | quantum | Active servers py=2.000000 cs=2.000000 diff=0.0000% | IT energy (kWh) py=11.039101 cs=11.036473 diff=0.0238% | Facility energy (kWh) py=17.000215 cs=16.996168 diff=0.0238% | Carbon (kg CO2) py=7.395094 cs=7.393333 diff=0.0238% | ok=True
+  per-host kWh (python, cloudsim): h2=(5.9135, 5.9116), h3=(5.1256, 5.1248)
+REPLAY | small_v2 | exact_r1 | Active servers py=2.000000 cs=2.000000 diff=0.0000% | IT energy (kWh) py=11.084942 cs=11.082259 diff=0.0242% | Facility energy (kWh) py=17.070810 cs=17.066679 diff=0.0242% | Carbon (kg CO2) py=7.425802 cs=7.424005 diff=0.0242% | ok=True
+  per-host kWh (python, cloudsim): h2=(6.5003, 6.4989), h3=(4.5846, 4.5834)
+REPLAY | medium_v2 | quantum | Active servers py=2.000000 cs=2.000000 diff=0.0000% | IT energy (kWh) py=12.176072 cs=12.174988 diff=0.0089% | Facility energy (kWh) py=18.751150 cs=18.749482 diff=0.0089% | Carbon (kg CO2) py=8.156750 cs=8.156024 diff=0.0089% | ok=True
+  per-host kWh (python, cloudsim): h2=(6.1848, 6.1837), h3=(5.9913, 5.9913)
+REPLAY | medium_v2 | exact_r1 | Active servers py=2.000000 cs=2.000000 diff=0.0000% | IT energy (kWh) py=12.198100 cs=12.196988 diff=0.0091% | Facility energy (kWh) py=18.785073 cs=18.783362 diff=0.0091% | Carbon (kg CO2) py=8.171507 cs=8.170762 diff=0.0091% | ok=True
+  per-host kWh (python, cloudsim): h2=(5.9043, 5.9048), h3=(6.2938, 6.2921)
+REPLAY | large_v2 | quantum | Active servers py=5.000000 cs=5.000000 diff=0.0000% | IT energy (kWh) py=21.462903 cs=21.457594 diff=0.0247% | Facility energy (kWh) py=33.052871 cs=33.044695 diff=0.0247% | Carbon (kg CO2) py=14.377999 cs=14.374442 diff=0.0247% | ok=True
+  per-host kWh (python, cloudsim): h3=(6.5320, 6.5326), h4=(6.5252, 6.5227), h9=(2.4499, 2.4491), h10=(3.0940, 3.0932), h11=(2.8618, 2.8599)
+REPLAY | large_v2 | exact_r1 | Active servers py=4.000000 cs=4.000000 diff=0.0000% | IT energy (kWh) py=20.030749 cs=20.025178 diff=0.0278% | Facility energy (kWh) py=30.847353 cs=30.838774 diff=0.0278% | Carbon (kg CO2) py=13.418598 cs=13.414867 diff=0.0278% | ok=True
+  per-host kWh (python, cloudsim): h3=(5.9156, 5.9147), h4=(6.3263, 6.3254), h5=(6.5353, 6.5324), h9=(1.2536, 1.2527)
+WORST IT diff 0.0278% -> PASS (bar 1 %)
+## protected folder status
+(empty = untouched)

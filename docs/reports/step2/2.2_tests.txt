@@ -1,0 +1,20 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 13 items
+
+tests/test_s2_stage2.py::test_q_y_has_no_off_host_or_y_variables PASSED  [  7%]
+tests/test_s2_stage2.py::test_u_y_bounds PASSED                          [ 15%]
+tests/test_s2_stage2.py::test_theorem_2_2_minimiser_is_feasible_and_optimal PASSED [ 23%]
+tests/test_s2_stage2.py::test_restriction_equals_full_fixed_y_minimum PASSED [ 30%]
+tests/test_s2_stage2.py::test_infeasible_y_costs_at_least_lambda_y PASSED [ 38%]
+tests/test_s2_stage2.py::test_heuristic_pruning_bound PASSED             [ 46%]
+tests/test_s2_stage2.py::test_profile_and_load_factor PASSED             [ 53%]
+tests/test_s2_stage2.py::test_rejects_bad_input PASSED                   [ 61%]
+tests/test_s1_stage1.py::test_cost_is_lower_bound_and_check_is_nonvacuous PASSED [ 69%]
+tests/test_s1_stage1.py::test_aggregate_checks_are_necessary PASSED      [ 76%]
+tests/test_s1_stage1.py::test_pruning_is_exact PASSED                    [ 84%]
+tests/test_s1_stage1.py::test_all_costs_index_convention PASSED          [ 92%]
+tests/test_s1_stage1.py::test_factor_must_exceed_one PASSED              [100%]
+
+============================= 13 passed in 21.03s =============================

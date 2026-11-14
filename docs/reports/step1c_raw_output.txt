@@ -1,0 +1,264 @@
+BEFORE: SHA256 list outside repository: C:\Users\Lenovo\AppData\Local\Temp\greenquanta-step1c-before-oeoo5juc.sha256
+7548672d2d032cba9aff83d3f9659c1ba5530cb8e5c927aca2bdd90e9ae793cd  large/assignment_exact.csv
+5c0c29da1648cf52f3eb868e2cfb62b9102332075d9d0aa09d03531e3f525f09  large/assignment_qa.csv
+166c0e7f14008a7c768873f18bbf929a03abcd755252eb87351a1427f07e4aa0  large/cloudsim_energy_hosts.csv
+0184bfc22be6033af008dfb8273e33cfd0e9b8af64a90497b0a2fe5bea04e5aa  large/cloudsim_input/servers.csv
+2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  large/cloudsim_input/settings.csv
+8edbffc39279c763d07ce6cb9e4064aa399cb82acb09b53f6023c9343e39024c  large/cloudsim_input/vm_cpu_demand.csv
+293044713a3049bb5cfc884c53a61fd84f3effc2f8e144189451baa7e78247a7  large/cloudsim_input/vms_assignment.csv
+0c919667fe72cc7daacd71cbe488072c91a2bb9659486ba3e2fac3954287e47c  large/cloudsim_summary.csv
+4a3020ba7d0dd3e900c4439a6f18321c700fc082895e879e94c7e4b1f5696e75  large/energy_hosts_python.csv
+d01e5fb260d1ed9e7cdc12d046cd78fe4eede98e5e01df1864a4fd02d9f989ae  large/experiment_v2.csv
+849bf5085b24b9251c167160b621911f45fe166f0ba64b12ba289f2b56e74adc  large/experiment_v2.png
+b7a74ff41896d9b6e5a5e82c7479a5727c8c9992c9e0d0456df5d3e690e434f6  large/host_energy.png
+dc77fe20534786c842949675c26bf4b151a32985ffe15c7a33fc26f52eafa846  large/host_utilization_24h.png
+ae330312f30b91470f218c9a8c8e723f19964c68fa419d8d4d2d1614779cc9d2  large/lambda_experiment.csv
+024d96d8e46eb7e096ba1fdad68103009c9a5875cd7bfc53d81d2a65777b47c2  large/lambda_experiment.png
+5cec602a40aa5bbaaf663ac4f3759c2b82560a6dcaf0f03fa8ea08c0e13a3447  large/server_types.csv
+62ace0f5ee07722ffda46fbf83cf130ec2cb7fab36f8e85c0728c955b1900ad1  large/summary.json
+9f52280c7c7c3ded59e5572403b4f3d41aedb4a9a8cbe81e6353d8eb288a3919  large/vms.csv
+ac0c062a2862da52378410c6915a1b5033c22002b4d9000e01518f8d79ee6c90  large_v2/assignment_annealer_only.csv
+b9809f4bf91e2818c0f01173d87eefa1a142f5f7bf60750cc04ba59dc45a2ff0  large_v2/assignment_exact.csv
+7119449617fae04cd5d8e8c22016e7544f1ac107419527632e205c4b2c210bd0  large_v2/assignment_qa.csv
+9470ae24cb22513f2b3229390f2b4ad974b4d8a82616c0981dc01dd83cfba5ff  large_v2/cloudsim_energy_hosts.csv
+9caf169160ad3d1d595b7a401608b3fa48e9de64bfd51ca77b2b4c8f20148ed1  large_v2/cloudsim_input/servers.csv
+2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  large_v2/cloudsim_input/settings.csv
+2a75c80d7879c9c822cddf17422ef3a12968db1e07abd4afa1bf7d5872a223ad  large_v2/cloudsim_input/vm_cpu_demand.csv
+81c366b2be25872a16dc3a859627404a6d95bdc36f3151b1013b81d17f7f3aa3  large_v2/cloudsim_input/vms_assignment.csv
+5ab2e0fa5cb73e2480cfac8980a86399506fd10fa16df91fdec4a78b67dfcc15  large_v2/cloudsim_summary.csv
+ae78d6e767dd5aefebe223d9a70eedccaa929ced8cccc58485becfbb6ad75505  large_v2/energy_hosts_python.csv
+38fc84039ef59a7d3f8d5b9a0d255d22ea62efa4f00ff752ea24e1caa56ee027  large_v2/experiment_v2.csv
+d5fc14c2835ce3bbf2197a980421dd606391f5c416bffc99bbf75e03e2fc66e7  large_v2/experiment_v2.png
+2652fdf63c0ccf23241ac7e1b18bf30781ccd45c905f02add35187b854e95213  large_v2/host_energy.png
+837d84612e0b8f878ce8cafa1f2a9f2c3584ccbb4c87b8bede41b258b1c9e042  large_v2/host_utilization_24h.png
+46817538b4cab1a7bb6deb40444f617d9610dffc247f49230d147196d33e1966  large_v2/server_types.csv
+1919f01f04bede5cef9ee3175162c35f37a101a8be25bad75cd09ee6794e860f  large_v2/summary.json
+1b01ec96910a1ad53b995db516111e43418490050605386554c815e93fd6063c  large_v2/vms.csv
+1215466ff15267c48f932ca8f1a498993c05a074172ea6cd322be6752d7976de  medium/assignment_exact.csv
+1bf45ee84b55a7c78d8b8c17e29bc0a546004df2a847ad8df6b5428abbf545d4  medium/assignment_qa.csv
+392c3bd84fa05dd703a99b33bd070615ea8d8c8ef38aba26778a626dec59e7a4  medium/cloudsim_energy_hosts.csv
+cc2e9342819bd68300b3bea52a7141ef5839b12fe1bb2986e679881d7889ce57  medium/cloudsim_input/servers.csv
+2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  medium/cloudsim_input/settings.csv
+93f6fde2a1c46ccff2fe34df063c62a798cf4712d71834dd323aa0655e68a32b  medium/cloudsim_input/vm_cpu_demand.csv
+8121f72756a65a6aa31aff59262b1cd7aaf21250ee5c8a0695aee5d8e62c5284  medium/cloudsim_input/vms_assignment.csv
+4077ccc15aa566d9e76c8b1798062be3382616468a0664ba002da7b81f4ed48c  medium/cloudsim_summary.csv
+798b02119ab359b75707ca98cdf955dcf82cca23f4a301f7e078a2ff1447fc81  medium/energy_hosts_python.csv
+4a475c6c8afabe47a614cc6eeb948545ce1ca07bd177adbd54c43a1965438ccd  medium/experiment_v2.csv
+2829386da9a7b5011cc16e4c8a782a71922c7f02d9af87c66877db292cb61d58  medium/experiment_v2.png
+0bed32bd1118e8456c9fa0f97934c40b52421d57973b65ddf85da60abd5b5df4  medium/host_energy.png
+a3015d2549d59a3180f5574a7ddd2d565013cb7ccd237c928ce678205b0ec739  medium/host_utilization_24h.png
+037ca84e9bf54827e13f87a00186f90ea3d4aa5baa7c70914bfe01c41f4dd7de  medium/lambda_experiment.csv
+49d0003bf6312628ab7d8d76bb970efd6ec3bcec46df89be50f2d72d644c1f88  medium/lambda_experiment.png
+0654f439c219fdb4e28b2f2f6ad02a149dcd5b4922f2574179bdee2f7fa17e71  medium/server_types.csv
+542c82a1497cea364153298301d1354a1051a2319c978b46bc6c42854ced8946  medium/summary.json
+2b70b54c446131c2ef1ec77ce30dfbcd4a7d61aa3d99f7eb23f23c77faaffa20  medium/vms.csv
+547370180e2b9c4473003438a2e9e8a2dab59c4a1fabb4cfcf3867a1002ad77e  medium_v2/assignment_annealer_only.csv
+bfad59b871fc03ad0ee51a4e62e1c0395c621c8b803a8d003a0110ca2f0de5b0  medium_v2/assignment_exact.csv
+0bb23e4c9158b4048f95e0ff72dd8b8a30130efb7c4a9b4e574acf9dc9a88330  medium_v2/assignment_qa.csv
+d7719e08bdfcee0815442d601f789a7bb0824195d1137bf432596d03ee00a064  medium_v2/cloudsim_energy_hosts.csv
+b922892adaa35ebf00b3d4e9e6d188940c2f0f23c2cef12560d48a5acbd788fc  medium_v2/cloudsim_input/servers.csv
+2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  medium_v2/cloudsim_input/settings.csv
+589ecdf53da7456656c9fa8c1b98f46c74c52addb4c70e54e798f89ecf997c2d  medium_v2/cloudsim_input/vm_cpu_demand.csv
+f7ac554cf9c8971a5aa62e439a032deac4c83acd3d13b3df512da0bb53ccefe3  medium_v2/cloudsim_input/vms_assignment.csv
+4c75cb604194fea3603718dda4e2ba026920b145bb338946189ebb6ec4a53095  medium_v2/cloudsim_summary.csv
+2310c89b1181df1484444d89c9848c80aab5ad9a104b01210f3e57f5ca25b052  medium_v2/energy_hosts_python.csv
+582814fabafd7e6701d4703fcd6b06eaca6efda76292377bd333b99fcb8fd5e6  medium_v2/experiment_v2.csv
+38d09612c6c2f59be5bcac2dbdab26cbc3d5d1eeca0722ee40cf0f5c78f09691  medium_v2/experiment_v2.png
+ebcefe184442e8bddec25390de9b64650ee9560880dcbe91e45e879b4c4be87f  medium_v2/host_energy.png
+c1ebfd4344f05a0acd37ce67d2d4e7065b30920702d3e150aa8b61a6f1d41254  medium_v2/host_utilization_24h.png
+b91fdb6e4bbd65a7e6e8cf49ab180a21dbad890af2964ad8e9715b3ec1c2f394  medium_v2/server_types.csv
+ea89fc5e5373fef86dba38830617db748046c89d5b569eca22ed6f83f1bfe33b  medium_v2/summary.json
+fadb79b0a0c37eefce8aeda59b46acc2f636477d1d5378de92daf669803841f4  medium_v2/vms.csv
+160c9d5000f74ab0981d46ba33200ae64d9370f74a20d9ac183bfc0b514d00a2  small/assignment_exact.csv
+e2cc91f09ff54b3a7b46d0585ed64a9fc7a2b1467f8fc32df4e7f3e17e8148c8  small/assignment_qa.csv
+14e4865f3a7c4bbd5e570365a6dc5ae4a875273280b49245f2bcb3ad8e545dc8  small/cloudsim_energy_hosts.csv
+09c91c861d81552c20a58bc4c61845e6b2729006e2ca943f1f1b820953b2a0c7  small/cloudsim_input/servers.csv
+2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  small/cloudsim_input/settings.csv
+f5d400a0cb27694594c1a837dce16af2cfa5881808dd0d6d7e6b3339b1085500  small/cloudsim_input/vm_cpu_demand.csv
+3f0d8765f5e1426397d821f90be8648274d9b2770db6fba8933b82889feddb04  small/cloudsim_input/vms_assignment.csv
+9cd4eabe1b72e06b2584869ba8319b73dc3ee405afdadd733ffd6bf533ffca47  small/cloudsim_summary.csv
+dae81620c2336c57c49e63a4c627e8c397826aa1bd683243d88907d0c0610000  small/energy_hosts_python.csv
+da5b4840eb7493e7a7bdb74e29142cfaa3c8c428eeb3917810154a71dd258c4f  small/experiment_v2.csv
+c274a404e623acc1cabdd477f44354e3796db1ff4acdc9a066bd109b5b7bf0e3  small/experiment_v2.png
+be6b7a4d7b711549c331f82d6a7b12b39c41c604995b5a4b2e879cbc45fb3ece  small/host_energy.png
+9b3035753bc19f3bd67c82bd60912561ac08f203c86be80490b168bc1d07216d  small/host_utilization_24h.png
+629744872c2485dca83568ff27a0c501b283d2104b6f8cebce2465da0e1c0b86  small/lambda_experiment.csv
+005c72bdbe21bfe44eab696fb20e153990d81d3d706c3c1d7cfa9133ad8d27bb  small/lambda_experiment.png
+8bc8cf874f8d8da0d203ab60c16c4fee48cf197d556a26ae66aaedc239f38eaf  small/server_types.csv
+a55fe3cc0bc9ac65de45cb58029bbded66b300e1598dac3f1a932a394d6852e1  small/summary.json
+178079481833e276e8a47c8d33529f2b72daaa840da20089273d07acddd6b060  small/vms.csv
+a83050514b81258a34838629726a08a68ee8a92da650fb18735cbda6f55175df  small_v2/assignment_annealer_only.csv
+1a946e988f3ce735069bf8f45099ce940412a2138c37cf5a2bfcd064b72b9812  small_v2/assignment_exact.csv
+9b397c7f14e8e291398993a35a67d8e1f02204fe8f927240f9039e330f0a1ca0  small_v2/assignment_qa.csv
+94c61bef0f18cddaf75c3a53ebea02f6287818b2c61927dc92dbc1b5f9c9e624  small_v2/cloudsim_energy_hosts.csv
+b922892adaa35ebf00b3d4e9e6d188940c2f0f23c2cef12560d48a5acbd788fc  small_v2/cloudsim_input/servers.csv
+2c330c96edda21603ff795a1a2762cc7e12d7ef4558b82c62349c8c1ba941ac3  small_v2/cloudsim_input/settings.csv
+86d1ae8afc828021b801b6b348748c1a2af60c6228f392967e06bfd446a1d3e4  small_v2/cloudsim_input/vm_cpu_demand.csv
+86b44752adbfa3c973e91d6b1b16e5ecc277890fb5f90eac310c13d333a70d17  small_v2/cloudsim_input/vms_assignment.csv
+f24a2997e14ceeaedb42bca4b60fffb0c23d37964d1e16af5cc05adfedc93859  small_v2/cloudsim_summary.csv
+ee4779ac98f9060b3bfb1a86da91f2cccd4322650f8f1dcb0bae02e60132d93d  small_v2/energy_hosts_python.csv
+9853de099a3d1a314e0f2dea52189d1999f898609152dd2ff21427bdcaa8feac  small_v2/experiment_v2.csv
+96c6e361e96b714f40967b8b0b261f4f92cbd4f0caa0ab172441391145cc4b56  small_v2/experiment_v2.png
+13617e6738dce2544c17b81052b95298854348787cc3fedc124206485247ac2e  small_v2/host_energy.png
+8d2e7851d94fc82f50bc5857dc4132756bb524ed5d9f59c342c5b8200d66d9bd  small_v2/host_utilization_24h.png
+b91fdb6e4bbd65a7e6e8cf49ab180a21dbad890af2964ad8e9715b3ec1c2f394  small_v2/server_types.csv
+b249d8f6a3742a2ae36d8e36814db9a03c45f544fa09ce2e2d71187e4e0cffb9  small_v2/summary.json
+61a6adb4200a6bd1424c3e8e4e95ae79c3c7c48f2c057081effbbe58126ccdf1  small_v2/vms.csv
+Files hashed: 105
+
+COMMAND: .venv-gq/Scripts/python.exe optimizer/run_phase2_v2_managed.py --size small_v2 --encoding unbalanced --lambda-config L0.05 --center 0.02 --seed 42
+========================================================================
+ GreenQuanta Phase 2 v2 (small_v2) - encoding 'unbalanced', lambda config L0.05
+========================================================================
+Trace     : 10 jobs, 115 instances -> 31 VMs
+Demand    : 1.2472 NCU, 0.2618 NMU
+Servers   : A x2, B x2, C x2, D x2  (8 total)
+Lambdas   : assign 0.05, cpu 0.05, ram 0.05, link 0.05
+QUBO      : 256 variables (0 slack), bias range 4.33e-06 .. 2.14e-01
+Annealer  : 2.92 s (+ descent 0.00 s); valid reads: raw 66.5%, after descent 66.5%; VMs placed per read 99.3%
+========================================================================
+ Final answer (repair allowed)
+  Servers on       : 3  A: 0/2, B: 1/2, C: 0/2, D: 2/2
+  VMs by annealer  : 31 of 31 (repair 0)
+  IT / facility    : 11.8949 / 18.3181 kWh, CO2 7.9684 kg
+  SLA / memory     : SLA 4.72%, memory-bound servers 1
+  Exact optimum    : 2 servers, 11.0950 kWh (optimal)
+  Final gap        : +7.21%
+  Annealer only    : 3 servers, gap +7.21%, pure and optimal: False
+  Status           : ok
+========================================================================
+ Run directory: results\runs\20261107T214411566786Z_phase2_v2_f049a1b9_s42
+Runner exit code: 0
+
+AFTER: SHA256 list outside repository: C:\Users\Lenovo\AppData\Local\Temp\greenquanta-step1c-after-zaa9q632.sha256
+results/phase2 hashes identical: yes; files before: 105; files after: 105
+Changed paths: []
+
+COMMAND: list results/runs/ recursively
+results/runs/
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/assignment_annealer_only.csv
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/assignment_exact.csv
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/assignment_qa.csv
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/servers.csv
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/settings.csv
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/vm_cpu_demand.csv
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/cloudsim_input/vms_assignment.csv
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/energy_hosts_python.csv
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/manifest.json
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/server_types.csv
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/summary.json
+results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/vms.csv
+
+COMMAND: first 30 lines of results/runs/20261107T214411566786Z_phase2_v2_f049a1b9_s42/manifest.json
+{
+  "run_id": "20261107T214411566786Z_phase2_v2_f049a1b9_s42",
+  "timestamp": "2026-11-07T21:44:11.566786+00:00",
+  "code_revision": "0225bd11f8c2fa6ca3634ebd8fae5f720dbfb458",
+  "dirty_worktree": false,
+  "untracked_count": 10,
+  "dataset_hash": "b7d257dbed8ef7b2dda01e82f6e2a9c98458a7f102d740a2ff065914099a6954",
+  "workload_hash": "4d65bcd23cfcf06de0c4968434598488f0ec90e4ab9a245b92e8a07788e2d95e",
+  "config_hash": "f049a1b9721b0390aa1752e9c005af554530fcd6b2c2eb5ff7a86c1f4c16cd4f",
+  "dependency_versions": {
+    "pandas": "3.1.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "dimod": "0.12.23",
+    "dwave-samplers": "1.8.0",
+    "pytest": "9.2.0"
+  },
+  "sampler_seed": 42,
+  "workload_seed": 0,
+  "method": "phase2_v2"
+}
+
+COMMAND: display results/experiment_log.csv
+run_id,git_commit,config_hash,sampler_seed,workload_seed,method,metrics_json,gate_result,timestamp
+20261107T214411566786Z_phase2_v2_f049a1b9_s42,0225bd11f8c2fa6ca3634ebd8fae5f720dbfb458,f049a1b9721b0390aa1752e9c005af554530fcd6b2c2eb5ff7a86c1f4c16cd4f,42,0,phase2_v2,"{""servers_on"": 3, ""it_energy_kwh"": 11.894887076620194, ""sla_violation_pct"": 4.715501792114695, ""final_gap_energy_pct"": 7.209423468722425, ""annealer_only_found"": true, ""anneal_time_s"": 2.9185, ""status"": ""ok""}",pass,2026-11-07T21:44:11.566786+00:00
+
+COMMAND: compare new summary.json vs results/phase2/small_v2/summary.json (exact value equality)
+| Metric | New run | Saved small_v2 | Comparison |
+| --- | --- | --- | --- |
+| final servers on | 3 | 3 | equal |
+| it_energy_kwh | 11.894887076620194 | 11.89488707662017 | different |
+| final_gap_energy_pct | 7.209423468722425 | 7.306718045408941 | different |
+| sla_violation_pct | 4.715501792114695 | 4.715501792114695 | equal |
+
+COMMAND: display managed validation results
+{
+  "status": "ok",
+  "validation": {
+    "final": {
+      "valid": true,
+      "violations": []
+    },
+    "pure": {
+      "valid": true,
+      "violations": []
+    },
+    "exact": {
+      "valid": true,
+      "violations": []
+    }
+  }
+}
+
+COMMAND: .venv-gq/Scripts/python.exe -B -m pytest tests -v -p no:cacheprovider
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 22 items
+
+tests/test_managed_runner.py::test_build_run_config_seed_changes_hash PASSED [  4%]
+tests/test_managed_runner.py::test_build_run_config_hash_ignores_dict_key_order PASSED [  9%]
+tests/test_managed_runner.py::test_build_run_config_contains_seed PASSED [ 13%]
+tests/test_manifest.py::test_canonical_hash_ignores_key_order PASSED     [ 18%]
+tests/test_manifest.py::test_sampler_seed_changes_config_hash PASSED     [ 22%]
+tests/test_manifest.py::test_write_manifest_never_overwrites PASSED      [ 27%]
+tests/test_manifest.py::test_experiment_log_appends_without_repeating_header PASSED [ 31%]
+tests/test_manifest.py::test_file_hash_changes_with_one_byte PASSED      [ 36%]
+tests/test_manifest.py::test_dependency_versions_reports_missing PASSED  [ 40%]
+tests/test_manifest.py::test_git_info_distinguishes_untracked_files PASSED [ 45%]
+tests/test_validation.py::test_fully_valid PASSED                        [ 50%]
+tests/test_validation.py::test_missing_vm PASSED                         [ 54%]
+tests/test_validation.py::test_unknown_vm PASSED                         [ 59%]
+tests/test_validation.py::test_unknown_host PASSED                       [ 63%]
+tests/test_validation.py::test_cpu_overload PASSED                       [ 68%]
+tests/test_validation.py::test_mem_overload PASSED                       [ 72%]
+tests/test_validation.py::test_non_finite_or_negative PASSED             [ 77%]
+tests/test_validation.py::test_quantized_cpu_overload PASSED             [ 81%]
+tests/test_validation.py::test_quantized_mem_overload PASSED             [ 86%]
+tests/test_validation.py::test_quantized_float_edge PASSED               [ 90%]
+tests/test_validation.py::test_duplicate_vm PASSED                       [ 95%]
+tests/test_validation_real.py::test_saved_small_v2_assignments PASSED    [100%]
+
+============================= 22 passed in 5.30s ==============================
+Pytest exit code: 0
+
+COMMAND: git --no-optional-locks status --short
+?? .rules
+?? docs/
+?? optimizer/run_phase2_v2_managed.py
+?? results/experiment_log.csv
+?? results/runs/
+?? tests/test_managed_runner.py
+
+COMMAND: git --no-pager diff --stat
+
+COMMAND: git --no-pager branch --show-current
+step1c-managed-runner
+
+COMMAND: check report line count
+Report lines: 40 (limit 40)
+
+COMMAND: git --no-optional-locks status --short
+?? .rules
+?? docs/
+?? optimizer/run_phase2_v2_managed.py
+?? results/experiment_log.csv
+?? results/runs/
+?? tests/test_managed_runner.py
+
+COMMAND: git --no-pager diff --exit-code --stat

@@ -1,0 +1,18 @@
+# G3.4_tests.txt (2026-11-14T13:10:27+05:00): npx vitest run src/test/pipeline.test.tsx --reporter=verbose
+
+ RUN  v5.0.5 C:/Users/Lenovo/Desktop/CLASS/4th year/7th SEM/FYDP/GreenQuanta/frontend
+
+stderr | src/test/pipeline.test.tsx > Pipeline live run > advances the stepper with the event sequence, disables the button while running, stops polling when done
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/test/pipeline.test.tsx > Pipeline live run > advances the stepper with the event sequence, disables the button while running, stops polling when done 515ms
+ ✓ src/test/pipeline.test.tsx > Pipeline live run > attaches to the running job on 409 70ms
+ ✓ src/test/pipeline.test.tsx > Pipeline live run > shows a failed job's error and stops polling 64ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  13:10:31
+   Duration  2.80s (environment 49%, tests 26%, import 10%, setup 9%, transform 6%, worker 1%)
+
+exit 0

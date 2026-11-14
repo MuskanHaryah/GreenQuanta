@@ -1,0 +1,27 @@
+﻿results/phase2: files before=105 after=105 identical=True
+results/runs: files before=24 after=24 identical=True
+experiment_log: old prefix found=True old_bytes=964 now_bytes=634053
+experiment_log: old_rows=2 appended_rows=168 appended_methods=['s0_sa_probe', 's1_fixed_y_sa_probe', 's1_gas', 's1_hybrid', 's1_qaoa', 's1_qaoa_cvar', 's2_exact_qy', 's2_gas_budget', 's2_lever_l4', 's2_pipeline_gas+qaoa_csqa', 's2_pipeline_gas_csa', 's2_pipeline_gas_csqa', 's2_pipeline_gas_exact', 's2_sa_qy', 's2_sa_vs_sqa', 's2_sqa_calibration', 's2c_calibration', 's2c_compare']
+experiment_log: rows_per_method={'s0_sa_probe': 6, 's1_fixed_y_sa_probe': 21, 's1_gas': 3, 's1_hybrid': 3, 's1_qaoa': 9, 's1_qaoa_cvar': 9, 's2_exact_qy': 3, 's2_gas_budget': 15, 's2_lever_l4': 42, 's2_pipeline_gas+qaoa_csqa': 3, 's2_pipeline_gas_csa': 3, 's2_pipeline_gas_csqa': 3, 's2_pipeline_gas_exact': 3, 's2_sa_qy': 18, 's2_sa_vs_sqa': 12, 's2_sqa_calibration': 1, 's2c_calibration': 2, 's2c_compare': 12} expected_methods=['s0_sa_probe', 's1_fixed_y_sa_probe', 's1_gas', 's1_hybrid', 's1_qaoa', 's1_qaoa_cvar', 's2_exact_qy', 's2_gas_budget', 's2_lever_l4', 's2_pipeline_gas+qaoa_csqa', 's2_pipeline_gas_csa', 's2_pipeline_gas_csqa', 's2_pipeline_gas_exact', 's2_sa_qy', 's2_sa_vs_sqa', 's2_sqa_calibration', 's2c_calibration', 's2c_compare']
+PROTECTION_GATE PASS
+COMMAND: git diff --exit-code
+ .../classes/greenquanta/Phase1Simulation.class      | Bin 15375 -> 15266 bytes
+ .../classes/greenquanta/Phase2Simulation.class      | Bin 16367 -> 16264 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+EXIT=1
+COMMAND: git diff --cached --exit-code
+EXIT=0
+9155960a Step 2.6: fix duplicate gas_runs key in PROPOSALS emit
+3e2b6766 Step 2.6: fully quantum pipeline (GAS at c_pipe*sqrt(N) -> constrained SQA), --stage1/--stage2 options, best valid placement from the shared scorer
+1ae9707d Step 2C.3: generic spec/calibrate/cell for both tracks; 2C dry run, equal-budget calibration grids and 2C.4 main mode
+d4e7863b Step 2C.2: constraint-preserving SA/SQA (PIMC, hopping driver, no slack) on G_y; csa/csqa methods on the shared scorer; tests incl. PIMC vs exact Trotter and quantum Gibbs
+33de4c18 Fix: bqm_agrees returns a Python bool from the relative branch (numpy offset made count*agrees an int64 that json rejected)
+69766ddc Step 2.5b: lever L4 (assignment weight r*lambda_y, exact) in stage2_bqm and sampler; shared cell() for main and L4 runs
+355851f3 Step 2.5: SA vs SQA driver (dry run, small-only calibration, equal-budget main runs); shared setup/summarize/tts99; raw-H stats in scorer
+97098954 Step 2.4: SQA module (OpenJij, per-read seeds, 1/max|coef| rescale) on the shared scoring path; 2.3 overload flags from real loads
+e3d9ddd6 Step 2.3: SA on reduced Q_y (reduce option in r3c_run sampler), violation breakdown, spin-update count
+008a12af Step 2.2: reduced Stage-2 QUBO Q_y with per-y lambda, U_y via reference_u(on=), exact check driver, tests
+9dd8a5d4 Step 2.1: GAS budget mode c*sqrt(2^m) without y* stop, 1.6 total-cost recompute, c_pipe rule
+7f365688 Step 2.0: pin openjij 0.12.2 and jij-cimod 1.7.5
+621b7ae0 Step 1.7: sampler-energy cross-check uses Step 0 relative rule (CHANGES #8)
+5a26950e Step 1.7: slack-aware scoring in the fixed-y SA probe (CHANGES #7)

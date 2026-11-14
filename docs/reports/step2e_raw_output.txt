@@ -1,0 +1,250 @@
+Step 2e-diag raw output
+SHA256 method: SHA256 of compact JSON ordered (relative path, file SHA256) pairs, recursively sorted by path.
+BASELINE {"results/phase2": {"files": 105, "sha256": "c57dbbaa4ad9c13d20f3383821f7c6502d73f21c160e1b9ef5874ecafeb9e89e"}, "results/runs": {"files": 24, "sha256": "29612d6631441749feb29db11593f46d5529f5ebcd9446b7c3f48ac466416d2c"}}
+Python: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+COMMAND: git --no-pager status --short
+?? .rules
+?? docs/AUDIT.md
+?? docs/LIMITATIONS_OPTIONS.md
+?? docs/reports/step1a_fix_report.md
+?? docs/reports/step1a_report.md
+?? docs/reports/step1b_fix_report.md
+?? docs/reports/step1b_report.md
+?? docs/reports/step1c_raw_output.txt
+?? docs/reports/step1c_report.md
+?? docs/reports/step2a_raw_output.txt
+?? docs/reports/step2a_report.md
+?? docs/reports/stepD0_raw_output.txt
+?? docs/reports/stepD0_report.md
+?? docs/reports/stepD2_raw_output.txt
+?? docs/reports/stepD2_report.md
+?? docs/reports/stepD3_gate_output.txt
+?? docs/reports/stepD3_large_output.txt
+?? docs/reports/stepD3_raw_output.txt
+?? docs/reports/stepD3_report.md
+?? results/diagnostics/
+?? results/experiment_log.csv
+?? results/runs/
+exit_code=0
+COMMAND: git --no-pager diff --name-only
+exit_code=0
+COMMAND: git --no-pager diff --cached --name-only
+exit_code=0
+COMMAND: git --no-pager rev-parse HEAD
+5da2c94177a2cd5ddb3c68b73248a5a3421d23b9
+exit_code=0
+optimizer/diagnostics/exact_quantized.py: absent
+tests/test_exact_quantized.py: absent
+COMMAND: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe -B -m pytest tests/test_exact_quantized.py -v -p no:cacheprovider
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 5 items
+
+tests/test_exact_quantized.py::test_rounding_requires_one_more_server[cpu] PASSED [ 20%]
+tests/test_exact_quantized.py::test_rounding_requires_one_more_server[mem] PASSED [ 40%]
+tests/test_exact_quantized.py::test_exact_unit_multiples_have_equal_optima[cpu] PASSED [ 60%]
+tests/test_exact_quantized.py::test_exact_unit_multiples_have_equal_optima[mem] PASSED [ 80%]
+tests/test_exact_quantized.py::test_no_incumbent_has_complete_info PASSED [100%]
+
+============================== 5 passed in 6.24s ==============================
+exit_code=0
+COMMAND: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe -B -m pytest tests -v -p no:cacheprovider
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 71 items
+
+tests/test_d0_formulation.py::test_hand_capacity_values[1.0-0.048] PASSED [  1%]
+tests/test_d0_formulation.py::test_hand_capacity_values[0.02--2e-05] PASSED [  2%]
+tests/test_d0_formulation.py::test_hand_capacity_values[0.0-0.0] PASSED  [  4%]
+tests/test_d0_formulation.py::test_hand_capacity_values[-0.5-0.0135] PASSED [  5%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[slack] PASSED   [  7%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[slack_scaled] PASSED [  8%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[unknown] PASSED [  9%]
+tests/test_d0_formulation.py::test_all_32768_states_match_independent_formula PASSED [ 11%]
+tests/test_d0_formulation.py::test_independent_terms_include_offsets_and_off_server_link PASSED [ 12%]
+tests/test_d0_formulation.py::test_all_81_assignments_use_real_size_validation_and_rank PASSED [ 14%]
+tests/test_d0_formulation.py::test_validation_rejects_missing_duplicate_and_off_server PASSED [ 15%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[small_v2] PASSED [ 16%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[medium_v2] PASSED [ 18%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[large_v2] PASSED [ 19%]
+tests/test_d3_helpers.py::test_flip_bound[a-7.5] PASSED                  [ 21%]
+tests/test_d3_helpers.py::test_flip_bound[b-7.25] PASSED                 [ 22%]
+tests/test_d3_helpers.py::test_flip_bound[c-2.25] PASSED                 [ 23%]
+tests/test_d3_helpers.py::test_read_landscape_threshold_and_multiplicity PASSED [ 25%]
+tests/test_d3_helpers.py::test_csv_writer_refuses_overwrite PASSED       [ 26%]
+tests/test_d3_helpers.py::test_saved_small_encoding_matches_d2[assignment_exact.csv-0.4366451311159] PASSED [ 28%]
+tests/test_d3_helpers.py::test_saved_small_encoding_matches_d2[assignment_annealer_only.csv-0.5012005266234] PASSED [ 29%]
+tests/test_exact_quantized.py::test_rounding_requires_one_more_server[cpu] PASSED [ 30%]
+tests/test_exact_quantized.py::test_rounding_requires_one_more_server[mem] PASSED [ 32%]
+tests/test_exact_quantized.py::test_exact_unit_multiples_have_equal_optima[cpu] PASSED [ 33%]
+tests/test_exact_quantized.py::test_exact_unit_multiples_have_equal_optima[mem] PASSED [ 35%]
+tests/test_exact_quantized.py::test_no_incumbent_has_complete_info PASSED [ 36%]
+tests/test_gap_metrics.py::test_proven_optimum_matches_within_tolerance PASSED [ 38%]
+tests/test_gap_metrics.py::test_unproven_incumbent_is_not_labelled_optimal PASSED [ 39%]
+tests/test_gap_metrics.py::test_no_exact_assignment PASSED               [ 40%]
+tests/test_gap_metrics.py::test_no_pure_assignment PASSED                [ 42%]
+tests/test_gap_metrics.py::test_existing_key_set_is_preserved PASSED     [ 43%]
+tests/test_gap_metrics.py::test_reference_matches_do_not_require_proof PASSED [ 45%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[True] PASSED  [ 46%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[False] PASSED [ 47%]
+tests/test_managed_runner.py::test_build_run_config_seed_changes_hash PASSED [ 49%]
+tests/test_managed_runner.py::test_build_run_config_hash_ignores_dict_key_order PASSED [ 50%]
+tests/test_managed_runner.py::test_build_run_config_contains_seed PASSED [ 52%]
+tests/test_manifest.py::test_canonical_hash_ignores_key_order PASSED     [ 53%]
+tests/test_manifest.py::test_sampler_seed_changes_config_hash PASSED     [ 54%]
+tests/test_manifest.py::test_write_manifest_never_overwrites PASSED      [ 56%]
+tests/test_manifest.py::test_experiment_log_appends_without_repeating_header PASSED [ 57%]
+tests/test_manifest.py::test_file_hash_changes_with_one_byte PASSED      [ 59%]
+tests/test_manifest.py::test_dependency_versions_reports_missing PASSED  [ 60%]
+tests/test_manifest.py::test_git_info_distinguishes_untracked_files PASSED [ 61%]
+tests/test_qubo_fingerprint.py::test_repeated_build_has_same_hash PASSED [ 63%]
+tests/test_qubo_fingerprint.py::test_lambda_changes_hash PASSED          [ 64%]
+tests/test_qubo_fingerprint.py::test_center_changes_hash PASSED          [ 66%]
+tests/test_qubo_fingerprint.py::test_matches_golden PASSED               [ 67%]
+tests/test_qubo_fingerprint.py::test_insertion_order_and_edge_orientation_do_not_change_hash PASSED [ 69%]
+tests/test_qubo_fingerprint.py::test_offset_changes_hash PASSED          [ 70%]
+tests/test_selection.py::test_lower_energy_repaired_wins_by_default PASSED [ 71%]
+tests/test_selection.py::test_prefer_unrepaired_preserves_old_ordering PASSED [ 73%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-0.0] PASSED [ 74%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-5e-13] PASSED [ 76%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-0.0] PASSED [ 77%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-5e-13] PASSED [ 78%]
+tests/test_selection.py::test_empty_candidates[False] PASSED             [ 80%]
+tests/test_selection.py::test_empty_candidates[True] PASSED              [ 81%]
+tests/test_selection.py::test_lowest_energy_of_three_mixed_candidates PASSED [ 83%]
+tests/test_validation.py::test_fully_valid PASSED                        [ 84%]
+tests/test_validation.py::test_missing_vm PASSED                         [ 85%]
+tests/test_validation.py::test_unknown_vm PASSED                         [ 87%]
+tests/test_validation.py::test_unknown_host PASSED                       [ 88%]
+tests/test_validation.py::test_cpu_overload PASSED                       [ 90%]
+tests/test_validation.py::test_mem_overload PASSED                       [ 91%]
+tests/test_validation.py::test_non_finite_or_negative PASSED             [ 92%]
+tests/test_validation.py::test_quantized_cpu_overload PASSED             [ 94%]
+tests/test_validation.py::test_quantized_mem_overload PASSED             [ 95%]
+tests/test_validation.py::test_quantized_float_edge PASSED               [ 97%]
+tests/test_validation.py::test_duplicate_vm PASSED                       [ 98%]
+tests/test_validation_real.py::test_saved_small_v2_assignments PASSED    [100%]
+
+============================= 71 passed in 28.37s =============================
+exit_code=0
+COMMAND: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe -B optimizer/diagnostics/exact_quantized.py --sizes small_v2 medium_v2 large_v2
+units: CPU=0.0025 RAM=0.0025; time_limit_s=120; objective=linear joules, no tie-break
+
+=== small_v2 ===
+vms=31 servers=8
+real MILP: status=optimal
+  proven_optimal=True mip_gap=0.0 time_s=0.186
+  servers_on=2 host_ids=[2, 3]
+  linear_cost_J=39951971.035826482 curve_it_energy_kWh=11.095001439020
+  real_size_validator={'valid': True, 'violations': []}
+  quantized_validator={'valid': False, 'violations': [{'type': 'quantized_cpu_overload', 'detail': 'Host 2 cpu units 341 exceed limit 340'}]}
+quantized MILP: status=optimal
+  proven_optimal=True mip_gap=0.0 time_s=0.437
+  servers_on=2 host_ids=[2, 3]
+  linear_cost_J=39951971.035826482 curve_it_energy_kWh=11.041989090265
+  real_size_validator={'valid': True, 'violations': []}
+  quantized_validator={'valid': True, 'violations': []}
+quantized minus real: servers=+0 linear_cost_pct=+0.000000000 curve_energy_pct=-0.477803893
+Real-MILP active-set quantization (positive deficit means excess units):
+  CPU: total_units=514 active_K=680 total_minus_K=-166 aggregate_deficit_units=0 placement_excess_units=1
+    host_id=2 load_units=341 K=340 load_minus_K=+1
+    host_id=3 load_units=173 K=340 load_minus_K=-167
+  MEM: total_units=117 active_K=340 total_minus_K=-223 aggregate_deficit_units=0 placement_excess_units=0
+    host_id=2 load_units=50 K=170 load_minus_K=-120
+    host_id=3 load_units=67 K=170 load_minus_K=-103
+  real-MILP assignment quantized-feasible: no (proven_optimal=True)
+
+=== medium_v2 ===
+vms=63 servers=8
+real MILP: status=optimal
+  proven_optimal=True mip_gap=0.0 time_s=0.148
+  servers_on=2 host_ids=[2, 3]
+  linear_cost_J=44211076.677488148 curve_it_energy_kWh=12.215055999933
+  real_size_validator={'valid': True, 'violations': []}
+  quantized_validator={'valid': False, 'violations': [{'type': 'quantized_mem_overload', 'detail': 'Host 2 mem units 184 exceed limit 170'}]}
+quantized MILP: status=optimal
+  proven_optimal=True mip_gap=0.0 time_s=0.389
+  servers_on=2 host_ids=[2, 3]
+  linear_cost_J=44211076.677488148 curve_it_energy_kWh=12.176813306393
+  real_size_validator={'valid': True, 'violations': []}
+  quantized_validator={'valid': True, 'violations': []}
+quantized minus real: servers=+0 linear_cost_pct=+0.000000000 curve_energy_pct=-0.313078332
+Real-MILP active-set quantization (positive deficit means excess units):
+  CPU: total_units=649 active_K=680 total_minus_K=-31 aggregate_deficit_units=0 placement_excess_units=0
+    host_id=2 load_units=309 K=340 load_minus_K=-31
+    host_id=3 load_units=340 K=340 load_minus_K=+0
+  MEM: total_units=289 active_K=340 total_minus_K=-51 aggregate_deficit_units=0 placement_excess_units=14
+    host_id=2 load_units=184 K=170 load_minus_K=+14
+    host_id=3 load_units=105 K=170 load_minus_K=-65
+  real-MILP assignment quantized-feasible: no (proven_optimal=True)
+
+=== large_v2 ===
+vms=133 servers=12
+real MILP: status=optimal
+  proven_optimal=True mip_gap=3.890915459787923e-06 time_s=7.029
+  servers_on=4 host_ids=[3, 4, 5, 11]
+  linear_cost_J=73230356.203680813 curve_it_energy_kWh=20.045485588935
+  real_size_validator={'valid': False, 'violations': [{'type': 'mem_overload', 'detail': 'Host 4 mem load 0.4250009409586588 exceeds limit 0.425'}]}
+  quantized_validator={'valid': False, 'violations': [{'type': 'quantized_mem_overload', 'detail': 'Host 3 mem units 186 exceed limit 170'}, {'type': 'quantized_cpu_overload', 'detail': 'Host 4 cpu units 357 exceed limit 340'}, {'type': 'mem_overload', 'detail': 'Host 4 mem load 0.4250009409586588 exceeds limit 0.425'}, {'type': 'quantized_mem_overload', 'detail': 'Host 4 mem units 188 exceed limit 170'}, {'type': 'quantized_mem_overload', 'detail': 'Host 5 mem units 190 exceed limit 170'}]}
+quantized MILP: status=optimal
+  proven_optimal=True mip_gap=9.994426359458923e-05 time_s=11.461
+  servers_on=5 host_ids=[4, 5, 9, 10, 11]
+  linear_cost_J=77978145.882644266 curve_it_energy_kWh=21.440746551558
+  real_size_validator={'valid': True, 'violations': []}
+  quantized_validator={'valid': True, 'violations': []}
+quantized minus real: servers=+1 linear_cost_pct=+6.483362809 curve_energy_pct=+6.960474748
+Real-MILP active-set quantization (positive deficit means excess units):
+  CPU: total_units=1010 active_K=1151 total_minus_K=-141 aggregate_deficit_units=0 placement_excess_units=17
+    host_id=3 load_units=305 K=340 load_minus_K=-35
+    host_id=4 load_units=357 K=340 load_minus_K=+17
+    host_id=5 load_units=338 K=340 load_minus_K=-2
+    host_id=11 load_units=10 K=131 load_minus_K=-121
+  MEM: total_units=631 active_K=623 total_minus_K=+8 aggregate_deficit_units=8 placement_excess_units=54
+    host_id=3 load_units=186 K=170 load_minus_K=+16
+    host_id=4 load_units=188 K=170 load_minus_K=+18
+    host_id=5 load_units=190 K=170 load_minus_K=+20
+    host_id=11 load_units=67 K=113 load_minus_K=-46
+  real-MILP assignment quantized-feasible: no (proven_optimal=True)
+exit_code=0
+COMMAND: recursive SHA256 before/after gate
+AFTER {"results/phase2": {"files": 105, "sha256": "c57dbbaa4ad9c13d20f3383821f7c6502d73f21c160e1b9ef5874ecafeb9e89e"}, "results/runs": {"files": 24, "sha256": "29612d6631441749feb29db11593f46d5529f5ebcd9446b7c3f48ac466416d2c"}}
+results/phase2: before_sha256=c57dbbaa4ad9c13d20f3383821f7c6502d73f21c160e1b9ef5874ecafeb9e89e after_sha256=c57dbbaa4ad9c13d20f3383821f7c6502d73f21c160e1b9ef5874ecafeb9e89e identical=yes before_count=105 after_count=105
+results/runs: before_sha256=29612d6631441749feb29db11593f46d5529f5ebcd9446b7c3f48ac466416d2c after_sha256=29612d6631441749feb29db11593f46d5529f5ebcd9446b7c3f48ac466416d2c identical=yes before_count=24 after_count=24
+COMMAND: git --no-pager diff --exit-code
+exit_code=0
+COMMAND: git --no-pager diff --cached --exit-code
+exit_code=0
+COMMAND: git --no-pager status --short
+?? .rules
+?? docs/AUDIT.md
+?? docs/LIMITATIONS_OPTIONS.md
+?? docs/reports/step1a_fix_report.md
+?? docs/reports/step1a_report.md
+?? docs/reports/step1b_fix_report.md
+?? docs/reports/step1b_report.md
+?? docs/reports/step1c_raw_output.txt
+?? docs/reports/step1c_report.md
+?? docs/reports/step2a_raw_output.txt
+?? docs/reports/step2a_report.md
+?? docs/reports/step2e_raw_output.txt
+?? docs/reports/stepD0_raw_output.txt
+?? docs/reports/stepD0_report.md
+?? docs/reports/stepD2_raw_output.txt
+?? docs/reports/stepD2_report.md
+?? docs/reports/stepD3_gate_output.txt
+?? docs/reports/stepD3_large_output.txt
+?? docs/reports/stepD3_raw_output.txt
+?? docs/reports/stepD3_report.md
+?? optimizer/diagnostics/exact_quantized.py
+?? results/diagnostics/
+?? results/experiment_log.csv
+?? results/runs/
+?? tests/test_exact_quantized.py
+exit_code=0
+COMMAND: final new-files-only and report-length audit
+New files: ['?? docs/reports/step2e_raw_output.txt', '?? docs/reports/step2e_report.md', '?? optimizer/diagnostics/exact_quantized.py', '?? tests/test_exact_quantized.py']
+Removed/changed pre-existing status entries: []
+Report lines: 39 (maximum 40)
+Audit: PASS

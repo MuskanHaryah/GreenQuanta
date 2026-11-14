@@ -1,0 +1,21 @@
+# G3.1_tests.txt (2026-11-14T13:12:32+05:00): npx vitest run src/test/api.test.tsx --reporter=verbose
+
+ RUN  v5.0.5 C:/Users/Lenovo/Desktop/CLASS/4th year/7th SEM/FYDP/GreenQuanta/frontend
+
+stderr | src/test/api.test.tsx > Layout > renders the page links and the size switcher from /api/sizes
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/test/api.test.tsx > API client > parses every fixture into the contract types 14ms
+ ✓ src/test/api.test.tsx > API client > turns error JSON into ApiError (code, message, status, 409 job id) 5ms
+ ✓ src/test/api.test.tsx > API client > turns a network failure into ApiError status 0 2ms
+ ✓ src/test/api.test.tsx > Layout > renders the page links and the size switcher from /api/sizes 364ms
+ ✓ src/test/api.test.tsx > Layout > toggles the phone menu with the hamburger 118ms
+ ✓ src/test/api.test.tsx > Layout > shows an error panel with a working retry when the API is down 108ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  13:12:36
+   Duration  2.87s (environment 55%, tests 24%, import 9%, setup 8%, transform 4%, worker 1%)
+
+exit 0

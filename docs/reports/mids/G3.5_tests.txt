@@ -1,0 +1,21 @@
+# G3.5_tests.txt (2026-11-14T13:10:34+05:00): npx vitest run src/test/quantum_about.test.tsx --reporter=verbose
+
+ RUN  v5.0.5 C:/Users/Lenovo/Desktop/CLASS/4th year/7th SEM/FYDP/GreenQuanta/frontend
+
+ ✓ src/test/quantum_about.test.tsx > Grover player > steps through `steps` in order with next/prev, and the slider equals the step index 541ms
+stderr | src/test/quantum_about.test.tsx > Grover player > loads the trace for an allowed seed, and the simulated box from /api/claims
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/test/quantum_about.test.tsx > Grover player > plays every step in order to the end, then stops 98ms
+ ✓ src/test/quantum_about.test.tsx > Grover player > colours y* coral, marked states periwinkle, the rest muted 1ms
+ ✓ src/test/quantum_about.test.tsx > Grover player > shows the trace totals and P(y*) of the current step 8ms
+ ✓ src/test/quantum_about.test.tsx > Grover player > loads the trace for an allowed seed, and the simulated box from /api/claims 91ms
+ ✓ src/test/quantum_about.test.tsx > About > renders every note, every caveat and every method's reference from /api/claims 42ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  13:10:37
+   Duration  3.32s (environment 38%, tests 26%, import 26%, setup 6%, transform 4%)
+
+exit 0

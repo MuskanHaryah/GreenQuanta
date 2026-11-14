@@ -1,0 +1,19 @@
+# G3.3_tests.txt (2026-11-14T13:10:16+05:00): npx vitest run src/test/servers.test.tsx --reporter=verbose
+
+ RUN  v5.0.5 C:/Users/Lenovo/Desktop/CLASS/4th year/7th SEM/FYDP/GreenQuanta/frontend
+
+stderr | src/test/servers.test.tsx > Servers > loads two placements: quantum and the best baseline
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/test/servers.test.tsx > Servers > loads two placements: quantum and the best baseline 178ms
+ ✓ src/test/servers.test.tsx > Servers > has one tile per server, on/off as in `active` 59ms
+ ✓ src/test/servers.test.tsx > Servers > opens a drawer listing exactly the clicked host's VMs 219ms
+ ✓ src/test/servers.test.tsx > Servers > loads another placement when a selector changes 762ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  13:10:21
+   Duration  4.14s (environment 47%, tests 32%, import 8%, transform 7%, setup 6%)
+
+exit 0

@@ -1,0 +1,39 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 32 items
+
+tests/test_s2_sqa.py::test_finds_bruteforce_minimum PASSED               [  3%]
+tests/test_s2_sqa.py::test_same_seed_same_samples_and_reads_differ PASSED [  6%]
+tests/test_s2_sqa.py::test_energies_match_bqm_energy PASSED              [  9%]
+tests/test_s2_sqa.py::test_rescaling_keeps_argmin_and_is_scale_invariant PASSED [ 12%]
+tests/test_s2_sqa.py::test_spin_update_count PASSED                      [ 15%]
+tests/test_s2_sqa.py::test_open_point_1_fixed_seed_repeats_reads PASSED  [ 18%]
+tests/test_s2_sqa.py::test_open_point_2_solution_is_a_trotter_slice PASSED [ 21%]
+tests/test_s2_sqa.py::test_open_point_4_no_internal_rescaling PASSED     [ 25%]
+tests/test_r3c_run.py::test_custom_matches_common_on_tiny PASSED         [ 28%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[assign] PASSED  [ 31%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[cpu] PASSED     [ 34%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[ram] PASSED     [ 37%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[link] PASSED    [ 40%]
+tests/test_r3c_run.py::test_fixed_y_equals_bruteforce[0.0025-weights0-active0] PASSED [ 43%]
+tests/test_r3c_run.py::test_fixed_y_equals_bruteforce[0.001-weights1-active1] PASSED [ 46%]
+tests/test_r3c_run.py::test_pass_rule[True-9.0-0.1-0.0025-True] PASSED   [ 50%]
+tests/test_r3c_run.py::test_pass_rule[True-0.0-0.10001-0.0025-False] PASSED [ 53%]
+tests/test_r3c_run.py::test_pass_rule[False-0.0-0.0-0.0025-False] PASSED [ 56%]
+tests/test_r3c_run.py::test_pass_rule[True--0.1-8.0-0.001-True] PASSED   [ 59%]
+tests/test_r3c_run.py::test_pass_rule[True-0.10001-0.0-0.0005-False] PASSED [ 62%]
+tests/test_r3c_run.py::test_pass_rule[True-None-None-0.0025-False] PASSED [ 65%]
+tests/test_r3c_run.py::test_linear_joules_use_actual_on_bits PASSED      [ 68%]
+tests/test_r3c_run.py::test_violation_counts_include_duplicated_load PASSED [ 71%]
+tests/test_r3c_run.py::test_solver_bindings_do_not_mutate_shared_config PASSED [ 75%]
+tests/test_s2_stage2.py::test_q_y_has_no_off_host_or_y_variables PASSED  [ 78%]
+tests/test_s2_stage2.py::test_u_y_bounds PASSED                          [ 81%]
+tests/test_s2_stage2.py::test_theorem_2_2_minimiser_is_feasible_and_optimal PASSED [ 84%]
+tests/test_s2_stage2.py::test_restriction_equals_full_fixed_y_minimum PASSED [ 87%]
+tests/test_s2_stage2.py::test_infeasible_y_costs_at_least_lambda_y PASSED [ 90%]
+tests/test_s2_stage2.py::test_heuristic_pruning_bound PASSED             [ 93%]
+tests/test_s2_stage2.py::test_profile_and_load_factor PASSED             [ 96%]
+tests/test_s2_stage2.py::test_rejects_bad_input PASSED                   [100%]
+
+============================= 32 passed in 18.91s =============================

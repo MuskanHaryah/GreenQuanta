@@ -1,0 +1,137 @@
+COMMAND: git --no-pager diff -- optimizer/phase2/solver_v2.py
+warning: in the working copy of 'optimizer/phase2/solver_v2.py', LF will be replaced by CRLF the next time Git touches it
+diff --git a/optimizer/phase2/solver_v2.py b/optimizer/phase2/solver_v2.py
+index 80cc33ad..356f990b 100644
+--- a/optimizer/phase2/solver_v2.py
++++ b/optimizer/phase2/solver_v2.py
+@@ -12,6 +12,7 @@ Two answers come out:
+   * annealer_only : best read that is valid after stage 1 or 2 (no repair), or None
+   * final         : best answer overall (repair allowed), always a valid placement
+ """
++import math
+ import time
+ 
+ import numpy as np
+@@ -27,7 +28,19 @@ def _placed_count(sample, vms, servers):
+     return sum(1 for v in vms if sum(sample[x_var(v.vm_id, h)] for h in range(len(servers))) == 1)
+ 
+ 
+-def solve(bqm, vms, servers, num_reads=None, num_sweeps=None, seed=None, descent=True):
++def rank_candidates(candidates, prefer_unrepaired=False):
++    if prefer_unrepaired:
++        return min(candidates, key=lambda c: c[:2], default=None)
++    best = min(candidates, key=lambda c: c[1], default=None)
++    if best is None:
++        return None
++    return min((c for c in candidates if not c[0] and
++                math.isclose(c[1], best[1], rel_tol=1e-12, abs_tol=0.0)),
++               key=lambda c: c[1], default=best)
++
++
++def solve(bqm, vms, servers, num_reads=None, num_sweeps=None, seed=None, descent=True,
++          prefer_unrepaired=False):
+     num_reads = num_reads or config.NUM_READS
+     num_sweeps = num_sweeps or config.NUM_SWEEPS
+     seed = config.SEED if seed is None else seed
+@@ -41,7 +54,7 @@ def solve(bqm, vms, servers, num_reads=None, num_sweeps=None, seed=None, descent
+     final_set = SteepestDescentSolver().sample(bqm, initial_states=raw) if descent else raw
+     descent_s = time.perf_counter() - t1 if descent else 0.0
+ 
+-    best_any, best_any_score, best_any_info = None, None, None
++    candidates = []
+     best_pure, best_pure_energy = None, None
+     valid_after, rule_counts, placed = 0, {}, []
+     for rec in final_set.data(fields=["sample", "energy"]):
+@@ -60,13 +73,14 @@ def solve(bqm, vms, servers, num_reads=None, num_sweeps=None, seed=None, descent
+         e = evaluate_allocation(vms, assignment, servers)["it_energy_kwh"]
+         if not repaired and (best_pure_energy is None or e < best_pure_energy):
+             best_pure, best_pure_energy = assignment, e
+-        score = (repaired, e)
+-        if best_any_score is None or score < best_any_score:
+-            best_any, best_any_score = assignment, score
+-            best_any_info = {"repaired": repaired, "vms_placed_by_annealer": kept,
+-                             "vms_placed_by_repair": by_repair, "qubo_energy_of_best": float(rec.energy)}
+-    if best_any is None:
++        candidates.append(((repaired, e, assignment),
++                           {"repaired": repaired, "vms_placed_by_annealer": kept,
++                            "vms_placed_by_repair": by_repair, "qubo_energy_of_best": float(rec.energy)}))
++    best = rank_candidates([candidate for candidate, _ in candidates], prefer_unrepaired)
++    if best is None:
+         raise RuntimeError("No usable placement: the servers are too small for this workload.")
++    best_any = best[2]
++    best_any_info = next(info for candidate, info in candidates if candidate is best)
+ 
+     stats = {
+         "solver": "SimulatedAnnealingSampler" + (" + SteepestDescentSolver" if descent else ""),
+
+COMMAND: .venv-gq/Scripts/pytest.exe tests -v
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 31 items
+
+tests/test_managed_runner.py::test_build_run_config_seed_changes_hash PASSED [  3%]
+tests/test_managed_runner.py::test_build_run_config_hash_ignores_dict_key_order PASSED [  6%]
+tests/test_managed_runner.py::test_build_run_config_contains_seed PASSED [  9%]
+tests/test_manifest.py::test_canonical_hash_ignores_key_order PASSED     [ 12%]
+tests/test_manifest.py::test_sampler_seed_changes_config_hash PASSED     [ 16%]
+tests/test_manifest.py::test_write_manifest_never_overwrites PASSED      [ 19%]
+tests/test_manifest.py::test_experiment_log_appends_without_repeating_header PASSED [ 22%]
+tests/test_manifest.py::test_file_hash_changes_with_one_byte PASSED      [ 25%]
+tests/test_manifest.py::test_dependency_versions_reports_missing PASSED  [ 29%]
+tests/test_manifest.py::test_git_info_distinguishes_untracked_files PASSED [ 32%]
+tests/test_selection.py::test_lower_energy_repaired_wins_by_default PASSED [ 35%]
+tests/test_selection.py::test_prefer_unrepaired_preserves_old_ordering PASSED [ 38%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-0.0] PASSED [ 41%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-5e-13] PASSED [ 45%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-0.0] PASSED [ 48%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-5e-13] PASSED [ 51%]
+tests/test_selection.py::test_empty_candidates[False] PASSED             [ 54%]
+tests/test_selection.py::test_empty_candidates[True] PASSED              [ 58%]
+tests/test_selection.py::test_lowest_energy_of_three_mixed_candidates PASSED [ 61%]
+tests/test_validation.py::test_fully_valid PASSED                        [ 64%]
+tests/test_validation.py::test_missing_vm PASSED                         [ 67%]
+tests/test_validation.py::test_unknown_vm PASSED                         [ 70%]
+tests/test_validation.py::test_unknown_host PASSED                       [ 74%]
+tests/test_validation.py::test_cpu_overload PASSED                       [ 77%]
+tests/test_validation.py::test_mem_overload PASSED                       [ 80%]
+tests/test_validation.py::test_non_finite_or_negative PASSED             [ 83%]
+tests/test_validation.py::test_quantized_cpu_overload PASSED             [ 87%]
+tests/test_validation.py::test_quantized_mem_overload PASSED             [ 90%]
+tests/test_validation.py::test_quantized_float_edge PASSED               [ 93%]
+tests/test_validation.py::test_duplicate_vm PASSED                       [ 96%]
+tests/test_validation_real.py::test_saved_small_v2_assignments PASSED    [100%]
+
+============================= 31 passed in 17.49s =============================
+
+COMMAND: git --no-pager diff --stat
+warning: in the working copy of 'optimizer/phase2/solver_v2.py', LF will be replaced by CRLF the next time Git touches it
+ optimizer/phase2/solver_v2.py | 30 ++++++++++++++++++++++--------
+ 1 file changed, 22 insertions(+), 8 deletions(-)
+
+COMMAND: git --no-optional-locks status --short
+ M optimizer/phase2/solver_v2.py
+?? .rules
+?? docs/
+?? results/experiment_log.csv
+?? results/runs/
+?? tests/test_selection.py
+
+COMMAND: git --no-optional-locks status
+On branch step2a-selection
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   optimizer/phase2/solver_v2.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.rules
+	docs/
+	results/experiment_log.csv
+	results/runs/
+	tests/test_selection.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+

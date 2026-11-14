@@ -1,0 +1,55 @@
+﻿ * Serving Flask app 'backend.app'
+ * Debug mode: off
+PASS 200 /health 143 bytes 308 ms
+PASS 200 /sizes 241 bytes 32 ms
+PASS 200 /results/small_v2 23,193 bytes 55 ms
+PASS 200 /results/small_v2/compare 3,078 bytes 29 ms
+PASS 200 /results/small_v2/placement/control 3,475 bytes 507 ms
+PASS 200 /results/small_v2/placement/exact_r1 3,478 bytes 23 ms
+PASS 200 /results/small_v2/placement/quantum 3,477 bytes 20 ms
+PASS 200 /results/small_v2/placement/pabfd 3,502 bytes 24 ms
+PASS 200 /results/small_v2/placement/cs_firstfit 3,505 bytes 30 ms
+PASS 200 /results/small_v2/placement/cs_ffd 3,510 bytes 31 ms
+PASS 200 /results/small_v2/placement/cs_bfd 3,532 bytes 27 ms
+PASS 200 /results/small_v2/placement/cs_bestfit 3,542 bytes 24 ms
+PASS 200 /results/small_v2/placement/cs_worstfit 3,601 bytes 23 ms
+PASS 200 /results/small_v2/placement/cs_roundrobin 3,666 bytes 23 ms
+PASS 200 /gas-trace/small_v2?seed=0 121,599 bytes 712 ms
+PASS 200 /gas-trace/small_v2?seed=1 174,176 bytes 792 ms
+PASS 200 /gas-trace/small_v2?seed=2 159,696 bytes 794 ms
+PASS 200 /claims?size=small_v2 4,917 bytes 23 ms
+PASS 200 /results/medium_v2 23,425 bytes 41 ms
+PASS 200 /results/medium_v2/compare 3,072 bytes 25 ms
+PASS 200 /results/medium_v2/placement/control 5,918 bytes 961 ms
+PASS 200 /results/medium_v2/placement/exact_r1 5,918 bytes 26 ms
+PASS 200 /results/medium_v2/placement/quantum 5,918 bytes 31 ms
+PASS 200 /results/medium_v2/placement/pabfd 5,979 bytes 38 ms
+PASS 200 /results/medium_v2/placement/cs_bestfit 5,981 bytes 55 ms
+PASS 200 /results/medium_v2/placement/cs_firstfit 5,978 bytes 48 ms
+PASS 200 /results/medium_v2/placement/cs_ffd 5,978 bytes 40 ms
+PASS 200 /results/medium_v2/placement/cs_bfd 6,007 bytes 42 ms
+PASS 200 /results/medium_v2/placement/cs_worstfit 6,042 bytes 38 ms
+PASS 200 /results/medium_v2/placement/cs_roundrobin 6,108 bytes 37 ms
+PASS 200 /gas-trace/medium_v2?seed=0 92,955 bytes 1265 ms
+PASS 200 /gas-trace/medium_v2?seed=1 116,532 bytes 1225 ms
+PASS 200 /gas-trace/medium_v2?seed=2 87,354 bytes 1290 ms
+PASS 200 /claims?size=medium_v2 4,920 bytes 128 ms
+PASS 200 /results/large_v2 31,120 bytes 108 ms
+PASS 200 /results/large_v2/compare 3,183 bytes 22 ms
+PASS 200 /results/large_v2/placement/exact_r1 11,877 bytes 2487 ms
+PASS 200 /results/large_v2/placement/control 11,907 bytes 41 ms
+PASS 200 /results/large_v2/placement/quantum 11,902 bytes 39 ms
+PASS 200 /results/large_v2/placement/pabfd 11,934 bytes 43 ms
+PASS 200 /results/large_v2/placement/cs_firstfit 11,935 bytes 36 ms
+PASS 200 /results/large_v2/placement/cs_ffd 11,936 bytes 29 ms
+PASS 200 /results/large_v2/placement/cs_bfd 11,993 bytes 28 ms
+PASS 200 /results/large_v2/placement/cs_bestfit 12,001 bytes 27 ms
+PASS 200 /results/large_v2/placement/cs_worstfit 12,025 bytes 31 ms
+PASS 200 /results/large_v2/placement/cs_roundrobin 12,124 bytes 28 ms
+PASS 200 /gas-trace/large_v2?seed=0 200,436 bytes 4008 ms
+PASS 200 /gas-trace/large_v2?seed=1 210,920 bytes 4041 ms
+PASS 200 /gas-trace/large_v2?seed=2 250,579 bytes 4101 ms
+PASS 200 /claims?size=large_v2 4,919 bytes 35 ms
+server stopped: True
+SMOKE PASS
+exit 0

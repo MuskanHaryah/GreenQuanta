@@ -1,0 +1,161 @@
+
+=== small_v2: encoding=unbalanced, lambda_config=L0.05, center=0.02 ===
+Encoding safeguard: assignment_exact.csv: H=0.4366451311159149, D2 total_h=0.4366451311159149, PASS
+Encoding safeguard: assignment_annealer_only.csv: H=0.5012005266233939, D2 total_h=0.5012005266233939, PASS
+Reproduction gate (solver.valid_reads_raw_pct): saved=66.50%, reproduced=66.50%, PASS
+H_exact=0.4366451311159149
+S0 default beta_range=[np.float64(0.364213372195427), np.float64(3194146.04100134)]
+S0: {"leak_broken_rules": {"assign": 1, "cpu_capacity": 9}, "leak_reads": 10, "min_h_all": 0.3933762721583207, "min_h_valid": 0.4980833845940431, "reads_le_exact": 10, "reads_le_exact_pct": 5.0, "valid_reads": 133, "valid_reads_le_exact": 0, "valid_reads_pct": 66.5, "valid_servers_on_histogram": {"3": 118, "4": 15}, "wall_time_s": 3.502030499977991}
+Leak check S0: 10 invalid reads with H <= H_exact + 1e-9
+  {"broken_rules": ["cpu_capacity"], "h": 0.40289131304083625, "reads": 1, "record": 30}
+  {"broken_rules": ["cpu_capacity"], "h": 0.400201380490369, "reads": 1, "record": 34}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3982023878742922, "reads": 1, "record": 61}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3933762721583207, "reads": 1, "record": 68}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39582227613583143, "reads": 1, "record": 69}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39664964440497386, "reads": 1, "record": 80}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3942245513844611, "reads": 1, "record": 98}
+  {"broken_rules": ["assign"], "h": 0.4058021374098182, "reads": 1, "record": 147}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3993212225187932, "reads": 1, "record": 186}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39840954762380676, "reads": 1, "record": 198}
+S1: {"leak_broken_rules": {"assign": 5, "cpu_capacity": 22}, "leak_reads": 27, "min_h_all": 0.3941206846287315, "min_h_valid": 0.4978436046275547, "reads_le_exact": 27, "reads_le_exact_pct": 13.5, "valid_reads": 118, "valid_reads_le_exact": 0, "valid_reads_pct": 59.0, "valid_servers_on_histogram": {"3": 118}, "wall_time_s": 18.110938800033182}
+Leak check S1: 27 invalid reads with H <= H_exact + 1e-9
+  {"broken_rules": ["cpu_capacity"], "h": 0.3941206846287315, "reads": 1, "record": 6}
+  {"broken_rules": ["cpu_capacity"], "h": 0.40299836525131383, "reads": 1, "record": 16}
+  {"broken_rules": ["assign"], "h": 0.4049338598629433, "reads": 1, "record": 17}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3950156992685834, "reads": 1, "record": 18}
+  {"broken_rules": ["cpu_capacity"], "h": 0.40160728551391855, "reads": 1, "record": 41}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3968653779692133, "reads": 1, "record": 52}
+  {"broken_rules": ["cpu_capacity"], "h": 0.4008784786682007, "reads": 1, "record": 61}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3981909639490411, "reads": 1, "record": 63}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39757861355360546, "reads": 1, "record": 69}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39976862291290516, "reads": 1, "record": 92}
+  {"broken_rules": ["cpu_capacity"], "h": 0.40282816785618536, "reads": 1, "record": 96}
+  {"broken_rules": ["cpu_capacity"], "h": 0.4006683204513841, "reads": 1, "record": 98}
+  {"broken_rules": ["cpu_capacity"], "h": 0.4014375085340163, "reads": 1, "record": 110}
+  {"broken_rules": ["assign"], "h": 0.4058879824727306, "reads": 1, "record": 121}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39710655802577577, "reads": 1, "record": 124}
+  {"broken_rules": ["cpu_capacity"], "h": 0.4003452147635329, "reads": 1, "record": 126}
+  {"broken_rules": ["cpu_capacity"], "h": 0.401762539836497, "reads": 1, "record": 153}
+  {"broken_rules": ["cpu_capacity"], "h": 0.40038464278075026, "reads": 1, "record": 162}
+  {"broken_rules": ["cpu_capacity"], "h": 0.403793878885331, "reads": 1, "record": 167}
+  {"broken_rules": ["assign"], "h": 0.4048639338680644, "reads": 1, "record": 171}
+  {"broken_rules": ["assign"], "h": 0.3991754702513326, "reads": 1, "record": 178}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39873119016983694, "reads": 1, "record": 179}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3941990869164158, "reads": 1, "record": 181}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3978050516696996, "reads": 1, "record": 183}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39677287075141976, "reads": 1, "record": 186}
+  {"broken_rules": ["assign"], "h": 0.4003335000112749, "reads": 1, "record": 188}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39822294152642, "reads": 1, "record": 198}
+S2: {"leak_broken_rules": {"assign": 8, "cpu_capacity": 38}, "leak_reads": 46, "min_h_all": 0.39203763558445104, "min_h_valid": 0.4339141622564284, "reads_le_exact": 48, "reads_le_exact_pct": 4.8, "valid_reads": 616, "valid_reads_le_exact": 2, "valid_reads_pct": 61.6, "valid_servers_on_histogram": {"2": 2, "3": 518, "4": 96}, "wall_time_s": 17.534784300019965}
+Leak check S2: 46 invalid reads with H <= H_exact + 1e-9
+  {"broken_rules": ["cpu_capacity"], "h": 0.40289131304083625, "reads": 1, "record": 30}
+  {"broken_rules": ["cpu_capacity"], "h": 0.400201380490369, "reads": 1, "record": 34}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3982023878742922, "reads": 1, "record": 61}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3933762721583207, "reads": 1, "record": 68}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39582227613583143, "reads": 1, "record": 69}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39664964440497386, "reads": 1, "record": 80}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3942245513844611, "reads": 1, "record": 98}
+  {"broken_rules": ["assign"], "h": 0.4058021374098182, "reads": 1, "record": 147}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3993212225187932, "reads": 1, "record": 186}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39840954762380676, "reads": 1, "record": 198}
+  {"broken_rules": ["cpu_capacity"], "h": 0.4000403901225198, "reads": 1, "record": 215}
+  {"broken_rules": ["cpu_capacity"], "h": 0.40008163666289676, "reads": 1, "record": 220}
+  {"broken_rules": ["cpu_capacity"], "h": 0.4001038218002435, "reads": 1, "record": 224}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3996479758412761, "reads": 1, "record": 232}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39333223017104757, "reads": 1, "record": 235}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39423099710796095, "reads": 1, "record": 242}
+  {"broken_rules": ["assign"], "h": 0.40180868863600594, "reads": 1, "record": 243}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3988125963255911, "reads": 1, "record": 245}
+  {"broken_rules": ["assign"], "h": 0.3969780020032907, "reads": 1, "record": 272}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3958293233934853, "reads": 1, "record": 302}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39856434986354117, "reads": 1, "record": 329}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3988701916007784, "reads": 1, "record": 348}
+  {"broken_rules": ["cpu_capacity"], "h": 0.4001939900191829, "reads": 1, "record": 349}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3947738014809943, "reads": 1, "record": 358}
+  {"broken_rules": ["assign"], "h": 0.4054105640681307, "reads": 1, "record": 437}
+  {"broken_rules": ["assign"], "h": 0.40479834915525004, "reads": 1, "record": 448}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39742687526455, "reads": 1, "record": 452}
+  {"broken_rules": ["assign"], "h": 0.4065784678981217, "reads": 1, "record": 486}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39776767028919835, "reads": 1, "record": 555}
+  {"broken_rules": ["assign"], "h": 0.4010695129142654, "reads": 1, "record": 572}
+  {"broken_rules": ["cpu_capacity"], "h": 0.395372762971526, "reads": 1, "record": 655}
+  {"broken_rules": ["assign"], "h": 0.3977962151944645, "reads": 1, "record": 678}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39991795620768755, "reads": 1, "record": 686}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39936363741880854, "reads": 1, "record": 712}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3951923127586099, "reads": 1, "record": 714}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3986846127440842, "reads": 1, "record": 759}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3941138397320003, "reads": 1, "record": 777}
+  {"broken_rules": ["cpu_capacity"], "h": 0.402806123077859, "reads": 1, "record": 799}
+  {"broken_rules": ["cpu_capacity"], "h": 0.40208974517725693, "reads": 1, "record": 803}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3988085419177878, "reads": 1, "record": 837}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39203763558445104, "reads": 1, "record": 838}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3920624915308437, "reads": 1, "record": 875}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3963884030532583, "reads": 1, "record": 916}
+  {"broken_rules": ["cpu_capacity"], "h": 0.40087619504125627, "reads": 1, "record": 924}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3933479101595694, "reads": 1, "record": 933}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39604412605439876, "reads": 1, "record": 953}
+S3: T_hot=0.7578486795475676, T_cold=0.0004677133278407752, beta_range=(1.319524632010965, 2138.0618008397496)
+S3: {"leak_broken_rules": {"assign": 5, "cpu_capacity": 12}, "leak_reads": 17, "min_h_all": 0.3938025333011197, "min_h_valid": 0.4304401138135745, "reads_le_exact": 18, "reads_le_exact_pct": 9.0, "valid_reads": 111, "valid_reads_le_exact": 1, "valid_reads_pct": 55.5, "valid_servers_on_histogram": {"2": 1, "3": 105, "4": 5}, "wall_time_s": 5.175282999989577}
+Leak check S3: 17 invalid reads with H <= H_exact + 1e-9
+  {"broken_rules": ["assign"], "h": 0.39976442430344505, "reads": 1, "record": 9}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39430228168981785, "reads": 1, "record": 18}
+  {"broken_rules": ["assign"], "h": 0.40471884633933186, "reads": 1, "record": 30}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3964189038482573, "reads": 1, "record": 32}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3950258425247597, "reads": 1, "record": 34}
+  {"broken_rules": ["assign"], "h": 0.4018587030750176, "reads": 1, "record": 51}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3997422685984091, "reads": 1, "record": 56}
+  {"broken_rules": ["assign"], "h": 0.3997572276230308, "reads": 1, "record": 62}
+  {"broken_rules": ["cpu_capacity"], "h": 0.40291287249849717, "reads": 1, "record": 73}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39468077618715824, "reads": 1, "record": 77}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39796049277440204, "reads": 1, "record": 122}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3968774122455372, "reads": 1, "record": 132}
+  {"broken_rules": ["assign"], "h": 0.399154881822394, "reads": 1, "record": 137}
+  {"broken_rules": ["cpu_capacity"], "h": 0.4014454230759448, "reads": 1, "record": 148}
+  {"broken_rules": ["cpu_capacity"], "h": 0.40229478972530686, "reads": 1, "record": 156}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3938025333011197, "reads": 1, "record": 182}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3998377161683493, "reads": 1, "record": 185}
+S4: T_hot=7.578486795475676, T_cold=0.0004677133278407752, beta_range=(0.13195246320109652, 2138.0618008397496)
+S4: {"leak_broken_rules": {"assign": 3, "cpu_capacity": 7}, "leak_reads": 10, "min_h_all": 0.39561623585242955, "min_h_valid": 0.4977170709428371, "reads_le_exact": 10, "reads_le_exact_pct": 5.0, "valid_reads": 115, "valid_reads_le_exact": 0, "valid_reads_pct": 57.5, "valid_servers_on_histogram": {"3": 103, "4": 12}, "wall_time_s": 7.066355300019495}
+Leak check S4: 10 invalid reads with H <= H_exact + 1e-9
+  {"broken_rules": ["cpu_capacity"], "h": 0.4001874755355104, "reads": 1, "record": 29}
+  {"broken_rules": ["assign"], "h": 0.40055962375397414, "reads": 1, "record": 98}
+  {"broken_rules": ["assign"], "h": 0.40798140041187025, "reads": 1, "record": 100}
+  {"broken_rules": ["assign"], "h": 0.39646152259366474, "reads": 1, "record": 131}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39816972801408923, "reads": 1, "record": 139}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3956456847428811, "reads": 1, "record": 144}
+  {"broken_rules": ["cpu_capacity"], "h": 0.4026963244209796, "reads": 1, "record": 159}
+  {"broken_rules": ["cpu_capacity"], "h": 0.404579808660646, "reads": 1, "record": 171}
+  {"broken_rules": ["cpu_capacity"], "h": 0.3989687808151636, "reads": 1, "record": 178}
+  {"broken_rules": ["cpu_capacity"], "h": 0.39561623585242955, "reads": 1, "record": 195}
+Local minimum: min delta H=0.01545819189683029, negative flips=0
+Saved: results/diagnostics/d3/small_v2.csv
+
+=== medium_v2: encoding=unbalanced, lambda_config=L0.05, center=0.02 ===
+Encoding safeguard: assignment_exact.csv: H=0.4062522893188384, D2 total_h=0.4062522893188384, PASS
+Encoding safeguard: assignment_annealer_only.csv: H=0.7667320471471373, D2 total_h=0.7667320471471373, PASS
+Reproduction gate (solver.valid_reads_raw_pct): saved=82.00%, reproduced=82.00%, PASS
+H_exact=0.4062522893188384
+S0 default beta_range=[np.float64(0.18429449695227748), np.float64(3278451.5288628647)]
+S0: {"leak_broken_rules": {}, "leak_reads": 0, "min_h_all": 0.7441624539689684, "min_h_valid": 0.7441624539689684, "reads_le_exact": 0, "reads_le_exact_pct": 0.0, "valid_reads": 164, "valid_reads_le_exact": 0, "valid_reads_pct": 82.0, "valid_servers_on_histogram": {"5": 44, "6": 104, "7": 16}, "wall_time_s": 11.95191059994977}
+Leak check S0: none
+S1: {"leak_broken_rules": {}, "leak_reads": 0, "min_h_all": 0.5792571166238005, "min_h_valid": 0.5792571166238005, "reads_le_exact": 0, "reads_le_exact_pct": 0.0, "valid_reads": 159, "valid_reads_le_exact": 0, "valid_reads_pct": 79.5, "valid_servers_on_histogram": {"4": 7, "5": 115, "6": 37}, "wall_time_s": 59.99661119992379}
+Leak check S1: none
+S2: {"leak_broken_rules": {}, "leak_reads": 0, "min_h_all": 0.615070935186111, "min_h_valid": 0.6423508478287445, "reads_le_exact": 0, "reads_le_exact_pct": 0.0, "valid_reads": 857, "valid_reads_le_exact": 0, "valid_reads_pct": 85.7, "valid_servers_on_histogram": {"4": 2, "5": 200, "6": 557, "7": 98}, "wall_time_s": 79.18441049999092}
+Leak check S2: none
+S3: T_hot=0.7611711707603475, T_cold=0.0004408753455443195, beta_range=(1.3137649433058298, 2268.2148369293964)
+S3: {"leak_broken_rules": {}, "leak_reads": 0, "min_h_all": 0.5941993852944236, "min_h_valid": 0.5941993852944236, "reads_le_exact": 0, "reads_le_exact_pct": 0.0, "valid_reads": 156, "valid_reads_le_exact": 0, "valid_reads_pct": 78.0, "valid_servers_on_histogram": {"4": 2, "5": 77, "6": 76, "7": 1}, "wall_time_s": 16.538672999944538}
+Leak check S3: none
+S4: T_hot=7.611711707603474, T_cold=0.0004408753455443195, beta_range=(0.131376494330583, 2268.2148369293964)
+S4: {"leak_broken_rules": {}, "leak_reads": 0, "min_h_all": 0.6129077826422815, "min_h_valid": 0.7464978197671854, "reads_le_exact": 0, "reads_le_exact_pct": 0.0, "valid_reads": 167, "valid_reads_le_exact": 0, "valid_reads_pct": 83.5, "valid_servers_on_histogram": {"5": 60, "6": 100, "7": 7}, "wall_time_s": 22.72082489996683}
+Leak check S4: none
+Local minimum: min delta H=0.01703597330472645, negative flips=0
+Saved: results/diagnostics/d3/medium_v2.csv
+
+=== large_v2: encoding=unbalanced, lambda_config=L0.05, center=0.02 ===
+Encoding safeguard: assignment_exact.csv: H=0.4869507682660553, D2 total_h=0.4869507682660553, PASS
+Encoding safeguard: assignment_annealer_only.csv: H=1.134027809686234, D2 total_h=1.134027809686234, PASS
+Reproduction gate (solver.valid_reads_raw_pct): saved=75.00%, reproduced=75.00%, PASS
+H_exact=0.4869507682660553
+S0 default beta_range=[np.float64(0.08824817568121668), np.float64(4194466.608066773)]
+S0: {"leak_broken_rules": {}, "leak_reads": 0, "min_h_all": 1.1251308801761581, "min_h_valid": 1.1340278098476517, "reads_le_exact": 0, "reads_le_exact_pct": 0.0, "valid_reads": 150, "valid_reads_le_exact": 0, "valid_reads_pct": 75.0, "valid_servers_on_histogram": {"10": 1, "11": 33, "12": 116}, "wall_time_s": 66.28172359999735}
+Leak check S0: none

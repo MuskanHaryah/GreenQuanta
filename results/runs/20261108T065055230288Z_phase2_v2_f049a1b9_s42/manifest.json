@@ -1,0 +1,21 @@
+{
+  "run_id": "20261108T065055230288Z_phase2_v2_f049a1b9_s42",
+  "timestamp": "2026-11-08T06:50:55.230288+00:00",
+  "code_revision": "a8c4bde1e5d9b11e606808547054a39140f973e3",
+  "dirty_worktree": false,
+  "untracked_count": 24,
+  "dataset_hash": "b7d257dbed8ef7b2dda01e82f6e2a9c98458a7f102d740a2ff065914099a6954",
+  "workload_hash": "4d65bcd23cfcf06de0c4968434598488f0ec90e4ab9a245b92e8a07788e2d95e",
+  "config_hash": "f049a1b9721b0390aa1752e9c005af554530fcd6b2c2eb5ff7a86c1f4c16cd4f",
+  "dependency_versions": {
+    "pandas": "3.1.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "dimod": "0.12.23",
+    "dwave-samplers": "1.8.0",
+    "pytest": "9.2.0"
+  },
+  "sampler_seed": 42,
+  "workload_seed": 0,
+  "method": "phase2_v2"
+}

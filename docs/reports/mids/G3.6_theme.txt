@@ -1,0 +1,11 @@
+﻿# G3.6 theme rule check (2026-11-14T13:30:50)
+Select-String over frontend/src for: gradient, blur(, backdrop-filter, box-shadow (glow)
+files scanned: 34
+matches: 0
+THEME GREP PASS (no matches)
+
+Blobs: inline SVG paths with solid fill (src/components/Blobs.tsx); motion: CSS keyframes on d/transform for the blobs (user-requested animation), transitions 200 ms; all off under prefers-reduced-motion (theme.css).
+> C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\frontend\src\theme.css:422:@media (prefers-reduced-motion: reduce) {
+  C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\frontend\src\theme.css:423:  html { scroll-behavior: auto; }
+  C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\frontend\src\theme.css:424:  *, *::before, *::after { animation: none !important; transition: none !important; }
+  C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\frontend\src\theme.css:425:  .btn:hover:not(:disabled), .tile:hover, .circle:hover:not(:disabled) { transform: none; }

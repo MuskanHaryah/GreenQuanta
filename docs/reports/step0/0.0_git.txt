@@ -1,0 +1,18 @@
+Step 0.0 record. Source: .git/HEAD and .git/logs/HEAD, read with the Read tool after the user ran the 0.0 commands
+(the user did not paste the `git status --short` / `git log --oneline -3` output).
+
+.git/HEAD:
+ref: refs/heads/step3-r3c-sweep
+
+.git/logs/HEAD (last two lines, verbatim):
+3b651053d3c7c4b76627dec7fd83ebbf2728f361 3b651053d3c7c4b76627dec7fd83ebbf2728f361 Muskan Haryah <muskanharyah36@gmail.com> 1794311452 +0500	checkout: moving from step3-r3-exact-qubo to step3-r3c-sweep
+3b651053d3c7c4b76627dec7fd83ebbf2728f361 3c6258ba6b3fe37fe04dce2eae333a114f2dd6f5 Muskan Haryah <muskanharyah36@gmail.com> 1794403971 +0500	commit: Step R3c: lambda/unit sweep and fixed-y SA probe (code and tests)
+
+0.1 gate (from docs/reports/step0/0.1_r3c_large.txt, 0.1_full_tests.txt, 0.1_r3c_finish.txt):
+- large_v2 Part B, V0, D1 [4,5,9,10,11]: fixed-y exact UNPROVEN (HiGHS time limit 600.33 s, mip_gap 2.06e-4,
+  incumbent H 0.4675925960, lower bound 0.4674961816, incumbent GLOBAL_VALID true, linear J 77887819.41);
+  SA seed 0 TIMEOUT at 120.56 s (sample_cap 120). Gate "rows recorded or timeout documented": PASS.
+- Full tests: 123 passed in 272.65s, EXIT=0.
+- finish: protected identical true, git diff / diff --cached 0/0, report 37 lines, EXIT=0.
+  docs/reports/stepR3c_report.md regenerated (no longer "NOT RUN"). Large Part A remains SKIPPED by design
+  (no variant passed on both small_v2 and medium_v2; r3c_run.py:165-178).

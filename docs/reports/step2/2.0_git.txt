@@ -1,0 +1,33 @@
+﻿step6-s2-sqa-placement
+579ac91a Step 1.8: gate script takes the expected appended methods as a parameter
+?? .rules
+?? RESEARCH.txt
+?? docs/AUDIT.md
+?? docs/LIMITATIONS_OPTIONS.md
+?? docs/plans/
+?? docs/reports/step0/
+?? docs/reports/step1/
+?? docs/reports/step1a_fix_report.md
+?? docs/reports/step1a_report.md
+?? docs/reports/step1b_fix_report.md
+?? docs/reports/step1b_report.md
+?? docs/reports/step1c_raw_output.txt
+?? docs/reports/step1c_report.md
+?? docs/reports/step2/
+?? docs/reports/step2a_raw_output.txt
+?? docs/reports/step2a_report.md
+?? docs/reports/step2e_raw_output.txt
+?? docs/reports/step2e_report.md
+?? docs/reports/stepD0_raw_output.txt
+?? docs/reports/stepD0_report.md
+?? docs/reports/stepD2_raw_output.txt
+?? docs/reports/stepD2_report.md
+?? docs/reports/stepD3_gate_output.txt
+?? docs/reports/stepD3_large_output.txt
+?? docs/reports/stepD3_raw_output.txt
+?? docs/reports/stepD3_report.md
+?? docs/reports/stepR3c_raw_output.txt
+?? docs/reports/stepR3c_report.md
+?? results/diagnostics/
+?? results/experiment_log.csv
+?? results/runs/

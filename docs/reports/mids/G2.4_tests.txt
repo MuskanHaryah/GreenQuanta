@@ -1,0 +1,23 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 9 items
+
+tests/test_backend_jobs.py::test_live_run_small_done_exclusive_and_matches_cached PASSED [ 11%]
+tests/test_backend_jobs.py::test_bad_body_400[None] PASSED               [ 22%]
+tests/test_backend_jobs.py::test_bad_body_400[body1] PASSED              [ 33%]
+tests/test_backend_jobs.py::test_bad_body_400[body2] PASSED              [ 44%]
+tests/test_backend_jobs.py::test_bad_body_400[body3] PASSED              [ 55%]
+tests/test_backend_jobs.py::test_bad_body_400[body4] PASSED              [ 66%]
+tests/test_backend_jobs.py::test_bad_body_400[body5] PASSED              [ 77%]
+tests/test_backend_jobs.py::test_unknown_job_404 PASSED                  [ 88%]
+tests/test_backend_jobs.py::test_timeout_kills_and_fails PASSED          [100%]
+
+============================= 9 passed in 22.71s ==============================
+
+Extra check (scratch script g24_treekill.py, not a repo test): large_v2 csqa with RUN_TIMEOUT_S=75; descendants listed
+with Get-CimInstance Win32_Process (recursive ParentProcessId) at 70 s, liveness with tasklist after the timeout:
+events so far ['PROPOSALS'] | run pid 25148 descendants while running: [{'ProcessId': 128, 'Name': 'python.exe'}, {'ProcessId': 27256, 'Name': 'python.exe'}]
+status failed | error timed out after 75 s; process tree killed | elapsed_s 75.359
+run poll() 1 | run alive False
+children alive after kill: {128: False, 27256: False}

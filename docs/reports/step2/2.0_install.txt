@@ -1,0 +1,195 @@
+﻿Collecting openjij
+  Downloading openjij-0.12.2-cp312-cp312-win_amd64.whl.metadata (9.0 kB)
+Requirement already satisfied: numpy<2.6,>=2.0.0 in .\.venv-gq\Lib\site-packages (from openjij) (2.5.4)
+Requirement already satisfied: dimod<0.13.0,>=0.12.22 in .\.venv-gq\Lib\site-packages (from openjij) (0.12.23)
+  Downloading openjij-0.12.1-cp312-cp312-win_amd64.whl.metadata (9.0 kB)
+INFO: pip is looking at multiple versions of openjij to determine which version is compatible with other requirements. This could take a while.
+  Downloading openjij-0.12.0-cp312-cp312-win_amd64.whl.metadata (9.0 kB)
+  Downloading openjij-0.11.6-cp312-cp312-win_amd64.whl.metadata (8.3 kB)
+Collecting numpy<2.4.0,>=1.19.3 (from openjij)
+  Downloading numpy-2.3.5-cp312-cp312-win_amd64.whl.metadata (60 kB)
+  WARNING: Connection interrupted while downloading.
+  WARNING: Attempting to resume incomplete download (0 bytes/60 kB, attempt 1)
+  Downloading numpy-2.3.5-cp312-cp312-win_amd64.whl.metadata (60 kB)
+Collecting openjij
+  Downloading openjij-0.11.5-cp312-cp312-win_amd64.whl.metadata (8.3 kB)
+  Downloading openjij-0.11.4-cp312-cp312-win_amd64.whl.metadata (8.3 kB)
+  Downloading openjij-0.11.3-cp312-cp312-win_amd64.whl.metadata (8.3 kB)
+  Downloading openjij-0.11.2-cp312-cp312-win_amd64.whl.metadata (8.3 kB)
+INFO: pip is still looking at multiple versions of openjij to determine which version is compatible with other requirements. This could take a while.
+  Downloading openjij-0.11.1-cp312-cp312-win_amd64.whl.metadata (8.3 kB)
+  Downloading openjij-0.10.17-cp312-cp312-win_amd64.whl.metadata (12 kB)
+Collecting requests<2.32.0,>=2.28.0 (from openjij)
+  Downloading requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting openjij
+  Downloading openjij-0.10.16-cp312-cp312-win_amd64.whl.metadata (12 kB)
+  Downloading openjij-0.10.15-cp312-cp312-win_amd64.whl.metadata (12 kB)
+Collecting scipy<1.12.0,>=1.7.3 (from openjij)
+  Downloading scipy-1.11.4-cp312-cp312-win_amd64.whl.metadata (60 kB)
+Collecting openjij
+  Downloading openjij-0.10.14-cp312-cp312-win_amd64.whl.metadata (12 kB)
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+  Downloading openjij-0.10.7-cp312-cp312-win_amd64.whl.metadata (12 kB)
+  Downloading openjij-0.10.6-cp312-cp312-win_amd64.whl.metadata (12 kB)
+  Downloading openjij-0.10.5-cp312-cp312-win_amd64.whl.metadata (9.9 kB)
+  Downloading openjij-0.10.3-cp312-cp312-win_amd64.whl.metadata (13 kB)
+  WARNING: Connection interrupted while downloading.
+  WARNING: Attempting to resume incomplete download (0 bytes/13 kB, attempt 1)
+  WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='files.pythonhosted.org', port=443): Failed to resolve 'files.pythonhosted.org' ([Errno 11001] getaddrinfo failed)")': /packages/c2/62/c9f5ae147e534b6fae7a2ebbff34bedbb3d54b5d7df87685e11dee2c1184/openjij-0.10.3-cp312-cp312-win_amd64.whl.metadata
+  WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='files.pythonhosted.org', port=443): Failed to resolve 'files.pythonhosted.org' ([Errno 11001] getaddrinfo failed)")': /packages/c2/62/c9f5ae147e534b6fae7a2ebbff34bedbb3d54b5d7df87685e11dee2c1184/openjij-0.10.3-cp312-cp312-win_amd64.whl.metadata
+  WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='files.pythonhosted.org', port=443): Failed to resolve 'files.pythonhosted.org' ([Errno 11001] getaddrinfo failed)")': /packages/c2/62/c9f5ae147e534b6fae7a2ebbff34bedbb3d54b5d7df87685e11dee2c1184/openjij-0.10.3-cp312-cp312-win_amd64.whl.metadata
+  WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='files.pythonhosted.org', port=443): Failed to resolve 'files.pythonhosted.org' ([Errno 11001] getaddrinfo failed)")': /packages/c2/62/c9f5ae147e534b6fae7a2ebbff34bedbb3d54b5d7df87685e11dee2c1184/openjij-0.10.3-cp312-cp312-win_amd64.whl.metadata
+  WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='files.pythonhosted.org', port=443): Failed to resolve 'files.pythonhosted.org' ([Errno 11001] getaddrinfo failed)")': /packages/c2/62/c9f5ae147e534b6fae7a2ebbff34bedbb3d54b5d7df87685e11dee2c1184/openjij-0.10.3-cp312-cp312-win_amd64.whl.metadata
+  Downloading openjij-0.10.3-cp312-cp312-win_amd64.whl.metadata (13 kB)
+Requirement already satisfied: scipy<2.0.0,>=1.7.3 in .\.venv-gq\Lib\site-packages (from openjij) (1.18.1)
+  Downloading openjij-0.9.2-cp312-cp312-win_amd64.whl.metadata (9.7 kB)
+Collecting numpy<1.27.0,>=1.17.3 (from openjij)
+  Downloading numpy-1.26.4-cp312-cp312-win_amd64.whl.metadata (61 kB)
+Collecting openjij
+  Downloading openjij-0.9.1-cp312-cp312-win_amd64.whl.metadata (9.7 kB)
+  Downloading openjij-0.9.0-cp312-cp312-win_amd64.whl.metadata (9.7 kB)
+  Downloading openjij-0.3.5.tar.gz (272 kB)
+  Installing build dependencies: started
+  Installing build dependencies: still running...
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Discarding https://files.pythonhosted.org/packages/0b/b5/7144da50ec6956a15e0e9c999c6be26249f9f47c373fddfedf8e15012933/openjij-0.3.5.tar.gz (from https://pypi.org/simple/openjij/): Requested openjij from https://files.pythonhosted.org/packages/0b/b5/7144da50ec6956a15e0e9c999c6be26249f9f47c373fddfedf8e15012933/openjij-0.3.5.tar.gz has inconsistent version: expected '0.3.5', but metadata has '0.0.0'
+  Downloading openjij-0.3.4.tar.gz (273 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Discarding https://files.pythonhosted.org/packages/0c/e0/5a0ce72966a78ad5d4718f83b25f43cf3ed746905b3a43b25e28a69e8a97/openjij-0.3.4.tar.gz (from https://pypi.org/simple/openjij/): Requested openjij from https://files.pythonhosted.org/packages/0c/e0/5a0ce72966a78ad5d4718f83b25f43cf3ed746905b3a43b25e28a69e8a97/openjij-0.3.4.tar.gz has inconsistent version: expected '0.3.4', but metadata has '0.0.0'
+  Downloading openjij-0.3.3.tar.gz (273 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Discarding https://files.pythonhosted.org/packages/99/6b/62fa7f01162fc31a8706a4f3453444000155db0ee71e96f2937ea67621e5/openjij-0.3.3.tar.gz (from https://pypi.org/simple/openjij/): Requested openjij from https://files.pythonhosted.org/packages/99/6b/62fa7f01162fc31a8706a4f3453444000155db0ee71e96f2937ea67621e5/openjij-0.3.3.tar.gz has inconsistent version: expected '0.3.3', but metadata has '0.0.0'
+  Downloading openjij-0.3.2.tar.gz (273 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Discarding https://files.pythonhosted.org/packages/c5/e2/21316fd03fe848bc0438ef20d408e9e760f55b8c6ef8dee9d5ad2bd35c09/openjij-0.3.2.tar.gz (from https://pypi.org/simple/openjij/): Requested openjij from https://files.pythonhosted.org/packages/c5/e2/21316fd03fe848bc0438ef20d408e9e760f55b8c6ef8dee9d5ad2bd35c09/openjij-0.3.2.tar.gz has inconsistent version: expected '0.3.2', but metadata has '0.0.0'
+  Downloading openjij-0.3.1.tar.gz (273 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting requests (from openjij)
+  Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting openjij
+  Downloading openjij-0.3.0.tar.gz (273 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+  Downloading openjij-0.2.2.tar.gz (256 kB)
+  WARNING: Connection interrupted while downloading.
+  WARNING: Attempting to resume incomplete download (0 bytes/256 kB, attempt 1)
+  Downloading openjij-0.2.2.tar.gz (256 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+  Downloading openjij-0.1.1.tar.gz (233 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+  Downloading openjij-0.1.0.tar.gz (225 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+  Downloading openjij-0.0.11.tar.gz (75 kB)
+  WARNING: Connection interrupted while downloading.
+  WARNING: Attempting to resume incomplete download (0 bytes/75 kB, attempt 1)
+  Downloading openjij-0.0.11.tar.gz (75 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'RemoteDisconnected('Remote end closed connection without response')': /simple/dimod/
+Collecting dimod==0.8.21 (from openjij)
+  Downloading dimod-0.8.21.tar.gz (151 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting six<2.0.0,>=1.10.0 (from dimod==0.8.21->openjij)
+  Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting charset_normalizer<4,>=2 (from requests->openjij)
+  Using cached charset_normalizer-3.5.2-cp312-cp312-win_amd64.whl.metadata (47 kB)
+Collecting idna<4,>=2.5 (from requests->openjij)
+  Using cached idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting urllib3<3,>=1.26 (from requests->openjij)
+  Using cached urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting certifi>=2023.5.7 (from requests->openjij)
+  Using cached certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Would install certifi-2026.10.23 charset-normalizer-3.5.2 dimod-0.8.21 idna-3.20 numpy-1.26.4 openjij-0.0.11 requests-2.34.2 six-1.17.0 urllib3-2.8.0
+Collecting openjij==0.12.2
+  Using cached openjij-0.12.2-cp312-cp312-win_amd64.whl.metadata (9.0 kB)
+Requirement already satisfied: numpy==2.5.4 in .\.venv-gq\Lib\site-packages (2.5.4)
+Requirement already satisfied: dimod==0.12.23 in .\.venv-gq\Lib\site-packages (0.12.23)
+ERROR: Ignored the following versions that require a different python version: 0.0.0 Requires-Python >=3.7,<3.10; 0.4.2 Requires-Python >=3.7,<3.10; 0.4.3 Requires-Python >=3.7,<3.10; 0.4.4 Requires-Python >=3.7,<3.10; 0.4.5 Requires-Python >=3.7,<3.10; 0.4.6 Requires-Python >=3.7,<3.11; 0.4.7 Requires-Python >=3.7,<3.11; 0.4.8 Requires-Python >=3.7,<3.11; 0.4.9 Requires-Python >=3.7,<3.11; 0.5.0 Requires-Python >=3.7,<3.11; 0.5.1 Requires-Python >=3.7,<3.11; 0.5.11 Requires-Python >=3.7,<3.11; 0.5.13 Requires-Python >=3.7,<3.11; 0.5.14 Requires-Python >=3.7,<3.11; 0.5.18 Requires-Python >=3.7,<3.11; 0.5.19 Requires-Python >=3.7,<3.11; 0.5.2 Requires-Python >=3.7,<3.11; 0.5.20 Requires-Python >=3.7,<3.11; 0.5.22 Requires-Python >=3.7,<3.11; 0.5.23 Requires-Python >=3.7,<3.11; 0.5.25 Requires-Python >=3.7,<3.11; 0.5.26 Requires-Python >=3.7,<3.11; 0.5.27 Requires-Python >=3.7,<3.11; 0.5.28 Requires-Python >=3.7,<3.11; 0.5.29 Requires-Python >=3.7,<3.11; 0.5.3 Requires-Python >=3.7,<3.11; 0.5.30 Requires-Python >=3.7,<3.11; 0.5.31 Requires-Python >=3.7,<3.11; 0.5.33 Requires-Python >=3.7,<3.11; 0.5.34 Requires-Python >=3.7,<3.11; 0.5.35 Requires-Python >=3.7,<3.11; 0.5.36 Requires-Python >=3.7,<3.11; 0.5.37 Requires-Python >=3.7,<3.11; 0.5.38 Requires-Python >=3.7,<3.11; 0.5.39 Requires-Python >=3.7,<3.11; 0.5.4 Requires-Python >=3.7,<3.11; 0.5.40 Requires-Python >=3.7,<3.11; 0.5.6 Requires-Python >=3.7,<3.11; 0.5.8 Requires-Python >=3.7,<3.11; 0.5.9 Requires-Python >=3.7,<3.11; 0.6.0 Requires-Python >=3.7,<3.11; 0.6.1 Requires-Python >=3.7,<3.11; 0.6.10 Requires-Python >=3.7,<3.11; 0.6.11 Requires-Python >=3.7,<3.11; 0.6.12 Requires-Python >=3.7,<3.11; 0.6.13 Requires-Python >=3.7,<3.11; 0.6.14 Requires-Python >=3.7,<3.11; 0.6.15 Requires-Python >=3.7,<3.11; 0.6.16 Requires-Python >=3.7,<3.11; 0.6.17 Requires-Python >=3.7,<3.11; 0.6.2 Requires-Python >=3.7,<3.11; 0.6.3 Requires-Python >=3.7,<3.11; 0.6.4 Requires-Python >=3.7,<3.11; 0.6.5 Requires-Python >=3.7,<3.11; 0.6.6 Requires-Python >=3.7,<3.11; 0.6.7 Requires-Python >=3.7,<3.11; 0.6.8 Requires-Python >=3.7,<3.11; 0.6.9 Requires-Python >=3.7,<3.11; 0.7.0 Requires-Python >=3.7,<3.11; 0.7.1 Requires-Python >=3.7,<3.11; 0.7.2 Requires-Python >=3.7,<3.11; 0.7.3 Requires-Python >=3.7,<3.11; 0.7.4 Requires-Python >=3.8,<3.11; 0.8.0 Requires-Python >=3.8,<3.12; 0.8.0rc2 Requires-Python >=3.8,<3.12
+ERROR: Could not find a version that satisfies the requirement jij-cimod<1.8.0,>=1.7.5 (from openjij) (from versions: none)
+ERROR: No matching distribution found for jij-cimod<1.8.0,>=1.7.5 (from openjij)
+Collecting openjij==0.12.2
+  Using cached openjij-0.12.2-cp312-cp312-win_amd64.whl.metadata (9.0 kB)
+Requirement already satisfied: numpy<2.6,>=2.0.0 in .\.venv-gq\Lib\site-packages (from openjij==0.12.2) (2.5.4)
+Requirement already satisfied: dimod<0.13.0,>=0.12.22 in .\.venv-gq\Lib\site-packages (from openjij==0.12.2) (0.12.23)
+Collecting jij-cimod<1.8.0,>=1.7.5 (from openjij==0.12.2)
+  Using cached jij_cimod-1.7.5-cp312-cp312-win_amd64.whl.metadata (10 kB)
+Requirement already satisfied: scipy<1.19,>=1.18 in .\.venv-gq\Lib\site-packages (from jij-cimod<1.8.0,>=1.7.5->openjij==0.12.2) (1.18.1)
+Would install jij-cimod-1.7.5 openjij-0.12.2
+Collecting openjij==0.12.2
+  Using cached openjij-0.12.2-cp312-cp312-win_amd64.whl.metadata (9.0 kB)
+Requirement already satisfied: numpy<2.6,>=2.0.0 in .\.venv-gq\Lib\site-packages (from openjij==0.12.2) (2.5.4)
+Requirement already satisfied: dimod<0.13.0,>=0.12.22 in .\.venv-gq\Lib\site-packages (from openjij==0.12.2) (0.12.23)
+Collecting jij-cimod<1.8.0,>=1.7.5 (from openjij==0.12.2)
+  Using cached jij_cimod-1.7.5-cp312-cp312-win_amd64.whl.metadata (10 kB)
+Requirement already satisfied: scipy<1.19,>=1.18 in .\.venv-gq\Lib\site-packages (from jij-cimod<1.8.0,>=1.7.5->openjij==0.12.2) (1.18.1)
+Downloading openjij-0.12.2-cp312-cp312-win_amd64.whl (849 kB)
+   ---------------------------------------- 849.5/849.5 kB 2.5 kB/s  0:01:57
+Downloading jij_cimod-1.7.5-cp312-cp312-win_amd64.whl (1.1 MB)
+   -------------------                      0.5/1.1 MB ? eta -:--:--
+WARNING: Connection interrupted while downloading.
+WARNING: Attempting to resume incomplete download (524 kB/1.1 MB, attempt 1)
+Resuming download jij_cimod-1.7.5-cp312-cp312-win_amd64.whl (524 kB/1.1 MB)
+   ---------------------------------------- 1.1/1.1 MB 10.5 kB/s  0:00:53
+Installing collected packages: jij-cimod, openjij
+
+Successfully installed jij-cimod-1.7.5 openjij-0.12.2

@@ -1,0 +1,86 @@
+# G3.6 checks (2026-11-14T13:31:00+05:00)
+## npx tsc --noEmit
+exit 0
+## npm run lint
+
+> greenquanta-dashboard@0.1.0 lint
+> eslint src
+
+exit 0
+## npx vitest run
+
+ RUN  v5.0.5 C:/Users/Lenovo/Desktop/CLASS/4th year/7th SEM/FYDP/GreenQuanta/frontend
+
+
+ Test Files  5 passed (5)
+      Tests  27 passed (27)
+   Start at  13:31:34
+   Duration  8.67s (environment 52%, tests 20%, import 18%, setup 8%, transform 2%, worker 1%)
+
+exit 0
+## npm run build
+
+> greenquanta-dashboard@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 415 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                               0.53 kB │ gzip:  0.33 kB
+dist/assets/inter-vietnamese-400-normal-DMkecbls.woff2        4.97 kB
+dist/assets/inter-vietnamese-600-normal-Cc8MFFhd.woff2        5.10 kB
+dist/assets/inter-greek-ext-400-normal-DGGRlc-M.woff2         5.26 kB
+dist/assets/raleway-vietnamese-200-normal-CqZUd6VU.woff       5.39 kB
+dist/assets/inter-greek-ext-600-normal-DRtmH8MT.woff2         5.43 kB
+dist/assets/inter-vietnamese-400-normal-Bbgyi5SW.woff         6.50 kB
+dist/assets/inter-vietnamese-600-normal-BuLX-rYi.woff         6.64 kB
+dist/assets/inter-greek-ext-400-normal-KugGGMne.woff          7.06 kB
+dist/assets/inter-greek-ext-600-normal-B8X0CLgF.woff          7.21 kB
+dist/assets/raleway-vietnamese-200-normal-BKhIkuSr.woff2      7.24 kB
+dist/assets/bebas-neue-latin-ext-400-normal-HFKRJXnW.woff     7.52 kB
+dist/assets/inter-cyrillic-400-normal-obahsSVq.woff2          7.71 kB
+dist/assets/inter-greek-400-normal-B4URO6DV.woff2             7.77 kB
+dist/assets/inter-greek-600-normal-plRanbMR.woff2             7.94 kB
+dist/assets/inter-cyrillic-600-normal-CWCymEST.woff2          7.97 kB
+dist/assets/bebas-neue-latin-ext-400-normal-DWiEslNC.woff2    8.92 kB
+dist/assets/inter-cyrillic-400-normal-HOLc17fK.woff           9.78 kB
+dist/assets/inter-greek-400-normal-q2sYcFCs.woff              9.92 kB
+dist/assets/inter-cyrillic-600-normal-4D_pXhcN.woff           9.93 kB
+dist/assets/inter-greek-600-normal-BZpKdvQh.woff             10.03 kB
+dist/assets/inter-cyrillic-ext-400-normal-BQZuk6qB.woff2     10.23 kB
+dist/assets/inter-cyrillic-ext-600-normal-Dfes3d0z.woff2     10.48 kB
+dist/assets/raleway-cyrillic-200-normal-DQ30Bmgm.woff        11.00 kB
+dist/assets/bebas-neue-latin-400-normal-Bi-ndsyu.woff        11.18 kB
+dist/assets/raleway-cyrillic-ext-200-normal-DGjOCt8b.woff    11.84 kB
+dist/assets/raleway-cyrillic-200-normal-DinWf4f-.woff2       12.56 kB
+dist/assets/raleway-cyrillic-ext-200-normal-Dvc2OuV6.woff2   13.28 kB
+dist/assets/inter-cyrillic-ext-400-normal-DQukG94-.woff      13.33 kB
+dist/assets/inter-cyrillic-ext-600-normal-Bcila6Z-.woff      13.46 kB
+dist/assets/bebas-neue-latin-400-normal-9mHNbWWO.woff2       13.76 kB
+dist/assets/raleway-latin-ext-200-normal-BU3L8yQo.woff       16.54 kB
+dist/assets/raleway-latin-ext-200-normal-DH45M06a.woff2      16.84 kB
+dist/assets/raleway-latin-200-normal-CjfabvDx.woff           22.28 kB
+dist/assets/raleway-latin-200-normal-CONFMnkM.woff2          22.37 kB
+dist/assets/inter-latin-400-normal-C38fXH4l.woff2            23.66 kB
+dist/assets/inter-latin-600-normal-LgqL8muc.woff2            24.45 kB
+dist/assets/inter-latin-400-normal-CyCys3Eg.woff             30.69 kB
+dist/assets/inter-latin-600-normal-CiBQ2DWP.woff             31.26 kB
+dist/assets/inter-latin-ext-400-normal-C1nco2VV.woff2        35.00 kB
+dist/assets/inter-latin-ext-600-normal-D2bJ5OIk.woff2        36.26 kB
+dist/assets/inter-latin-ext-400-normal-77YHD8bZ.woff         47.56 kB
+dist/assets/inter-latin-ext-600-normal-CIVaiw4L.woff         48.66 kB
+dist/assets/index-C-2rpNLN.css                               22.15 kB │ gzip:  5.77 kB
+dist/assets/selectors-DWFwo9k9.js                             0.42 kB │ gzip:  0.26 kB
+dist/assets/About-DAZ9Lm-l.js                                 1.24 kB │ gzip:  0.52 kB
+dist/assets/Overview-CTymB1da.js                              2.67 kB │ gzip:  1.19 kB
+dist/assets/Servers-BtlqPPUY.js                               4.58 kB │ gzip:  1.72 kB
+dist/assets/Compare-XlfXE-fT.js                               5.17 kB │ gzip:  2.01 kB
+dist/assets/Pipeline-CKFmcmIs.js                              5.39 kB │ gzip:  2.31 kB
+dist/assets/Quantum-CyZ7IlDo.js                               6.01 kB │ gzip:  2.23 kB
+dist/assets/index-CPQFn2nB.js                               177.61 kB │ gzip: 59.16 kB
+dist/assets/BarChart-BmD7t3cb.js                            373.71 kB │ gzip: 99.35 kB
+
+✓ built in 902ms
+exit 0

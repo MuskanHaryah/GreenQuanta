@@ -1,0 +1,14 @@
+results/phase2: files before=105 after=105 identical=True
+results/runs: files before=24 after=24 identical=True
+experiment_log: old prefix found=True old_bytes=964 now_bytes=750324
+experiment_log: old_rows=2 appended_rows=187 appended_methods=['s0_sa_probe', 's1_fixed_y_sa_probe', 's1_gas', 's1_hybrid', 's1_qaoa', 's1_qaoa_cvar', 's2_exact_qy', 's2_gas_budget', 's2_lever_l4', 's2_pipeline_gas+qaoa_csqa', 's2_pipeline_gas_csa', 's2_pipeline_gas_csa_2d', 's2_pipeline_gas_csqa', 's2_pipeline_gas_csqa_2d', 's2_pipeline_gas_exact', 's2_sa_qy', 's2_sa_vs_sqa', 's2_sqa_calibration', 's2c_calibration', 's2c_compare', 's2d_calibration', 's2d_compare', 's2d_freeze']
+experiment_log: rows_per_method={'s0_sa_probe': 6, 's1_fixed_y_sa_probe': 21, 's1_gas': 3, 's1_hybrid': 3, 's1_qaoa': 9, 's1_qaoa_cvar': 9, 's2_exact_qy': 3, 's2_gas_budget': 15, 's2_lever_l4': 42, 's2_pipeline_gas+qaoa_csqa': 3, 's2_pipeline_gas_csa': 3, 's2_pipeline_gas_csa_2d': 1, 's2_pipeline_gas_csqa': 3, 's2_pipeline_gas_csqa_2d': 1, 's2_pipeline_gas_exact': 3, 's2_sa_qy': 18, 's2_sa_vs_sqa': 12, 's2_sqa_calibration': 1, 's2c_calibration': 2, 's2c_compare': 12, 's2d_calibration': 4, 's2d_compare': 12, 's2d_freeze': 1} expected_methods=['s0_sa_probe', 's1_fixed_y_sa_probe', 's1_gas', 's1_hybrid', 's1_qaoa', 's1_qaoa_cvar', 's2_exact_qy', 's2_gas_budget', 's2_lever_l4', 's2_pipeline_gas+qaoa_csqa', 's2_pipeline_gas_csa', 's2_pipeline_gas_csa_2d', 's2_pipeline_gas_csqa', 's2_pipeline_gas_csqa_2d', 's2_pipeline_gas_exact', 's2_sa_qy', 's2_sa_vs_sqa', 's2_sqa_calibration', 's2c_calibration', 's2c_compare', 's2d_calibration', 's2d_compare', 's2d_freeze']
+PROTECTION_GATE PASS
+GATES EXIT 0
+git diff EXIT 0
+git diff --cached EXIT 0
+4e41df3a Step 2D.3: csqa calibration gamma grid {1e-3, 1e-2, 1e-1, 1} after the 2D.2 freeze diagnostic
+1f734ae8 Step 2D.1: world-line move (common shift in all Trotter slices, off by default), one move-attempt formula, 2D freeze/calibrate/evaluate modes, pipeline --settings 2D; tests
+fa598258 Step 2D: stop tracking simulation/target/ (Java build output, R6)
+9155960a Step 2.6: fix duplicate gas_runs key in PROPOSALS emit
+3e2b6766 Step 2.6: fully quantum pipeline (GAS at c_pipe*sqrt(N) -> constrained SQA), --stage1/--stage2 options, best valid placement from the shared scorer

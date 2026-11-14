@@ -1,0 +1,17 @@
+COMMAND: .venv-gq/Scripts/python.exe -B -u optimizer/diagnostics/s0_gates.py 
+results/phase2: files before=105 after=105 identical=True
+results/runs: files before=24 after=24 identical=True
+experiment_log: old prefix found=True old_bytes=964 now_bytes=5116
+experiment_log: old_rows=2 appended_rows=6 appended_methods=['s0_sa_probe']
+PROTECTION_GATE PASS
+EXIT=0 
+COMMAND: git --no-pager diff --exit-code 
+EXIT=0 
+COMMAND: git --no-pager diff --cached --exit-code 
+EXIT=0 
+COMMAND: git log --oneline -5 
+8af9d25d Step 0: protection gate script
+a57947c1 Step 0: SA probe scores on BQM energy; relative sampler cross-check
+17f33859 Step 0: exact slack penalty (builder/solver encoding param, theorem checks, scale, SA probe)
+3c6258ba Step R3c: lambda/unit sweep and fixed-y SA probe (code and tests)
+3b651053 Step R3b: exact QUBO minimum small/medium/large (all R3_INVALID) + tests

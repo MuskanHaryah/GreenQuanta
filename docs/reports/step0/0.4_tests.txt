@@ -1,0 +1,84 @@
+COMMAND: .venv-gq/Scripts/python.exe -B -m pytest tests/test_s0_exact_slack.py tests/test_s0_slack.py tests/test_exact_qubo.py tests/test_r3c_run.py tests/test_d0_formulation.py -v -p no:cacheprovider 
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 54 items
+
+tests/test_s0_exact_slack.py::test_with_slack_writes_every_value_0_to_k PASSED [  1%]
+tests/test_s0_exact_slack.py::test_bound_holds_global_minimum_feasible_and_energy_optimal FAILED [  3%]
+tests/test_s0_exact_slack.py::test_counterexample_lambda_below_f_minimum_is_invalid PASSED [  5%]
+tests/test_s0_slack.py::test_slack_range_is_exactly_0_to_k PASSED        [  7%]
+tests/test_s0_slack.py::test_default_encoding_is_unbalanced_and_unchanged PASSED [  9%]
+tests/test_s0_slack.py::test_encoding_arguments_are_checked PASSED       [ 11%]
+tests/test_s0_slack.py::test_slack_matches_build_qubo_v2_at_default_unit_and_lambda PASSED [ 12%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[small_v2] PASSED [ 14%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[medium_v2] PASSED [ 16%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[large_v2] PASSED [ 18%]
+tests/test_s0_slack.py::test_lemma_slack_elimination_bruteforce[0.05] PASSED [ 20%]
+tests/test_s0_slack.py::test_lemma_slack_elimination_bruteforce[0.0025] PASSED [ 22%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L0.05-c0.02] PASSED [ 24%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.05-c0.02-cutting] PASSED [ 25%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.05-c0.02-full] PASSED [ 27%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L0.2-c0.07] PASSED [ 29%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.2-c0.07-cutting] PASSED [ 31%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.2-c0.07-full] PASSED [ 33%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L1.0-c0] PASSED [ 35%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L1.0-c0-cutting] PASSED [ 37%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L1.0-c0-full] PASSED [ 38%]
+tests/test_exact_qubo.py::test_one_iteration_duplicate_state_is_unproven PASSED [ 40%]
+tests/test_exact_qubo.py::test_time_exhausted_before_milp_has_finite_bound PASSED [ 42%]
+tests/test_exact_qubo.py::test_interrupted_exact_worse_candidate_retains_earlier_incumbent PASSED [ 44%]
+tests/test_exact_qubo.py::test_milp_time_limit_without_candidate_keeps_true_scored_state PASSED [ 46%]
+tests/test_r3c_run.py::test_custom_matches_common_on_tiny PASSED         [ 48%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[assign] PASSED  [ 50%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[cpu] PASSED     [ 51%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[ram] PASSED     [ 53%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[link] PASSED    [ 55%]
+tests/test_r3c_run.py::test_fixed_y_equals_bruteforce[0.0025-weights0-active0] PASSED [ 57%]
+tests/test_r3c_run.py::test_fixed_y_equals_bruteforce[0.001-weights1-active1] PASSED [ 59%]
+tests/test_r3c_run.py::test_pass_rule[True-9.0-0.1-0.0025-True] PASSED   [ 61%]
+tests/test_r3c_run.py::test_pass_rule[True-0.0-0.10001-0.0025-False] PASSED [ 62%]
+tests/test_r3c_run.py::test_pass_rule[False-0.0-0.0-0.0025-False] PASSED [ 64%]
+tests/test_r3c_run.py::test_pass_rule[True--0.1-8.0-0.001-True] PASSED   [ 66%]
+tests/test_r3c_run.py::test_pass_rule[True-0.10001-0.0-0.0005-False] PASSED [ 68%]
+tests/test_r3c_run.py::test_pass_rule[True-None-None-0.0025-False] PASSED [ 70%]
+tests/test_r3c_run.py::test_linear_joules_use_actual_on_bits PASSED      [ 72%]
+tests/test_r3c_run.py::test_solver_bindings_do_not_mutate_shared_config PASSED [ 74%]
+tests/test_d0_formulation.py::test_hand_capacity_values[1.0-0.048] PASSED [ 75%]
+tests/test_d0_formulation.py::test_hand_capacity_values[0.02--2e-05] PASSED [ 77%]
+tests/test_d0_formulation.py::test_hand_capacity_values[0.0-0.0] PASSED  [ 79%]
+tests/test_d0_formulation.py::test_hand_capacity_values[-0.5-0.0135] PASSED [ 81%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[slack] PASSED   [ 83%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[slack_scaled] PASSED [ 85%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[unknown] PASSED [ 87%]
+tests/test_d0_formulation.py::test_all_32768_states_match_independent_formula PASSED [ 88%]
+tests/test_d0_formulation.py::test_independent_terms_include_offsets_and_off_server_link PASSED [ 90%]
+tests/test_d0_formulation.py::test_all_81_assignments_use_real_size_validation_and_rank PASSED [ 92%]
+tests/test_d0_formulation.py::test_validation_rejects_missing_duplicate_and_off_server PASSED [ 94%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[small_v2] PASSED [ 96%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[medium_v2] PASSED [ 98%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[large_v2] PASSED [100%]
+
+================================== FAILURES ===================================
+_________ test_bound_holds_global_minimum_feasible_and_energy_optimal _________
+
+tiny = {'vms': [VirtualMachine(vm_id=0, collection_id=9111261169, instance_indexes=[0, 1, 2, 3], cpu_demand=array([0.00262165...MD EPYC 8534P, 64 cores)', fit_idle_w=56.30000000000002, fit_slope_w=145.30909090909088)], 'm': 3, 'unit': 0.0025, ...}
+
+    def test_bound_holds_global_minimum_feasible_and_energy_optimal(tiny):
+        lam = 1.1 * tiny["F"]
+        bqm, h = exhaustive_h(tiny, lam)
+        minimisers = np.isclose(h, h.min(), atol=1e-12, rtol=0)
+        assert tiny["feasible"][minimisers].all()                 # Theorem (1)
+>       assert h.min() == pytest.approx(tiny["F"], abs=1e-12)     # Theorem (2): min H = min feasible E
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       assert np.float64(0....9352442462587) == 0.4978935244371604 ± 1.0e-12
+E         
+E         comparison failed
+E         Obtained: 0.49789352442462587
+E         Expected: 0.4978935244371604 ± 1.0e-12
+
+tests\test_s0_exact_slack.py:97: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_s0_exact_slack.py::test_bound_holds_global_minimum_feasible_and_energy_optimal
+================== 1 failed, 53 passed in 874.29s (0:14:34) ===================
+EXIT=1 

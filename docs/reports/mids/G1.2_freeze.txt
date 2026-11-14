@@ -1,0 +1,9 @@
+FREEZE | small_v2 | csqa | [2, 3] | V=0.38505827990484337 | joules=39951971.03582648 | PASS
+FREEZE | small_v2 | csa | [2, 3] | V=0.38505827990484337 | joules=39951971.03582648 | PASS
+FREEZE | medium_v2 | csqa | [2, 3] | V=0.40156535160258183 | joules=44211076.67748815 | PASS
+FREEZE | medium_v2 | csa | [2, 3] | V=0.40156535160258183 | joules=44211076.67748815 | PASS
+FREEZE | large_v2 | csqa | [3, 4, 9, 10, 11] | V=0.4689138415395567 | joules=78864956.26095286 | PASS
+FREEZE | large_v2 | csa | [3, 4, 9, 10, 11] | V=0.4656709142036448 | joules=78318706.95783564 | PASS
+FREEZE CHECK PASS
+freeze exit 0
+experiment_log lines after freeze: 196

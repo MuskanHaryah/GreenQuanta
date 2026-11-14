@@ -1,0 +1,36 @@
+# G3.7 gates (2026-11-14T13:33:30+05:00), branch step9-frontend @ f1f318de
+## preflight.py
+b21032a56056ca3261ecd8ef1d45ce3d72908a60a14c450f3eeae979ada2a4ef docs/reports/step2e_raw_output.txt
+1a946e988f3ce735069bf8f45099ce940412a2138c37cf5a2bfcd064b72b9812 results/phase2/small_v2/assignment_exact.csv
+bfad59b871fc03ad0ee51a4e62e1c0395c621c8b803a8d003a0110ca2f0de5b0 results/phase2/medium_v2/assignment_exact.csv
+b9809f4bf91e2818c0f01173d87eefa1a142f5f7bf60750cc04ba59dc45a2ff0 results/phase2/large_v2/assignment_exact.csv
+PREFLIGHT PASS
+exit 0
+## freeze_check.py
+FREEZE | small_v2 | csqa | [2, 3] | V=0.38505827990484337 | joules=39951971.03582648 | PASS
+FREEZE | small_v2 | csa | [2, 3] | V=0.38505827990484337 | joules=39951971.03582648 | PASS
+FREEZE | medium_v2 | csqa | [2, 3] | V=0.40156535160258183 | joules=44211076.67748815 | PASS
+FREEZE | medium_v2 | csa | [2, 3] | V=0.40156535160258183 | joules=44211076.67748815 | PASS
+FREEZE | large_v2 | csqa | [3, 4, 9, 10, 11] | V=0.4689138415395567 | joules=78864956.26095286 | PASS
+FREEZE | large_v2 | csa | [3, 4, 9, 10, 11] | V=0.4656709142036448 | joules=78318706.95783564 | PASS
+FREEZE CHECK PASS
+exit 0
+## backend/smoke.ps1 (frontend/dist built, so / is served too)
+PASS 200 /results/large_v2/placement/cs_worstfit 12,025 bytes 84 ms
+PASS 200 /results/large_v2/placement/cs_roundrobin 12,124 bytes 88 ms
+PASS 200 /gas-trace/large_v2?seed=0 200,436 bytes 10952 ms
+PASS 200 /gas-trace/large_v2?seed=1 210,920 bytes 11228 ms
+PASS 200 /gas-trace/large_v2?seed=2 250,579 bytes 10526 ms
+PASS 200 /claims?size=large_v2 5,583 bytes 61 ms
+server stopped: True
+SMOKE PASS
+exit 0
+## git diff --exit-code
+exit 0
+## git diff --cached --exit-code
+exit 0
+## files changed on step9-frontend vs step8-backend
+ frontend/vite.config.ts                            |    14 +
+ optimizer/demo/build_results.py                    |    27 +-
+ 44 files changed, 22910 insertions(+), 8 deletions(-)
+optimizer/demo/build_results.py

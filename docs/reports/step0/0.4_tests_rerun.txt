@@ -1,0 +1,12 @@
+COMMAND: .venv-gq/Scripts/python.exe -B -m pytest tests/test_s0_exact_slack.py -v -p no:cacheprovider 
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 3 items
+
+tests/test_s0_exact_slack.py::test_with_slack_writes_every_value_0_to_k PASSED [ 33%]
+tests/test_s0_exact_slack.py::test_bound_holds_global_minimum_feasible_and_energy_optimal PASSED [ 66%]
+tests/test_s0_exact_slack.py::test_counterexample_lambda_below_f_minimum_is_invalid PASSED [100%]
+
+======================== 3 passed in 188.92s (0:03:08) ========================
+EXIT=0 

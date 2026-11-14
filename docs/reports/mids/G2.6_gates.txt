@@ -1,0 +1,694 @@
+## preflight
+$ python -B optimizer/demo/preflight.py
+9dd2116ed7a7a7e4b32ee6ef5be3e36ea71c5039662674c79956ac5dcb1aee65 docs/reports/step1/1.3_ground_truth.txt
+14d68a812736a4643674e28a993fdf41849212bf65fc59a2cad5b972fc34b8de docs/reports/step1/1.5b_qaoa_cvar.txt
+d74f3620b479696fad90a83e03df9e9567ef5e86f4fd64a2130f74721dcbc75d docs/reports/step2/2.5_calibration.txt
+d2cee40d2374ebe751723f35ee08464bdd84d5458a6c8aa726e44a7fc50be331 docs/reports/step2/2C.3_calibration.txt
+2216be368ad2d80647ce6c4bde1a9e76c1e4b15da06d5168ddd841145b28b1b1 docs/reports/step2/2D.3_calibration.txt
+b21032a56056ca3261ecd8ef1d45ce3d72908a60a14c450f3eeae979ada2a4ef docs/reports/step2e_raw_output.txt
+1a946e988f3ce735069bf8f45099ce940412a2138c37cf5a2bfcd064b72b9812 results/phase2/small_v2/assignment_exact.csv
+bfad59b871fc03ad0ee51a4e62e1c0395c621c8b803a8d003a0110ca2f0de5b0 results/phase2/medium_v2/assignment_exact.csv
+b9809f4bf91e2818c0f01173d87eefa1a142f5f7bf60750cc04ba59dc45a2ff0 results/phase2/large_v2/assignment_exact.csv
+PREFLIGHT PASS
+EXIT=0 (0 s)
+
+## freeze_check
+$ python -B -u optimizer/demo/freeze_check.py
+PROPOSALS_JSON={"aggregate_ok": [12], "gas_best": [12], "gas_budget": 64, "gas_measurements": 153, "gas_oracle_calls": 198, "gas_runs": 3, "gas_runs_ending_at_y_star": 3, "pool": [12], "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "qaoa_top_k": [], "size": "small_v2", "stage1": "gas", "y_star_proposed": true}
+STAGE2_JSON={"V": 0.38505827990484337, "active_ids": [2, 3], "index": 12, "lam_y": 0.4235641078953277, "linear_joules": 39951971.03582648, "method": "csqa", "move_attempts": 12300800, "proven": false, "quantized_valid": true, "real_valid": true, "size": "small_v2", "stage2": "csqa", "status": "DONE", "time_s": 6.528798500003177, "valid_read_pct": 100.0, "violation_reads": {"cpu_over": 0, "duplicated": 0, "off_host": 0, "ram_over": 0, "unplaced": 0, "valid_slack_off_minimiser": 0}}
+HYBRID_JSON={"V": 0.38505827990484337, "V_minus_step0": 0.0, "chosen": 12, "chosen_ids": [2, 3], "curve_it_energy_kwh": 11.039100641817516, "diff_r1_pct": 0.0, "diff_r2_pct": 0.0, "found": true, "gap_to_h_min_pct": 0.0, "gas_budget": 64, "gas_measurements": 153, "gas_oracle_calls": 198, "gas_runs": 3, "is_y_star": true, "linear_joules": 39951971.03582648, "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "quantized_valid": true, "r1_joules": 39951971.03582648, "r2_curve_it_energy_kwh": 11.041989090265, "r2_joules": 39951971.03582648, "real_valid": true, "settings": "2D", "size": "small_v2", "stage1": "gas", "stage2": "csqa", "stage2_move_attempts": 12300800, "stage2_s": 6.528798500003177, "stage2_solves": 1, "wall_s": 10.485694100003457, "y_star_proposed": true}
+TABLE | small_v2 | gas | csqa | 1 | 1 | 1 | [2, 3] | True | True/True | 0.0000 | 39951971.04 | 0.0000 | 0.0000 | 11.0391 | GAS 198+153 | QAOA nfev 0 | moves 12300800 |
+FREEZE | small_v2 | csqa | [2, 3] | V=0.38505827990484337 | joules=39951971.03582648 | PASS
+PROPOSALS_JSON={"aggregate_ok": [12], "gas_best": [12], "gas_budget": 64, "gas_measurements": 153, "gas_oracle_calls": 198, "gas_runs": 3, "gas_runs_ending_at_y_star": 3, "pool": [12], "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "qaoa_top_k": [], "size": "small_v2", "stage1": "gas", "y_star_proposed": true}
+STAGE2_JSON={"V": 0.38505827990484337, "active_ids": [2, 3], "index": 12, "lam_y": 0.4235641078953277, "linear_joules": 39951971.03582648, "method": "csa", "move_attempts": 12400000, "proven": false, "quantized_valid": true, "real_valid": true, "size": "small_v2", "stage2": "csa", "status": "DONE", "time_s": 16.007112399995094, "valid_read_pct": 100.0, "violation_reads": {"cpu_over": 0, "duplicated": 0, "off_host": 0, "ram_over": 0, "unplaced": 0, "valid_slack_off_minimiser": 0}}
+HYBRID_JSON={"V": 0.38505827990484337, "V_minus_step0": 0.0, "chosen": 12, "chosen_ids": [2, 3], "curve_it_energy_kwh": 11.039923383355141, "diff_r1_pct": 0.0, "diff_r2_pct": 0.0, "found": true, "gap_to_h_min_pct": 0.0, "gas_budget": 64, "gas_measurements": 153, "gas_oracle_calls": 198, "gas_runs": 3, "is_y_star": true, "linear_joules": 39951971.03582648, "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "quantized_valid": true, "r1_joules": 39951971.03582648, "r2_curve_it_energy_kwh": 11.041989090265, "r2_joules": 39951971.03582648, "real_valid": true, "settings": "2D", "size": "small_v2", "stage1": "gas", "stage2": "csa", "stage2_move_attempts": 12400000, "stage2_s": 16.007112399995094, "stage2_solves": 1, "wall_s": 19.703290099991136, "y_star_proposed": true}
+TABLE | small_v2 | gas | csa | 1 | 1 | 1 | [2, 3] | True | True/True | 0.0000 | 39951971.04 | 0.0000 | 0.0000 | 11.0399 | GAS 198+153 | QAOA nfev 0 | moves 12400000 |
+FREEZE | small_v2 | csa | [2, 3] | V=0.38505827990484337 | joules=39951971.03582648 | PASS
+PROPOSALS_JSON={"aggregate_ok": [12], "gas_best": [12], "gas_budget": 64, "gas_measurements": 102, "gas_oracle_calls": 201, "gas_runs": 3, "gas_runs_ending_at_y_star": 3, "pool": [12], "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "qaoa_top_k": [], "size": "medium_v2", "stage1": "gas", "y_star_proposed": true}
+STAGE2_JSON={"V": 0.40156535160258183, "active_ids": [2, 3], "index": 12, "lam_y": 0.4417218867628402, "linear_joules": 44211076.67748815, "method": "csqa", "move_attempts": 24998400, "proven": false, "quantized_valid": true, "real_valid": true, "size": "medium_v2", "stage2": "csqa", "status": "DONE", "time_s": 12.716084799991222, "valid_read_pct": 100.0, "violation_reads": {"cpu_over": 0, "duplicated": 0, "off_host": 0, "ram_over": 0, "unplaced": 0, "valid_slack_off_minimiser": 0}}
+HYBRID_JSON={"V": 0.40156535160258183, "V_minus_step0": 0.0, "chosen": 12, "chosen_ids": [2, 3], "curve_it_energy_kwh": 12.17607155529393, "diff_r1_pct": 0.0, "diff_r2_pct": 0.0, "found": true, "gap_to_h_min_pct": 0.0, "gas_budget": 64, "gas_measurements": 102, "gas_oracle_calls": 201, "gas_runs": 3, "is_y_star": true, "linear_joules": 44211076.67748815, "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "quantized_valid": true, "r1_joules": 44211076.67748815, "r2_curve_it_energy_kwh": 12.176813306393, "r2_joules": 44211076.67748815, "real_valid": true, "settings": "2D", "size": "medium_v2", "stage1": "gas", "stage2": "csqa", "stage2_move_attempts": 24998400, "stage2_s": 12.716084799991222, "stage2_solves": 1, "wall_s": 19.81438419999904, "y_star_proposed": true}
+TABLE | medium_v2 | gas | csqa | 1 | 1 | 1 | [2, 3] | True | True/True | 0.0000 | 44211076.68 | 0.0000 | 0.0000 | 12.1761 | GAS 201+102 | QAOA nfev 0 | moves 24998400 |
+FREEZE | medium_v2 | csqa | [2, 3] | V=0.40156535160258183 | joules=44211076.67748815 | PASS
+PROPOSALS_JSON={"aggregate_ok": [12], "gas_best": [12], "gas_budget": 64, "gas_measurements": 102, "gas_oracle_calls": 201, "gas_runs": 3, "gas_runs_ending_at_y_star": 3, "pool": [12], "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "qaoa_top_k": [], "size": "medium_v2", "stage1": "gas", "y_star_proposed": true}
+STAGE2_JSON={"V": 0.40156535160258183, "active_ids": [2, 3], "index": 12, "lam_y": 0.4417218867628402, "linear_joules": 44211076.67748815, "method": "csa", "move_attempts": 25200000, "proven": false, "quantized_valid": true, "real_valid": true, "size": "medium_v2", "stage2": "csa", "status": "DONE", "time_s": 29.178694100002758, "valid_read_pct": 100.0, "violation_reads": {"cpu_over": 0, "duplicated": 0, "off_host": 0, "ram_over": 0, "unplaced": 0, "valid_slack_off_minimiser": 0}}
+HYBRID_JSON={"V": 0.40156535160258183, "V_minus_step0": 0.0, "chosen": 12, "chosen_ids": [2, 3], "curve_it_energy_kwh": 12.176997751055822, "diff_r1_pct": 0.0, "diff_r2_pct": 0.0, "found": true, "gap_to_h_min_pct": 0.0, "gas_budget": 64, "gas_measurements": 102, "gas_oracle_calls": 201, "gas_runs": 3, "is_y_star": true, "linear_joules": 44211076.67748815, "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "quantized_valid": true, "r1_joules": 44211076.67748815, "r2_curve_it_energy_kwh": 12.176813306393, "r2_joules": 44211076.67748815, "real_valid": true, "settings": "2D", "size": "medium_v2", "stage1": "gas", "stage2": "csa", "stage2_move_attempts": 25200000, "stage2_s": 29.178694100002758, "stage2_solves": 1, "wall_s": 36.355777300006594, "y_star_proposed": true}
+TABLE | medium_v2 | gas | csa | 1 | 1 | 1 | [2, 3] | True | True/True | 0.0000 | 44211076.68 | 0.0000 | 0.0000 | 12.177 | GAS 201+102 | QAOA nfev 0 | moves 25200000 |
+FREEZE | medium_v2 | csa | [2, 3] | V=0.40156535160258183 | joules=44211076.67748815 | PASS
+PROPOSALS_JSON={"aggregate_ok": [3608], "gas_best": [3608], "gas_budget": 256, "gas_measurements": 214, "gas_oracle_calls": 839, "gas_runs": 3, "gas_runs_ending_at_y_star": 3, "pool": [3608], "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "qaoa_top_k": [], "size": "large_v2", "stage1": "gas", "y_star_proposed": true}
+STAGE2_JSON={"V": 0.4689138415395567, "active_ids": [3, 4, 9, 10, 11], "index": 3608, "lam_y": 0.6035511366077031, "linear_joules": 78864956.26095286, "method": "csqa", "move_attempts": 52774400, "proven": false, "quantized_valid": true, "real_valid": true, "size": "large_v2", "stage2": "csqa", "status": "DONE", "time_s": 28.281808500003535, "valid_read_pct": 86.0, "violation_reads": {"cpu_over": 18, "duplicated": 0, "off_host": 0, "ram_over": 11, "unplaced": 0, "valid_slack_off_minimiser": 0}}
+HYBRID_JSON={"V": 0.4689138415395567, "V_minus_step0": 0.005308955437547835, "chosen": 3608, "chosen_ids": [3, 4, 9, 10, 11], "curve_it_energy_kwh": 21.462903009206897, "diff_r1_pct": 7.69435019761495, "diff_r2_pct": 1.1372550196861928, "found": true, "gap_to_h_min_pct": 1.1451465669798149, "gas_budget": 256, "gas_measurements": 214, "gas_oracle_calls": 839, "gas_runs": 3, "is_y_star": true, "linear_joules": 78864956.26095286, "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "quantized_valid": true, "r1_joules": 73230356.20368081, "r2_curve_it_energy_kwh": 21.440746551558, "r2_joules": 77978145.88264427, "real_valid": true, "settings": "2D", "size": "large_v2", "stage1": "gas", "stage2": "csqa", "stage2_move_attempts": 52774400, "stage2_s": 28.281808500003535, "stage2_solves": 1, "wall_s": 49.75821770000039, "y_star_proposed": true}
+TABLE | large_v2 | gas | csqa | 1 | 1 | 1 | [3, 4, 9, 10, 11] | True | True/True | 1.1451 | 78864956.26 | 7.6944 | 1.1373 | 21.4629 | GAS 839+214 | QAOA nfev 0 | moves 52774400 |
+FREEZE | large_v2 | csqa | [3, 4, 9, 10, 11] | V=0.4689138415395567 | joules=78864956.26095286 | PASS
+PROPOSALS_JSON={"aggregate_ok": [3608], "gas_best": [3608], "gas_budget": 256, "gas_measurements": 214, "gas_oracle_calls": 839, "gas_runs": 3, "gas_runs_ending_at_y_star": 3, "pool": [3608], "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "qaoa_top_k": [], "size": "large_v2", "stage1": "gas", "y_star_proposed": true}
+STAGE2_JSON={"V": 0.4656709142036448, "active_ids": [3, 4, 9, 10, 11], "index": 3608, "lam_y": 0.6035511366077031, "linear_joules": 78318706.95783564, "method": "csa", "move_attempts": 53200000, "proven": false, "quantized_valid": true, "real_valid": true, "size": "large_v2", "stage2": "csa", "status": "DONE", "time_s": 59.49229070000001, "valid_read_pct": 100.0, "violation_reads": {"cpu_over": 0, "duplicated": 0, "off_host": 0, "ram_over": 0, "unplaced": 0, "valid_slack_off_minimiser": 0}}
+HYBRID_JSON={"V": 0.4656709142036448, "V_minus_step0": 0.002066028101635975, "chosen": 3608, "chosen_ids": [3, 4, 9, 10, 11], "curve_it_energy_kwh": 21.42868610618491, "diff_r1_pct": 6.948417320273902, "diff_r2_pct": 0.4367391290681841, "found": true, "gap_to_h_min_pct": 0.44564416026913456, "gas_budget": 256, "gas_measurements": 214, "gas_oracle_calls": 839, "gas_runs": 3, "is_y_star": true, "linear_joules": 78318706.95783564, "qaoa_circuit_evaluations": 0, "qaoa_runs": 0, "quantized_valid": true, "r1_joules": 73230356.20368081, "r2_curve_it_energy_kwh": 21.440746551558, "r2_joules": 77978145.88264427, "real_valid": true, "settings": "2D", "size": "large_v2", "stage1": "gas", "stage2": "csa", "stage2_move_attempts": 53200000, "stage2_s": 59.49229070000001, "stage2_solves": 1, "wall_s": 79.78706750000129, "y_star_proposed": true}
+TABLE | large_v2 | gas | csa | 1 | 1 | 1 | [3, 4, 9, 10, 11] | True | True/True | 0.4456 | 78318706.96 | 6.9484 | 0.4367 | 21.4287 | GAS 839+214 | QAOA nfev 0 | moves 53200000 |
+FREEZE | large_v2 | csa | [3, 4, 9, 10, 11] | V=0.4656709142036448 | joules=78318706.95783564 | PASS
+FREEZE CHECK PASS
+EXIT=0 (218 s)
+
+## pytest
+$ python -B -m pytest tests -v -p no:cacheprovider
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 259 items
+
+tests/test_backend_api.py::test_health PASSED                            [  0%]
+tests/test_backend_api.py::test_sizes PASSED                             [  0%]
+tests/test_backend_api.py::test_results_without_assignments PASSED       [  1%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[quantum] PASSED [  1%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[control] PASSED [  1%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[exact_r1] PASSED [  2%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_firstfit] PASSED [  2%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_bestfit] PASSED [  3%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_worstfit] PASSED [  3%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_roundrobin] PASSED [  3%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_ffd] PASSED [  4%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_bfd] PASSED [  4%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[pabfd] PASSED [  5%]
+tests/test_backend_api.py::test_compare_equals_json PASSED               [  5%]
+tests/test_backend_api.py::test_claims PASSED                            [  5%]
+tests/test_backend_api.py::test_404[/api/results/huge_v2-unknown_size] PASSED [  6%]
+tests/test_backend_api.py::test_404[/api/results/huge_v2/compare-unknown_size] PASSED [  6%]
+tests/test_backend_api.py::test_404[/api/results/small_v2/placement/nope-unknown_method] PASSED [  6%]
+tests/test_backend_api.py::test_404[/api/claims?size=huge_v2-unknown_size] PASSED [  7%]
+tests/test_backend_api.py::test_404[/api/nope-not_found] PASSED          [  7%]
+tests/test_backend_api.py::test_missing_results_names_the_build_command PASSED [  8%]
+tests/test_backend_api.py::test_frontend_dist_served_with_spa_fallback PASSED [  8%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[0-small_v2] PASSED [  8%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[0-medium_v2] PASSED [  9%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[0-large_v2] PASSED [  9%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[1-small_v2] PASSED [ 10%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[1-medium_v2] PASSED [ 10%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[1-large_v2] PASSED [ 10%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[2-small_v2] PASSED [ 11%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[2-medium_v2] PASSED [ 11%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[2-large_v2] PASSED [ 11%]
+tests/test_backend_gas_trace.py::test_endpoint_and_seed_check PASSED     [ 12%]
+tests/test_backend_jobs.py::test_live_run_small_done_exclusive_and_matches_cached PASSED [ 12%]
+tests/test_backend_jobs.py::test_bad_body_400[None] PASSED               [ 13%]
+tests/test_backend_jobs.py::test_bad_body_400[body1] PASSED              [ 13%]
+tests/test_backend_jobs.py::test_bad_body_400[body2] PASSED              [ 13%]
+tests/test_backend_jobs.py::test_bad_body_400[body3] PASSED              [ 14%]
+tests/test_backend_jobs.py::test_bad_body_400[body4] PASSED              [ 14%]
+tests/test_backend_jobs.py::test_bad_body_400[body5] PASSED              [ 15%]
+tests/test_backend_jobs.py::test_unknown_job_404 PASSED                  [ 15%]
+tests/test_backend_jobs.py::test_timeout_kills_and_fails PASSED          [ 15%]
+tests/test_d0_formulation.py::test_hand_capacity_values[1.0-0.048] PASSED [ 16%]
+tests/test_d0_formulation.py::test_hand_capacity_values[0.02--2e-05] PASSED [ 16%]
+tests/test_d0_formulation.py::test_hand_capacity_values[0.0-0.0] PASSED  [ 16%]
+tests/test_d0_formulation.py::test_hand_capacity_values[-0.5-0.0135] PASSED [ 17%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[slack] PASSED   [ 17%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[slack_scaled] PASSED [ 18%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[unknown] PASSED [ 18%]
+tests/test_d0_formulation.py::test_all_32768_states_match_independent_formula PASSED [ 18%]
+tests/test_d0_formulation.py::test_independent_terms_include_offsets_and_off_server_link PASSED [ 19%]
+tests/test_d0_formulation.py::test_all_81_assignments_use_real_size_validation_and_rank PASSED [ 19%]
+tests/test_d0_formulation.py::test_validation_rejects_missing_duplicate_and_off_server PASSED [ 20%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[small_v2] PASSED [ 20%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[medium_v2] PASSED [ 20%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[large_v2] PASSED [ 21%]
+tests/test_d3_helpers.py::test_flip_bound[a-7.5] PASSED                  [ 21%]
+tests/test_d3_helpers.py::test_flip_bound[b-7.25] PASSED                 [ 22%]
+tests/test_d3_helpers.py::test_flip_bound[c-2.25] PASSED                 [ 22%]
+tests/test_d3_helpers.py::test_read_landscape_threshold_and_multiplicity PASSED [ 22%]
+tests/test_d3_helpers.py::test_csv_writer_refuses_overwrite PASSED       [ 23%]
+tests/test_d3_helpers.py::test_saved_small_encoding_matches_d2[assignment_exact.csv-0.4366451311159] PASSED [ 23%]
+tests/test_d3_helpers.py::test_saved_small_encoding_matches_d2[assignment_annealer_only.csv-0.5012005266234] PASSED [ 23%]
+tests/test_exact_quantized.py::test_rounding_requires_one_more_server[cpu] PASSED [ 24%]
+tests/test_exact_quantized.py::test_rounding_requires_one_more_server[mem] PASSED [ 24%]
+tests/test_exact_quantized.py::test_exact_unit_multiples_have_equal_optima[cpu] PASSED [ 25%]
+tests/test_exact_quantized.py::test_exact_unit_multiples_have_equal_optima[mem] PASSED [ 25%]
+tests/test_exact_quantized.py::test_no_incumbent_has_complete_info PASSED [ 25%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L0.05-c0.02] PASSED [ 26%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.05-c0.02-cutting] PASSED [ 26%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.05-c0.02-full] PASSED [ 27%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L0.2-c0.07] PASSED [ 27%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.2-c0.07-cutting] PASSED [ 27%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.2-c0.07-full] PASSED [ 28%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L1.0-c0] PASSED [ 28%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L1.0-c0-cutting] PASSED [ 28%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L1.0-c0-full] PASSED [ 29%]
+tests/test_exact_qubo.py::test_one_iteration_duplicate_state_is_unproven PASSED [ 29%]
+tests/test_exact_qubo.py::test_time_exhausted_before_milp_has_finite_bound PASSED [ 30%]
+tests/test_exact_qubo.py::test_interrupted_exact_worse_candidate_retains_earlier_incumbent PASSED [ 30%]
+tests/test_exact_qubo.py::test_milp_time_limit_without_candidate_keeps_true_scored_state PASSED [ 30%]
+tests/test_gap_metrics.py::test_proven_optimum_matches_within_tolerance PASSED [ 31%]
+tests/test_gap_metrics.py::test_unproven_incumbent_is_not_labelled_optimal PASSED [ 31%]
+tests/test_gap_metrics.py::test_no_exact_assignment PASSED               [ 32%]
+tests/test_gap_metrics.py::test_no_pure_assignment PASSED                [ 32%]
+tests/test_gap_metrics.py::test_existing_key_set_is_preserved PASSED     [ 32%]
+tests/test_gap_metrics.py::test_reference_matches_do_not_require_proof PASSED [ 33%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[True] PASSED  [ 33%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[False] PASSED [ 33%]
+tests/test_managed_runner.py::test_build_run_config_seed_changes_hash PASSED [ 34%]
+tests/test_managed_runner.py::test_build_run_config_hash_ignores_dict_key_order PASSED [ 34%]
+tests/test_managed_runner.py::test_build_run_config_contains_seed PASSED [ 35%]
+tests/test_manifest.py::test_canonical_hash_ignores_key_order PASSED     [ 35%]
+tests/test_manifest.py::test_sampler_seed_changes_config_hash PASSED     [ 35%]
+tests/test_manifest.py::test_write_manifest_never_overwrites PASSED      [ 36%]
+tests/test_manifest.py::test_experiment_log_appends_without_repeating_header PASSED [ 36%]
+tests/test_manifest.py::test_file_hash_changes_with_one_byte PASSED      [ 37%]
+tests/test_manifest.py::test_dependency_versions_reports_missing PASSED  [ 37%]
+tests/test_manifest.py::test_git_info_distinguishes_untracked_files PASSED [ 37%]
+tests/test_mids_baselines.py::test_every_assignment_covers_every_vm_once_or_is_flagged ERROR [ 38%]
+tests/test_mids_baselines.py::test_sorted_submission_is_applied ERROR    [ 38%]
+tests/test_mids_cloudsim.py::test_write_cloudsim_inputs_matches_write_outputs PASSED [ 38%]
+tests/test_mids_freeze.py::test_pipeline_matches_golden[csqa-small_v2] PASSED [ 39%]
+tests/test_mids_freeze.py::test_pipeline_matches_golden[csqa-medium_v2] PASSED [ 39%]
+tests/test_mids_freeze.py::test_pipeline_matches_golden[csa-small_v2] PASSED [ 40%]
+tests/test_mids_freeze.py::test_pipeline_matches_golden[csa-medium_v2] PASSED [ 40%]
+tests/test_mids_preflight.py::test_pipeline_inputs_match_pinned_hashes PASSED [ 40%]
+tests/test_mids_results_schema.py::test_schema[small_v2] PASSED          [ 41%]
+tests/test_mids_results_schema.py::test_schema[medium_v2] PASSED         [ 41%]
+tests/test_mids_results_schema.py::test_schema[large_v2] PASSED          [ 42%]
+tests/test_mids_results_schema.py::test_quantum_matches_golden[small_v2] PASSED [ 42%]
+tests/test_mids_results_schema.py::test_quantum_matches_golden[medium_v2] PASSED [ 42%]
+tests/test_mids_results_schema.py::test_quantum_matches_golden[large_v2] PASSED [ 43%]
+tests/test_mids_results_schema.py::test_energy_is_fresh_evaluate_allocation[small_v2] PASSED [ 43%]
+tests/test_mids_results_schema.py::test_energy_is_fresh_evaluate_allocation[medium_v2] PASSED [ 44%]
+tests/test_mids_results_schema.py::test_energy_is_fresh_evaluate_allocation[large_v2] PASSED [ 44%]
+tests/test_mids_run_pipeline.py::test_run_pipeline_small_csqa PASSED     [ 44%]
+tests/test_qubo_fingerprint.py::test_repeated_build_has_same_hash PASSED [ 45%]
+tests/test_qubo_fingerprint.py::test_lambda_changes_hash PASSED          [ 45%]
+tests/test_qubo_fingerprint.py::test_center_changes_hash PASSED          [ 45%]
+tests/test_qubo_fingerprint.py::test_matches_golden PASSED               [ 46%]
+tests/test_qubo_fingerprint.py::test_insertion_order_and_edge_orientation_do_not_change_hash PASSED [ 46%]
+tests/test_qubo_fingerprint.py::test_offset_changes_hash PASSED          [ 47%]
+tests/test_r3_run.py::test_constrained_tiny_minimum_is_proven_within_30_second_budget PASSED [ 47%]
+tests/test_r3_run.py::test_margin_excludes_near_limit_host_even_when_shared_validation_accepts[cpu] PASSED [ 47%]
+tests/test_r3_run.py::test_margin_excludes_near_limit_host_even_when_shared_validation_accepts[mem] PASSED [ 48%]
+tests/test_r3_run.py::test_no_margin_safe_placement_does_not_return_invalid_fallback[cpu] PASSED [ 48%]
+tests/test_r3_run.py::test_no_margin_safe_placement_does_not_return_invalid_fallback[mem] PASSED [ 49%]
+tests/test_r3_run.py::test_one_iteration_preserves_honest_certificate_and_scoring PASSED [ 49%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[990.0-False] PASSED [ 49%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[990.0-True] PASSED [ 50%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1000.0-False] PASSED [ 50%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1000.0-True] PASSED [ 50%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1010.0-False] PASSED [ 51%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1010.0-True] PASSED [ 51%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[990.0] PASSED [ 52%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[1000.0] PASSED [ 52%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[1010.0] PASSED [ 52%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1000.0-0.0-MATCH] PASSED [ 53%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1000.5-0.05-MATCH] PASSED [ 53%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[999.5--0.05-MATCH] PASSED [ 54%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1001.0-0.1-MATCH] PASSED [ 54%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[999.0--0.1-MATCH] PASSED [ 54%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1001.001-0.1001-DIFFERENT] PASSED [ 55%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[998.999--0.1001-DIFFERENT] PASSED [ 55%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1010.0-1.0-DIFFERENT] PASSED [ 55%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[990.0--1.0-DIFFERENT] PASSED [ 56%]
+tests/test_r3c_run.py::test_custom_matches_common_on_tiny PASSED         [ 56%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[assign] PASSED  [ 57%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[cpu] PASSED     [ 57%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[ram] PASSED     [ 57%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[link] PASSED    [ 58%]
+tests/test_r3c_run.py::test_fixed_y_equals_bruteforce[0.0025-weights0-active0] PASSED [ 58%]
+tests/test_r3c_run.py::test_fixed_y_equals_bruteforce[0.001-weights1-active1] PASSED [ 59%]
+tests/test_r3c_run.py::test_pass_rule[True-9.0-0.1-0.0025-True] PASSED   [ 59%]
+tests/test_r3c_run.py::test_pass_rule[True-0.0-0.10001-0.0025-False] PASSED [ 59%]
+tests/test_r3c_run.py::test_pass_rule[False-0.0-0.0-0.0025-False] PASSED [ 60%]
+tests/test_r3c_run.py::test_pass_rule[True--0.1-8.0-0.001-True] PASSED   [ 60%]
+tests/test_r3c_run.py::test_pass_rule[True-0.10001-0.0-0.0005-False] PASSED [ 61%]
+tests/test_r3c_run.py::test_pass_rule[True-None-None-0.0025-False] PASSED [ 61%]
+tests/test_r3c_run.py::test_linear_joules_use_actual_on_bits PASSED      [ 61%]
+tests/test_r3c_run.py::test_violation_counts_include_duplicated_load PASSED [ 62%]
+tests/test_r3c_run.py::test_solver_bindings_do_not_mutate_shared_config PASSED [ 62%]
+tests/test_s0_exact_slack.py::test_with_slack_writes_every_value_0_to_k PASSED [ 62%]
+tests/test_s0_exact_slack.py::test_bound_holds_global_minimum_feasible_and_energy_optimal PASSED [ 63%]
+tests/test_s0_exact_slack.py::test_counterexample_lambda_below_f_minimum_is_invalid PASSED [ 63%]
+tests/test_s0_slack.py::test_slack_range_is_exactly_0_to_k PASSED        [ 64%]
+tests/test_s0_slack.py::test_default_encoding_is_unbalanced_and_unchanged PASSED [ 64%]
+tests/test_s0_slack.py::test_encoding_arguments_are_checked PASSED       [ 64%]
+tests/test_s0_slack.py::test_slack_matches_build_qubo_v2_at_default_unit_and_lambda PASSED [ 65%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[small_v2] PASSED [ 65%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[medium_v2] PASSED [ 66%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[large_v2] PASSED [ 66%]
+tests/test_s0_slack.py::test_lemma_slack_elimination_bruteforce[0.05] PASSED [ 66%]
+tests/test_s0_slack.py::test_lemma_slack_elimination_bruteforce[0.0025] PASSED [ 67%]
+tests/test_s1_cvar.py::test_cvar_hand_values PASSED                      [ 67%]
+tests/test_s1_cvar.py::test_cvar_alpha_one_is_mean_and_is_monotone_in_alpha PASSED [ 67%]
+tests/test_s1_quantum.py::test_norm_is_preserved PASSED                  [ 68%]
+tests/test_s1_quantum.py::test_one_qubit_p1_matches_analytic[0.3-0.2] PASSED [ 68%]
+tests/test_s1_quantum.py::test_one_qubit_p1_matches_analytic[1.7--0.9] PASSED [ 69%]
+tests/test_s1_quantum.py::test_one_qubit_p1_matches_analytic[2.5-1.1] PASSED [ 69%]
+tests/test_s1_quantum.py::test_mixer_acts_on_the_bit_of_the_index PASSED [ 69%]
+tests/test_s1_quantum.py::test_grover_matches_sin_squared[6-marked0-0] PASSED [ 70%]
+tests/test_s1_quantum.py::test_grover_matches_sin_squared[6-marked1-4] PASSED [ 70%]
+tests/test_s1_quantum.py::test_grover_matches_sin_squared[6-marked2-2] PASSED [ 71%]
+tests/test_s1_quantum.py::test_grover_matches_sin_squared[8-marked3-9] PASSED [ 71%]
+tests/test_s1_quantum.py::test_walsh_round_trip_and_linear_cost_has_n_plus_1_terms PASSED [ 71%]
+tests/test_s1_quantum.py::test_gas_counts_calls_and_finds_minimum PASSED [ 72%]
+tests/test_s1_quantum.py::test_tiny_instance_qaoa_finds_bruteforce_optimum_at_larger_p PASSED [ 72%]
+tests/test_s1_stage1.py::test_cost_is_lower_bound_and_check_is_nonvacuous PASSED [ 72%]
+tests/test_s1_stage1.py::test_aggregate_checks_are_necessary PASSED      [ 73%]
+tests/test_s1_stage1.py::test_pruning_is_exact PASSED                    [ 73%]
+tests/test_s1_stage1.py::test_all_costs_index_convention PASSED          [ 74%]
+tests/test_s1_stage1.py::test_factor_must_exceed_one PASSED              [ 74%]
+tests/test_s2_constrained.py::test_g_equals_slack_eliminated_q_y_on_every_one_hot_state PASSED [ 74%]
+tests/test_s2_constrained.py::test_min_g_equals_fixed_y_minimum PASSED   [ 75%]
+tests/test_s2_constrained.py::test_trotter_weights[0.05] PASSED          [ 75%]
+tests/test_s2_constrained.py::test_trotter_weights[0.5] PASSED           [ 76%]
+tests/test_s2_constrained.py::test_trotter_weights[2.0] PASSED           [ 76%]
+tests/test_s2_constrained.py::test_pimc_matches_exact_trotter_distribution[1-0.0] PASSED [ 76%]
+tests/test_s2_constrained.py::test_pimc_matches_exact_trotter_distribution[2-1.0] PASSED [ 77%]
+tests/test_s2_constrained.py::test_pimc_matches_exact_trotter_distribution[4-1.0] PASSED [ 77%]
+tests/test_s2_constrained.py::test_exact_trotter_converges_to_quantum_gibbs PASSED [ 77%]
+tests/test_s2_constrained.py::test_anneal_loads_reproducible_and_odd_trotter_rejected PASSED [ 78%]
+tests/test_s2_constrained.py::test_constrained_sample_gives_one_hot_q_y_samples[spec0] PASSED [ 78%]
+tests/test_s2_constrained.py::test_constrained_sample_gives_one_hot_q_y_samples[spec1] PASSED [ 79%]
+tests/test_s2_constrained.py::test_equal_budget_specs PASSED             [ 79%]
+tests/test_s2_constrained.py::test_schedule_shapes PASSED                [ 79%]
+tests/test_s2_sqa.py::test_finds_bruteforce_minimum PASSED               [ 80%]
+tests/test_s2_sqa.py::test_same_seed_same_samples_and_reads_differ PASSED [ 80%]
+tests/test_s2_sqa.py::test_energies_match_bqm_energy PASSED              [ 81%]
+tests/test_s2_sqa.py::test_rescaling_keeps_argmin_and_is_scale_invariant PASSED [ 81%]
+tests/test_s2_sqa.py::test_spin_update_count PASSED                      [ 81%]
+tests/test_s2_sqa.py::test_open_point_1_fixed_seed_repeats_reads PASSED  [ 82%]
+tests/test_s2_sqa.py::test_open_point_2_solution_is_a_trotter_slice PASSED [ 82%]
+tests/test_s2_sqa.py::test_tts99 PASSED                                  [ 83%]
+tests/test_s2_sqa.py::test_open_point_4_no_internal_rescaling PASSED     [ 83%]
+tests/test_s2_stage2.py::test_q_y_has_no_off_host_or_y_variables PASSED  [ 83%]
+tests/test_s2_stage2.py::test_u_y_bounds PASSED                          [ 84%]
+tests/test_s2_stage2.py::test_theorem_2_2_minimiser_is_feasible_and_optimal PASSED [ 84%]
+tests/test_s2_stage2.py::test_restriction_equals_full_fixed_y_minimum PASSED [ 84%]
+tests/test_s2_stage2.py::test_infeasible_y_costs_at_least_lambda_y PASSED [ 85%]
+tests/test_s2_stage2.py::test_heuristic_pruning_bound PASSED             [ 85%]
+tests/test_s2_stage2.py::test_profile_and_load_factor PASSED             [ 86%]
+tests/test_s2_stage2.py::test_l4_assignment_weight_keeps_minimum[10.0] PASSED [ 86%]
+tests/test_s2_stage2.py::test_l4_assignment_weight_keeps_minimum[1000.0] PASSED [ 86%]
+tests/test_s2_stage2.py::test_bqm_agrees_relative_branch_returns_python_bool PASSED [ 87%]
+tests/test_s2_stage2.py::test_rejects_bad_input PASSED                   [ 87%]
+tests/test_s2d_worldline.py::test_worldline_matches_exact_trotter_distribution[2] PASSED [ 88%]
+tests/test_s2d_worldline.py::test_worldline_matches_exact_trotter_distribution[4] PASSED [ 88%]
+tests/test_s2d_worldline.py::test_worldline_off_reproduces_committed_sampler[1] PASSED [ 88%]
+tests/test_s2d_worldline.py::test_worldline_off_reproduces_committed_sampler[4] PASSED [ 89%]
+tests/test_s2d_worldline.py::test_worldline_off_reproduces_committed_sampler[8] PASSED [ 89%]
+tests/test_s2d_worldline.py::test_worldline_loads_consistent_and_reproducible[0.0] PASSED [ 89%]
+tests/test_s2d_worldline.py::test_worldline_loads_consistent_and_reproducible[1.0] PASSED [ 90%]
+tests/test_s2d_worldline.py::test_constrained_sample_worldline_one_hot_and_budget PASSED [ 90%]
+tests/test_s2d_worldline.py::test_worldline_budget_formula PASSED        [ 91%]
+tests/test_s2d_worldline.py::test_select_rule PASSED                     [ 91%]
+tests/test_s2d_worldline.py::test_decide_rule PASSED                     [ 91%]
+tests/test_selection.py::test_lower_energy_repaired_wins_by_default PASSED [ 92%]
+tests/test_selection.py::test_prefer_unrepaired_preserves_old_ordering PASSED [ 92%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-0.0] PASSED [ 93%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-5e-13] PASSED [ 93%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-0.0] PASSED [ 93%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-5e-13] PASSED [ 94%]
+tests/test_selection.py::test_empty_candidates[False] PASSED             [ 94%]
+tests/test_selection.py::test_empty_candidates[True] PASSED              [ 94%]
+tests/test_selection.py::test_lowest_energy_of_three_mixed_candidates PASSED [ 95%]
+tests/test_validation.py::test_fully_valid PASSED                        [ 95%]
+tests/test_validation.py::test_missing_vm PASSED                         [ 96%]
+tests/test_validation.py::test_unknown_vm PASSED                         [ 96%]
+tests/test_validation.py::test_unknown_host PASSED                       [ 96%]
+tests/test_validation.py::test_cpu_overload PASSED                       [ 97%]
+tests/test_validation.py::test_mem_overload PASSED                       [ 97%]
+tests/test_validation.py::test_non_finite_or_negative PASSED             [ 98%]
+tests/test_validation.py::test_quantized_cpu_overload PASSED             [ 98%]
+tests/test_validation.py::test_quantized_mem_overload PASSED             [ 98%]
+tests/test_validation.py::test_quantized_float_edge PASSED               [ 99%]
+tests/test_validation.py::test_duplicate_vm PASSED                       [ 99%]
+tests/test_validation_real.py::test_saved_small_v2_assignments PASSED    [100%]
+
+=================================== ERRORS ====================================
+_ ERROR at setup of test_every_assignment_covers_every_vm_once_or_is_flagged __
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x00000198942779E0>, _basetemp=WindowsPath('C:/Users/Lenovo/AppData/Local/Temp/pytest-of-Lenovo/pytest-25'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def runs(tmp_path_factory):
+        vms, servers, _, _ = build_problem("small_v2")
+        out = tmp_path_factory.mktemp("mids")
+>       return vms, {p: run_baseline("small_v2", p, vms, servers, out) for p in POLICIES}
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_mids_baselines.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+optimizer\demo\baselines.py:48: in run_baseline
+    mvn("greenquanta.BaselinePlacement", base_in, placed_dir, policy)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+main_class = 'greenquanta.BaselinePlacement'
+args = (WindowsPath('C:/Users/Lenovo/AppData/Local/Temp/pytest-of-Lenovo/pytest-25/mids0/small_v2/cs_firstfit/baseline_input'...Path('C:/Users/Lenovo/AppData/Local/Temp/pytest-of-Lenovo/pytest-25/mids0/small_v2/cs_firstfit/placement'), 'firstfit')
+
+    def mvn(main_class, *args):
+        """Run a simulation class with mvn exec:java (cwd simulation/); returns stdout. Paths go relative to simulation/
+        because exec.args splits on whitespace and the repo path has spaces."""
+        exe = shutil.which("mvn")
+        if exe is None:
+            raise RuntimeError("mvn not found on PATH")
+        java_home = os.environ.get("JAVA_HOME")
+        if java_home and not Path(java_home).is_dir():
+>           raise RuntimeError(f"JAVA_HOME points to a missing folder: {java_home}")
+E           RuntimeError: JAVA_HOME points to a missing folder: C:\Program Files\Eclipse Adoptium\jdk-17.0.20.101-hotspot
+
+optimizer\demo\cloudsim.py:33: RuntimeError
+_____________ ERROR at setup of test_sorted_submission_is_applied _____________
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x00000198942779E0>, _basetemp=WindowsPath('C:/Users/Lenovo/AppData/Local/Temp/pytest-of-Lenovo/pytest-25'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def runs(tmp_path_factory):
+        vms, servers, _, _ = build_problem("small_v2")
+        out = tmp_path_factory.mktemp("mids")
+>       return vms, {p: run_baseline("small_v2", p, vms, servers, out) for p in POLICIES}
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_mids_baselines.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+optimizer\demo\baselines.py:48: in run_baseline
+    mvn("greenquanta.BaselinePlacement", base_in, placed_dir, policy)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+main_class = 'greenquanta.BaselinePlacement'
+args = (WindowsPath('C:/Users/Lenovo/AppData/Local/Temp/pytest-of-Lenovo/pytest-25/mids0/small_v2/cs_firstfit/baseline_input'...Path('C:/Users/Lenovo/AppData/Local/Temp/pytest-of-Lenovo/pytest-25/mids0/small_v2/cs_firstfit/placement'), 'firstfit')
+
+    def mvn(main_class, *args):
+        """Run a simulation class with mvn exec:java (cwd simulation/); returns stdout. Paths go relative to simulation/
+        because exec.args splits on whitespace and the repo path has spaces."""
+        exe = shutil.which("mvn")
+        if exe is None:
+            raise RuntimeError("mvn not found on PATH")
+        java_home = os.environ.get("JAVA_HOME")
+        if java_home and not Path(java_home).is_dir():
+>           raise RuntimeError(f"JAVA_HOME points to a missing folder: {java_home}")
+E           RuntimeError: JAVA_HOME points to a missing folder: C:\Program Files\Eclipse Adoptium\jdk-17.0.20.101-hotspot
+
+optimizer\demo\cloudsim.py:33: RuntimeError
+=========================== short test summary info ===========================
+ERROR tests/test_mids_baselines.py::test_every_assignment_covers_every_vm_once_or_is_flagged
+ERROR tests/test_mids_baselines.py::test_sorted_submission_is_applied - Runti...
+================= 257 passed, 2 errors in 1236.71s (0:20:36) ==================
+EXIT=1 (1238 s)
+
+## s0_gates
+$ python -B optimizer/diagnostics/s0_gates.py --methods s0_sa_probe s1_fixed_y_sa_probe s1_gas s1_hybrid s1_qaoa s1_qaoa_cvar s2_exact_qy s2_gas_budget s2_lever_l4 s2_pipeline_gas+qaoa_csqa s2_pipeline_gas_csa s2_pipeline_gas_csa_2d s2_pipeline_gas_csqa s2_pipeline_gas_csqa_2d s2_pipeline_gas_exact s2_sa_qy s2_sa_vs_sqa s2_sqa_calibration s2c_calibration s2c_compare s2d_calibration s2d_compare s2d_freeze
+results/phase2: files before=105 after=105 identical=True
+results/runs: files before=24 after=24 identical=True
+experiment_log: old prefix found=True old_bytes=964 now_bytes=782174
+experiment_log: old_rows=2 appended_rows=207 appended_methods=['s0_sa_probe', 's1_fixed_y_sa_probe', 's1_gas', 's1_hybrid', 's1_qaoa', 's1_qaoa_cvar', 's2_exact_qy', 's2_gas_budget', 's2_lever_l4', 's2_pipeline_gas+qaoa_csqa', 's2_pipeline_gas_csa', 's2_pipeline_gas_csa_2d', 's2_pipeline_gas_csqa', 's2_pipeline_gas_csqa_2d', 's2_pipeline_gas_exact', 's2_sa_qy', 's2_sa_vs_sqa', 's2_sqa_calibration', 's2c_calibration', 's2c_compare', 's2d_calibration', 's2d_compare', 's2d_freeze']
+experiment_log: rows_per_method={'s0_sa_probe': 6, 's1_fixed_y_sa_probe': 21, 's1_gas': 3, 's1_hybrid': 3, 's1_qaoa': 9, 's1_qaoa_cvar': 9, 's2_exact_qy': 3, 's2_gas_budget': 15, 's2_lever_l4': 42, 's2_pipeline_gas+qaoa_csqa': 3, 's2_pipeline_gas_csa': 3, 's2_pipeline_gas_csa_2d': 8, 's2_pipeline_gas_csqa': 3, 's2_pipeline_gas_csqa_2d': 14, 's2_pipeline_gas_exact': 3, 's2_sa_qy': 18, 's2_sa_vs_sqa': 12, 's2_sqa_calibration': 1, 's2c_calibration': 2, 's2c_compare': 12, 's2d_calibration': 4, 's2d_compare': 12, 's2d_freeze': 1} expected_methods=['s0_sa_probe', 's1_fixed_y_sa_probe', 's1_gas', 's1_hybrid', 's1_qaoa', 's1_qaoa_cvar', 's2_exact_qy', 's2_gas_budget', 's2_lever_l4', 's2_pipeline_gas+qaoa_csqa', 's2_pipeline_gas_csa', 's2_pipeline_gas_csa_2d', 's2_pipeline_gas_csqa', 's2_pipeline_gas_csqa_2d', 's2_pipeline_gas_exact', 's2_sa_qy', 's2_sa_vs_sqa', 's2_sqa_calibration', 's2c_calibration', 's2c_compare', 's2d_calibration', 's2d_compare', 's2d_freeze']
+PROTECTION_GATE PASS
+EXIT=0 (3 s)
+
+## git diff
+$ git diff --exit-code --stat
+EXIT=0 (0 s)
+
+## git diff --cached
+$ git diff --cached --exit-code --stat
+EXIT=0 (0 s)
+
+
+## pytest (rerun): the run above had 2 setup errors in tests/test_mids_baselines.py because this session's JAVA_HOME
+## pointed to the deleted Adoptium folder (Guide 1 pitfall). Rerun with JAVA_HOME=C:/Program Files/Java/jdk-17, no code change.
+$ python -B -m pytest tests -v -p no:cacheprovider
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 259 items
+
+tests/test_backend_api.py::test_health PASSED                            [  0%]
+tests/test_backend_api.py::test_sizes PASSED                             [  0%]
+tests/test_backend_api.py::test_results_without_assignments PASSED       [  1%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[quantum] PASSED [  1%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[control] PASSED [  1%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[exact_r1] PASSED [  2%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_firstfit] PASSED [  2%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_bestfit] PASSED [  3%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_worstfit] PASSED [  3%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_roundrobin] PASSED [  3%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_ffd] PASSED [  4%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_bfd] PASSED [  4%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[pabfd] PASSED [  5%]
+tests/test_backend_api.py::test_compare_equals_json PASSED               [  5%]
+tests/test_backend_api.py::test_claims PASSED                            [  5%]
+tests/test_backend_api.py::test_404[/api/results/huge_v2-unknown_size] PASSED [  6%]
+tests/test_backend_api.py::test_404[/api/results/huge_v2/compare-unknown_size] PASSED [  6%]
+tests/test_backend_api.py::test_404[/api/results/small_v2/placement/nope-unknown_method] PASSED [  6%]
+tests/test_backend_api.py::test_404[/api/claims?size=huge_v2-unknown_size] PASSED [  7%]
+tests/test_backend_api.py::test_404[/api/nope-not_found] PASSED          [  7%]
+tests/test_backend_api.py::test_missing_results_names_the_build_command PASSED [  8%]
+tests/test_backend_api.py::test_frontend_dist_served_with_spa_fallback PASSED [  8%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[0-small_v2] PASSED [  8%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[0-medium_v2] PASSED [  9%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[0-large_v2] PASSED [  9%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[1-small_v2] PASSED [ 10%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[1-medium_v2] PASSED [ 10%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[1-large_v2] PASSED [ 10%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[2-small_v2] PASSED [ 11%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[2-medium_v2] PASSED [ 11%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[2-large_v2] PASSED [ 11%]
+tests/test_backend_gas_trace.py::test_endpoint_and_seed_check PASSED     [ 12%]
+tests/test_backend_jobs.py::test_live_run_small_done_exclusive_and_matches_cached PASSED [ 12%]
+tests/test_backend_jobs.py::test_bad_body_400[None] PASSED               [ 13%]
+tests/test_backend_jobs.py::test_bad_body_400[body1] PASSED              [ 13%]
+tests/test_backend_jobs.py::test_bad_body_400[body2] PASSED              [ 13%]
+tests/test_backend_jobs.py::test_bad_body_400[body3] PASSED              [ 14%]
+tests/test_backend_jobs.py::test_bad_body_400[body4] PASSED              [ 14%]
+tests/test_backend_jobs.py::test_bad_body_400[body5] PASSED              [ 15%]
+tests/test_backend_jobs.py::test_unknown_job_404 PASSED                  [ 15%]
+tests/test_backend_jobs.py::test_timeout_kills_and_fails PASSED          [ 15%]
+tests/test_d0_formulation.py::test_hand_capacity_values[1.0-0.048] PASSED [ 16%]
+tests/test_d0_formulation.py::test_hand_capacity_values[0.02--2e-05] PASSED [ 16%]
+tests/test_d0_formulation.py::test_hand_capacity_values[0.0-0.0] PASSED  [ 16%]
+tests/test_d0_formulation.py::test_hand_capacity_values[-0.5-0.0135] PASSED [ 17%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[slack] PASSED   [ 17%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[slack_scaled] PASSED [ 18%]
+tests/test_d0_formulation.py::test_reject_non_unbalanced[unknown] PASSED [ 18%]
+tests/test_d0_formulation.py::test_all_32768_states_match_independent_formula PASSED [ 18%]
+tests/test_d0_formulation.py::test_independent_terms_include_offsets_and_off_server_link PASSED [ 19%]
+tests/test_d0_formulation.py::test_all_81_assignments_use_real_size_validation_and_rank PASSED [ 19%]
+tests/test_d0_formulation.py::test_validation_rejects_missing_duplicate_and_off_server PASSED [ 20%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[small_v2] PASSED [ 20%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[medium_v2] PASSED [ 20%]
+tests/test_d0_formulation.py::test_resource_statistics_real_sizes_and_catalog[large_v2] PASSED [ 21%]
+tests/test_d3_helpers.py::test_flip_bound[a-7.5] PASSED                  [ 21%]
+tests/test_d3_helpers.py::test_flip_bound[b-7.25] PASSED                 [ 22%]
+tests/test_d3_helpers.py::test_flip_bound[c-2.25] PASSED                 [ 22%]
+tests/test_d3_helpers.py::test_read_landscape_threshold_and_multiplicity PASSED [ 22%]
+tests/test_d3_helpers.py::test_csv_writer_refuses_overwrite PASSED       [ 23%]
+tests/test_d3_helpers.py::test_saved_small_encoding_matches_d2[assignment_exact.csv-0.4366451311159] PASSED [ 23%]
+tests/test_d3_helpers.py::test_saved_small_encoding_matches_d2[assignment_annealer_only.csv-0.5012005266234] PASSED [ 23%]
+tests/test_exact_quantized.py::test_rounding_requires_one_more_server[cpu] PASSED [ 24%]
+tests/test_exact_quantized.py::test_rounding_requires_one_more_server[mem] PASSED [ 24%]
+tests/test_exact_quantized.py::test_exact_unit_multiples_have_equal_optima[cpu] PASSED [ 25%]
+tests/test_exact_quantized.py::test_exact_unit_multiples_have_equal_optima[mem] PASSED [ 25%]
+tests/test_exact_quantized.py::test_no_incumbent_has_complete_info PASSED [ 25%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L0.05-c0.02] PASSED [ 26%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.05-c0.02-cutting] PASSED [ 26%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.05-c0.02-full] PASSED [ 27%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L0.2-c0.07] PASSED [ 27%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.2-c0.07-cutting] PASSED [ 27%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L0.2-c0.07-full] PASSED [ 28%]
+tests/test_exact_qubo.py::test_exhaustive_minimum_matches_full_and_cutting_plane[L1.0-c0] PASSED [ 28%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L1.0-c0-cutting] PASSED [ 28%]
+tests/test_exact_qubo.py::test_fixed_bounds_match_exact_h_for_random_and_invalid_states[L1.0-c0-full] PASSED [ 29%]
+tests/test_exact_qubo.py::test_one_iteration_duplicate_state_is_unproven PASSED [ 29%]
+tests/test_exact_qubo.py::test_time_exhausted_before_milp_has_finite_bound PASSED [ 30%]
+tests/test_exact_qubo.py::test_interrupted_exact_worse_candidate_retains_earlier_incumbent PASSED [ 30%]
+tests/test_exact_qubo.py::test_milp_time_limit_without_candidate_keeps_true_scored_state PASSED [ 30%]
+tests/test_gap_metrics.py::test_proven_optimum_matches_within_tolerance PASSED [ 31%]
+tests/test_gap_metrics.py::test_unproven_incumbent_is_not_labelled_optimal PASSED [ 31%]
+tests/test_gap_metrics.py::test_no_exact_assignment PASSED               [ 32%]
+tests/test_gap_metrics.py::test_no_pure_assignment PASSED                [ 32%]
+tests/test_gap_metrics.py::test_existing_key_set_is_preserved PASSED     [ 32%]
+tests/test_gap_metrics.py::test_reference_matches_do_not_require_proof PASSED [ 33%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[True] PASSED  [ 33%]
+tests/test_gap_metrics.py::test_exact_mip_gap_is_forwarded[False] PASSED [ 33%]
+tests/test_managed_runner.py::test_build_run_config_seed_changes_hash PASSED [ 34%]
+tests/test_managed_runner.py::test_build_run_config_hash_ignores_dict_key_order PASSED [ 34%]
+tests/test_managed_runner.py::test_build_run_config_contains_seed PASSED [ 35%]
+tests/test_manifest.py::test_canonical_hash_ignores_key_order PASSED     [ 35%]
+tests/test_manifest.py::test_sampler_seed_changes_config_hash PASSED     [ 35%]
+tests/test_manifest.py::test_write_manifest_never_overwrites PASSED      [ 36%]
+tests/test_manifest.py::test_experiment_log_appends_without_repeating_header PASSED [ 36%]
+tests/test_manifest.py::test_file_hash_changes_with_one_byte PASSED      [ 37%]
+tests/test_manifest.py::test_dependency_versions_reports_missing PASSED  [ 37%]
+tests/test_manifest.py::test_git_info_distinguishes_untracked_files PASSED [ 37%]
+tests/test_mids_baselines.py::test_every_assignment_covers_every_vm_once_or_is_flagged PASSED [ 38%]
+tests/test_mids_baselines.py::test_sorted_submission_is_applied PASSED   [ 38%]
+tests/test_mids_cloudsim.py::test_write_cloudsim_inputs_matches_write_outputs PASSED [ 38%]
+tests/test_mids_freeze.py::test_pipeline_matches_golden[csqa-small_v2] PASSED [ 39%]
+tests/test_mids_freeze.py::test_pipeline_matches_golden[csqa-medium_v2] PASSED [ 39%]
+tests/test_mids_freeze.py::test_pipeline_matches_golden[csa-small_v2] PASSED [ 40%]
+tests/test_mids_freeze.py::test_pipeline_matches_golden[csa-medium_v2] PASSED [ 40%]
+tests/test_mids_preflight.py::test_pipeline_inputs_match_pinned_hashes PASSED [ 40%]
+tests/test_mids_results_schema.py::test_schema[small_v2] PASSED          [ 41%]
+tests/test_mids_results_schema.py::test_schema[medium_v2] PASSED         [ 41%]
+tests/test_mids_results_schema.py::test_schema[large_v2] PASSED          [ 42%]
+tests/test_mids_results_schema.py::test_quantum_matches_golden[small_v2] PASSED [ 42%]
+tests/test_mids_results_schema.py::test_quantum_matches_golden[medium_v2] PASSED [ 42%]
+tests/test_mids_results_schema.py::test_quantum_matches_golden[large_v2] PASSED [ 43%]
+tests/test_mids_results_schema.py::test_energy_is_fresh_evaluate_allocation[small_v2] PASSED [ 43%]
+tests/test_mids_results_schema.py::test_energy_is_fresh_evaluate_allocation[medium_v2] PASSED [ 44%]
+tests/test_mids_results_schema.py::test_energy_is_fresh_evaluate_allocation[large_v2] PASSED [ 44%]
+tests/test_mids_run_pipeline.py::test_run_pipeline_small_csqa PASSED     [ 44%]
+tests/test_qubo_fingerprint.py::test_repeated_build_has_same_hash PASSED [ 45%]
+tests/test_qubo_fingerprint.py::test_lambda_changes_hash PASSED          [ 45%]
+tests/test_qubo_fingerprint.py::test_center_changes_hash PASSED          [ 45%]
+tests/test_qubo_fingerprint.py::test_matches_golden PASSED               [ 46%]
+tests/test_qubo_fingerprint.py::test_insertion_order_and_edge_orientation_do_not_change_hash PASSED [ 46%]
+tests/test_qubo_fingerprint.py::test_offset_changes_hash PASSED          [ 47%]
+tests/test_r3_run.py::test_constrained_tiny_minimum_is_proven_within_30_second_budget PASSED [ 47%]
+tests/test_r3_run.py::test_margin_excludes_near_limit_host_even_when_shared_validation_accepts[cpu] PASSED [ 47%]
+tests/test_r3_run.py::test_margin_excludes_near_limit_host_even_when_shared_validation_accepts[mem] PASSED [ 48%]
+tests/test_r3_run.py::test_no_margin_safe_placement_does_not_return_invalid_fallback[cpu] PASSED [ 48%]
+tests/test_r3_run.py::test_no_margin_safe_placement_does_not_return_invalid_fallback[mem] PASSED [ 49%]
+tests/test_r3_run.py::test_one_iteration_preserves_honest_certificate_and_scoring PASSED [ 49%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[990.0-False] PASSED [ 49%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[990.0-True] PASSED [ 50%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1000.0-False] PASSED [ 50%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1000.0-True] PASSED [ 50%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1010.0-False] PASSED [ 51%]
+tests/test_r3_run.py::test_unproven_label_takes_precedence_over_validity_and_cost[1010.0-True] PASSED [ 51%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[990.0] PASSED [ 52%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[1000.0] PASSED [ 52%]
+tests/test_r3_run.py::test_invalid_label_takes_precedence_over_cost_for_proven_result[1010.0] PASSED [ 52%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1000.0-0.0-MATCH] PASSED [ 53%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1000.5-0.05-MATCH] PASSED [ 53%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[999.5--0.05-MATCH] PASSED [ 54%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1001.0-0.1-MATCH] PASSED [ 54%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[999.0--0.1-MATCH] PASSED [ 54%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1001.001-0.1001-DIFFERENT] PASSED [ 55%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[998.999--0.1001-DIFFERENT] PASSED [ 55%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[1010.0-1.0-DIFFERENT] PASSED [ 55%]
+tests/test_r3_run.py::test_proven_valid_label_uses_absolute_signed_percentage[990.0--1.0-DIFFERENT] PASSED [ 56%]
+tests/test_r3c_run.py::test_custom_matches_common_on_tiny PASSED         [ 56%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[assign] PASSED  [ 57%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[cpu] PASSED     [ 57%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[ram] PASSED     [ 57%]
+tests/test_r3c_run.py::test_per_term_lambda_changes_hash[link] PASSED    [ 58%]
+tests/test_r3c_run.py::test_fixed_y_equals_bruteforce[0.0025-weights0-active0] PASSED [ 58%]
+tests/test_r3c_run.py::test_fixed_y_equals_bruteforce[0.001-weights1-active1] PASSED [ 59%]
+tests/test_r3c_run.py::test_pass_rule[True-9.0-0.1-0.0025-True] PASSED   [ 59%]
+tests/test_r3c_run.py::test_pass_rule[True-0.0-0.10001-0.0025-False] PASSED [ 59%]
+tests/test_r3c_run.py::test_pass_rule[False-0.0-0.0-0.0025-False] PASSED [ 60%]
+tests/test_r3c_run.py::test_pass_rule[True--0.1-8.0-0.001-True] PASSED   [ 60%]
+tests/test_r3c_run.py::test_pass_rule[True-0.10001-0.0-0.0005-False] PASSED [ 61%]
+tests/test_r3c_run.py::test_pass_rule[True-None-None-0.0025-False] PASSED [ 61%]
+tests/test_r3c_run.py::test_linear_joules_use_actual_on_bits PASSED      [ 61%]
+tests/test_r3c_run.py::test_violation_counts_include_duplicated_load PASSED [ 62%]
+tests/test_r3c_run.py::test_solver_bindings_do_not_mutate_shared_config PASSED [ 62%]
+tests/test_s0_exact_slack.py::test_with_slack_writes_every_value_0_to_k PASSED [ 62%]
+tests/test_s0_exact_slack.py::test_bound_holds_global_minimum_feasible_and_energy_optimal PASSED [ 63%]
+tests/test_s0_exact_slack.py::test_counterexample_lambda_below_f_minimum_is_invalid PASSED [ 63%]
+tests/test_s0_slack.py::test_slack_range_is_exactly_0_to_k PASSED        [ 64%]
+tests/test_s0_slack.py::test_default_encoding_is_unbalanced_and_unchanged PASSED [ 64%]
+tests/test_s0_slack.py::test_encoding_arguments_are_checked PASSED       [ 64%]
+tests/test_s0_slack.py::test_slack_matches_build_qubo_v2_at_default_unit_and_lambda PASSED [ 65%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[small_v2] PASSED [ 65%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[medium_v2] PASSED [ 66%]
+tests/test_s0_slack.py::test_energy_part_is_nonnegative[large_v2] PASSED [ 66%]
+tests/test_s0_slack.py::test_lemma_slack_elimination_bruteforce[0.05] PASSED [ 66%]
+tests/test_s0_slack.py::test_lemma_slack_elimination_bruteforce[0.0025] PASSED [ 67%]
+tests/test_s1_cvar.py::test_cvar_hand_values PASSED                      [ 67%]
+tests/test_s1_cvar.py::test_cvar_alpha_one_is_mean_and_is_monotone_in_alpha PASSED [ 67%]
+tests/test_s1_quantum.py::test_norm_is_preserved PASSED                  [ 68%]
+tests/test_s1_quantum.py::test_one_qubit_p1_matches_analytic[0.3-0.2] PASSED [ 68%]
+tests/test_s1_quantum.py::test_one_qubit_p1_matches_analytic[1.7--0.9] PASSED [ 69%]
+tests/test_s1_quantum.py::test_one_qubit_p1_matches_analytic[2.5-1.1] PASSED [ 69%]
+tests/test_s1_quantum.py::test_mixer_acts_on_the_bit_of_the_index PASSED [ 69%]
+tests/test_s1_quantum.py::test_grover_matches_sin_squared[6-marked0-0] PASSED [ 70%]
+tests/test_s1_quantum.py::test_grover_matches_sin_squared[6-marked1-4] PASSED [ 70%]
+tests/test_s1_quantum.py::test_grover_matches_sin_squared[6-marked2-2] PASSED [ 71%]
+tests/test_s1_quantum.py::test_grover_matches_sin_squared[8-marked3-9] PASSED [ 71%]
+tests/test_s1_quantum.py::test_walsh_round_trip_and_linear_cost_has_n_plus_1_terms PASSED [ 71%]
+tests/test_s1_quantum.py::test_gas_counts_calls_and_finds_minimum PASSED [ 72%]
+tests/test_s1_quantum.py::test_tiny_instance_qaoa_finds_bruteforce_optimum_at_larger_p PASSED [ 72%]
+tests/test_s1_stage1.py::test_cost_is_lower_bound_and_check_is_nonvacuous PASSED [ 72%]
+tests/test_s1_stage1.py::test_aggregate_checks_are_necessary PASSED      [ 73%]
+tests/test_s1_stage1.py::test_pruning_is_exact PASSED                    [ 73%]
+tests/test_s1_stage1.py::test_all_costs_index_convention PASSED          [ 74%]
+tests/test_s1_stage1.py::test_factor_must_exceed_one PASSED              [ 74%]
+tests/test_s2_constrained.py::test_g_equals_slack_eliminated_q_y_on_every_one_hot_state PASSED [ 74%]
+tests/test_s2_constrained.py::test_min_g_equals_fixed_y_minimum PASSED   [ 75%]
+tests/test_s2_constrained.py::test_trotter_weights[0.05] PASSED          [ 75%]
+tests/test_s2_constrained.py::test_trotter_weights[0.5] PASSED           [ 76%]
+tests/test_s2_constrained.py::test_trotter_weights[2.0] PASSED           [ 76%]
+tests/test_s2_constrained.py::test_pimc_matches_exact_trotter_distribution[1-0.0] PASSED [ 76%]
+tests/test_s2_constrained.py::test_pimc_matches_exact_trotter_distribution[2-1.0] PASSED [ 77%]
+tests/test_s2_constrained.py::test_pimc_matches_exact_trotter_distribution[4-1.0] PASSED [ 77%]
+tests/test_s2_constrained.py::test_exact_trotter_converges_to_quantum_gibbs PASSED [ 77%]
+tests/test_s2_constrained.py::test_anneal_loads_reproducible_and_odd_trotter_rejected PASSED [ 78%]
+tests/test_s2_constrained.py::test_constrained_sample_gives_one_hot_q_y_samples[spec0] PASSED [ 78%]
+tests/test_s2_constrained.py::test_constrained_sample_gives_one_hot_q_y_samples[spec1] PASSED [ 79%]
+tests/test_s2_constrained.py::test_equal_budget_specs PASSED             [ 79%]
+tests/test_s2_constrained.py::test_schedule_shapes PASSED                [ 79%]
+tests/test_s2_sqa.py::test_finds_bruteforce_minimum PASSED               [ 80%]
+tests/test_s2_sqa.py::test_same_seed_same_samples_and_reads_differ PASSED [ 80%]
+tests/test_s2_sqa.py::test_energies_match_bqm_energy PASSED              [ 81%]
+tests/test_s2_sqa.py::test_rescaling_keeps_argmin_and_is_scale_invariant PASSED [ 81%]
+tests/test_s2_sqa.py::test_spin_update_count PASSED                      [ 81%]
+tests/test_s2_sqa.py::test_open_point_1_fixed_seed_repeats_reads PASSED  [ 82%]
+tests/test_s2_sqa.py::test_open_point_2_solution_is_a_trotter_slice PASSED [ 82%]
+tests/test_s2_sqa.py::test_tts99 PASSED                                  [ 83%]
+tests/test_s2_sqa.py::test_open_point_4_no_internal_rescaling PASSED     [ 83%]
+tests/test_s2_stage2.py::test_q_y_has_no_off_host_or_y_variables PASSED  [ 83%]
+tests/test_s2_stage2.py::test_u_y_bounds PASSED                          [ 84%]
+tests/test_s2_stage2.py::test_theorem_2_2_minimiser_is_feasible_and_optimal PASSED [ 84%]
+tests/test_s2_stage2.py::test_restriction_equals_full_fixed_y_minimum PASSED [ 84%]
+tests/test_s2_stage2.py::test_infeasible_y_costs_at_least_lambda_y PASSED [ 85%]
+tests/test_s2_stage2.py::test_heuristic_pruning_bound PASSED             [ 85%]
+tests/test_s2_stage2.py::test_profile_and_load_factor PASSED             [ 86%]
+tests/test_s2_stage2.py::test_l4_assignment_weight_keeps_minimum[10.0] PASSED [ 86%]
+tests/test_s2_stage2.py::test_l4_assignment_weight_keeps_minimum[1000.0] PASSED [ 86%]
+tests/test_s2_stage2.py::test_bqm_agrees_relative_branch_returns_python_bool PASSED [ 87%]
+tests/test_s2_stage2.py::test_rejects_bad_input PASSED                   [ 87%]
+tests/test_s2d_worldline.py::test_worldline_matches_exact_trotter_distribution[2] PASSED [ 88%]
+tests/test_s2d_worldline.py::test_worldline_matches_exact_trotter_distribution[4] PASSED [ 88%]
+tests/test_s2d_worldline.py::test_worldline_off_reproduces_committed_sampler[1] PASSED [ 88%]
+tests/test_s2d_worldline.py::test_worldline_off_reproduces_committed_sampler[4] PASSED [ 89%]
+tests/test_s2d_worldline.py::test_worldline_off_reproduces_committed_sampler[8] PASSED [ 89%]
+tests/test_s2d_worldline.py::test_worldline_loads_consistent_and_reproducible[0.0] PASSED [ 89%]
+tests/test_s2d_worldline.py::test_worldline_loads_consistent_and_reproducible[1.0] PASSED [ 90%]
+tests/test_s2d_worldline.py::test_constrained_sample_worldline_one_hot_and_budget PASSED [ 90%]
+tests/test_s2d_worldline.py::test_worldline_budget_formula PASSED        [ 91%]
+tests/test_s2d_worldline.py::test_select_rule PASSED                     [ 91%]
+tests/test_s2d_worldline.py::test_decide_rule PASSED                     [ 91%]
+tests/test_selection.py::test_lower_energy_repaired_wins_by_default PASSED [ 92%]
+tests/test_selection.py::test_prefer_unrepaired_preserves_old_ordering PASSED [ 92%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-0.0] PASSED [ 93%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[False-5e-13] PASSED [ 93%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-0.0] PASSED [ 93%]
+tests/test_selection.py::test_equal_energy_prefers_unrepaired[True-5e-13] PASSED [ 94%]
+tests/test_selection.py::test_empty_candidates[False] PASSED             [ 94%]
+tests/test_selection.py::test_empty_candidates[True] PASSED              [ 94%]
+tests/test_selection.py::test_lowest_energy_of_three_mixed_candidates PASSED [ 95%]
+tests/test_validation.py::test_fully_valid PASSED                        [ 95%]
+tests/test_validation.py::test_missing_vm PASSED                         [ 96%]
+tests/test_validation.py::test_unknown_vm PASSED                         [ 96%]
+tests/test_validation.py::test_unknown_host PASSED                       [ 96%]
+tests/test_validation.py::test_cpu_overload PASSED                       [ 97%]
+tests/test_validation.py::test_mem_overload PASSED                       [ 97%]
+tests/test_validation.py::test_non_finite_or_negative PASSED             [ 98%]
+tests/test_validation.py::test_quantized_cpu_overload PASSED             [ 98%]
+tests/test_validation.py::test_quantized_mem_overload PASSED             [ 98%]
+tests/test_validation.py::test_quantized_float_edge PASSED               [ 99%]
+tests/test_validation.py::test_duplicate_vm PASSED                       [ 99%]
+tests/test_validation_real.py::test_saved_small_v2_assignments PASSED    [100%]
+
+====================== 259 passed in 1022.49s (0:17:02) =======================
+EXIT=0 (1025 s)
+
+## s0_gates (after the pytest rerun)
+$ python -B optimizer/diagnostics/s0_gates.py --methods s0_sa_probe s1_fixed_y_sa_probe s1_gas s1_hybrid s1_qaoa s1_qaoa_cvar s2_exact_qy s2_gas_budget s2_lever_l4 s2_pipeline_gas+qaoa_csqa s2_pipeline_gas_csa s2_pipeline_gas_csa_2d s2_pipeline_gas_csqa s2_pipeline_gas_csqa_2d s2_pipeline_gas_exact s2_sa_qy s2_sa_vs_sqa s2_sqa_calibration s2c_calibration s2c_compare s2d_calibration s2d_compare s2d_freeze
+results/phase2: files before=105 after=105 identical=True
+results/runs: files before=24 after=24 identical=True
+experiment_log: old prefix found=True old_bytes=964 now_bytes=785316
+experiment_log: old_rows=2 appended_rows=209 appended_methods=['s0_sa_probe', 's1_fixed_y_sa_probe', 's1_gas', 's1_hybrid', 's1_qaoa', 's1_qaoa_cvar', 's2_exact_qy', 's2_gas_budget', 's2_lever_l4', 's2_pipeline_gas+qaoa_csqa', 's2_pipeline_gas_csa', 's2_pipeline_gas_csa_2d', 's2_pipeline_gas_csqa', 's2_pipeline_gas_csqa_2d', 's2_pipeline_gas_exact', 's2_sa_qy', 's2_sa_vs_sqa', 's2_sqa_calibration', 's2c_calibration', 's2c_compare', 's2d_calibration', 's2d_compare', 's2d_freeze']
+experiment_log: rows_per_method={'s0_sa_probe': 6, 's1_fixed_y_sa_probe': 21, 's1_gas': 3, 's1_hybrid': 3, 's1_qaoa': 9, 's1_qaoa_cvar': 9, 's2_exact_qy': 3, 's2_gas_budget': 15, 's2_lever_l4': 42, 's2_pipeline_gas+qaoa_csqa': 3, 's2_pipeline_gas_csa': 3, 's2_pipeline_gas_csa_2d': 8, 's2_pipeline_gas_csqa': 3, 's2_pipeline_gas_csqa_2d': 16, 's2_pipeline_gas_exact': 3, 's2_sa_qy': 18, 's2_sa_vs_sqa': 12, 's2_sqa_calibration': 1, 's2c_calibration': 2, 's2c_compare': 12, 's2d_calibration': 4, 's2d_compare': 12, 's2d_freeze': 1} expected_methods=['s0_sa_probe', 's1_fixed_y_sa_probe', 's1_gas', 's1_hybrid', 's1_qaoa', 's1_qaoa_cvar', 's2_exact_qy', 's2_gas_budget', 's2_lever_l4', 's2_pipeline_gas+qaoa_csqa', 's2_pipeline_gas_csa', 's2_pipeline_gas_csa_2d', 's2_pipeline_gas_csqa', 's2_pipeline_gas_csqa_2d', 's2_pipeline_gas_exact', 's2_sa_qy', 's2_sa_vs_sqa', 's2_sqa_calibration', 's2c_calibration', 's2c_compare', 's2d_calibration', 's2d_compare', 's2d_freeze']
+PROTECTION_GATE PASS
+EXIT=0
+
+## git diff (after rerun)
+$ git diff --exit-code --stat
+EXIT=0
+
+## git diff --cached (after rerun)
+$ git diff --cached --exit-code --stat
+EXIT=0

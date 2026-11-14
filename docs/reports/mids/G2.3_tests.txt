@@ -1,0 +1,28 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 10 items
+
+tests/test_backend_gas_trace.py::test_replay_is_faithful[0-small_v2] PASSED [ 10%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[0-medium_v2] PASSED [ 20%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[0-large_v2] PASSED [ 30%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[1-small_v2] PASSED [ 40%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[1-medium_v2] PASSED [ 50%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[1-large_v2] PASSED [ 60%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[2-small_v2] PASSED [ 70%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[2-medium_v2] PASSED [ 80%]
+tests/test_backend_gas_trace.py::test_replay_is_faithful[2-large_v2] PASSED [ 90%]
+tests/test_backend_gas_trace.py::test_endpoint_and_seed_check PASSED     [100%]
+
+============================= 10 passed in 40.22s =============================
+
+GAS trace payload sizes (GET /api/gas-trace/<size>?seed=<s>, bytes of the JSON body; limit about 2 MB for large)
+small_v2 seed 0: status 200, 121,599 bytes, steps 41, oracle_calls 69, measurements 41, budget 64
+small_v2 seed 1: status 200, 174,176 bytes, steps 59, oracle_calls 65, measurements 59, budget 64
+small_v2 seed 2: status 200, 159,696 bytes, steps 53, oracle_calls 64, measurements 53, budget 64
+medium_v2 seed 0: status 200, 92,955 bytes, steps 32, oracle_calls 71, measurements 32, budget 64
+medium_v2 seed 1: status 200, 116,532 bytes, steps 40, oracle_calls 64, measurements 40, budget 64
+medium_v2 seed 2: status 200, 87,354 bytes, steps 30, oracle_calls 66, measurements 30, budget 64
+large_v2 seed 0: status 200, 200,436 bytes, steps 65, oracle_calls 287, measurements 65, budget 256
+large_v2 seed 1: status 200, 210,920 bytes, steps 68, oracle_calls 269, measurements 68, budget 256
+large_v2 seed 2: status 200, 250,579 bytes, steps 81, oracle_calls 283, measurements 81, budget 256

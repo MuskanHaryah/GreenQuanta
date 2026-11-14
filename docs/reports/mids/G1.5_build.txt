@@ -1,0 +1,73 @@
+experiment_log lines before: 198
+## build_all.py (3 sizes, then freeze_check)
+wrote C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\results\mids\small_v2\results.json
+wrote C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\results\mids\medium_v2\results.json
+wrote C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\results\mids\large_v2\results.json
+FREEZE | small_v2 | csqa | [2, 3] | V=0.38505827990484337 | joules=39951971.03582648 | PASS
+FREEZE | small_v2 | csa | [2, 3] | V=0.38505827990484337 | joules=39951971.03582648 | PASS
+FREEZE | medium_v2 | csqa | [2, 3] | V=0.40156535160258183 | joules=44211076.67748815 | PASS
+FREEZE | medium_v2 | csa | [2, 3] | V=0.40156535160258183 | joules=44211076.67748815 | PASS
+FREEZE | large_v2 | csqa | [3, 4, 9, 10, 11] | V=0.4689138415395567 | joules=78864956.26095286 | PASS
+FREEZE | large_v2 | csa | [3, 4, 9, 10, 11] | V=0.4656709142036448 | joules=78318706.95783564 | PASS
+FREEZE CHECK PASS
+build_all exit 0
+experiment_log lines after: 204
+## pytest tests/test_mids_results_schema.py
+collecting ... collected 9 items
+
+tests/test_mids_results_schema.py::test_schema[small_v2] PASSED          [ 11%]
+tests/test_mids_results_schema.py::test_schema[medium_v2] PASSED         [ 22%]
+tests/test_mids_results_schema.py::test_schema[large_v2] PASSED          [ 33%]
+tests/test_mids_results_schema.py::test_quantum_matches_golden[small_v2] PASSED [ 44%]
+tests/test_mids_results_schema.py::test_quantum_matches_golden[medium_v2] PASSED [ 55%]
+tests/test_mids_results_schema.py::test_quantum_matches_golden[large_v2] PASSED [ 66%]
+tests/test_mids_results_schema.py::test_energy_is_fresh_evaluate_allocation[small_v2] PASSED [ 77%]
+tests/test_mids_results_schema.py::test_energy_is_fresh_evaluate_allocation[medium_v2] PASSED [ 88%]
+tests/test_mids_results_schema.py::test_energy_is_fresh_evaluate_allocation[large_v2] PASSED [100%]
+
+============================== 9 passed in 9.85s ==============================
+## protected folder status
+(empty = untouched)
+## comparison table from results/mids/<size>/results.json
+
+### small_v2 (R1 3.9952e+07 J, R2 3.9952e+07 J, commit 108638f0)
+| method | valid real/quant | active servers | joules vs R1 % | vs R2 % | IT kWh | CO2 kg | CloudSim IT diff % |
+|---|---|---|---|---|---|---|---|
+| quantum | True/True | 2 [2, 3] | +0.000 | +0.000 | 11.0391 | 7.3951 | 0.0238 |
+| control | True/True | 2 [2, 3] | +0.000 | +0.000 | 11.0399 | 7.3956 | 0.0239 |
+| exact_r1 | True/True | 2 [2, 3] | +0.000 | +0.000 | 11.0849 | 7.4258 | 0.0242 |
+| pabfd | True/True | 3 [2, 6, 7] | +10.416 | +10.416 | 11.9084 | 7.9774 | 0.0229 |
+| cs_firstfit | True/True | 3 [0, 1, 2] | +50.827 | +50.827 | 16.6737 | 11.1697 | 0.0199 |
+| cs_ffd | True/True | 3 [0, 1, 2] | +57.516 | +57.516 | 17.3776 | 11.6412 | 0.0211 |
+| cs_bfd | True/True | 4 [0, 1, 6, 7] | +58.182 | +58.182 | 17.2697 | 11.5690 | 0.0242 |
+| cs_bestfit | True/True | 4 [0, 1, 6, 7] | +58.581 | +58.581 | 17.2954 | 11.5862 | 0.0246 |
+| cs_worstfit | True/True | 6 [0, 1, 2, 3, 4, 5] | +125.652 | +125.652 | 23.1262 | 15.4922 | 0.0152 |
+| cs_roundrobin | True/True | 8 [0, 1, 2, 3, 4, 5, 6, 7] | +164.887 | +164.887 | 26.2109 | 17.5586 | 0.0213 |
+
+### medium_v2 (R1 4.42111e+07 J, R2 4.42111e+07 J, commit 108638f0)
+| method | valid real/quant | active servers | joules vs R1 % | vs R2 % | IT kWh | CO2 kg | CloudSim IT diff % |
+|---|---|---|---|---|---|---|---|
+| quantum | True/True | 2 [2, 3] | +0.000 | +0.000 | 12.1761 | 8.1568 | 0.0089 |
+| control | True/True | 2 [2, 3] | +0.000 | +0.000 | 12.1770 | 8.1574 | 0.0090 |
+| exact_r1 | True/False | 2 [2, 3] | +0.000 | +0.000 | 12.1981 | 8.1715 | 0.0091 |
+| pabfd | True/True | 4 [2, 3, 6, 7] | +33.170 | +33.170 | 15.5832 | 10.4392 | 0.0165 |
+| cs_bestfit | True/False | 4 [0, 1, 6, 7] | +60.052 | +60.052 | 19.2223 | 12.8770 | 0.0126 |
+| cs_firstfit | True/True | 4 [0, 1, 2, 3] | +67.424 | +67.424 | 19.9220 | 13.3457 | 0.0034 |
+| cs_ffd | True/False | 4 [0, 1, 2, 3] | +72.918 | +72.918 | 20.1867 | 13.5231 | 0.0112 |
+| cs_bfd | True/False | 5 [0, 1, 4, 6, 7] | +87.312 | +87.312 | 22.1774 | 14.8567 | 0.0180 |
+| cs_worstfit | True/True | 6 [0, 1, 2, 3, 4, 5] | +117.894 | +117.894 | 26.6996 | 17.8861 | 0.0142 |
+| cs_roundrobin | True/True | 8 [0, 1, 2, 3, 4, 5, 6, 7] | +150.358 | +150.358 | 28.0806 | 18.8112 | 0.0014 |
+
+### large_v2 (R1 7.32304e+07 J, R2 7.79781e+07 J, commit 108638f0)
+| method | valid real/quant | active servers | joules vs R1 % | vs R2 % | IT kWh | CO2 kg | CloudSim IT diff % |
+|---|---|---|---|---|---|---|---|
+| exact_r1 | True/False | 4 [3, 4, 5, 9] | +0.000 | -6.089 | 20.0307 | 13.4186 | 0.0278 |
+| control | True/True | 5 [3, 4, 9, 10, 11] | +6.948 | +0.437 | 21.4287 | 14.3551 | 0.0229 |
+| quantum | True/True | 5 [3, 4, 9, 10, 11] | +7.694 | +1.137 | 21.4629 | 14.3780 | 0.0247 |
+| pabfd | True/False | 6 [3, 4, 5, 9, 10, 11] | +23.818 | +16.279 | 24.0877 | 16.1363 | 0.0309 |
+| cs_firstfit | True/False | 6 [0, 1, 2, 3, 4, 5] | +47.861 | +38.859 | 30.1537 | 20.2000 | 0.0252 |
+| cs_ffd | True/False | 6 [0, 1, 2, 3, 4, 5] | +56.568 | +47.036 | 31.0171 | 20.7783 | 0.0307 |
+| cs_bfd | True/False | 8 [0, 1, 2, 6, 7, 9, 10, 11] | +82.092 | +71.005 | 34.4218 | 23.0592 | 0.0366 |
+| cs_bestfit | True/False | 8 [0, 1, 2, 6, 7, 9, 10, 11] | +83.750 | +72.562 | 35.7292 | 23.9350 | 0.0137 |
+| cs_worstfit | True/True | 9 [0, 1, 2, 3, 4, 5, 6, 7, 8] | +99.488 | +87.342 | 40.6173 | 27.2095 | 0.0080 |
+| cs_roundrobin | True/True | 12 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] | +130.727 | +116.679 | 47.2340 | 31.6420 | 0.0182 |

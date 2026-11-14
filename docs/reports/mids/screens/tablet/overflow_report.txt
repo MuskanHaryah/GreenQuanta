@@ -1,0 +1,2 @@
+OK   about-small_v2-tablet: viewport 1024 px, scrollWidth 1024, page height 2411, error panels 0
+OK   about-large_v2-tablet: viewport 1024 px, scrollWidth 1024, page height 2411, error panels 0

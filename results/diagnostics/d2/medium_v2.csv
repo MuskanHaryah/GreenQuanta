@@ -1,0 +1,11 @@
+size,kind,term,max_abs_coef,min_nonzero_abs_coef,ratio,nonzero_count,servers,e_ref_joule,y_min,y_max,x_min,x_max,assignment,servers_on,valid,validation,total_h,energy_h,assign_h,cpu_h,ram_h,link_h,lower_total_h,max_coefficient_error,status
+medium_v2,decomposition,,,,,,,,,,,,,,,,,,,,,,,2.7755575615628914e-17,pass
+medium_v2,term,energy,0.11125511532143269,1.4135333881527638e-05,7870.710112254462,512,,,,,,,,,,,,,,,,,,,
+medium_v2,term,assign,0.1,0.05,2.0,2268,,,,,,,,,,,,,,,,,,,
+medium_v2,term,cpu,0.07480916030534351,8.650519031141869e-07,86479.38931297709,16640,,,,,,,,,,,,,,,,,,,
+medium_v2,term,ram,0.048000000000000015,3.4602076124567477e-06,13872.000000000004,16640,,,,,,,,,,,,,,,,,,,
+medium_v2,term,link,0.05000000000000001,0.049999999999999996,1.0000000000000002,1008,,,,,,,,,,,,,,,,,,,
+medium_v2,energy_details,,,,,,8,110333227.95572406,0.04408753455443195,0.11125511532143269,1.4135333881527638e-05,0.06587362152165145,,,,,,,,,,,,,
+medium_v2,assignment,,,,,,,,,,,,assignment_exact.csv,2,True,"{""valid"": true, ""violations"": []}",0.4062522893188384,0.40156535160258183,-3.191891195797325e-16,2.569204152253908e-05,0.00466124567474074,-6.938893903907228e-18,,,
+medium_v2,assignment,,,,,,,,,,,,assignment_annealer_only.csv,5,True,"{""valid"": true, ""violations"": []}",0.7667320471471373,0.6013213238014375,-3.191891195797325e-16,0.07682205471945386,0.08858866862624964,-6.938893903907228e-18,,,
+medium_v2,comparison,,,,,,,,,,,,,,,,,,,,,,assignment_exact.csv,,

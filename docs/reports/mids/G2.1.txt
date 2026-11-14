@@ -1,0 +1,18 @@
+G2.1 run_pipeline CLI (cwd optimizer/: ../.venv-gq/Scripts/python.exe -B -u -m demo.run_pipeline --size small_v2 --stage2 csqa)
+raw stdout: G2.1_raw_small_csqa.txt (exit 0, 32 s)
+event kinds: ['PROPOSALS', 'STAGE2', 'HYBRID', 'LOGGED', 'RESULT']
+chosen_ids=[2, 3] V=0.38505827990484337 joules=39951971.03582648 valid=True/True it_kwh=11.039100641817516
+differences vs tests/data/mids_golden.json: []
+
+$ pytest tests/test_mids_run_pipeline.py -v -p no:cacheprovider
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 1 item
+
+tests/test_mids_run_pipeline.py::test_run_pipeline_small_csqa PASSED     [100%]
+
+============================= 1 passed in 30.66s ==============================
+
+
+exit 0

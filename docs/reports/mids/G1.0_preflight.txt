@@ -1,0 +1,43 @@
+## note: user JAVA_HOME pointed to a missing Adoptium folder; set JAVA_HOME=C:/Program Files/Java/jdk-17 for this session
+## java -version
+java version "17.0.12" 2024-07-16 LTS
+Java(TM) SE Runtime Environment (build 17.0.12+8-LTS-286)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.12+8-LTS-286, mixed mode, sharing)
+## mvn -v
+Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
+Maven home: C:\Users\Lenovo\tools\apache-maven-3.9.9
+Java version: 17.0.12, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk-17
+Default locale: en_US, platform encoding: Cp1252
+OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
+## mvn -q compile (simulation/)
+compile exit: 0
+## preflight (1st run)
+wrote tests\data\mids_inputs_sha256.json
+9dd2116ed7a7a7e4b32ee6ef5be3e36ea71c5039662674c79956ac5dcb1aee65 docs/reports/step1/1.3_ground_truth.txt
+14d68a812736a4643674e28a993fdf41849212bf65fc59a2cad5b972fc34b8de docs/reports/step1/1.5b_qaoa_cvar.txt
+d74f3620b479696fad90a83e03df9e9567ef5e86f4fd64a2130f74721dcbc75d docs/reports/step2/2.5_calibration.txt
+d2cee40d2374ebe751723f35ee08464bdd84d5458a6c8aa726e44a7fc50be331 docs/reports/step2/2C.3_calibration.txt
+2216be368ad2d80647ce6c4bde1a9e76c1e4b15da06d5168ddd841145b28b1b1 docs/reports/step2/2D.3_calibration.txt
+b21032a56056ca3261ecd8ef1d45ce3d72908a60a14c450f3eeae979ada2a4ef docs/reports/step2e_raw_output.txt
+1a946e988f3ce735069bf8f45099ce940412a2138c37cf5a2bfcd064b72b9812 results/phase2/small_v2/assignment_exact.csv
+bfad59b871fc03ad0ee51a4e62e1c0395c621c8b803a8d003a0110ca2f0de5b0 results/phase2/medium_v2/assignment_exact.csv
+b9809f4bf91e2818c0f01173d87eefa1a142f5f7bf60750cc04ba59dc45a2ff0 results/phase2/large_v2/assignment_exact.csv
+PREFLIGHT PASS
+exit: 0
+## preflight (2nd run)
+9dd2116ed7a7a7e4b32ee6ef5be3e36ea71c5039662674c79956ac5dcb1aee65 docs/reports/step1/1.3_ground_truth.txt
+14d68a812736a4643674e28a993fdf41849212bf65fc59a2cad5b972fc34b8de docs/reports/step1/1.5b_qaoa_cvar.txt
+d74f3620b479696fad90a83e03df9e9567ef5e86f4fd64a2130f74721dcbc75d docs/reports/step2/2.5_calibration.txt
+d2cee40d2374ebe751723f35ee08464bdd84d5458a6c8aa726e44a7fc50be331 docs/reports/step2/2C.3_calibration.txt
+2216be368ad2d80647ce6c4bde1a9e76c1e4b15da06d5168ddd841145b28b1b1 docs/reports/step2/2D.3_calibration.txt
+b21032a56056ca3261ecd8ef1d45ce3d72908a60a14c450f3eeae979ada2a4ef docs/reports/step2e_raw_output.txt
+1a946e988f3ce735069bf8f45099ce940412a2138c37cf5a2bfcd064b72b9812 results/phase2/small_v2/assignment_exact.csv
+bfad59b871fc03ad0ee51a4e62e1c0395c621c8b803a8d003a0110ca2f0de5b0 results/phase2/medium_v2/assignment_exact.csv
+b9809f4bf91e2818c0f01173d87eefa1a142f5f7bf60750cc04ba59dc45a2ff0 results/phase2/large_v2/assignment_exact.csv
+PREFLIGHT PASS
+exit: 0
+## pytest
+
+tests/test_mids_preflight.py::test_pipeline_inputs_match_pinned_hashes PASSED [100%]
+
+============================== 1 passed in 0.04s ==============================

@@ -1,0 +1,116 @@
+# G3.00 method references in META (2026-11-14T13:07:14+05:00)
+
+## git diff --stat (optimizer/)
+warning: in the working copy of 'optimizer/demo/build_results.py', LF will be replaced by CRLF the next time Git touches it
+ optimizer/demo/build_results.py | 27 +++++++++++++++++++--------
+ 1 file changed, 19 insertions(+), 8 deletions(-)
+
+## build_all.py (JAVA_HOME=C:\Program Files\Java\jdk-17): wrote / freeze lines
+wrote C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\results\mids\small_v2\results.json
+wrote C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\results\mids\medium_v2\results.json
+wrote C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\results\mids\large_v2\results.json
+FREEZE | small_v2 | csqa | [2, 3] | V=0.38505827990484337 | joules=39951971.03582648 | PASS
+FREEZE | small_v2 | csa | [2, 3] | V=0.38505827990484337 | joules=39951971.03582648 | PASS
+FREEZE | medium_v2 | csqa | [2, 3] | V=0.40156535160258183 | joules=44211076.67748815 | PASS
+FREEZE | medium_v2 | csa | [2, 3] | V=0.40156535160258183 | joules=44211076.67748815 | PASS
+FREEZE | large_v2 | csqa | [3, 4, 9, 10, 11] | V=0.4689138415395567 | joules=78864956.26095286 | PASS
+FREEZE | large_v2 | csa | [3, 4, 9, 10, 11] | V=0.4656709142036448 | joules=78318706.95783564 | PASS
+FREEZE CHECK PASS
+exit 0
+
+## results.json diff vs the pre-change copies (ignore generated_at, git_commit, runtime_s)
+== small_v2: 8 differences (ignoring ['generated_at', 'git_commit', 'runtime_s']); reference: 8; other: 0
+  methods.control.reference
+    old: Kirkpatrick, Gelatt & Vecchi 1983 (simulated annealing)
+    new: Kirkpatrick, Gelatt & Vecchi 1983, Science 220, 671 (simulated annealing)
+  methods.cs_bestfit.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicyBestFit
+    new: CloudSim Plus 8.0.0, VmAllocationPolicyBestFit; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.cs_firstfit.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicyFirstFit
+    new: CloudSim Plus 8.0.0, VmAllocationPolicyFirstFit; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.cs_roundrobin.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicyRoundRobin
+    new: CloudSim Plus 8.0.0, VmAllocationPolicyRoundRobin; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.cs_worstfit.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicySimple
+    new: CloudSim Plus 8.0.0, VmAllocationPolicySimple; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.exact_r1.reference
+    old: None
+    new: Huangfu & Hall 2018, Math. Prog. Comp. 10, 119 (HiGHS); Virtanen et al. 2020, Nature Methods 17, 261 (SciPy milp)
+  methods.pabfd.reference
+    old: Beloglazov & Buyya 2012, Algorithm 1 (PABFD)
+    new: Beloglazov & Buyya 2012, Concurrency Computat.: Pract. Exper. 24(13), 1397 (PABFD)
+  methods.quantum.reference
+    old: Gilliam et al. 2021 (Grover Adaptive Search); Martonak, Santoro & Tosatti 2002 (path-integral SQA)
+    new: Dürr & Høyer 1996, arXiv:quant-ph/9607014 (quantum minimum finding); Gilliam, Woerner & Gonciulea 2021, Quantum 5, 428 (Grover Adaptive Search); Hen & Spedalieri 2016, Phys. Rev. Applied 5, 034007 and Hen & Sarandy 2016, Phys. Rev. A 93, 062312 (constraint-preserving drivers); Martoňák, Santoro & Tosatti 2002, Phys. Rev. B 66, 094203 (path-integral SQA)
+  git_commit old 108638f009a7277ec68c9ea6a647167d87434d28 new 871007f3f0bc7e1100d50f7c17c7bc155c84b022
+== medium_v2: 8 differences (ignoring ['generated_at', 'git_commit', 'runtime_s']); reference: 8; other: 0
+  methods.control.reference
+    old: Kirkpatrick, Gelatt & Vecchi 1983 (simulated annealing)
+    new: Kirkpatrick, Gelatt & Vecchi 1983, Science 220, 671 (simulated annealing)
+  methods.cs_bestfit.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicyBestFit
+    new: CloudSim Plus 8.0.0, VmAllocationPolicyBestFit; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.cs_firstfit.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicyFirstFit
+    new: CloudSim Plus 8.0.0, VmAllocationPolicyFirstFit; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.cs_roundrobin.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicyRoundRobin
+    new: CloudSim Plus 8.0.0, VmAllocationPolicyRoundRobin; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.cs_worstfit.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicySimple
+    new: CloudSim Plus 8.0.0, VmAllocationPolicySimple; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.exact_r1.reference
+    old: None
+    new: Huangfu & Hall 2018, Math. Prog. Comp. 10, 119 (HiGHS); Virtanen et al. 2020, Nature Methods 17, 261 (SciPy milp)
+  methods.pabfd.reference
+    old: Beloglazov & Buyya 2012, Algorithm 1 (PABFD)
+    new: Beloglazov & Buyya 2012, Concurrency Computat.: Pract. Exper. 24(13), 1397 (PABFD)
+  methods.quantum.reference
+    old: Gilliam et al. 2021 (Grover Adaptive Search); Martonak, Santoro & Tosatti 2002 (path-integral SQA)
+    new: Dürr & Høyer 1996, arXiv:quant-ph/9607014 (quantum minimum finding); Gilliam, Woerner & Gonciulea 2021, Quantum 5, 428 (Grover Adaptive Search); Hen & Spedalieri 2016, Phys. Rev. Applied 5, 034007 and Hen & Sarandy 2016, Phys. Rev. A 93, 062312 (constraint-preserving drivers); Martoňák, Santoro & Tosatti 2002, Phys. Rev. B 66, 094203 (path-integral SQA)
+  git_commit old 108638f009a7277ec68c9ea6a647167d87434d28 new 871007f3f0bc7e1100d50f7c17c7bc155c84b022
+== large_v2: 8 differences (ignoring ['generated_at', 'git_commit', 'runtime_s']); reference: 8; other: 0
+  methods.control.reference
+    old: Kirkpatrick, Gelatt & Vecchi 1983 (simulated annealing)
+    new: Kirkpatrick, Gelatt & Vecchi 1983, Science 220, 671 (simulated annealing)
+  methods.cs_bestfit.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicyBestFit
+    new: CloudSim Plus 8.0.0, VmAllocationPolicyBestFit; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.cs_firstfit.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicyFirstFit
+    new: CloudSim Plus 8.0.0, VmAllocationPolicyFirstFit; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.cs_roundrobin.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicyRoundRobin
+    new: CloudSim Plus 8.0.0, VmAllocationPolicyRoundRobin; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.cs_worstfit.reference
+    old: CloudSim Plus 8.0.0, VmAllocationPolicySimple
+    new: CloudSim Plus 8.0.0, VmAllocationPolicySimple; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+  methods.exact_r1.reference
+    old: None
+    new: Huangfu & Hall 2018, Math. Prog. Comp. 10, 119 (HiGHS); Virtanen et al. 2020, Nature Methods 17, 261 (SciPy milp)
+  methods.pabfd.reference
+    old: Beloglazov & Buyya 2012, Algorithm 1 (PABFD)
+    new: Beloglazov & Buyya 2012, Concurrency Computat.: Pract. Exper. 24(13), 1397 (PABFD)
+  methods.quantum.reference
+    old: Gilliam et al. 2021 (Grover Adaptive Search); Martonak, Santoro & Tosatti 2002 (path-integral SQA)
+    new: Dürr & Høyer 1996, arXiv:quant-ph/9607014 (quantum minimum finding); Gilliam, Woerner & Gonciulea 2021, Quantum 5, 428 (Grover Adaptive Search); Hen & Spedalieri 2016, Phys. Rev. Applied 5, 034007 and Hen & Sarandy 2016, Phys. Rev. A 93, 062312 (constraint-preserving drivers); Martoňák, Santoro & Tosatti 2002, Phys. Rev. B 66, 094203 (path-integral SQA)
+  git_commit old 108638f009a7277ec68c9ea6a647167d87434d28 new 871007f3f0bc7e1100d50f7c17c7bc155c84b022
+RESULTS DIFF PASS (only reference strings changed)
+
+## pytest tests/test_mids_results_schema.py tests/test_backend_api.py
+...............................                                          [100%]
+31 passed in 19.50s
+
+## GET /api/claims?size=large_v2 -> methods[].reference
+quantum | Dürr & Høyer 1996, arXiv:quant-ph/9607014 (quantum minimum finding); Gilliam, Woerner & Gonciulea 2021, Quantum 5, 428 (Grover Adaptive Search); Hen & Spedalieri 2016, Phys. Rev. Applied 5, 034007 and Hen & Sarandy 2016, Phys. Rev. A 93, 062312 (constraint-preserving drivers); Martoňák, Santoro & Tosatti 2002, Phys. Rev. B 66, 094203 (path-integral SQA)
+control | Kirkpatrick, Gelatt & Vecchi 1983, Science 220, 671 (simulated annealing)
+exact_r1 | Huangfu & Hall 2018, Math. Prog. Comp. 10, 119 (HiGHS); Virtanen et al. 2020, Nature Methods 17, 261 (SciPy milp)
+cs_firstfit | CloudSim Plus 8.0.0, VmAllocationPolicyFirstFit; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+cs_bestfit | CloudSim Plus 8.0.0, VmAllocationPolicyBestFit; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+cs_worstfit | CloudSim Plus 8.0.0, VmAllocationPolicySimple; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+cs_roundrobin | CloudSim Plus 8.0.0, VmAllocationPolicyRoundRobin; Silva Filho et al. 2017, IFIP/IEEE IM (CloudSim Plus)
+cs_ffd | Johnson 1973 (bin-packing FFD)
+cs_bfd | Johnson 1973 (bin-packing BFD)
+pabfd | Beloglazov & Buyya 2012, Concurrency Computat.: Pract. Exper. 24(13), 1397 (PABFD)

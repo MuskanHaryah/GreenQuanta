@@ -1,0 +1,8 @@
+﻿RUN_CONFIG={"budget_factor": 1.0, "c_pipe_min_success": 0.95, "growth": 1.2, "restarts": [1, 2, 4, 8], "seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], "sizes": ["small_v2", "medium_v2", "large_v2"], "sqrt_budget_factors": [1, 2, 4, 8, 16], "sqrt_budget_seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]}
+TABLE | size | seeds | found | oracle med/mean/max | total med/mean/max |
+GAS_16_TOTAL_JSON={"found": 20, "oracle_calls": {"max": 56, "mean": 28.05, "median": 27.5}, "seeds": 20, "size": "small_v2", "total_cost": {"max": 101, "mean": 59.4, "median": 59.0}}
+TABLE | small_v2 | 20 | 20 | 27.5/28.05/56 | 59.0/59.4/101 |
+GAS_16_TOTAL_JSON={"found": 20, "oracle_calls": {"max": 46, "mean": 22.55, "median": 22.0}, "seeds": 20, "size": "medium_v2", "total_cost": {"max": 90, "mean": 46.85, "median": 44.5}}
+TABLE | medium_v2 | 20 | 20 | 22.0/22.55/46 | 44.5/46.85/90 |
+GAS_16_TOTAL_JSON={"found": 20, "oracle_calls": {"max": 286, "mean": 99.7, "median": 92.5}, "seeds": 20, "size": "large_v2", "total_cost": {"max": 386, "mean": 153.75, "median": 143.5}}
+TABLE | large_v2 | 20 | 20 | 92.5/99.7/286 | 143.5/153.75/386 |

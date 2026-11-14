@@ -1,0 +1,26 @@
+﻿tokens: {"bg":"#584887","bg-deep":"#3B3070","blob-blue":"#2E55A6","blob-pink":"#E9738A","panel":"#1C1B22","panel-2":"#2A2733","peach":"#F49A72","coral":"#F2706A","navy":"#2C4A8E","periwinkle":"#8E9BFF","text":"#FFFFFF","muted":"#D6CFEA","ink":"#1C1B22","ok":"#7FD6A6","bad":"#FF8A8A"}
+fg / bg | hex | ratio | need | result | use
+text / bg | #FFFFFF on #584887 | 7.80 | 4.5 | PASS | body text, hero QUANTA, headline second word, unpressed pill labels
+muted / bg | #D6CFEA on #584887 | 5.19 | 4.5 | PASS | secondary text and field labels on the page
+periwinkle / bg | #8E9BFF on #584887 | 3.08 | 3.0 | PASS | headline first word (Bebas Neue >= 32 px)
+periwinkle / bg | #8E9BFF on #584887 | 3.08 | 3.0 | PASS | focus ring on the page (non-text)
+text / bg | #FFFFFF on #584887 | 7.80 | 3.0 | PASS | active nav underline (non-text)
+text / bg-deep | #FFFFFF on #3B3070 | 11.40 | 4.5 | PASS | rail active label, phone menu active link, footer
+muted / bg-deep | #D6CFEA on #3B3070 | 7.58 | 4.5 | PASS | rail labels, phone menu links, footer text
+coral / bg-deep | #F2706A on #3B3070 | 3.96 | 3.0 | PASS | rail dashes, menu close button (non-text)
+periwinkle / bg-deep | #8E9BFF on #3B3070 | 4.49 | 3.0 | PASS | focus ring on the rail and menu (non-text)
+text / panel | #FFFFFF on #1C1B22 | 17.08 | 4.5 | PASS | card, table, chart and drawer text
+muted / panel | #D6CFEA on #1C1B22 | 11.37 | 4.5 | PASS | secondary text in cards, axis ticks, muted valid_quantized cross
+periwinkle / panel | #8E9BFF on #1C1B22 | 6.74 | 4.5 | PASS | top-bar tag chip, box titles, references
+coral / panel | #F2706A on #1C1B22 | 5.94 | 3.0 | PASS | round arrow buttons (non-text)
+ok / panel | #7FD6A6 on #1C1B22 | 9.82 | 4.5 | PASS | valid check
+bad / panel | #FF8A8A on #1C1B22 | 7.53 | 4.5 | PASS | invalid cross (valid_real), error panel title
+text / panel-2 | #FFFFFF on #2A2733 | 14.62 | 4.5 | PASS | raised surfaces: counters, notices, tooltips, highlighted row
+muted / panel-2 | #D6CFEA on #2A2733 | 9.73 | 4.5 | PASS | counter labels on raised surfaces
+ok / panel-2 | #7FD6A6 on #2A2733 | 8.40 | 4.5 | PASS | matches-cached check in the notice
+periwinkle / panel-2 | #8E9BFF on #2A2733 | 5.77 | 4.5 | PASS | active stepper state
+ink / peach | #1C1B22 on #F49A72 | 7.90 | 4.5 | PASS | all text in the peach KPI card
+ink / coral | #1C1B22 on #F2706A | 5.94 | 4.5 | PASS | coral button and pressed pill labels (white on coral is never used: 2.88)
+text / navy | #FFFFFF on #2C4A8E | 8.48 | 4.5 | PASS | navy button label
+text / blob-blue | #FFFFFF on #2E55A6 | 7.08 | 3.0 | PASS | hero headline where it touches the blue blob (phone)
+CONTRAST PASS (23 pairs)

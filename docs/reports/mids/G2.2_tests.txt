@@ -1,0 +1,28 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta\.venv-gq\Scripts\python.exe
+rootdir: C:\Users\Lenovo\Desktop\CLASS\4th year\7th SEM\FYDP\GreenQuanta
+collecting ... collected 21 items
+
+tests/test_backend_api.py::test_health PASSED                            [  4%]
+tests/test_backend_api.py::test_sizes PASSED                             [  9%]
+tests/test_backend_api.py::test_results_without_assignments PASSED       [ 14%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[quantum] PASSED [ 19%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[control] PASSED [ 23%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[exact_r1] PASSED [ 28%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_firstfit] PASSED [ 33%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_bestfit] PASSED [ 38%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_worstfit] PASSED [ 42%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_roundrobin] PASSED [ 47%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_ffd] PASSED [ 52%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[cs_bfd] PASSED [ 57%]
+tests/test_backend_api.py::test_placement_loads_and_coverage[pabfd] PASSED [ 61%]
+tests/test_backend_api.py::test_compare_equals_json PASSED               [ 66%]
+tests/test_backend_api.py::test_claims PASSED                            [ 71%]
+tests/test_backend_api.py::test_404[/api/results/huge_v2-unknown_size] PASSED [ 76%]
+tests/test_backend_api.py::test_404[/api/results/huge_v2/compare-unknown_size] PASSED [ 80%]
+tests/test_backend_api.py::test_404[/api/results/small_v2/placement/nope-unknown_method] PASSED [ 85%]
+tests/test_backend_api.py::test_404[/api/claims?size=huge_v2-unknown_size] PASSED [ 90%]
+tests/test_backend_api.py::test_404[/api/nope-not_found] PASSED          [ 95%]
+tests/test_backend_api.py::test_missing_results_names_the_build_command PASSED [100%]
+
+============================= 21 passed in 14.41s =============================

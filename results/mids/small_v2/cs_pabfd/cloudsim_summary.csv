@@ -1,0 +1,6 @@
+metric,value
+active_hosts,3
+it_energy_kwh,11.905632
+facility_energy_kwh,18.334673
+co2_kg,7.975583
+simulated_seconds,86400
