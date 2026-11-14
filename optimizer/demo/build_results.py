@@ -31,25 +31,35 @@ META = {
     "quantum": ("Quantum pipeline (GAS -> constraint-preserving SQA)", "quantum",
                 "Grover Adaptive Search (statevector simulation) picks the servers to switch on; constraint-preserving "
                 "simulated quantum annealing (path-integral Monte Carlo) places the VMs on them.",
-                "Gilliam et al. 2021 (Grover Adaptive Search); Martonak, Santoro & Tosatti 2002 (path-integral SQA)"),
+                "Dürr & Høyer 1996, arXiv:quant-ph/9607014 (quantum minimum finding); Gilliam, Woerner & Gonciulea "
+                "2021, Quantum 5, 428 (Grover Adaptive Search); Hen & Spedalieri 2016, Phys. Rev. Applied 5, 034007 "
+                "and Hen & Sarandy 2016, Phys. Rev. A 93, 062312 (constraint-preserving drivers); Martoňák, Santoro & "
+                "Tosatti 2002, Phys. Rev. B 66, 094203 (path-integral SQA)"),
     "control": ("Classical control (GAS -> constraint-preserving SA)", "classical-control",
                 "Same Stage 1 and the same moves and budget as the quantum pipeline, with classical simulated annealing "
-                "in Stage 2.", "Kirkpatrick, Gelatt & Vecchi 1983 (simulated annealing)"),
+                "in Stage 2.", "Kirkpatrick, Gelatt & Vecchi 1983, Science 220, 671 (simulated annealing)"),
     "exact_r1": ("Exact optimum R1 (MILP, real sizes)", "exact",
                  "Mixed-integer linear program on the real VM sizes (SciPy HiGHS), proven optimal for the linear energy "
-                 "model; the reference every method is compared with.", None),
+                 "model; the reference every method is compared with.",
+                 "Huangfu & Hall 2018, Math. Prog. Comp. 10, 119 (HiGHS); Virtanen et al. 2020, Nature Methods 17, 261 "
+                 "(SciPy milp)"),
     "cs_firstfit": ("CloudSim FirstFit (next-fit)", "baseline",
                     f"{BL} VmAllocationPolicyFirstFit, VMs in input order; it resumes at the last used host, so it "
-                    "behaves as circular next-fit.", "CloudSim Plus 8.0.0, VmAllocationPolicyFirstFit"),
+                    "behaves as circular next-fit.",
+                    "CloudSim Plus 8.0.0, VmAllocationPolicyFirstFit; Silva Filho et al. 2017, IFIP/IEEE IM "
+                    "(CloudSim Plus)"),
     "cs_bestfit": ("CloudSim BestFit", "baseline",
                    f"{BL} VmAllocationPolicyBestFit (active host with the fewest free CPU units), VMs in input order.",
-                   "CloudSim Plus 8.0.0, VmAllocationPolicyBestFit"),
+                   "CloudSim Plus 8.0.0, VmAllocationPolicyBestFit; Silva Filho et al. 2017, IFIP/IEEE IM "
+                   "(CloudSim Plus)"),
     "cs_worstfit": ("CloudSim WorstFit (Simple)", "baseline",
                     f"{BL} VmAllocationPolicySimple (active host with the most free CPU units), VMs in input order.",
-                    "CloudSim Plus 8.0.0, VmAllocationPolicySimple"),
+                    "CloudSim Plus 8.0.0, VmAllocationPolicySimple; Silva Filho et al. 2017, IFIP/IEEE IM "
+                    "(CloudSim Plus)"),
     "cs_roundrobin": ("CloudSim RoundRobin", "baseline",
                       f"{BL} VmAllocationPolicyRoundRobin, VMs in input order.",
-                      "CloudSim Plus 8.0.0, VmAllocationPolicyRoundRobin"),
+                      "CloudSim Plus 8.0.0, VmAllocationPolicyRoundRobin; Silva Filho et al. 2017, IFIP/IEEE IM "
+                      "(CloudSim Plus)"),
     "cs_ffd": ("First-Fit Decreasing", "baseline",
                "Textbook first-fit (lowest-index host that fits) with VMs sorted by CPU size descending, run in "
                "CloudSim Plus.", "Johnson 1973 (bin-packing FFD)"),
@@ -58,7 +68,8 @@ META = {
     "pabfd": ("PABFD (implemented per Beloglazov & Buyya 2012)", "baseline",
               "Power-Aware Best-Fit Decreasing: VMs by CPU descending, each to the host with the smallest power "
               "increase (SPEC curve; an empty host is off). Not built into CloudSim Plus 8; implemented on its "
-              "allocation hook.", "Beloglazov & Buyya 2012, Algorithm 1 (PABFD)"),
+              "allocation hook.",
+              "Beloglazov & Buyya 2012, Concurrency Computat.: Pract. Exper. 24(13), 1397 (PABFD)"),
 }
 HOST_KEYS = ("host_id", "type", "active", "vms", "mean_cpu_util_pct", "peak_cpu_util_pct", "mem_util_pct", "energy_kwh")
 
