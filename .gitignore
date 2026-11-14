@@ -15,3 +15,8 @@ simulation/target/
 
 # local documentation (all .md files)
 documentation/
+
+# unused files kept locally
+archive/
+
+.rules
