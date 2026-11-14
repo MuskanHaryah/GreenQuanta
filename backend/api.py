@@ -7,6 +7,7 @@ import math
 from flask import Blueprint, current_app, jsonify, request
 
 from backend import ROOT, gas_trace
+from backend.jobs import METHOD_OF, Busy
 from demo.build_results import META
 from diagnostics.common import build_problem
 from diagnostics.s1_end_to_end import RUN_CONFIG
@@ -149,3 +150,24 @@ def gas_trace_view(size):
     if not (seed.lstrip("-").isdigit() and int(seed) in seeds):
         raise ApiError(400, "bad_seed", f"seed must be one of the pipeline's GAS seeds {seeds}, got {seed!r}")
     return jsonify(gas_trace.trace(size, int(seed)))
+
+
+@bp.post("/runs")
+def start_run():
+    body = request.get_json(silent=True)
+    if not isinstance(body, dict) or body.get("size") not in SIZES or body.get("stage2") not in METHOD_OF:
+        raise ApiError(400, "bad_request", f'body must be {{"size": one of {SIZES}, "stage2": "csqa" | "csa"}}')
+    try:
+        job_id = current_app.extensions["jobs"].start(body["size"], body["stage2"])
+    except Busy as e:
+        return jsonify(error={"code": "run_in_progress", "message": f"run {e.job_id} is still running"},
+                       job_id=e.job_id), 409
+    return jsonify(job_id=job_id), 202
+
+
+@bp.get("/runs/<job_id>")
+def get_run(job_id):
+    job = current_app.extensions["jobs"].get(job_id)
+    if job is None:
+        raise ApiError(404, "unknown_job", f"unknown job {job_id!r} (jobs are kept in memory until restart)")
+    return jsonify(job)
