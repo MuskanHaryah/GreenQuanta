@@ -41,6 +41,7 @@ import java.util.Optional;
  * the nearest point (no interpolation) and fails above ~95% load.
  *
  * Run from the simulation folder:  mvn -q compile exec:java "-Dexec.args=small"
+ * Optional folders (Guide 1 step 1.3):  "-Dexec.args=<size> <input_dir> <output_dir>"
  *
  * Inputs (written by optimizer/run_phase2.py) in results/phase2/<size>/cloudsim_input/:
  *   settings.csv        time steps, PUE, emission factor
@@ -75,8 +76,9 @@ public class Phase2Simulation {
 
     public static void main(String[] args) throws IOException {
         String size = args.length > 0 ? args[0] : "small";
-        OUTPUT = Paths.get("..", "results", "phase2", size);
-        INPUT = OUTPUT.resolve("cloudsim_input");
+        OUTPUT = args.length > 2 ? Paths.get(args[2]) : Paths.get("..", "results", "phase2", size);
+        INPUT = args.length > 1 ? Paths.get(args[1]) : OUTPUT.resolve("cloudsim_input");
+        Files.createDirectories(OUTPUT);
         System.out.println("Phase 2 size: " + size);
         // the cloudlets are meant to run past 24 h, so CloudSim's end-of-run INFO messages are expected noise
         Log.setLevel(Level.WARN);
@@ -237,7 +239,7 @@ public class Phase2Simulation {
         return map;
     }
 
-    private static List<String[]> readCsvText(Path path) throws IOException {
+    static List<String[]> readCsvText(Path path) throws IOException {
         List<String[]> rows = new ArrayList<>();
         List<String> lines = Files.readAllLines(path);
         for (String line : lines.subList(1, lines.size())) {
@@ -248,7 +250,7 @@ public class Phase2Simulation {
         return rows;
     }
 
-    private static List<double[]> readCsvNumbers(Path path) throws IOException {
+    static List<double[]> readCsvNumbers(Path path) throws IOException {
         List<double[]> rows = new ArrayList<>();
         List<String> lines = Files.readAllLines(path);
         for (String line : lines.subList(1, lines.size())) {

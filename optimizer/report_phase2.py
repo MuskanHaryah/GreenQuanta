@@ -20,6 +20,16 @@ from phase1 import config as p1config
 from phase2 import config
 
 
+def compare(r, cs):
+    """Python result vs CloudSim summary: ([(metric, python, cloudsim, |diff| % of python)], worst diff %)."""
+    rows = [("Active servers", r["active_hosts"], cs["active_hosts"]),
+            ("IT energy (kWh)", r["it_energy_kwh"], cs["it_energy_kwh"]),
+            ("Facility energy (kWh)", r["facility_energy_kwh"], cs["facility_energy_kwh"]),
+            ("Carbon (kg CO2)", r["co2_kg"], cs["co2_kg"])]
+    out = [(name, x, y, 0.0 if x == 0 else 100 * abs(x - y) / abs(x)) for name, x, y in rows]
+    return out, max(d for *_, d in out)
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--size", choices=sorted(config.SCENARIOS), default=config.DEFAULT_SIZE)
@@ -48,14 +58,8 @@ def main():
           f"{st['vms_placed_by_annealer']} VMs by annealer + {st['vms_placed_by_repair']} by repair")
     print(line)
     print(f" {'Metric':<22}{'Python':>14}{'CloudSim':>14}{'Diff %':>10}")
-    rows = [("Active servers", r["active_hosts"], cs["active_hosts"]),
-            ("IT energy (kWh)", r["it_energy_kwh"], cs["it_energy_kwh"]),
-            ("Facility energy (kWh)", r["facility_energy_kwh"], cs["facility_energy_kwh"]),
-            ("Carbon (kg CO2)", r["co2_kg"], cs["co2_kg"])]
-    worst = 0.0
-    for name, x, y in rows:
-        d = 0.0 if x == 0 else 100 * abs(x - y) / abs(x)
-        worst = max(worst, d)
+    rows, worst = compare(r, cs)
+    for name, x, y, d in rows:
         print(f" {name:<22}{x:>14.4f}{y:>14.4f}{d:>10.3f}")
     print(line)
     print(f" SLA violation {r['sla_violation_pct']:.2f}%, unmet demand {r['unmet_cpu_demand_pct']:.2f}%, "

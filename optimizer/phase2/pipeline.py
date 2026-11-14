@@ -87,7 +87,6 @@ def write_outputs(out_dir, size, servers, vms, percentile, tinfo, need, qinfo, s
                   energy, exact_assignment, exact_info, gap):
     out_dir.mkdir(parents=True, exist_ok=True)
     cs_dir = out_dir / "cloudsim_input"
-    cs_dir.mkdir(exist_ok=True)
 
     vms_table(vms).to_csv(out_dir / "vms.csv", index=False)
     pd.DataFrame(catalog_table(servers)).to_csv(out_dir / "server_types.csv", index=False)
@@ -120,7 +119,13 @@ def write_outputs(out_dir, size, servers, vms, percentile, tinfo, need, qinfo, s
     with open(out_dir / "summary.json", "w") as f:
         json.dump(summary, f, indent=2)
 
-    # ---- CloudSim inputs (plain CSV)
+    write_cloudsim_inputs(cs_dir, servers, vms, assignment)
+    return summary
+
+
+def write_cloudsim_inputs(cs_dir, servers, vms, assignment):
+    """CloudSim inputs (plain CSV) for Phase2Simulation: settings, servers, VM placement, CPU demand."""
+    cs_dir.mkdir(parents=True, exist_ok=True)
     settings = {"window_seconds": p1config.WINDOW_SECONDS, "windows": p1config.WINDOWS_PER_DAY,
                 "pue": config.PUE, "emission_factor": config.EMISSION_FACTOR}
     pd.DataFrame({"key": list(settings), "value": list(settings.values())}).to_csv(cs_dir / "settings.csv", index=False)
@@ -136,4 +141,3 @@ def write_outputs(out_dir, size, servers, vms, percentile, tinfo, need, qinfo, s
     demand = pd.DataFrame({f"vm_{v.vm_id}": v.cpu_demand for v in vms})
     demand.insert(0, "window_idx", range(p1config.WINDOWS_PER_DAY))
     demand.to_csv(cs_dir / "vm_cpu_demand.csv", index=False, float_format="%.8f")
-    return summary
