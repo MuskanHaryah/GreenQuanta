@@ -101,3 +101,17 @@ def test_404(client, url, code):
 def test_missing_results_names_the_build_command(tmp_path):
     body = get(create_app({"TESTING": True, "RESULTS_ROOT": tmp_path}).test_client(), f"/api/results/{SIZE}", 404)
     assert body["error"]["code"] == "results_missing" and "build_results.py --size small_v2" in body["error"]["message"]
+
+
+def test_frontend_dist_served_with_spa_fallback(tmp_path):
+    (tmp_path / "assets").mkdir()
+    (tmp_path / "index.html").write_text("<html>demo</html>", encoding="utf-8")
+    (tmp_path / "assets" / "app.js").write_text("console.log(1)", encoding="utf-8")
+    client = create_app({"TESTING": True, "FRONTEND_DIST": tmp_path}).test_client()
+    for url in ["/", "/quantum", "/results/large_v2?size=x"]:
+        r = client.get(url)
+        assert r.status_code == 200 and r.get_data(as_text=True) == "<html>demo</html>"
+    assert client.get("/assets/app.js").get_data(as_text=True) == "console.log(1)"
+    assert client.get("/api/nope").get_json()["error"]["code"] == "not_found"        # /api never falls back
+    assert client.get("/api/health").get_json()["status"] == "ok"
+    assert create_app({"TESTING": True, "FRONTEND_DIST": tmp_path / "none"}).test_client().get("/").status_code == 404
