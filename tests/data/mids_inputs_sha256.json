@@ -1,0 +1,11 @@
+{
+  "docs/reports/step1/1.3_ground_truth.txt": "9dd2116ed7a7a7e4b32ee6ef5be3e36ea71c5039662674c79956ac5dcb1aee65",
+  "docs/reports/step1/1.5b_qaoa_cvar.txt": "14d68a812736a4643674e28a993fdf41849212bf65fc59a2cad5b972fc34b8de",
+  "docs/reports/step2/2.5_calibration.txt": "d74f3620b479696fad90a83e03df9e9567ef5e86f4fd64a2130f74721dcbc75d",
+  "docs/reports/step2/2C.3_calibration.txt": "d2cee40d2374ebe751723f35ee08464bdd84d5458a6c8aa726e44a7fc50be331",
+  "docs/reports/step2/2D.3_calibration.txt": "2216be368ad2d80647ce6c4bde1a9e76c1e4b15da06d5168ddd841145b28b1b1",
+  "docs/reports/step2e_raw_output.txt": "b21032a56056ca3261ecd8ef1d45ce3d72908a60a14c450f3eeae979ada2a4ef",
+  "results/phase2/large_v2/assignment_exact.csv": "b9809f4bf91e2818c0f01173d87eefa1a142f5f7bf60750cc04ba59dc45a2ff0",
+  "results/phase2/medium_v2/assignment_exact.csv": "bfad59b871fc03ad0ee51a4e62e1c0395c621c8b803a8d003a0110ca2f0de5b0",
+  "results/phase2/small_v2/assignment_exact.csv": "1a946e988f3ce735069bf8f45099ce940412a2138c37cf5a2bfcd064b72b9812"
+}
